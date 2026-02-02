@@ -8,6 +8,7 @@ extends CharacterBody2D
 
 func _physics_process(delta: float) -> void:
 	var move_vec = Vector2()
+	# rebind keys at editor -> shortcuts at top left
 	if Input.is_action_pressed("move_left"):
 		move_vec.x -= 1
 	if Input.is_action_pressed("move_right"):
@@ -20,3 +21,7 @@ func _physics_process(delta: float) -> void:
 	move_and_collide(move_vec * delta * move_speed)
 
 	
+
+
+func _on_prepper_body_entered(body: Node2D) -> void:
+	body.inside = true # Replace with function body. # Replace with function body.

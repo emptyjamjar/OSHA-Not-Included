@@ -2,11 +2,44 @@
 
 [ext_resource type="PackedScene" uid="uid://c7e7f64igaa5j" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://d2r1f8py617s3" path="res://scenes/box.tscn" id="2_yqjtg"]
+[ext_resource type="Script" uid="uid://c7w28bth788m6" path="res://scenes/prepper.gd" id="3_lbhrr"]
+[ext_resource type="Texture2D" uid="uid://dsnmu8t7ih5io" path="res://art/printer-icon-pixel-art-stile-260nw-2196618791.webp" id="4_iywne"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p57ef"]
+size = Vector2(260, 276.49997)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u5sy4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_iywne")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [node name="Game" type="Node2D" unique_id=645817684]
 
 [node name="Player" parent="." unique_id=2112891127 instance=ExtResource("1_uwrxv")]
 position = Vector2(265, 129)
 
-[node name="Box" parent="." unique_id=189150552 instance=ExtResource("2_yqjtg")]
+[node name="Box" parent="." unique_id=189150552 groups=["Boxable"] instance=ExtResource("2_yqjtg")]
 position = Vector2(170, 133)
+
+[node name="Prepper" type="Area2D" parent="." unique_id=1004775621]
+position = Vector2(154.5, 126)
+scale = Vector2(0.30384615, 0.2857143)
+script = ExtResource("3_lbhrr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Prepper" unique_id=1232019329]
+position = Vector2(0, -1.75)
+scale = Vector2(0.9999999, 1)
+shape = SubResource("RectangleShape2D_p57ef")
+
+[node name="Image" type="AnimatedSprite2D" parent="Prepper" unique_id=193319367]
+scale = Vector2(0.9999999, 1)
+sprite_frames = SubResource("SpriteFrames_u5sy4")
+
+[connection signal="body_entered" from="Prepper" to="Player" method="_on_prepper_body_entered"]
+[connection signal="body_entered" from="Prepper" to="Box" method="_on_prepper_body_entered"]
