@@ -20,4 +20,9 @@ func _process(delta: float) -> void:
 
 
 func _on_prepper_body_entered(body: Node2D) -> void:
-	add_to_group("Boxable") # Replace with function body.
+	add_to_group("Boxable")
+
+
+func _on_shipper_area_entered(area: Area2D) -> void:
+	if is_in_group("Boxable"):
+		free()

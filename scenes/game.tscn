@@ -2,8 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://c7e7f64igaa5j" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://d2r1f8py617s3" path="res://scenes/box.tscn" id="2_yqjtg"]
-[ext_resource type="Script" uid="uid://c7w28bth788m6" path="res://scenes/prepper.gd" id="3_lbhrr"]
+[ext_resource type="Script" uid="uid://c7w28bth788m6" path="res://scripts/prepper.gd" id="3_lbhrr"]
 [ext_resource type="Texture2D" uid="uid://dsnmu8t7ih5io" path="res://art/printer-icon-pixel-art-stile-260nw-2196618791.webp" id="4_iywne"]
+[ext_resource type="Script" uid="uid://bvef8vv3vxbxu" path="res://conveyer.gd" id="5_p57ef"]
+[ext_resource type="Texture2D" uid="uid://37gvsnqg22mk" path="res://art/2288992_citytoon_semi-truck-sprite.jpg" id="6_u5sy4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p57ef"]
 size = Vector2(260, 276.49997)
@@ -13,6 +15,20 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("4_iywne")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5sy4"]
+size = Vector2(800.6332, 639.375)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gee14"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_u5sy4")
 }],
 "loop": true,
 "name": &"default",
@@ -41,5 +57,21 @@ shape = SubResource("RectangleShape2D_p57ef")
 scale = Vector2(0.9999999, 1)
 sprite_frames = SubResource("SpriteFrames_u5sy4")
 
+[node name="Shipper" type="Area2D" parent="." unique_id=371577797]
+position = Vector2(154.5, 126)
+scale = Vector2(0.30384615, 0.2857143)
+script = ExtResource("5_p57ef")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Shipper" unique_id=1480838391]
+position = Vector2(1529.9366, 243.81253)
+scale = Vector2(0.9999999, 1)
+shape = SubResource("RectangleShape2D_u5sy4")
+
+[node name="Image" type="AnimatedSprite2D" parent="Shipper" unique_id=2017054966]
+position = Vector2(1532.0253, 244.99997)
+scale = Vector2(0.2262032, 0.5772059)
+sprite_frames = SubResource("SpriteFrames_gee14")
+
 [connection signal="body_entered" from="Prepper" to="Player" method="_on_prepper_body_entered"]
 [connection signal="body_entered" from="Prepper" to="Box" method="_on_prepper_body_entered"]
+[connection signal="area_entered" from="Shipper" to="Box" method="_on_shipper_area_entered"]
