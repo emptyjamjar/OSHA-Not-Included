@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://bhmynboldga2b"]
+
+[ext_resource type="Script" uid="uid://c7w28bth788m6" path="res://scripts/prepper.gd" id="1_uljtb"]
+[ext_resource type="Texture2D" uid="uid://dsnmu8t7ih5io" path="res://art/printer-icon-pixel-art-stile-260nw-2196618791.webp" id="2_s1jx0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p57ef"]
+size = Vector2(260, 276.49997)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u5sy4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_s1jx0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Prepper" type="Area2D" unique_id=2093227932]
+scale = Vector2(0.30384615, 0.2857143)
+script = ExtResource("1_uljtb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1561103054]
+position = Vector2(0, -1.75)
+scale = Vector2(0.9999999, 1)
+shape = SubResource("RectangleShape2D_p57ef")
+
+[node name="Image" type="AnimatedSprite2D" parent="." unique_id=845293452]
+scale = Vector2(0.9999999, 1)
+sprite_frames = SubResource("SpriteFrames_u5sy4")
