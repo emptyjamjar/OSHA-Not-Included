@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 @export var weight := 10
-@export var boxed = false
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -17,12 +17,3 @@ func _process(delta: float) -> void:
 		linear_velocity.y -= weight * 1 * delta
 	elif linear_velocity.y < 0:
 		linear_velocity.y += weight * 1 * delta
-
-
-func _on_prepper_body_entered(body: Node2D) -> void:
-	add_to_group("Boxable")
-
-
-func _on_shipper_area_entered(area: Area2D) -> void:
-	if is_in_group("Boxable"):
-		free()
