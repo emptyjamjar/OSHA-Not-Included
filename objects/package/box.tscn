@@ -2,8 +2,12 @@
 
 [ext_resource type="Script" uid="uid://danqchikyp37a" path="res://scripts/box.gd" id="1_ks2v0"]
 [ext_resource type="Texture2D" uid="uid://coef8g2cwlpx7" path="res://art/New Piskel-1.png(1).png" id="2_c2ln5"]
+[ext_resource type="PackedScene" uid="uid://cdhb2euh28ies" path="res://core/utils/interaction_area.tscn" id="3_ehynf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3inec"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ehynf"]
+radius = 40.0
 
 [node name="Box" type="RigidBody2D" unique_id=189150552]
 collision_layer = 2
@@ -18,3 +22,8 @@ texture = ExtResource("2_c2ln5")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=55003392]
 scale = Vector2(1.5, 1.5)
 shape = SubResource("RectangleShape2D_3inec")
+
+[node name="InteractionArea" parent="." unique_id=2104453103 instance=ExtResource("3_ehynf")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1483966594]
+shape = SubResource("CircleShape2D_ehynf")
