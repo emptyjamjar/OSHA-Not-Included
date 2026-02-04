@@ -11,5 +11,5 @@ func _process(delta: float) -> void:
 	boxes = get_overlapping_bodies()
 	for box in boxes:
 		#print(box)
-		if box.is_in_group("Boxable"):
+		if box.is_in_group("Shippable"):
 			box.free()

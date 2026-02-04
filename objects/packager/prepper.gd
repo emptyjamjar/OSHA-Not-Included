@@ -21,6 +21,6 @@ func _process(delta: float) -> void:
 	if inside and Input.is_action_pressed("ui_E"):
 		print("Boxing")
 		for box in scanner:
-			if box == get_node("../Box"):
-				box.add_to_group("Boxable")
+			if box.is_in_group("Boxes"):
+				box.add_to_group("Shippable")
 				print("Box is boxed")
