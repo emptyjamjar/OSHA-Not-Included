@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bhmynboldga2b"]
 
-[ext_resource type="Script" uid="uid://c7w28bth788m6" path="res://scripts/prepper.gd" id="1_uljtb"]
-[ext_resource type="Texture2D" uid="uid://dsnmu8t7ih5io" path="res://art/printer-icon-pixel-art-stile-260nw-2196618791.webp" id="2_s1jx0"]
+[ext_resource type="Script" uid="uid://c7w28bth788m6" path="res://objects/packager/prepper.gd" id="1_uljtb"]
+[ext_resource type="Texture2D" uid="uid://dsnmu8t7ih5io" path="res://objects/packager/placeholder.webp" id="2_s1jx0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p57ef"]
 size = Vector2(260, 276.49997)

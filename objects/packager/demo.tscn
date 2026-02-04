@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cp3eur47tnd7i"]
 
 [ext_resource type="PackedScene" uid="uid://c7e7f64igaa5j" path="res://scenes/player.tscn" id="1_lbhrr"]
-[ext_resource type="PackedScene" uid="uid://bhmynboldga2b" path="res://scenes/prepper.tscn" id="2_iywne"]
-[ext_resource type="PackedScene" uid="uid://cyuiwukw36bwd" path="res://scenes/shipper.tscn" id="3_p57ef"]
+[ext_resource type="PackedScene" uid="uid://bhmynboldga2b" path="res://objects/packager/prepper.tscn" id="2_iywne"]
+[ext_resource type="PackedScene" uid="uid://cyuiwukw36bwd" path="res://objects/sorter/shipper.tscn" id="3_p57ef"]
 [ext_resource type="PackedScene" uid="uid://d2r1f8py617s3" path="res://scenes/box.tscn" id="4_u5sy4"]
 
 [node name="Game" type="Node2D" unique_id=1827869877]
@@ -10,7 +10,7 @@
 [node name="Player" parent="." unique_id=2112891127 instance=ExtResource("1_lbhrr")]
 position = Vector2(157, 137)
 
-[node name="Prepper" parent="." unique_id=2093227932 instance=ExtResource("2_iywne")]
+[node name="Packager" parent="." unique_id=2093227932 instance=ExtResource("2_iywne")]
 position = Vector2(238.00002, 121)
 
 [node name="Shipper" parent="." unique_id=441417436 instance=ExtResource("3_p57ef")]
