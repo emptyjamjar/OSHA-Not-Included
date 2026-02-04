@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://bimhohbyv6s5d"]
+
+[ext_resource type="Script" uid="uid://bvef8vv3vxbxu" path="res://objects/conveyor/conveyer.gd" id="1_ifo1u"]
+[ext_resource type="Texture2D" uid="uid://37gvsnqg22mk" path="res://objects/sorter/placeholder.jpg" id="2_jweep"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5sy4"]
+size = Vector2(800.6332, 639.375)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_gee14"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_jweep")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Shipper" type="Area2D" unique_id=441417436]
+position = Vector2(-0.99999994, 1)
+scale = Vector2(0.30384615, 0.2857143)
+script = ExtResource("1_ifo1u")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=324685094]
+position = Vector2(3.2913818, 0)
+scale = Vector2(0.9999999, 1)
+shape = SubResource("RectangleShape2D_u5sy4")
+
+[node name="Image" type="AnimatedSprite2D" parent="." unique_id=883687236]
+position = Vector2(3.2912598, 3.5000305)
+scale = Vector2(0.2262032, 0.5772059)
+sprite_frames = SubResource("SpriteFrames_gee14")
