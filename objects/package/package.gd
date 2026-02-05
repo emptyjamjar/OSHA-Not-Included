@@ -2,6 +2,13 @@ class_name Package extends Node2D
 
 var inventory : Array[Item]
 var capacity : int
+var curCapacity : int :
+	get:
+		var cap
+		for item in inventory:
+			cap += item.size
+		return cap
+
 # Used to differentiate between modifying contents and holding
 var isHoldable : bool
 
@@ -28,4 +35,7 @@ func _on_interact():
 			disable()
 			global_position = player.global_position
 			reparent(player, true)
-		
+
+func add_item(item : Item):
+	if (curCapacity + item.size > capacity):
+		inventory.append(item)
