@@ -19,12 +19,8 @@ func _ready() -> void:
 	isHoldable = false
 
 func disable():
-	var hitboxShape := $Hitbox/CollisionShape2D
-	var iAreaShape := $InteractionArea/CollisionShape2D
-	# Disable Collision
-	hitboxShape.disabled = not hitboxShape.disabled
-	# Disable Interaction
-	iAreaShape.disabled = not iAreaShape.disabled
+	iArea.monitorable = false
+	iArea.monitoring = false
 
 func _on_interact():
 	# if the station changes holdable then pick it up

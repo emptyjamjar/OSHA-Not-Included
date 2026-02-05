@@ -4,9 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://d1menmudiwcfy" path="res://objects/package/temp_package.png" id="2_fkn04"]
 [ext_resource type="PackedScene" uid="uid://cdhb2euh28ies" path="res://core/components/interaction_area/interaction_area.tscn" id="3_6atse"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ksh33"]
-size = Vector2(32, 32)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_ofwpu"]
 radius = 38.013157
 
@@ -16,11 +13,6 @@ script = ExtResource("1_xg0p7")
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1480615960]
 scale = Vector2(0.53333336, 0.53333336)
 texture = ExtResource("2_fkn04")
-
-[node name="Hitbox" type="StaticBody2D" parent="." unique_id=665604246]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox" unique_id=1291273916]
-shape = SubResource("RectangleShape2D_ksh33")
 
 [node name="InteractionArea" parent="." unique_id=2104453103 instance=ExtResource("3_6atse")]
 
