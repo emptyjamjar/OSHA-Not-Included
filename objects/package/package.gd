@@ -4,7 +4,7 @@ var inventory : Array[Item]
 var capacity : int
 var curCapacity : int :
 	get:
-		var cap
+		var cap = 0
 		for item in inventory:
 			cap += item.size
 		return cap
@@ -13,18 +13,18 @@ var curCapacity : int :
 var isHoldable : bool
 
 @onready var iArea := $InteractionArea
-@onready var hitboxShape := $Hitbox/CollisionShape2D
 
 func _ready() -> void:
 	iArea.interact = Callable(self, "_on_interact")
-	isHoldable = true
+	isHoldable = false
 
 func disable():
+	var hitboxShape := $Hitbox/CollisionShape2D
+	var iAreaShape := $InteractionArea/CollisionShape2D
 	# Disable Collision
 	hitboxShape.disabled = not hitboxShape.disabled
 	# Disable Interaction
-	iArea.monitoring = not iArea.monitoring
-	iArea.monitorable = not iArea.monitoring
+	iAreaShape.disabled = not iAreaShape.disabled
 
 func _on_interact():
 	# if the station changes holdable then pick it up
@@ -37,5 +37,7 @@ func _on_interact():
 			reparent(player, true)
 
 func add_item(item : Item):
-	if (curCapacity + item.size > capacity):
+	if (curCapacity + item.size < capacity):
 		inventory.append(item)
+	else:
+		isHoldable = true
