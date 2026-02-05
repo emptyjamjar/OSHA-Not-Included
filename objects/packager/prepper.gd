@@ -11,7 +11,7 @@ func _process(delta: float) -> void:
 	inside = false
 	scanner = get_overlapping_bodies()
 	for object in scanner:
-		if object == get_node("../Player"):
+		if object.is_in_group("player"):
 			print("Player is in")
 			inside = true
 			break

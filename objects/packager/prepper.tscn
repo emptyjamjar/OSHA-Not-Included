@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://c7w28bth788m6" path="res://objects/packager/prepper.gd" id="1_uljtb"]
 [ext_resource type="Shape2D" uid="uid://dvpia8jjdm67f" path="res://objects/packager/boundary.tres" id="2_owb4y"]
 [ext_resource type="Texture2D" uid="uid://dsnmu8t7ih5io" path="res://objects/packager/placeholder.webp" id="2_s1jx0"]
-[ext_resource type="PackedScene" uid="uid://bfa7j2x44gfvg" path="res://core/components/interaction-area/interaction-area.tscn" id="3_ysrdg"]
+[ext_resource type="PackedScene" uid="uid://cdhb2euh28ies" path="res://core/components/interaction_area/interaction_area.tscn" id="4_owb4y"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_u5sy4"]
 animations = [{
@@ -29,7 +29,8 @@ shape = ExtResource("2_owb4y")
 scale = Vector2(0.9999999, 1)
 sprite_frames = SubResource("SpriteFrames_u5sy4")
 
-[node name="InteractionArea" parent="." unique_id=2020613793 instance=ExtResource("3_ysrdg")]
+[node name="InteractionArea" parent="." unique_id=2104453103 instance=ExtResource("4_owb4y")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=680122479]
+scale = Vector2(0.99999994, 1)
 shape = ExtResource("2_owb4y")
