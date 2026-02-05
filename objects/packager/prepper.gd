@@ -4,8 +4,7 @@ extends Area2D
 @export var inside := false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	$InteractionArea.interact = Callable(self, "_on_interact")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -24,3 +23,6 @@ func _process(delta: float) -> void:
 			if box.is_in_group("Boxes"):
 				box.add_to_group("Shippable")
 				print("Box is boxed")
+
+func _on_interact():
+	pass

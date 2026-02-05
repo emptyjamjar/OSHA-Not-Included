@@ -1,10 +1,9 @@
 [gd_scene format=3 uid="uid://bimhohbyv6s5d"]
 
-[ext_resource type="Script" uid="uid://bvef8vv3vxbxu" path="res://objects/conveyor/conveyer.gd" id="1_ifo1u"]
+[ext_resource type="Script" path="res://conveyer.gd" id="1_ifo1u"]
+[ext_resource type="Shape2D" uid="uid://bn0naoloc0n4l" path="res://objects/sorter/boundary.tres" id="2_1w0gl"]
 [ext_resource type="Texture2D" uid="uid://37gvsnqg22mk" path="res://objects/sorter/placeholder.jpg" id="2_jweep"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5sy4"]
-size = Vector2(800.6332, 639.375)
+[ext_resource type="PackedScene" uid="uid://bfa7j2x44gfvg" path="res://core/components/interaction-area/interaction-area.tscn" id="4_txcdc"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gee14"]
 animations = [{
@@ -25,9 +24,14 @@ script = ExtResource("1_ifo1u")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=324685094]
 position = Vector2(3.2913818, 0)
 scale = Vector2(0.9999999, 1)
-shape = SubResource("RectangleShape2D_u5sy4")
+shape = ExtResource("2_1w0gl")
 
 [node name="Image" type="AnimatedSprite2D" parent="." unique_id=883687236]
 position = Vector2(3.2912598, 3.5000305)
 scale = Vector2(0.2262032, 0.5772059)
 sprite_frames = SubResource("SpriteFrames_gee14")
+
+[node name="InteractionArea" parent="." unique_id=2020613793 instance=ExtResource("4_txcdc")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=760146199]
+shape = ExtResource("2_1w0gl")
