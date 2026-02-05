@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://c7e7f64igaa5j" path="res://game/actors/player/player.tscn" id="1_vasa2"]
 [ext_resource type="PackedScene" uid="uid://d2r1f8py617s3" path="res://objects/package/box.tscn" id="2_h7iqs"]
-[ext_resource type="PackedScene" uid="uid://rs788b0iptdm" path="res://core/autoload/InteractionManager.tscn" id="3_h7iqs"]
+[ext_resource type="PackedScene" uid="uid://rs788b0iptdm" path="res://core/autoload/interaction_manager/interaction_manager.tscn" id="3_h7iqs"]
 
 [node name="Game" type="Node2D" unique_id=645817684 groups=["game"]]
 
