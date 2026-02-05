@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://d2r1f8py617s3"]
 
 [ext_resource type="Script" uid="uid://danqchikyp37a" path="res://scripts/box.gd" id="1_ks2v0"]
-[ext_resource type="Texture2D" uid="uid://coef8g2cwlpx7" path="res://art/New Piskel-1.png(1).png" id="2_c2ln5"]
+[ext_resource type="Texture2D" uid="uid://coef8g2cwlpx7" path="res://art/box.png" id="2_c2ln5"]
 [ext_resource type="PackedScene" uid="uid://cdhb2euh28ies" path="res://core/utils/interaction_area.tscn" id="3_ehynf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3inec"]

@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c7e7f64igaa5j" path="res://game/actors/player/player.tscn" id="1_vasa2"]
 [ext_resource type="PackedScene" uid="uid://d2r1f8py617s3" path="res://objects/package/box.tscn" id="2_h7iqs"]
 [ext_resource type="PackedScene" uid="uid://rs788b0iptdm" path="res://core/autoload/InteractionManager.tscn" id="3_h7iqs"]
+[ext_resource type="PackedScene" uid="uid://cmysh8kqsje1j" path="res://objects/shelves/shelf.tscn" id="4_4fuuu"]
 
 [node name="Game" type="Node2D" unique_id=645817684 groups=["game"]]
 
@@ -16,3 +17,6 @@ position = Vector2(170, 133)
 position = Vector2(275, 251)
 
 [node name="InteractionManager" parent="." unique_id=938102348 instance=ExtResource("3_h7iqs")]
+
+[node name="Shelf" parent="." unique_id=1206098896 instance=ExtResource("4_4fuuu")]
+position = Vector2(398, 233)
