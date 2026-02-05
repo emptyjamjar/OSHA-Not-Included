@@ -1,8 +1,8 @@
 class_name Package extends Node2D
 
 var inventory : Array[Item]
-var capacity : int
-var curCapacity : int :
+var maxCap : int
+var curCap : int :
 	get:
 		var cap = 0
 		for item in inventory:
@@ -37,7 +37,7 @@ func _on_interact():
 			reparent(player, true)
 
 func add_item(item : Item):
-	if (curCapacity + item.size < capacity):
+	if (curCap + item.size < maxCap):
 		inventory.append(item)
 	else:
 		isHoldable = true
