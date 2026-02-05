@@ -21,7 +21,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-InteractionManager="*uid://rs788b0iptdm"
+InteractionManager="*uid://cqlwrg2wyw45a"
 
 [global_group]
 
