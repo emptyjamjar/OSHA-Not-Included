@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://d2r1f8py617s3"]
 
-[ext_resource type="Script" uid="uid://danqchikyp37a" path="res://scripts/box.gd" id="1_ks2v0"]
-[ext_resource type="Texture2D" uid="uid://coef8g2cwlpx7" path="res://art/New Piskel-1.png(1).png" id="2_c2ln5"]
-[ext_resource type="PackedScene" uid="uid://cdhb2euh28ies" path="res://core/utils/interaction_area.tscn" id="3_ehynf"]
+[ext_resource type="Script" uid="uid://bj3wy206lvwr8" path="res://objects/package/box.gd" id="1_ks2v0"]
+[ext_resource type="Texture2D" uid="uid://bmisxcq76lrat" path="res://icon.svg" id="2_ehynf"]
+[ext_resource type="PackedScene" uid="uid://cdhb2euh28ies" path="res://core/components/interaction_area/interaction_area.tscn" id="3_ehynf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3inec"]
 
@@ -10,14 +10,15 @@
 radius = 40.0
 
 [node name="Box" type="RigidBody2D" unique_id=189150552]
-collision_layer = 2
+collision_layer = 0
 collision_mask = 2
 gravity_scale = 0.0
 lock_rotation = true
+freeze = true
 script = ExtResource("1_ks2v0")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1898091790]
-texture = ExtResource("2_c2ln5")
+texture = ExtResource("2_ehynf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=55003392]
 scale = Vector2(1.5, 1.5)
