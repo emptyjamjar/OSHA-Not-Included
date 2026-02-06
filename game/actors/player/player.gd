@@ -6,6 +6,12 @@ class_name Player extends CharacterBody2D
 @export var move_speed := 250
 @export var push_speed := 100
 
+@onready var health_bar :int = 100
+@onready var energy_bar: float = 100.0 
+@onready var sanity: int = 100 
+@onready var needs:float = 50
+
+
 func _physics_process(delta: float) -> void:
 	var move_vec = Vector2()
 	if Input.is_action_pressed("move_left"):
