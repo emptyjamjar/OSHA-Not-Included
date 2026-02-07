@@ -11,29 +11,44 @@ var curCap : int :
 
 # Used to differentiate between modifying contents and holding
 var isHoldable : bool
+var isHeld : bool
 
 @onready var iArea := $InteractionArea
 
 func _ready() -> void:
 	iArea.interact = Callable(self, "_on_interact")
+	iArea.action_name = "pick up"
 	isHoldable = false
 
 func disable():
 	iArea.monitorable = false
 	iArea.monitoring = false
+func enable():
+	iArea.monitorable = true
+	iArea.monitoring = true
 
 func _on_interact():
+	if isHeld:
+		drop()
 	# if the station changes holdable then pick it up
-	if isHoldable:
+	elif isHoldable:
 		# temporary code until inventory is set up
 		var player = get_tree().get_first_node_in_group("player")
 		if player:
 			disable()
 			global_position = player.global_position
 			reparent(player)
+			isHeld = true
 
 func add_item(item : Item):
 	if (curCap + item.size < maxCap):
 		inventory.append(item)
 	else:
 		isHoldable = true
+
+# Called when player tries to drop item
+func drop():
+	enable()
+	isHeld = false
+	# TODO - handle drop, will free itself for now
+	self.queue_free()
