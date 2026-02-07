@@ -30,7 +30,7 @@ func _on_interact():
 		if player:
 			disable()
 			global_position = player.global_position
-			reparent(player, true)
+			reparent(player)
 
 func add_item(item : Item):
 	if (curCap + item.size < maxCap):
