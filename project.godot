@@ -15,7 +15,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="osha_not_included"
-run/main_scene="uid://cp3eur47tnd7i"
+run/main_scene="uid://cj5ikori0r3jt"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
