@@ -17,8 +17,7 @@ var isHeld : bool
 
 func _ready() -> void:
 	iArea.interact = Callable(self, "_on_interact")
-	iArea.action_name = "pick up"
-	isHoldable = false
+	iArea.action_name = "pickup"
 
 func disable():
 	iArea.monitorable = false
@@ -35,7 +34,7 @@ func _on_interact():
 		# temporary code until inventory is set up
 		var player = get_tree().get_first_node_in_group("player")
 		if player:
-			disable()
+			#disable()
 			global_position = player.global_position
 			reparent(player)
 			isHeld = true
