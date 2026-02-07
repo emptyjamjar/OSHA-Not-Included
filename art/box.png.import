@@ -10,13 +10,8 @@ metadata={
 
 [deps]
 
-<<<<<<<< HEAD:art/box.png.import
 source_file="res://art/box.png"
 dest_files=["res://.godot/imported/box.png-0dcfa2e0705760a5bed75d0ae36cd30e.ctex"]
-========
-source_file="res://objects/packager/placeholder.webp"
-dest_files=["res://.godot/imported/placeholder.webp-eaac6faab147dfe775c2736e5f1e187c.ctex"]
->>>>>>>> main:objects/packager/placeholder.webp.import
 
 [params]
 
