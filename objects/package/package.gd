@@ -49,5 +49,4 @@ func add_item(item : Item):
 func drop():
 	enable()
 	isHeld = false
-	# TODO - handle drop, will free itself for now
-	self.queue_free()
+	# TODO - handle drop once inventory system is made
