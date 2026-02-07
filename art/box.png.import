@@ -2,13 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-<<<<<<<< HEAD:art/box.png.import
 uid="uid://coef8g2cwlpx7"
 path="res://.godot/imported/box.png-0dcfa2e0705760a5bed75d0ae36cd30e.ctex"
-========
-uid="uid://dsnmu8t7ih5io"
-path="res://.godot/imported/placeholder.webp-eaac6faab147dfe775c2736e5f1e187c.ctex"
->>>>>>>> main:objects/packager/placeholder.webp.import
 metadata={
 "vram_texture": false
 }
