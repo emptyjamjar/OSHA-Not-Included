@@ -24,5 +24,6 @@ func _process(delta: float) -> void:
 				box.add_to_group("Shippable")
 				print("Box is boxed")
 
+# on interacting with the box, energy decreases: 
 func _on_interact():
 	pass
