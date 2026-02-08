@@ -7,8 +7,9 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_ofwpu"]
 radius = 38.013157
 
-[node name="Package" type="Node2D" unique_id=497298653 groups=["Boxes"]]
+[node name="Package" type="Node2D" unique_id=497298653 node_paths=PackedStringArray("iArea") groups=["Boxes"]]
 script = ExtResource("1_xg0p7")
+iArea = NodePath("InteractionArea")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1480615960]
 scale = Vector2(0.53333336, 0.53333336)

@@ -13,18 +13,11 @@ var curCap : int :
 var isHoldable : bool
 var isHeld : bool
 
-@onready var iArea := $InteractionArea
+@export var iArea : InteractionArea
 
 func _ready() -> void:
 	iArea.interact = Callable(self, "_on_interact")
 	iArea.action_name = "pickup"
-
-func disable():
-	iArea.monitorable = false
-	iArea.monitoring = false
-func enable():
-	iArea.monitorable = true
-	iArea.monitoring = true
 
 func _on_interact():
 	if isHeld:
@@ -38,6 +31,13 @@ func _on_interact():
 			global_position = player.global_position
 			reparent(player)
 			isHeld = true
+
+func disable():
+	iArea.monitorable = false
+	iArea.monitoring = false
+func enable():
+	iArea.monitorable = true
+	iArea.monitoring = true
 
 func add_item(item : Item):
 	if (curCap + item.size < maxCap):
