@@ -6,6 +6,17 @@ enum Colour {
 	PINK,
 }
 
+
+func _ready() -> void:
+	iArea.interact = Callable(self, "_on_interact")
+	iArea.action_name = "pickup"
+
+
+func _on_interact():
+	# Uncomment code when player inventory is made global
+	#PlayerInventory.add_held_item(self)
+	pass
+
 func set_colour(colour: Colour) -> void:
 	var resourcePath := "res://objects/items/water_bottles/resources/"
 	match colour:

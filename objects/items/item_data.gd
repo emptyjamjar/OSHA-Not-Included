@@ -4,6 +4,7 @@ enum Type {
 	ANOMALOUS,
 	GENERIC,
 	CONSUMABLE,
+	PACKAGE,
 }
 
 @export var type : Type

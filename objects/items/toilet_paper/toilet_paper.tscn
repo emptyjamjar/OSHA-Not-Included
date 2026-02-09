@@ -4,6 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://djqexv2evsnka" path="res://objects/items/item_data_component.tscn" id="2_3njml"]
 [ext_resource type="Script" uid="uid://cakmo3o53qbak" path="res://objects/items/toilet_paper/toilet_paper.gd" id="2_rg55b"]
 [ext_resource type="Resource" uid="uid://bguhd83d36whj" path="res://objects/items/toilet_paper/toilet_paper.tres" id="3_rg55b"]
+[ext_resource type="PackedScene" uid="uid://cdhb2euh28ies" path="res://core/components/interaction_area/interaction_area.tscn" id="5_m8mlr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3er3a"]
+radius = 30.0
 
 [node name="ToiletPaper" type="Sprite2D" unique_id=1164788756 node_paths=PackedStringArray("itemData")]
 texture = ExtResource("1_s1i3w")
@@ -12,3 +16,8 @@ itemData = NodePath("ItemDataComponent")
 
 [node name="ItemDataComponent" parent="." unique_id=1304246171 instance=ExtResource("2_3njml")]
 data = ExtResource("3_rg55b")
+
+[node name="InteractionArea" parent="." unique_id=2104453103 instance=ExtResource("5_m8mlr")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1232978957]
+shape = SubResource("CircleShape2D_3er3a")
