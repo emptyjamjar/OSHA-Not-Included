@@ -25,13 +25,13 @@ func _process(delta: float) -> void:
 	#else:
 		#linear_velocity.y = 0
 	
-	#if picked_up:
-		#self.freeze = true
-		#self.global_position = player.global_position
-		#reparent(player)
-	#else:
-		#self.freeze = false
-		#reparent(game)
+	if picked_up:
+		self.freeze = true
+		self.global_position = player.global_position
+		reparent(player)
+	else:
+		self.freeze = false
+		reparent(game)
 
 func _on_interact():
 	if picked_up != true:

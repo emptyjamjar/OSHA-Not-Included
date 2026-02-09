@@ -4,15 +4,14 @@ extends Area2D
 @export var inside := false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
-
+	$InteractionArea.interact = Callable(self, "_on_interact")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	inside = false
 	scanner = get_overlapping_bodies()
 	for object in scanner:
-		if object == get_node("../Player"):
+		if object.is_in_group("player"):
 			print("Player is in")
 			inside = true
 			break
@@ -24,3 +23,7 @@ func _process(delta: float) -> void:
 			if box.is_in_group("Boxes"):
 				box.add_to_group("Shippable")
 				print("Box is boxed")
+
+# on interacting with the box, energy decreases: 
+func _on_interact():
+	pass
