@@ -1,8 +1,13 @@
 class_name Package extends Node2D
 
+signal picked_up
+signal dropped
+
+@export var iArea : InteractionArea
+
 var inventory : Array[Item]
 var maxCap : int
-var curCap : int :
+var curCap : int:
 	get:
 		var cap = 0
 		for item in inventory:
@@ -13,40 +18,40 @@ var curCap : int :
 var isHoldable : bool
 var isHeld : bool
 
-@export var iArea : InteractionArea
 
 func _ready() -> void:
 	iArea.interact = Callable(self, "_on_interact")
 	iArea.action_name = "pickup"
 
+
 func _on_interact():
 	if isHeld:
 		drop()
-	# if the station changes holdable then pick it up
+	# Only allow pickup when possible
 	elif isHoldable:
-		# temporary code until inventory is set up
-		var player = get_tree().get_first_node_in_group("player")
-		if player:
-			#disable()
-			global_position = player.global_position
-			reparent(player)
-			isHeld = true
+		pick_up()
 
-func disable():
-	iArea.monitorable = false
-	iArea.monitoring = false
-func enable():
-	iArea.monitorable = true
-	iArea.monitoring = true
 
 func add_item(item : Item):
 	if (curCap + item.size < maxCap):
-		inventory.append(item)
+		inventory.push_front(item)
 	else:
 		isHoldable = true
 
-# Called when player tries to drop item
+
+# Called when player tries to pick up package
+func pick_up():
+	isHeld = true
+	picked_up.emit()
+
+
+# Called when player tries to drop package
 func drop():
-	enable()
 	isHeld = false
-	# TODO - handle drop once inventory system is made
+	dropped.emit()
+
+func get_cur_cap():
+	var cap = 0
+	for item in inventory:
+		cap += item.size
+	return cap
