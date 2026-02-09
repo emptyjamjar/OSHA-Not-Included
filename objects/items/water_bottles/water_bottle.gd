@@ -1,4 +1,4 @@
-class_name WaterBottle extends Sprite2D
+class_name WaterBottle extends Item
 
 enum Colour {
 	BLACK,
@@ -6,9 +6,7 @@ enum Colour {
 	PINK,
 }
 
-@export var itemData : ItemDataComponent
-
-func _init(colour: Colour) -> void:
+func set_colour(colour: Colour) -> void:
 	var resourcePath := "res://objects/items/water_bottles/resources/"
 	match colour:
 		Colour.BLACK:
