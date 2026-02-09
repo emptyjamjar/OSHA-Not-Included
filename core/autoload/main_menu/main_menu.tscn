@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://rwv23iayi48d"]
+
+[ext_resource type="Texture2D" uid="uid://ca7ldkphma5nn" path="res://core/autoload/main_menu/image0(1).png" id="1_mpo3g"]
+[ext_resource type="Script" uid="uid://ba7hlf2id4q5t" path="res://core/autoload/main_menu/play.gd" id="2_6k7qw"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lwp85"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_mpo3g")
+}, {
+"duration": 1.0,
+"texture": null
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="MainMenu" type="Control" unique_id=1549026700]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -653.0
+offset_bottom = -292.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Node2D" type="Node2D" parent="." unique_id=1844560326]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Node2D" unique_id=470053171]
+layer = -1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D/CanvasLayer" unique_id=1288663064]
+position = Vector2(550, 313)
+sprite_frames = SubResource("SpriteFrames_lwp85")
+
+[node name="Play" type="Button" parent="." unique_id=873624178]
+layout_mode = 0
+offset_left = 241.0
+offset_top = 302.0
+offset_right = 403.0
+offset_bottom = 373.0
+script = ExtResource("2_6k7qw")
+
+[connection signal="button_up" from="Play" to="Play" method="_on_button_up"]
