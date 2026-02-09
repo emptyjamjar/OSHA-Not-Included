@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://smgpw80c1pur"]
+
+[ext_resource type="Texture2D" uid="uid://dtivco36dr1yn" path="res://objects/items/toilet_paper/warehouse-large-toilet-paper.png" id="1_s1i3w"]
+[ext_resource type="PackedScene" uid="uid://djqexv2evsnka" path="res://objects/items/item_data_component.tscn" id="2_3njml"]
+[ext_resource type="Resource" uid="uid://bguhd83d36whj" path="res://objects/items/toilet_paper/toilet_paper.tres" id="3_rg55b"]
+
+[node name="ToiletPaper" type="Sprite2D" unique_id=1164788756]
+texture = ExtResource("1_s1i3w")
+
+[node name="ItemDataComponent" parent="." unique_id=1304246171 instance=ExtResource("2_3njml")]
+data = ExtResource("3_rg55b")
