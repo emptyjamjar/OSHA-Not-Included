@@ -6,18 +6,34 @@ class_name Player extends CharacterBody2D
 
 @export var move_speed := 250
 @export var push_speed := 100
-@export var sprint_speed := 2
+@export var sprint_speed := 1.5
 
 #wasd is the movement for move_(direction). 
 func _physics_process(delta: float) -> void:
-	var input_direction = Input.get_vector('move_left', 'move_right', 'move_up', 'move_down')
+	var direction = Input.get_vector('move_left', 'move_right', 'move_up', 'move_down')
+	
+	if direction != Vector2.ZERO:
+		if abs(direction.x) > abs(direction.y):
+			animated_sprite.play("move_right" if direction.x > 0 else "move_left")
+		else:
+			animated_sprite.play("move_down" if direction.y > 0 else "move_up")
+	else:
+		animated_sprite.play("idle")
 	
 	if (Input.is_action_pressed("sprint")):
-		move_and_collide(input_direction * delta * (move_speed * sprint_speed))
+		animated_sprite.speed_scale = 1.5
+		move_and_collide(direction * delta * (move_speed * sprint_speed))
 	else:
-		move_and_collide(input_direction * delta * move_speed)
+		animated_sprite.speed_scale = 1
+		move_and_collide(direction * delta * move_speed)
 
 	var screen_size = get_viewport_rect().size
-	position.x = clamp(position.x, 0, screen_size.x)
-	position.y = clamp(position.y, 0, screen_size.y)
-	
+	var sprite_width_half = get_animated_sprite_dimensions().x / 2.0
+	var sprite_height_half = get_animated_sprite_dimensions().y / 2.0
+	position.x = clamp(position.x, 0 + sprite_width_half, screen_size.x - sprite_width_half)
+	position.y = clamp(position.y, 0 + sprite_height_half, screen_size.y - sprite_height_half)
+
+
+## Returns the full dimensions of the player's animated sprite in a Vector2i
+func get_animated_sprite_dimensions() -> Vector2i:
+	return animated_sprite.sprite_frames.get_frame_texture(animated_sprite.animation, animated_sprite.frame).get_size()
