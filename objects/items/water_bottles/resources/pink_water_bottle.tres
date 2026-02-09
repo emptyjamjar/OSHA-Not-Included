@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://dq0vjcaxvxr4o"]
+
+[ext_resource type="Texture2D" uid="uid://bnjpx66ro6rq3" path="res://objects/items/water_bottles/resources/warehouse-pink-water.png" id="1_lq0gb"]
+[ext_resource type="Script" uid="uid://c7i8xoc0ofw0m" path="res://objects/items/item_data.gd" id="2_3q0np"]
+
+[resource]
+script = ExtResource("2_3q0np")
+type = 1
+name = "Pink Water Bottle"
+description = "People sure order a lot of these."
+invTexture = ExtResource("1_lq0gb")

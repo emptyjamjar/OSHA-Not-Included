@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnjpx66ro6rq3"
-path="res://.godot/imported/warehouse-pink-water.png-125f08af13e55ba992d82c194add86c0.ctex"
+uid="uid://ryxlg3pw4eyu"
+path="res://.godot/imported/warehouse-large-pink.png-ad1e813bbea01f1f80d1b3e84adb4a69.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/items/water_bottles/warehouse-pink-water.png"
-dest_files=["res://.godot/imported/warehouse-pink-water.png-125f08af13e55ba992d82c194add86c0.ctex"]
+source_file="res://objects/items/water_bottles/resources/warehouse-large-pink.png"
+dest_files=["res://.godot/imported/warehouse-large-pink.png-ad1e813bbea01f1f80d1b3e84adb4a69.ctex"]
 
 [params]
 
