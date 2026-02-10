@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://rwv23iayi48d"]
 
-[ext_resource type="Texture2D" uid="uid://ca7ldkphma5nn" path="res://core/autoload/main_menu/mockup.png" id="1_mpo3g"]
-[ext_resource type="Script" uid="uid://ba7hlf2id4q5t" path="res://core/autoload/main_menu/play.gd" id="2_6k7qw"]
+[ext_resource type="Texture2D" uid="uid://ca7ldkphma5nn" path="res://ui/menus/main_menu/mockup.png" id="1_mpo3g"]
+[ext_resource type="Script" uid="uid://ba7hlf2id4q5t" path="res://ui/menus/main_menu/play.gd" id="2_6k7qw"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lwp85"]
 animations = [{
@@ -16,6 +16,8 @@ animations = [{
 "name": &"default",
 "speed": 5.0
 }]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6s8a2"]
 
 [node name="MainMenu" type="Control" unique_id=1549026700]
 layout_mode = 3
@@ -38,10 +40,11 @@ sprite_frames = SubResource("SpriteFrames_lwp85")
 
 [node name="Play" type="Button" parent="." unique_id=873624178]
 layout_mode = 0
-offset_left = 241.0
-offset_top = 302.0
-offset_right = 403.0
-offset_bottom = 373.0
+offset_left = 243.0
+offset_top = 316.0
+offset_right = 405.0
+offset_bottom = 387.0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6s8a2")
 script = ExtResource("2_6k7qw")
 
 [connection signal="button_up" from="Play" to="Play" method="_on_button_up"]
