@@ -1,15 +1,19 @@
 [gd_scene format=3 uid="uid://bimhohbyv6s5d"]
 
-[ext_resource type="Script" uid="uid://ccrk62keayi5f" path="res://conveyer.gd" id="1_ifo1u"]
-[ext_resource type="Shape2D" uid="uid://bn0naoloc0n4l" path="res://objects/sorter/boundary.tres" id="2_1w0gl"]
-[ext_resource type="Texture2D" uid="uid://37gvsnqg22mk" path="res://objects/sorter/placeholder.jpg" id="2_jweep"]
+[ext_resource type="Script" uid="uid://ccrk62keayi5f" path="res://objects/shipper/shipper.gd" id="1_ifo1u"]
+[ext_resource type="Shape2D" uid="uid://bn0naoloc0n4l" path="res://objects/shipper/boundary.tres" id="2_1w0gl"]
+[ext_resource type="Texture2D" uid="uid://clwij4b1x4jbc" path="res://objects/shipper/Output_Station_Sheet.png" id="3_0ivfn"]
 [ext_resource type="PackedScene" uid="uid://cdhb2euh28ies" path="res://core/components/interaction_area/interaction_area.tscn" id="4_1w0gl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_escnv"]
+atlas = ExtResource("3_0ivfn")
+region = Rect2(0, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_gee14"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_jweep")
+"texture": SubResource("AtlasTexture_escnv")
 }],
 "loop": true,
 "name": &"default",
@@ -19,6 +23,8 @@ animations = [{
 [node name="Shipper" type="Area2D" unique_id=441417436]
 position = Vector2(-0.99999994, 1)
 scale = Vector2(0.30384615, 0.2857143)
+collision_layer = 0
+collision_mask = 4
 script = ExtResource("1_ifo1u")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=324685094]
@@ -27,8 +33,8 @@ scale = Vector2(0.9999999, 1)
 shape = ExtResource("2_1w0gl")
 
 [node name="Image" type="AnimatedSprite2D" parent="." unique_id=883687236]
-position = Vector2(3.2912598, 3.5000305)
-scale = Vector2(0.2262032, 0.5772059)
+position = Vector2(14.810118, 68.24999)
+scale = Vector2(7.353639, 12.0859375)
 sprite_frames = SubResource("SpriteFrames_gee14")
 
 [node name="InteractionArea" parent="." unique_id=2104453103 instance=ExtResource("4_1w0gl")]
