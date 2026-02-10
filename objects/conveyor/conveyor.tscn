@@ -3,61 +3,6 @@
 [ext_resource type="Script" uid="uid://c8aty2hcl6j7a" path="res://objects/conveyor/conveyor_controller.gd" id="1_ncid3"]
 [ext_resource type="Texture2D" uid="uid://b262ubqhs8k2j" path="res://objects/conveyor/Input_Station.png" id="1_ob2mf"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ncid3"]
-texture = ExtResource("1_ob2mf")
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-4:0/0 = 0
-5:0/0 = 0
-6:0/0 = 0
-7:0/0 = 0
-8:0/0 = 0
-9:0/0 = 0
-10:0/0 = 0
-11:0/0 = 0
-12:0/0 = 0
-13:0/0 = 0
-14:0/0 = 0
-15:0/0 = 0
-16:0/0 = 0
-17:0/0 = 0
-18:0/0 = 0
-19:0/0 = 0
-0:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-4:1/0 = 0
-5:1/0 = 0
-7:1/0 = 0
-8:1/0 = 0
-9:1/0 = 0
-10:1/0 = 0
-12:1/0 = 0
-13:1/0 = 0
-14:1/0 = 0
-15:1/0 = 0
-17:1/0 = 0
-18:1/0 = 0
-19:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-5:2/0 = 0
-6:2/0 = 0
-7:2/0 = 0
-10:2/0 = 0
-11:2/0 = 0
-12:2/0 = 0
-15:2/0 = 0
-16:2/0 = 0
-17:2/0 = 0
-0:3/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_ywffn"]
-sources/0 = SubResource("TileSetAtlasSource_ncid3")
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_ncid3"]
 atlas = ExtResource("1_ob2mf")
 region = Rect2(0, 48, 16, 16)
@@ -208,9 +153,6 @@ animations = [{
 [node name="Conveyor" type="Node2D" unique_id=1135306595]
 script = ExtResource("1_ncid3")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=231633411]
-tile_set = SubResource("TileSet_ywffn")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1512575671]
 
 [node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1422485525]
@@ -230,7 +172,7 @@ position = Vector2(48.000004, 20)
 scale = Vector2(2.9999995, 2.5)
 sprite_frames = SubResource("SpriteFrames_dbokv")
 animation = &"Belt_Horizontal_Foward"
-frame_progress = 0.37378678
+frame_progress = 0.43032485
 
 [node name="Belt_Horizontal_02" type="AnimatedSprite2D" parent="." unique_id=673973688]
 texture_filter = 1
@@ -238,7 +180,7 @@ position = Vector2(96, 20)
 scale = Vector2(2.9999993, 2.5)
 sprite_frames = SubResource("SpriteFrames_dbokv")
 animation = &"Belt_Horizontal_Foward"
-frame_progress = 0.4212966
+frame_progress = 0.47783545
 
 [node name="Belt_Horizontal_03" type="AnimatedSprite2D" parent="." unique_id=2077580728]
 texture_filter = 1
@@ -246,18 +188,18 @@ position = Vector2(144, 20)
 scale = Vector2(2.9999995, 2.4999998)
 sprite_frames = SubResource("SpriteFrames_dbokv")
 animation = &"Belt_Horizontal_Foward"
-frame_progress = 0.3828453
+frame_progress = 0.4393836
 
 [node name="Belt_Corner_01" type="AnimatedSprite2D" parent="." unique_id=1113883413]
 texture_filter = 1
 position = Vector2(188.00002, 20)
 scale = Vector2(2.4999979, 2.4999998)
 sprite_frames = SubResource("SpriteFrames_r2g2m")
-frame_progress = 0.47182328
+frame_progress = 0.52836204
 
 [node name="Belt_Vertical_01" type="AnimatedSprite2D" parent="." unique_id=217516374]
 texture_filter = 1
 position = Vector2(188.00002, 60)
 scale = Vector2(2.5, 2.5)
 sprite_frames = SubResource("SpriteFrames_g3few")
-frame_progress = 0.6341126
+frame_progress = 0.6906522
