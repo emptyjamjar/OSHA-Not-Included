@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cp3eur47tnd7i"]
 
-[ext_resource type="PackedScene" uid="uid://bhmynboldga2b" path="res://objects/packager/prepper.tscn" id="1_rjdaw"]
-[ext_resource type="PackedScene" uid="uid://bimhohbyv6s5d" path="res://objects/sorter/shipper.tscn" id="2_in6g1"]
+[ext_resource type="PackedScene" uid="uid://bhmynboldga2b" path="res://objects/packager/packager.tscn" id="1_rjdaw"]
+[ext_resource type="PackedScene" uid="uid://bimhohbyv6s5d" path="res://objects/shipper/shipper.tscn" id="2_in6g1"]
 [ext_resource type="PackedScene" uid="uid://c7e7f64igaa5j" path="res://game/actors/player/player.tscn" id="3_in6g1"]
 [ext_resource type="PackedScene" uid="uid://d2r1f8py617s3" path="res://objects/package/box.tscn" id="4_bml3k"]
 [ext_resource type="PackedScene" uid="uid://rs788b0iptdm" path="res://core/autoload/interaction_manager/interaction_manager.tscn" id="5_vxc2a"]
