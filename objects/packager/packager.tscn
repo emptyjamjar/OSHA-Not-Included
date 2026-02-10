@@ -1,6 +1,6 @@
-[gd_scene format=3 uid="uid://bhmynboldga2b"]
+[gd_scene format=3 uid="uid://sxf3e0qydlfv"]
 
-[ext_resource type="Script" uid="uid://c7w28bth788m6" path="res://objects/packager/packager.gd" id="1_uljtb"]
+[ext_resource type="Script" path="res://objects/packager/packager.gd" id="1_hlauf"]
 [ext_resource type="Shape2D" uid="uid://dvpia8jjdm67f" path="res://objects/packager/boundary.tres" id="2_owb4y"]
 [ext_resource type="Texture2D" uid="uid://cc5wwyurmmsew" path="res://objects/packager/placeholder.webp" id="2_s1jx0"]
 [ext_resource type="PackedScene" uid="uid://cdhb2euh28ies" path="res://core/components/interaction_area/interaction_area.tscn" id="4_owb4y"]
@@ -20,7 +20,7 @@ animations = [{
 scale = Vector2(0.30384615, 0.2857143)
 collision_layer = 0
 collision_mask = 5
-script = ExtResource("1_uljtb")
+script = ExtResource("1_hlauf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1561103054]
 position = Vector2(0, -1.75)
