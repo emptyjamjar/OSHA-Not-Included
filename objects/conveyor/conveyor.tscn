@@ -3,11 +3,15 @@
 [ext_resource type="Script" uid="uid://c8aty2hcl6j7a" path="res://objects/conveyor/conveyor_controller.gd" id="1_ncid3"]
 [ext_resource type="Texture2D" uid="uid://b262ubqhs8k2j" path="res://objects/conveyor/Input_Station.png" id="1_ob2mf"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ncid3"]
+size = Vector2(288, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ywffn"]
+size = Vector2(64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_ncid3"]
 atlas = ExtResource("1_ob2mf")
 region = Rect2(0, 48, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_ncid3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_byef5"]
 atlas = ExtResource("1_ob2mf")
@@ -153,53 +157,56 @@ animations = [{
 [node name="Conveyor" type="Node2D" unique_id=1135306595]
 script = ExtResource("1_ncid3")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1512575671]
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1976208908]
 
-[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=1422485525]
+[node name="Collision_Horizontal" type="CollisionShape2D" parent="StaticBody2D" unique_id=1512575671]
+position = Vector2(144, 32)
+shape = SubResource("RectangleShape2D_ncid3")
+
+[node name="Collision_Vertical" type="CollisionShape2D" parent="StaticBody2D" unique_id=509053654]
+position = Vector2(256, 96)
+shape = SubResource("RectangleShape2D_ywffn")
+
+[node name="Belt_Input" type="NinePatchRect" parent="StaticBody2D" unique_id=1422485525]
 texture_filter = 1
-offset_right = 48.0
-offset_bottom = 40.0
+offset_right = 64.0
+offset_bottom = 64.0
 texture = SubResource("AtlasTexture_ncid3")
 
-[node name="Belt_Start" type="AnimatedSprite2D" parent="." unique_id=881000170]
-position = Vector2(60, 20)
-scale = Vector2(2.5, 2.5)
-sprite_frames = SubResource("SpriteFrames_ncid3")
-
-[node name="Belt_Horizontal_01" type="AnimatedSprite2D" parent="." unique_id=844702504]
+[node name="Belt_Horizontal_01" type="AnimatedSprite2D" parent="StaticBody2D" unique_id=844702504]
 texture_filter = 1
-position = Vector2(48.000004, 20)
-scale = Vector2(2.9999995, 2.5)
+position = Vector2(64, 32)
+scale = Vector2(3.9999995, 4)
 sprite_frames = SubResource("SpriteFrames_dbokv")
 animation = &"Belt_Horizontal_Foward"
-frame_progress = 0.43032485
+frame_progress = 0.0092719225
 
-[node name="Belt_Horizontal_02" type="AnimatedSprite2D" parent="." unique_id=673973688]
+[node name="Belt_Horizontal_02" type="AnimatedSprite2D" parent="StaticBody2D" unique_id=673973688]
 texture_filter = 1
-position = Vector2(96, 20)
-scale = Vector2(2.9999993, 2.5)
+position = Vector2(127.999985, 32.000008)
+scale = Vector2(3.999999, 3.9999998)
 sprite_frames = SubResource("SpriteFrames_dbokv")
 animation = &"Belt_Horizontal_Foward"
-frame_progress = 0.47783545
+frame_progress = 0.056792323
 
-[node name="Belt_Horizontal_03" type="AnimatedSprite2D" parent="." unique_id=2077580728]
+[node name="Belt_Horizontal_03" type="AnimatedSprite2D" parent="StaticBody2D" unique_id=2077580728]
 texture_filter = 1
-position = Vector2(144, 20)
-scale = Vector2(2.9999995, 2.4999998)
+position = Vector2(192, 32)
+scale = Vector2(3.9999998, 3.9999998)
 sprite_frames = SubResource("SpriteFrames_dbokv")
 animation = &"Belt_Horizontal_Foward"
-frame_progress = 0.4393836
+frame_progress = 0.01833475
 
-[node name="Belt_Corner_01" type="AnimatedSprite2D" parent="." unique_id=1113883413]
+[node name="Belt_Corner_01" type="AnimatedSprite2D" parent="StaticBody2D" unique_id=1113883413]
 texture_filter = 1
-position = Vector2(188.00002, 20)
-scale = Vector2(2.4999979, 2.4999998)
+position = Vector2(256, 32)
+scale = Vector2(3.9999993, 4)
 sprite_frames = SubResource("SpriteFrames_r2g2m")
-frame_progress = 0.52836204
+frame_progress = 0.107319474
 
-[node name="Belt_Vertical_01" type="AnimatedSprite2D" parent="." unique_id=217516374]
+[node name="Belt_Vertical_01" type="AnimatedSprite2D" parent="StaticBody2D" unique_id=217516374]
 texture_filter = 1
-position = Vector2(188.00002, 60)
-scale = Vector2(2.5, 2.5)
+position = Vector2(256, 96)
+scale = Vector2(3.999999, 3.9999993)
 sprite_frames = SubResource("SpriteFrames_g3few")
-frame_progress = 0.6906522
+frame_progress = 0.26962858
