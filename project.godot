@@ -15,19 +15,19 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 [application]
 
 config/name="osha_not_included"
-run/main_scene="uid://cj5ikori0r3jt"
+run/main_scene="uid://rwv23iayi48d"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-InteractionManager="*uid://cqlwrg2wyw45a"
+InteractionManager="*uid://rs788b0iptdm"
 
 [display]
 
 window/size/viewport_width=640
 window/size/viewport_height=360
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 
 [global_group]
 
