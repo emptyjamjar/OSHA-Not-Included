@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://ck4p7gga13e5e" path="res://energy_component.gd" id="3_feb5d"]
 [ext_resource type="Script" uid="uid://b0ovv20hjaxi3" path="res://needs_component.gd" id="4_fc0e3"]
 [ext_resource type="Script" uid="uid://dka4wuamclaju" path="res://sanity_component.gd" id="5_7jktm"]
+[ext_resource type="PackedScene" uid="uid://d2r1f8py617s3" path="res://objects/package/box.tscn" id="6_ryrav"]
 
 [node name="Game" unique_id=645817684 instance=ExtResource("1_80nbo")]
 
@@ -29,5 +30,8 @@ script = ExtResource("5_7jktm")
 [node name="Box" parent="." index="3" unique_id=189150552]
 position = Vector2(175, 283)
 
-[node name="Packager" parent="." index="5" unique_id=2093227932]
+[node name="Box2" parent="." index="4" unique_id=553175714 instance=ExtResource("6_ryrav")]
+position = Vector2(124, 306)
+
+[node name="Packager" parent="." index="6" unique_id=2093227932]
 position = Vector2(578, 66.999985)
