@@ -14,12 +14,12 @@ func _ready() -> void:
 	body_exited.connect(_on_body_exited)
 	
 func _on_body_entered(body:Node2D) -> void:
-	if (body.is_in_group("player")):
+	if (body.is_in_group("player") and timer.is_stopped()):
 		animated_sprite.play("open")
 		shipped = false
 	
 func _on_body_exited(body:Node2D) -> void:
-	if (body.is_in_group("player") and !shipped):
+	if (body.is_in_group("player") and !shipped and timer.is_stopped()):
 		animated_sprite.play("close")
 
 			
