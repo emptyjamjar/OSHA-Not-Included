@@ -5,39 +5,127 @@
 [ext_resource type="Texture2D" uid="uid://clwij4b1x4jbc" path="res://objects/shipper/Output_Station_Sheet.png" id="3_0ivfn"]
 [ext_resource type="PackedScene" uid="uid://cdhb2euh28ies" path="res://core/components/interaction_area/interaction_area.tscn" id="4_1w0gl"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_tdknt"]
+atlas = ExtResource("3_0ivfn")
+region = Rect2(0, 0, 64, 51)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_06xw7"]
+atlas = ExtResource("3_0ivfn")
+region = Rect2(64, 0, 64, 51)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3smwb"]
+atlas = ExtResource("3_0ivfn")
+region = Rect2(128, 0, 64, 51)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8eouu"]
+atlas = ExtResource("3_0ivfn")
+region = Rect2(192, 0, 64, 51)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ivfn"]
+atlas = ExtResource("3_0ivfn")
+region = Rect2(256, 0, 64, 51)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_escnv"]
 atlas = ExtResource("3_0ivfn")
-region = Rect2(0, 0, 64, 64)
+region = Rect2(320, 0, 64, 51)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_gee14"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ag84r"]
+atlas = ExtResource("3_0ivfn")
+region = Rect2(384, 0, 64, 51)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ll81s"]
+atlas = ExtResource("3_0ivfn")
+region = Rect2(448, 0, 64, 51)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgxi3"]
+atlas = ExtResource("3_0ivfn")
+region = Rect2(192, 0, 64, 51)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nsx2u"]
+atlas = ExtResource("3_0ivfn")
+region = Rect2(128, 0, 64, 51)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eyo00"]
+atlas = ExtResource("3_0ivfn")
+region = Rect2(64, 0, 64, 51)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_so2nq"]
+atlas = ExtResource("3_0ivfn")
+region = Rect2(0, 0, 64, 51)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6m55v"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_escnv")
+"texture": SubResource("AtlasTexture_tdknt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_06xw7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3smwb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8eouu")
 }],
-"loop": true,
-"name": &"default",
+"loop": false,
+"name": &"close",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ivfn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_escnv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ag84r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ll81s")
+}],
+"loop": false,
+"name": &"drive_away",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bgxi3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nsx2u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eyo00")
+}, {
+"duration": 2.0,
+"texture": SubResource("AtlasTexture_so2nq")
+}],
+"loop": false,
+"name": &"open",
 "speed": 5.0
 }]
 
 [node name="Shipper" type="Area2D" unique_id=441417436]
-collision_layer = 0
-collision_mask = 4
+collision_layer = 7
+collision_mask = 7
 script = ExtResource("1_ifo1u")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=324685094]
-position = Vector2(3.2913818, 0)
-scale = Vector2(0.9999999, 1)
-shape = ExtResource("2_1w0gl")
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=624549937]
+sprite_frames = SubResource("SpriteFrames_6m55v")
+animation = &"open"
 
-[node name="Image" type="AnimatedSprite2D" parent="." unique_id=883687236]
-position = Vector2(14.810118, 68.24999)
-scale = Vector2(7.353639, 12.0859375)
-sprite_frames = SubResource("SpriteFrames_gee14")
+[node name="ProximityCollisionShape" type="CollisionShape2D" parent="." unique_id=324685094]
+position = Vector2(1, 1.785965)
+scale = Vector2(0.25, 0.25)
+shape = ExtResource("2_1w0gl")
+debug_color = Color(0.54736716, 0.4457801, 0.89674175, 0.41960785)
 
 [node name="InteractionArea" parent="." unique_id=2104453103 instance=ExtResource("4_1w0gl")]
+action_name = "ship package"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=760146199]
-position = Vector2(13.500015, -10.84375)
-scale = Vector2(0.99999994, 1)
+position = Vector2(-1.1920929e-06, 7.1525574e-07)
+scale = Vector2(0.18552363, 0.18552364)
 shape = ExtResource("2_1w0gl")

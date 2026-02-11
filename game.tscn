@@ -9,8 +9,7 @@
 [node name="Game" unique_id=645817684 instance=ExtResource("1_80nbo")]
 
 [node name="Shipper" parent="." index="0" unique_id=441417436]
-position = Vector2(49, 80.00001)
-scale = Vector2(0.23999938, 0.23999938)
+position = Vector2(50, 44)
 
 [node name="Camera2D" parent="." index="1" unique_id=167263537]
 position = Vector2(320, 180)
