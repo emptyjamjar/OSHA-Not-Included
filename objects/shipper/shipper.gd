@@ -2,6 +2,7 @@ extends Area2D
 
 @export var boxes = null
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var timer = $ArriveTimer
 
 var shipped:bool = false
 
@@ -29,3 +30,7 @@ func _on_interact():
 			box.free()
 			animated_sprite.play("drive_away")
 			shipped = true
+			timer.start()
+
+func _on_arrive_timer_timeout() -> void:
+	animated_sprite.play("drive_up")
