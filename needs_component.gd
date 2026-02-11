@@ -1,4 +1,5 @@
 extends Node
+class_name NeedsComponent
 
 #Note: further desgin on this feature, did not finalize how this works: 
 # Hungers ?
