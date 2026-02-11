@@ -18,6 +18,13 @@ extends Node
 @onready var animated_corner_01 := $StaticBody2D/Belt_Corner_01
 @onready var animated_belt_v_01 := $StaticBody2D/Belt_Vertical_01
 
+func _process(delta: float) -> void:
+	animated_belt_h_01.play("Move_Right")
+	animated_belt_h_02.play("Move_Right")
+	animated_belt_h_03.play("Move_Right")
+	animated_corner_01.play("Move_Right_to_Down")
+	animated_belt_v_01.play("Move_Down")
+
 ## Adds an item to the conveyor
 ## @param item: item to be added
 func input(item:Item)->void:
@@ -26,10 +33,3 @@ func input(item:Item)->void:
 ## Returns the front-most item in the conveyor
 func output()->Item:
 	return self._queue.pop_front()
-
-func _process(delta: float) -> void:
-	animated_belt_h_01.play("Move_Right")
-	animated_belt_h_02.play("Move_Right")
-	animated_belt_h_03.play("Move_Right")
-	animated_corner_01.play("Move_Right_to_Down")
-	animated_belt_v_01.play("Move_Down")
