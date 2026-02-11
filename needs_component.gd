@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 #Note: further desgin on this feature, did not finalize how this works: 
 # Hungers ?

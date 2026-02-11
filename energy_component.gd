@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 @export var MAX_ENERGY := 50.0 
 var energy : float 

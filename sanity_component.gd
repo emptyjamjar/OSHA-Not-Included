@@ -1,4 +1,4 @@
-extends Node2D
+extends Node
 
 @export var MAX_SANITY := 100.0 
 var sanity : float 
