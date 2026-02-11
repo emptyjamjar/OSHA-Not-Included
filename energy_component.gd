@@ -7,7 +7,7 @@ var energy : float
 
 
 @export var regen_rate: float = 5.0  #energy per second
-@export var drain_rate: float = 0.5 #base drain per second
+@export var drain_rate: float = 0.05 #base drain per second
 var draining := false 
 
 var hold_time: float = 0.0	# how long the player has been doing the work
