@@ -2,12 +2,13 @@
 
 [ext_resource type="Script" uid="uid://dnn46uikhe1lo" path="res://objects/conveyor/conveyor.gd" id="1_ncid3"]
 [ext_resource type="Texture2D" uid="uid://b262ubqhs8k2j" path="res://objects/conveyor/Input_Station.png" id="1_ob2mf"]
+[ext_resource type="PackedScene" uid="uid://dwl8735m8xyja" path="res://objects/items/water_bottles/water_bottle.tscn" id="2_ywffn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ncid3"]
-size = Vector2(288, 64)
+size = Vector2(208, 40)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ywffn"]
-size = Vector2(64, 64)
+size = Vector2(32, 56)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ncid3"]
 atlas = ExtResource("1_ob2mf")
@@ -123,54 +124,73 @@ animations = [{
 
 [node name="Conveyor" type="Node2D" unique_id=1135306595]
 script = ExtResource("1_ncid3")
+item_scene = ExtResource("2_ywffn")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1976208908]
 
 [node name="Collision_Horizontal" type="CollisionShape2D" parent="StaticBody2D" unique_id=1512575671]
-position = Vector2(144, 32)
+position = Vector2(104, 20)
 shape = SubResource("RectangleShape2D_ncid3")
 
 [node name="Collision_Vertical" type="CollisionShape2D" parent="StaticBody2D" unique_id=509053654]
-position = Vector2(256, 96)
+position = Vector2(192, 68)
 shape = SubResource("RectangleShape2D_ywffn")
 
 [node name="Belt_Input" type="NinePatchRect" parent="StaticBody2D" unique_id=1422485525]
 texture_filter = 1
-offset_right = 64.0
-offset_bottom = 64.0
+offset_right = 48.0
+offset_bottom = 48.0
 texture = SubResource("AtlasTexture_ncid3")
 
 [node name="Belt_Horizontal_01" type="AnimatedSprite2D" parent="StaticBody2D" unique_id=844702504]
 texture_filter = 1
-position = Vector2(64, 32)
-scale = Vector2(3.9999995, 4)
+position = Vector2(48, 24)
+scale = Vector2(3, 3)
 sprite_frames = SubResource("SpriteFrames_dbokv")
 animation = &"Move_Right"
 
 [node name="Belt_Horizontal_02" type="AnimatedSprite2D" parent="StaticBody2D" unique_id=673973688]
 texture_filter = 1
-position = Vector2(127.999985, 32.000008)
-scale = Vector2(3.999999, 3.9999998)
+position = Vector2(96.00001, 24.000002)
+scale = Vector2(3.0000002, 2.9999995)
 sprite_frames = SubResource("SpriteFrames_dbokv")
 animation = &"Move_Right"
 
 [node name="Belt_Horizontal_03" type="AnimatedSprite2D" parent="StaticBody2D" unique_id=2077580728]
 texture_filter = 1
-position = Vector2(192, 32)
-scale = Vector2(3.9999998, 3.9999998)
+position = Vector2(144.00002, 24)
+scale = Vector2(2.9999998, 2.9999998)
 sprite_frames = SubResource("SpriteFrames_dbokv")
 animation = &"Move_Right"
 
 [node name="Belt_Corner_01" type="AnimatedSprite2D" parent="StaticBody2D" unique_id=1113883413]
 texture_filter = 1
-position = Vector2(256, 32)
-scale = Vector2(3.9999993, 4)
+position = Vector2(192, 24)
+scale = Vector2(2.999999, 2.9999998)
 sprite_frames = SubResource("SpriteFrames_r2g2m")
 animation = &"Move_Right_to_Down"
 
 [node name="Belt_Vertical_01" type="AnimatedSprite2D" parent="StaticBody2D" unique_id=217516374]
 texture_filter = 1
-position = Vector2(256, 96)
-scale = Vector2(3.999999, 3.9999993)
+position = Vector2(192, 72.00001)
+scale = Vector2(2.9999993, 2.999999)
 sprite_frames = SubResource("SpriteFrames_g3few")
 animation = &"Move_Down"
+
+[node name="Marker_Start" type="Marker2D" parent="." unique_id=2057746255]
+position = Vector2(40, 24)
+
+[node name="Marker_Pos_01" type="Marker2D" parent="." unique_id=507846563]
+position = Vector2(80, 24)
+
+[node name="Marker_Pos_02" type="Marker2D" parent="." unique_id=1152789713]
+position = Vector2(120, 24)
+
+[node name="Marker_Pos_03" type="Marker2D" parent="." unique_id=1940192903]
+position = Vector2(168, 24)
+
+[node name="Marker_Pos_04" type="Marker2D" parent="." unique_id=1522233274]
+position = Vector2(192, 48)
+
+[node name="Marker_End" type="Marker2D" parent="." unique_id=1672538663]
+position = Vector2(192, 80)
