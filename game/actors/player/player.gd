@@ -8,6 +8,10 @@ class_name Player extends CharacterBody2D
 @export var push_speed := 20
 @export var sprint_speed := 1.5
 
+func _ready() -> void:
+	InteractionManager.player = self
+	InteractionManager.can_interact = true
+
 #wasd is the movement for move_(direction). 
 func _physics_process(delta: float) -> void:
 	var direction = Input.get_vector('move_left', 'move_right', 'move_up', 'move_down')

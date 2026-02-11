@@ -6,7 +6,8 @@ extends Node2D
 const base_text = "[E] to "
 
 var active_areas : Array[InteractionArea] = []
-var can_interact = true
+var can_interact = false
+
 
 func register_area(area: InteractionArea):
 	active_areas.push_back(area)
