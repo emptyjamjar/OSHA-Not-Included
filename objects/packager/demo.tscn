@@ -1,18 +1,15 @@
 [gd_scene format=3 uid="uid://cp3eur47tnd7i"]
 
-[ext_resource type="PackedScene" uid="uid://bhmynboldga2b" path="res://objects/packager/prepper.tscn" id="1_rjdaw"]
-[ext_resource type="PackedScene" uid="uid://bimhohbyv6s5d" path="res://objects/sorter/shipper.tscn" id="2_in6g1"]
+[ext_resource type="PackedScene" uid="uid://bimhohbyv6s5d" path="res://objects/shipper/shipper.tscn" id="2_in6g1"]
 [ext_resource type="PackedScene" uid="uid://c7e7f64igaa5j" path="res://game/actors/player/player.tscn" id="3_in6g1"]
 [ext_resource type="PackedScene" uid="uid://d2r1f8py617s3" path="res://objects/package/box.tscn" id="4_bml3k"]
+[ext_resource type="PackedScene" uid="uid://sxf3e0qydlfv" path="res://objects/packager/packager.tscn" id="5_pgb08"]
 [ext_resource type="PackedScene" uid="uid://rs788b0iptdm" path="res://core/autoload/interaction_manager/interaction_manager.tscn" id="5_vxc2a"]
 
 [node name="Game" type="Node2D" unique_id=1827869877 groups=["game"]]
 
-[node name="Packager" parent="." unique_id=2093227932 instance=ExtResource("1_rjdaw")]
-position = Vector2(238.00002, 121)
-
-[node name="Sorter" parent="." unique_id=441417436 instance=ExtResource("2_in6g1")]
-position = Vector2(533, 108.99999)
+[node name="Shipper" parent="." unique_id=441417436 instance=ExtResource("2_in6g1")]
+position = Vector2(434, 197)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=167263537]
 position = Vector2(574, 323)
@@ -20,7 +17,10 @@ position = Vector2(574, 323)
 [node name="Player" parent="." unique_id=2112891127 groups=["player"] instance=ExtResource("3_in6g1")]
 position = Vector2(323, 263)
 
-[node name="Box" parent="." unique_id=189150552 groups=["Boxes"] instance=ExtResource("4_bml3k")]
+[node name="Box" parent="." unique_id=189150552 instance=ExtResource("4_bml3k")]
 position = Vector2(637, 301)
 
 [node name="InteractionManager" parent="." unique_id=938102348 instance=ExtResource("5_vxc2a")]
+
+[node name="Packager" parent="." unique_id=2093227932 instance=ExtResource("5_pgb08")]
+position = Vector2(823.00006, 283)
