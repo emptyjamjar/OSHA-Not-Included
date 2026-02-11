@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://dwl8735m8xyja"]
+
+[ext_resource type="Texture2D" uid="uid://31qxlr5k0ix4" path="res://objects/items/water_bottles/resources/warehouse-large-black.png" id="1_n4fx6"]
+[ext_resource type="Script" uid="uid://7t7iabh663ad" path="res://objects/items/water_bottles/water_bottle.gd" id="2_gt0bj"]
+[ext_resource type="PackedScene" uid="uid://djqexv2evsnka" path="res://objects/items/item_data_component.tscn" id="3_inmkg"]
+[ext_resource type="Resource" uid="uid://bt5hk58dqtwii" path="res://objects/items/water_bottles/resources/black_water_bottle.tres" id="4_8nshx"]
+[ext_resource type="PackedScene" uid="uid://cdhb2euh28ies" path="res://core/components/interaction_area/interaction_area.tscn" id="5_inmkg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8nshx"]
+radius = 30.0
+
+[node name="WaterBottle" type="Sprite2D" unique_id=260756264 node_paths=PackedStringArray("itemData")]
+texture = ExtResource("1_n4fx6")
+script = ExtResource("2_gt0bj")
+itemData = NodePath("ItemDataComponent")
+
+[node name="ItemDataComponent" parent="." unique_id=1304246171 instance=ExtResource("3_inmkg")]
+data = ExtResource("4_8nshx")
+
+[node name="InteractionArea" parent="." unique_id=2104453103 instance=ExtResource("5_inmkg")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=267989025]
+shape = SubResource("CircleShape2D_8nshx")
