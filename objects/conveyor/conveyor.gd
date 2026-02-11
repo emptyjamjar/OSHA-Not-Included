@@ -59,19 +59,21 @@ func _ready() -> void:
 	_slots.resize(_slot_markers.size())
 	for i in _slots.size():
 		_slots[i] = null
-	
-	# Test
-	var tp = preload("res://objects/items/toilet_paper/toilet_paper.tscn").instantiate() as ToiletPaper
-	input(tp)
+		
 	
 func _process(delta: float) -> void:
 	# Process queue and spawn items onto belt at output_speed rate
 	_output_timer += delta
 	var output_interval = 1.0 / output_speed
 	
+	# PLACEHOLDER: Below will move into method later
+	# Continue processing while enough time has passed and items are waiting in queue
 	while _output_timer >= output_interval and _queue.size() > 0:
+		# Subtract the output interval from the timer (allows multiple spawns per frame if needed)
 		_output_timer -= output_interval
+		# Remove the first item from the queue
 		var item = _queue.pop_front()
+		# Attempt to spawn the item into the first available slot on the belt
 		_spawn_into_first_slot(item)
 
 ## Adds an item to the conveyor
@@ -83,6 +85,11 @@ func input(item:Item)->void:
 func output()->Item:
 	return self._queue.pop_front()
 
+## Spawns an item into the first available slot on the conveyor belt.
+## Creates a visual representation of the item at the slot position and stores
+## the reference in the slots array. If all slots are occupied, the item is not spawned.
+## PLACEHOLDER: contains print statements for debug (remove later)
+## @param item: The Item data to spawn onto the conveyor belt
 func _spawn_into_first_slot(item: Item) -> void:
 	for i in _slots.size():
 		if _slots[i] == null:
