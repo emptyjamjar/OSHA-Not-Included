@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cnumkt0ntauyy"]
 
-[ext_resource type="Script" uid="uid://c8aty2hcl6j7a" path="res://objects/conveyor/conveyor_controller.gd" id="1_ncid3"]
+[ext_resource type="Script" uid="uid://dnn46uikhe1lo" path="res://objects/conveyor/conveyor.gd" id="1_ncid3"]
 [ext_resource type="Texture2D" uid="uid://b262ubqhs8k2j" path="res://objects/conveyor/Input_Station.png" id="1_ob2mf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ncid3"]
@@ -179,7 +179,7 @@ position = Vector2(64, 32)
 scale = Vector2(3.9999995, 4)
 sprite_frames = SubResource("SpriteFrames_dbokv")
 animation = &"Belt_Horizontal_Foward"
-frame_progress = 0.0092719225
+frame_progress = 0.28721133
 
 [node name="Belt_Horizontal_02" type="AnimatedSprite2D" parent="StaticBody2D" unique_id=673973688]
 texture_filter = 1
@@ -187,7 +187,7 @@ position = Vector2(127.999985, 32.000008)
 scale = Vector2(3.999999, 3.9999998)
 sprite_frames = SubResource("SpriteFrames_dbokv")
 animation = &"Belt_Horizontal_Foward"
-frame_progress = 0.056792323
+frame_progress = 0.3347446
 
 [node name="Belt_Horizontal_03" type="AnimatedSprite2D" parent="StaticBody2D" unique_id=2077580728]
 texture_filter = 1
@@ -195,18 +195,18 @@ position = Vector2(192, 32)
 scale = Vector2(3.9999998, 3.9999998)
 sprite_frames = SubResource("SpriteFrames_dbokv")
 animation = &"Belt_Horizontal_Foward"
-frame_progress = 0.01833475
+frame_progress = 0.2962785
 
 [node name="Belt_Corner_01" type="AnimatedSprite2D" parent="StaticBody2D" unique_id=1113883413]
 texture_filter = 1
 position = Vector2(256, 32)
 scale = Vector2(3.9999993, 4)
 sprite_frames = SubResource("SpriteFrames_r2g2m")
-frame_progress = 0.107319474
+frame_progress = 0.38526827
 
 [node name="Belt_Vertical_01" type="AnimatedSprite2D" parent="StaticBody2D" unique_id=217516374]
 texture_filter = 1
 position = Vector2(256, 96)
 scale = Vector2(3.999999, 3.9999993)
 sprite_frames = SubResource("SpriteFrames_g3few")
-frame_progress = 0.26962858
+frame_progress = 0.5476165
