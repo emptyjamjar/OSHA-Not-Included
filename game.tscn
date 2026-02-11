@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://ck4p7gga13e5e" path="res://energy_component.gd" id="3_feb5d"]
 [ext_resource type="Script" uid="uid://b0ovv20hjaxi3" path="res://needs_component.gd" id="4_fc0e3"]
 [ext_resource type="Script" uid="uid://dka4wuamclaju" path="res://sanity_component.gd" id="5_7jktm"]
+[ext_resource type="PackedScene" uid="uid://rgnaipuerpmn" path="res://objects/scanner/terminal/TicketTerminal.tscn" id="6_ryrav"]
 
 [node name="Game" unique_id=645817684 instance=ExtResource("1_80nbo")]
 
@@ -31,3 +32,6 @@ position = Vector2(175, 283)
 
 [node name="Packager" parent="." index="5" unique_id=2093227932]
 position = Vector2(578, 66.999985)
+
+[node name="TicketTerminal" parent="." index="6" unique_id=982348100 instance=ExtResource("6_ryrav")]
+position = Vector2(58, 235)
