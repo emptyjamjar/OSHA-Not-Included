@@ -4,9 +4,13 @@ class_name Player extends CharacterBody2D
 @onready var animated_sprite : AnimatedSprite2D = $AnimatedSprite2D
 @onready var viewport_rect = get_viewport_rect()
 
-@export var move_speed := 250
-@export var push_speed := 100
+@export var move_speed := 150
+@export var push_speed := 20
 @export var sprint_speed := 1.5
+
+func _ready() -> void:
+	InteractionManager.player = self
+	InteractionManager.can_interact = true
 
 #wasd is the movement for move_(direction). 
 func _physics_process(delta: float) -> void:
