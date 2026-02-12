@@ -126,6 +126,8 @@ func _spawn_into_first_slot(item: ItemDataList) -> void:
 			print("Spawned item in slot ", i)
 			return
 	print("No free slot on belt")
+	# No free slots so add back to queue
+	_queue.push_front(item)
 
 ## Removes item from conveyor slots using index
 ## Then disconnects the function from item signal
