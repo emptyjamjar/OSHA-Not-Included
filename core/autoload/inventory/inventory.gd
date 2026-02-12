@@ -1,9 +1,9 @@
 class_name Inventory extends Node
 
-signal held_item_changed(prev: Item, new: Item)
+signal held_item_changed(prev: ItemData, new: ItemData)
 signal add_held_item_failed
 
-var held_item : Item:
+var held_item : ItemData:
 	set = add_held_item
 
 
@@ -15,7 +15,7 @@ func has_item() -> bool:
 	return held_item != null
 
 
-func add_held_item(item: Item) -> bool:
+func add_held_item(item: ItemData) -> bool:
 	if has_item():
 		add_held_item_failed.emit()
 		return false
@@ -25,7 +25,7 @@ func add_held_item(item: Item) -> bool:
 		return true
 
 
-func remove_held_item() -> Item:
+func remove_held_item() -> ItemData:
 	var item := held_item
 	held_item = null
 	return item

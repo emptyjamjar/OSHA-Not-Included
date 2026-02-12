@@ -10,9 +10,15 @@ class_name Player extends CharacterBody2D
 
 var last_direction = Vector2.DOWN
 
+
+func _init() -> void:
+	add_to_group("player")
+
+
 func _ready() -> void:
 	InteractionManager.player = self
 	InteractionManager.can_interact = true
+
 
 #wasd is the movement for move_(direction). 
 func _physics_process(delta: float) -> void:
@@ -36,10 +42,12 @@ func _physics_process(delta: float) -> void:
 	
 	if (Input.is_action_pressed("sprint")):
 		animated_sprite.speed_scale = 1.5
-		move_and_collide(direction * delta * (move_speed * sprint_speed))
+		velocity = direction * move_speed * sprint_speed
+		move_and_slide()
 	else:
 		animated_sprite.speed_scale = 1
-		move_and_collide(direction * delta * move_speed)
+		velocity = direction * move_speed
+		move_and_slide()
 
 	var screen_size = get_viewport_rect().size
 	var sprite_width_half = get_animated_sprite_dimensions().x / 2.0

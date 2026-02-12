@@ -22,7 +22,6 @@ config/icon="res://icon.svg"
 [autoload]
 
 InteractionManager="*uid://rs788b0iptdm"
-VendingSystem="*uid://dbt77a5u1yl67"
 
 [display]
 

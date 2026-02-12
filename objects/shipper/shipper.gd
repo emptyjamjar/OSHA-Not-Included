@@ -28,10 +28,10 @@ func _on_body_exited(body:Node2D) -> void:
 
 			
 func _on_interact():
-	boxes = get_overlapping_bodies()
+	boxes = get_overlapping_areas()
 	for box in boxes:
 		if box.is_in_group("Shippable"):
-			box.free()
+			box.get_parent().queue_free()
 			animated_sprite.play("drive_away")
 			shipped = true
 			player_collision.disabled = true
