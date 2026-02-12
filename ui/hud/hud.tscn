@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://brf2yhupwajsc"]
+
+[ext_resource type="Script" uid="uid://bslxe4pk0838k" path="res://hud.gd" id="1_xmswo"]
+
+[node name="HUD" type="CanvasLayer" unique_id=830642951]
+script = ExtResource("1_xmswo")
+
+[node name="Money" type="Label" parent="." unique_id=1131186569]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Money: 0"
