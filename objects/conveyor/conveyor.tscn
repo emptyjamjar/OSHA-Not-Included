@@ -2,7 +2,9 @@
 
 [ext_resource type="Script" uid="uid://dnn46uikhe1lo" path="res://objects/conveyor/conveyor.gd" id="1_ncid3"]
 [ext_resource type="Texture2D" uid="uid://b262ubqhs8k2j" path="res://objects/conveyor/Input_Station.png" id="1_ob2mf"]
-[ext_resource type="PackedScene" uid="uid://dwl8735m8xyja" path="res://objects/items/water_bottles/water_bottle.tscn" id="2_ywffn"]
+
+[sub_resource type="Resource" id="Resource_ncid3"]
+metadata/__load_path__ = "res://objects/items/water_bottles/water_bottle.tscn"
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ncid3"]
 size = Vector2(208, 40)
@@ -124,7 +126,7 @@ animations = [{
 
 [node name="Conveyor" type="Node2D" unique_id=1135306595]
 script = ExtResource("1_ncid3")
-item_scene = ExtResource("2_ywffn")
+item_scene = SubResource("Resource_ncid3")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1976208908]
 
@@ -178,16 +180,16 @@ sprite_frames = SubResource("SpriteFrames_g3few")
 animation = &"Move_Down"
 
 [node name="Marker_Start" type="Marker2D" parent="." unique_id=2057746255]
-position = Vector2(40, 24)
+position = Vector2(40, 19)
 
 [node name="Marker_Pos_01" type="Marker2D" parent="." unique_id=507846563]
-position = Vector2(80, 24)
+position = Vector2(80, 19)
 
 [node name="Marker_Pos_02" type="Marker2D" parent="." unique_id=1152789713]
-position = Vector2(120, 24)
+position = Vector2(118, 19)
 
 [node name="Marker_Pos_03" type="Marker2D" parent="." unique_id=1940192903]
-position = Vector2(168, 24)
+position = Vector2(168, 19)
 
 [node name="Marker_Pos_04" type="Marker2D" parent="." unique_id=1522233274]
 position = Vector2(192, 48)

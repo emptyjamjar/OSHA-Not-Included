@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://0ctj1p1jp7xq"]
+
+[ext_resource type="Script" uid="uid://dopl7mb8g2jdw" path="res://objects/items/item_base.gd" id="1_e5u0p"]
+[ext_resource type="PackedScene" uid="uid://cdhb2euh28ies" path="res://core/components/interaction_area/interaction_area.tscn" id="2_lt50k"]
+[ext_resource type="Resource" uid="uid://bguhd83d36whj" path="res://objects/items/toilet_paper/toilet_paper.tres" id="2_oqai5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oqai5"]
+radius = 40.0
+
+[node name="ItemBase" type="Node2D" unique_id=1912400498 node_paths=PackedStringArray("iArea", "sprite")]
+script = ExtResource("1_e5u0p")
+iArea = NodePath("InteractionArea")
+sprite = NodePath("Sprite2D")
+data = ExtResource("2_oqai5")
+
+[node name="InteractionArea" parent="." unique_id=2104453103 instance=ExtResource("2_lt50k")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1938878689]
+shape = SubResource("CircleShape2D_oqai5")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1270451069]

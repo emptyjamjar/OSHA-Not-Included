@@ -4,11 +4,11 @@
 [ext_resource type="Script" uid="uid://ds6mar0vwpxvw" path="res://levels/testing/conveyor/level_testing_conveyor_01.gd" id="1_loqtu"]
 [ext_resource type="PackedScene" uid="uid://c7e7f64igaa5j" path="res://game/actors/player/player.tscn" id="2_loqtu"]
 
-[node name="LevelTestingConveyor01" type="Node2D" unique_id=1887569054]
+[node name="LevelTestingConveyor01" type="Node2D" unique_id=1887569054 groups=["game"]]
 script = ExtResource("1_loqtu")
 
 [node name="Conveyor" parent="." unique_id=1135306595 instance=ExtResource("1_gc4ql")]
-position = Vector2(240, 128)
+position = Vector2(225, 21)
 
 [node name="Player" parent="." unique_id=2112891127 instance=ExtResource("2_loqtu")]
-position = Vector2(336, 368)
+position = Vector2(86, 87)

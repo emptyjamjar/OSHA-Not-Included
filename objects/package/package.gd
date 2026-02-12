@@ -1,8 +1,10 @@
-class_name Package extends Item
+class_name Package extends Sprite2D
 
-signal item_added(item: Item)
+signal item_added(item: ItemData)
 
-var inventory : Array[Item]
+@export var iArea : InteractionArea
+
+var inventory : Array[ItemData]
 var maxCap : int
 var curCap : int:
 	get = get_cur_cap
@@ -21,7 +23,7 @@ func _on_interact():
 	pass
 
 
-func add_item(item : Item):
+func add_item(item : ItemData):
 	if (curCap + item.size < maxCap):
 		item_added.emit(item)
 		inventory.push_front(item)

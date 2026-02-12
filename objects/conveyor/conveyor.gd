@@ -1,5 +1,17 @@
-extends Node
+class_name Conveyor extends Node
 ## The conveyor belt outputs items
+
+## All items that the conveyor can spawn are found here
+## Connected to a list of String paths to resources
+enum ItemDataList {
+	TOILET_PAPER,
+	BLACK_WATER_BOTTLE,
+	BLUE_WATER_BOTTLE,
+	PINK_WATER_BOTTLE,
+}
+
+## Preloaded resources of item data
+var item_resources : Array[ItemData]
 
 ## Affects how quickly items are moved/Animation speed
 ## (Default: 5)
@@ -10,7 +22,7 @@ extends Node
 @export var output_speed:int = 1
 
 ## Storage for the items yet to be put onto the conveyor belt
-var _queue:Array[Item] = []
+var _queue:Array[ItemDataList] = []
 
 ## Belt slots, each slot can hold at most one item
 var _belt_capacity:int = 5
@@ -21,10 +33,10 @@ var _slot_positions: Array[int]
 # PLACEHOLDER: slot markers and slots
 var _slot_markers: Array[Marker2D] = []
 # PLACEHOLDER: holds spawned item nodes
-var _slots: Array[Node2D] = []
+var _slots: Array[ItemBase] = []
 
-# PLACEHOLDER: item component scene
-@export var item_scene:PackedScene
+# Item Base scene
+@export var item_scene : PackedScene
 
 ## Timer for output speed control
 var _output_timer: float = 0.0
@@ -37,6 +49,15 @@ var _output_timer: float = 0.0
 @onready var animated_belt_v_01 := $StaticBody2D/Belt_Vertical_01
 
 func _ready() -> void:
+	# Fill item_resources with needed item data
+	# Items should follow the order presented in the enums
+	item_resources.append(preload("res://objects/items/toilet_paper/toilet_paper.tres"))
+	item_resources.append(preload("res://objects/items/water_bottles/black_water_bottle.tres"))
+	item_resources.append(preload("res://objects/items/water_bottles/blue_water_bottle.tres"))
+	item_resources.append(preload("res://objects/items/water_bottles/pink_water_bottle.tres"))
+	
+	# Used to instantiate new children
+	item_scene = load("res://objects/items/item_base.tscn")
 	
 	# PLACEHOLDER: Set animations to run on start
 	animated_belt_h_01.play("Move_Right")
@@ -78,11 +99,11 @@ func _process(delta: float) -> void:
 
 ## Adds an item to the conveyor
 ## @param item: item to be added
-func input(item:Item)->void:
+func input(item:ItemDataList)->void:
 	_queue.push_back(item)
 
 ## Returns the front-most item in the conveyor
-func output()->Item:
+func output()->ItemDataList:
 	return self._queue.pop_front()
 
 ## Spawns an item into the first available slot on the conveyor belt.
@@ -90,16 +111,24 @@ func output()->Item:
 ## the reference in the slots array. If all slots are occupied, the item is not spawned.
 ## PLACEHOLDER: contains print statements for debug (remove later)
 ## @param item: The Item data to spawn onto the conveyor belt
-func _spawn_into_first_slot(item: Item) -> void:
+func _spawn_into_first_slot(item: ItemDataList) -> void:
 	for i in _slots.size():
 		if _slots[i] == null:
-			var ent := item_scene.instantiate() as Node2D
-			add_child(ent)
-			ent.global_position = _slot_markers[i].global_position
-			_slots[i] = ent
-			# Pass the item data to the visual node if it has a set_item method
-			if ent.has_method("set_item"):
-				ent.set_item(item)
+			# Create sprite of texture
+			var scene := item_scene.instantiate() as ItemBase
+			# Connect to function to remove from list on pickup
+			scene.picked_up.connect(_on_item_picked_up.bind(i))
+			scene.data = item_resources[item].duplicate(true)
+			add_child(scene)
+			scene.global_position = _slot_markers[i].global_position
+			_slots[i] = scene
+			
 			print("Spawned item in slot ", i)
 			return
 	print("No free slot on belt")
+
+## Removes item from conveyor slots using index
+## Then disconnects the function from item signal
+func _on_item_picked_up(item: ItemBase, index: int):
+	_slots[index] = null
+	item.picked_up.disconnect(_on_item_picked_up)

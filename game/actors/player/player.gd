@@ -8,6 +8,9 @@ class_name Player extends CharacterBody2D
 @export var push_speed := 100
 @export var sprint_speed := 1.5
 
+func _init() -> void:
+	add_to_group("player")
+
 #wasd is the movement for move_(direction). 
 func _physics_process(delta: float) -> void:
 	var direction = Input.get_vector('move_left', 'move_right', 'move_up', 'move_down')
@@ -22,10 +25,12 @@ func _physics_process(delta: float) -> void:
 	
 	if (Input.is_action_pressed("sprint")):
 		animated_sprite.speed_scale = 1.5
-		move_and_collide(direction * delta * (move_speed * sprint_speed))
+		velocity = direction * move_speed * sprint_speed
+		move_and_slide()
 	else:
 		animated_sprite.speed_scale = 1
-		move_and_collide(direction * delta * move_speed)
+		velocity = direction * move_speed
+		move_and_slide()
 
 	var screen_size = get_viewport_rect().size
 	var sprite_width_half = get_animated_sprite_dimensions().x / 2.0

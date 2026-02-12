@@ -8,4 +8,4 @@ script = ExtResource("1_1ej48")
 type = 3
 name = "Basic Package"
 description = "How much storage does this have??"
-invTexture = ExtResource("1_lfm36")
+texture = ExtResource("1_lfm36")
