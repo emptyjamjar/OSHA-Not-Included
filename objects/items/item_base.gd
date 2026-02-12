@@ -11,6 +11,8 @@ var isHeld := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	iArea.add_to_group("Boxes")
+	
 	# Setting interaction values
 	iArea.interact = Callable(self, "_on_interact")
 	iArea.action_name = "pickup"
