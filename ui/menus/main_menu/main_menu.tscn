@@ -44,8 +44,8 @@ layer = -1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D/CanvasLayer" unique_id=1288663064]
 texture_filter = 1
-position = Vector2(320.00003, 180)
-scale = Vector2(0.19393939, 0.14117646)
+position = Vector2(320.00003, 184.00002)
+scale = Vector2(0.19393939, 0.14431372)
 sprite_frames = SubResource("SpriteFrames_lwp85")
 
 [node name="Play" type="TextureButton" parent="." unique_id=1977710476]

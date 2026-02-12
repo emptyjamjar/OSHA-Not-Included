@@ -153,7 +153,7 @@ script = ExtResource("1_ifo1u")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=624549937]
 sprite_frames = SubResource("SpriteFrames_6m55v")
-animation = &"drive_up"
+animation = &"open"
 
 [node name="ProximityCollisionShape" type="CollisionShape2D" parent="." unique_id=324685094]
 position = Vector2(1, 1.785965)
