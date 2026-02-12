@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://po0k00unwx74"
-path="res://.godot/imported/placeholder.jpg-15d729e2ef82f4ce543dcb074f879064.ctex"
+uid="uid://cba3reeknyihx"
+path="res://.godot/imported/symbol-single-line-input-box.png-7b4823d339a1f186e5b4ba148718e8bd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://objects/shipper/placeholder.jpg"
-dest_files=["res://.godot/imported/placeholder.jpg-15d729e2ef82f4ce543dcb074f879064.ctex"]
+source_file="res://objects/scanner/terminal/symbol-single-line-input-box.png"
+dest_files=["res://.godot/imported/symbol-single-line-input-box.png-7b4823d339a1f186e5b4ba148718e8bd.ctex"]
 
 [params]
 

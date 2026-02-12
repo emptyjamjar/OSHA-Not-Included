@@ -1,10 +1,5 @@
-extends Node
-class_name NeedsComponent
+extends Button
 
-#Note: further desgin on this feature, did not finalize how this works: 
-# Hungers ?
-# Thirsts ?
-# Washroom rest ? 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -35,15 +35,18 @@ grow_vertical = 2
 layer = -1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D/CanvasLayer" unique_id=1288663064]
-position = Vector2(550, 313)
+texture_filter = 1
+position = Vector2(318.99997, 183)
+scale = Vector2(0.57968366, 0.57968366)
 sprite_frames = SubResource("SpriteFrames_lwp85")
 
 [node name="Play" type="Button" parent="." unique_id=873624178]
 layout_mode = 0
-offset_left = 243.0
-offset_top = 316.0
-offset_right = 405.0
-offset_bottom = 387.0
+offset_left = 150.5
+offset_top = 181.0
+offset_right = 312.5
+offset_bottom = 252.0
+scale = Vector2(0.5317131, 0.5317131)
 theme_override_styles/normal = SubResource("StyleBoxEmpty_6s8a2")
 script = ExtResource("2_6k7qw")
 
