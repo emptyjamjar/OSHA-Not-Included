@@ -1,23 +1,17 @@
 [gd_scene format=3 uid="uid://ja0kk3x1u2w6"]
 
+[ext_resource type="Texture2D" uid="uid://dmn8itpbwobie" path="res://objects/package/Temporary_Package.png" id="1_fkn04"]
 [ext_resource type="Script" uid="uid://dfj1womim5psm" path="res://objects/package/package.gd" id="1_xg0p7"]
-[ext_resource type="Texture2D" uid="uid://d1menmudiwcfy" path="res://objects/package/temp_package.png" id="2_fkn04"]
 [ext_resource type="PackedScene" uid="uid://cdhb2euh28ies" path="res://core/components/interaction_area/interaction_area.tscn" id="3_6atse"]
-[ext_resource type="PackedScene" uid="uid://djqexv2evsnka" path="res://objects/items/item_data_component.tscn" id="3_ksh33"]
-[ext_resource type="Resource" uid="uid://cccvjibuctwos" path="res://objects/package/package.tres" id="4_ksh33"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ofwpu"]
 radius = 38.013157
 
-[node name="Package" type="Sprite2D" unique_id=1480615960 node_paths=PackedStringArray("itemData", "iArea") groups=["Boxes"]]
+[node name="Package" type="Sprite2D" unique_id=1480615960 node_paths=PackedStringArray("iArea") groups=["Boxes"]]
 scale = Vector2(0.53333336, 0.53333336)
-texture = ExtResource("2_fkn04")
+texture = ExtResource("1_fkn04")
 script = ExtResource("1_xg0p7")
-itemData = NodePath("ItemDataComponent")
 iArea = NodePath("InteractionArea")
-
-[node name="ItemDataComponent" parent="." unique_id=1304246171 instance=ExtResource("3_ksh33")]
-data = ExtResource("4_ksh33")
 
 [node name="InteractionArea" parent="." unique_id=2104453103 instance=ExtResource("3_6atse")]
 

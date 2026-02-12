@@ -8,4 +8,4 @@ script = ExtResource("2_i0v6g")
 type = 1
 name = "Toilet Paper"
 description = "It’s a bare necessity."
-invTexture = ExtResource("1_48707")
+texture = ExtResource("1_48707")

@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bcvsjf35k7mev"]
+
+[ext_resource type="Texture2D" uid="uid://sartprrmuu2y" path="res://objects/items/water_bottles/warehouse-large-blue.png" id="1_lgrr5"]
+[ext_resource type="Script" uid="uid://c7i8xoc0ofw0m" path="res://objects/items/item_data.gd" id="2_j2uhb"]
+
+[resource]
+script = ExtResource("2_j2uhb")
+type = 1
+name = "Blue Water Bottle"
+description = "People sure order a lot of these."
+texture = ExtResource("1_lgrr5")
