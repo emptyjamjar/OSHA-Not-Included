@@ -3,6 +3,7 @@ extends Area2D
 @export var boxes = null
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var timer = $ArriveTimer
+signal get_money
 
 var shipped:bool = false
 
@@ -26,8 +27,9 @@ func _on_body_exited(body:Node2D) -> void:
 func _on_interact():
 	boxes = get_overlapping_bodies()
 	for box in boxes:
-		if box.is_in_group("Shippable"):
+		if box.is_in_group("Boxes"):
 			box.free()
+			get_money.emit()
 			animated_sprite.play("drive_away")
 			shipped = true
 			timer.start()

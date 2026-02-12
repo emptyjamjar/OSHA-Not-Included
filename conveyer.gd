@@ -10,11 +10,12 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	boxes = get_overlapping_bodies()
+	
+			
+func _on_interact():
 	for box in boxes:
 		#print(box)
-		if box.is_in_group("Shippable"):
+		if box.is_in_group("Boxes"):
 			print("box in me")
 			get_money.emit()
 			box.free()
-func _on_interact():
-	pass

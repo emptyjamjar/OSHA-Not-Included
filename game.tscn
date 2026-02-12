@@ -7,20 +7,20 @@
 [ext_resource type="Script" uid="uid://ck4p7gga13e5e" path="res://energy_component.gd" id="3_feb5d"]
 [ext_resource type="Script" uid="uid://b0ovv20hjaxi3" path="res://needs_component.gd" id="4_fc0e3"]
 [ext_resource type="Script" uid="uid://dka4wuamclaju" path="res://sanity_component.gd" id="5_7jktm"]
-[ext_resource type="PackedScene" uid="uid://rgnaipuerpmn" path="res://objects/scanner/terminal/TicketTerminal.tscn" id="6_ryrav"]
 
 [node name="Game" unique_id=645817684 instance=ExtResource("1_80nbo")]
 script = ExtResource("2_eow3j")
 
-[node name="Packager" parent="." index="0" unique_id=2093227932]
-collision_layer = 3
-
-[node name="Sorter" parent="." index="1" unique_id=441417436]
+[node name="Shipper" parent="." index="0" unique_id=441417436]
+position = Vector2(457, 181)
 collision_mask = 3
 
-[node name="HUD" parent="Camera2D" parent_id_path=PackedInt32Array(167263537) index="0" unique_id=830642951 instance=ExtResource("2_ryrav")]
+[node name="Camera2D" parent="." index="1" unique_id=167263537]
+position = Vector2(321, 180)
 
-[node name="Player" parent="." index="3" unique_id=2112891127]
+[node name="HUD" parent="Camera2D" index="0" unique_id=830642951 instance=ExtResource("2_ryrav")]
+
+[node name="Player" parent="." index="2" unique_id=2112891127]
 collision_layer = 3
 
 [node name="HealthComponent" type="Node2D" parent="Player" index="2" unique_id=361325902]
@@ -35,8 +35,13 @@ script = ExtResource("4_fc0e3")
 [node name="SanityComponent" type="Node2D" parent="Player" index="5" unique_id=425989110]
 script = ExtResource("5_7jktm")
 
-[node name="Box" parent="." index="4" unique_id=189150552]
+[node name="Box" parent="." index="3" unique_id=189150552 groups=["Boxes"]]
+position = Vector2(269, 168)
 collision_layer = 2
 collision_mask = 3
 
-[connection signal="get_money" from="Sorter" to="." method="_on_sorter_get_money"]
+[node name="Packager" parent="." index="5" unique_id=2093227932]
+position = Vector2(114.00006, 139)
+collision_layer = 3
+
+[connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]

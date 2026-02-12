@@ -8,6 +8,9 @@ class_name Player extends CharacterBody2D
 @export var push_speed := 20
 @export var sprint_speed := 1.5
 
+func _init() -> void:
+	add_to_group("player")
+
 func _ready() -> void:
 	InteractionManager.player = self
 	InteractionManager.can_interact = true

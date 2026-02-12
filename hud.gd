@@ -11,4 +11,4 @@ func _process(delta: float) -> void:
 	pass
 
 func update_money(money) -> void:
-	$Money.text = str("Money: " + money)
+	$Money.text = "Money: " + str(money)

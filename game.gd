@@ -1,6 +1,6 @@
 extends Node2D
 
-
+@onready var hud: CanvasLayer = $Camera2D/HUD
 @onready var money := 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -12,6 +12,7 @@ func _process(delta: float) -> void:
 	pass
 
 
-func _on_sorter_get_money() -> void:
+func _on_shipper_get_money() -> void:
 	money += 10
-	$Camera2D/HUD.update_money(money)
+	hud.update_money(money)
+	
