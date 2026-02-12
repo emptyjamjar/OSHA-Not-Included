@@ -10,16 +10,16 @@ size = Vector2(50, 50.666668)
 [sub_resource type="CircleShape2D" id="CircleShape2D_ehynf"]
 radius = 26.019224
 
-[node name="Box" type="RigidBody2D" unique_id=189150552 groups=["Boxes"]]
-collision_layer = 4
-collision_mask = 3
+[node name="Box" type="RigidBody2D" unique_id=189150552]
+collision_layer = 0
 gravity_scale = 0.0
 lock_rotation = true
 freeze = true
 script = ExtResource("1_ks2v0")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1898091790]
-scale = Vector2(0.12031171, 0.12031171)
+position = Vector2(-4.7683716e-07, 4.7683716e-07)
+scale = Vector2(0.234375, 0.23437501)
 texture = ExtResource("2_ehynf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=55003392]

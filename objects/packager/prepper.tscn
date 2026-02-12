@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://dbbirjl6q4b01"]
+
+[ext_resource type="Script" path="res://objects/packager/prepper.gd" id="1_uljtb"]
+[ext_resource type="Shape2D" uid="uid://dvpia8jjdm67f" path="res://objects/packager/boundary.tres" id="2_owb4y"]
+[ext_resource type="Texture2D" uid="uid://cc5wwyurmmsew" path="res://objects/packager/placeholder.webp" id="2_s1jx0"]
+[ext_resource type="PackedScene" uid="uid://cdhb2euh28ies" path="res://core/components/interaction_area/interaction_area.tscn" id="4_owb4y"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u5sy4"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_s1jx0")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Prepper" type="Area2D" unique_id=2093227932]
+scale = Vector2(0.30384615, 0.2857143)
+script = ExtResource("1_uljtb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1561103054]
+position = Vector2(0, -1.75)
+scale = Vector2(0.9999999, 1)
+shape = ExtResource("2_owb4y")
+
+[node name="Image" type="AnimatedSprite2D" parent="." unique_id=845293452]
+scale = Vector2(0.9999999, 1)
+sprite_frames = SubResource("SpriteFrames_u5sy4")
+
+[node name="InteractionArea" parent="." unique_id=2104453103 instance=ExtResource("4_owb4y")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=680122479]
+scale = Vector2(0.99999994, 1)
+shape = ExtResource("2_owb4y")
