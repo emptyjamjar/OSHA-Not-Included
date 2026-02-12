@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://rgnaipuerpmn" path="res://objects/scanner/terminal/TicketTerminal.tscn" id="6_ryrav"]
 
 [node name="Game" unique_id=645817684 instance=ExtResource("1_80nbo")]
+y_sort_enabled = true
+scale = Vector2(1.000542, 1)
 
 [node name="Shipper" parent="." index="0" unique_id=441417436]
 position = Vector2(153.00009, 107)
@@ -31,7 +33,8 @@ script = ExtResource("5_7jktm")
 position = Vector2(175, 283)
 
 [node name="Packager" parent="." index="5" unique_id=2093227932]
-position = Vector2(578, 66.999985)
+position = Vector2(571.69, 39)
+scale = Vector2(0.40825486, 0.38389248)
 
 [node name="TicketTerminal" parent="." index="6" unique_id=982348100 instance=ExtResource("6_ryrav")]
 position = Vector2(58, 235)
