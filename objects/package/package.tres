@@ -1,11 +1,11 @@
 [gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://cccvjibuctwos"]
 
-[ext_resource type="Script" path="res://objects/items/item_data.gd" id="1_1ej48"]
-[ext_resource type="Texture2D" uid="uid://d1menmudiwcfy" path="res://objects/package/temp_package.png" id="1_lfm36"]
+[ext_resource type="Script" uid="uid://c7i8xoc0ofw0m" path="res://objects/items/item_data.gd" id="1_1ej48"]
+[ext_resource type="Texture2D" uid="uid://dmn8itpbwobie" path="res://objects/package/Temporary_Package.png" id="2_lfm36"]
 
 [resource]
 script = ExtResource("1_1ej48")
 type = 3
 name = "Basic Package"
 description = "How much storage does this have??"
-texture = ExtResource("1_lfm36")
+texture = ExtResource("2_lfm36")
