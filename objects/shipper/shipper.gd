@@ -9,6 +9,7 @@ var shipped:bool = false
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$InteractionArea.interact = Callable(self, "_on_interact")
+	$ArriveTimer.start(5.0)
 	
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
