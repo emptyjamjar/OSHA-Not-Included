@@ -3,6 +3,7 @@ extends Area2D
 @export var boxes = null
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var timer = $ArriveTimer
+@onready var player_collision = $StaticBody2D/PlayerCollision
 
 var shipped:bool = false
 
@@ -13,6 +14,8 @@ func _ready() -> void:
 	
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
+	
+	player_collision.disabled = true
 	
 func _on_body_entered(body:Node2D) -> void:
 	if (body.is_in_group("player") and timer.is_stopped()):
@@ -31,7 +34,9 @@ func _on_interact():
 			box.free()
 			animated_sprite.play("drive_away")
 			shipped = true
+			player_collision.disabled = true
 			timer.start()
 
 func _on_arrive_timer_timeout() -> void:
 	animated_sprite.play("drive_up")
+	player_collision.disabled = false
