@@ -1,5 +1,6 @@
 extends Area2D
 
+signal get_money
 @export var boxes = null
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var timer = $ArriveTimer
@@ -32,6 +33,7 @@ func _on_interact():
 	for box in boxes:
 		if box.is_in_group("Shippable"):
 			box.get_parent().queue_free()
+			get_money.emit()
 			animated_sprite.play("drive_away")
 			shipped = true
 			player_collision.disabled = true
