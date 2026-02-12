@@ -8,6 +8,9 @@ class_name Player extends CharacterBody2D
 @export var push_speed := 20
 @export var sprint_speed := 1.5
 
+var last_direction = Vector2.DOWN
+
+
 func _init() -> void:
 	add_to_group("player")
 
@@ -22,12 +25,20 @@ func _physics_process(delta: float) -> void:
 	var direction = Input.get_vector('move_left', 'move_right', 'move_up', 'move_down')
 	
 	if direction != Vector2.ZERO:
+		last_direction = direction
+		
 		if abs(direction.x) > abs(direction.y):
 			animated_sprite.play("move_right" if direction.x > 0 else "move_left")
 		else:
 			animated_sprite.play("move_down" if direction.y > 0 else "move_up")
 	else:
-		animated_sprite.play("idle")
+		# last_direction determines idle animation
+		if abs(last_direction.x) > abs(last_direction.y):
+			animated_sprite.play("idle_right" if last_direction.x > 0 else "idle_left")
+		else:
+			animated_sprite.play("idle_down" if last_direction.y > 0 else "idle_up")
+
+
 	
 	if (Input.is_action_pressed("sprint")):
 		animated_sprite.speed_scale = 1.5

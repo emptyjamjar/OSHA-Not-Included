@@ -2,38 +2,46 @@
 
 [ext_resource type="Script" path="res://objects/packager/packager.gd" id="1_hlauf"]
 [ext_resource type="Shape2D" uid="uid://dvpia8jjdm67f" path="res://objects/packager/boundary.tres" id="2_owb4y"]
-[ext_resource type="Texture2D" uid="uid://cc5wwyurmmsew" path="res://objects/packager/placeholder.webp" id="2_s1jx0"]
+[ext_resource type="Texture2D" uid="uid://dms1uvw6h6ice" path="res://levels/shared/Temporary Tilemap.png" id="3_hlauf"]
 [ext_resource type="PackedScene" uid="uid://cdhb2euh28ies" path="res://core/components/interaction_area/interaction_area.tscn" id="4_owb4y"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_u5sy4"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_s1jx0")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrgxu"]
+atlas = ExtResource("3_hlauf")
+region = Rect2(96, 64, 48, 32)
 
-[node name="Packager" type="Area2D" unique_id=2093227932]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hlauf"]
+size = Vector2(306.07596, 181.99997)
+
+[node name="Packager" type="Area2D" unique_id=77134705]
 scale = Vector2(0.30384615, 0.2857143)
 collision_layer = 0
 collision_mask = 5
 script = ExtResource("1_hlauf")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1561103054]
-position = Vector2(0, -1.75)
-scale = Vector2(0.9999999, 1)
-shape = ExtResource("2_owb4y")
+[node name="Image" type="Sprite2D" parent="." unique_id=1170182557]
+position = Vector2(8.8817837e-16, -3.8146973e-06)
+scale = Vector2(5.4794297, 4.9468746)
+texture = SubResource("AtlasTexture_qrgxu")
 
-[node name="Image" type="AnimatedSprite2D" parent="." unique_id=845293452]
-position = Vector2(-3.2911377, -3.0517578e-05)
-scale = Vector2(0.93670887, 0.9750001)
-sprite_frames = SubResource("SpriteFrames_u5sy4")
+[node name="AreaCollision" type="CollisionShape2D" parent="." unique_id=558164500]
+position = Vector2(1.6455741, 4.1723247e-06)
+scale = Vector2(0.9999999, 1)
+shape = SubResource("RectangleShape2D_hlauf")
+debug_color = Color(0.697663, 0.48961765, 0.18368462, 0.41960785)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=277377667]
+scale = Vector2(0.9999999, 0.5799989)
+
+[node name="PlayerCollision" type="CollisionShape2D" parent="StaticBody2D" unique_id=1561103054]
+position = Vector2(0, 10.499999)
+scale = Vector2(1, 1.0000001)
+shape = ExtResource("2_owb4y")
+debug_color = Color(0.99178, 0, 0.29680523, 0.41960785)
 
 [node name="InteractionArea" parent="." unique_id=2104453103 instance=ExtResource("4_owb4y")]
+action_name = "box item"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=680122479]
-scale = Vector2(0.99999994, 1)
+[node name="InteractCollision" type="CollisionShape2D" parent="InteractionArea" unique_id=680122479]
+position = Vector2(7.0620185e-06, -0.6562499)
+scale = Vector2(0.9999999, 1)
 shape = ExtResource("2_owb4y")
