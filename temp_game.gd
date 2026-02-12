@@ -1,6 +1,7 @@
 extends Node2D
 
-
+@onready var hud: CanvasLayer = $Camera2D/HUD
+@onready var money := 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var conveyor := $Conveyor
@@ -14,3 +15,9 @@ func _ready() -> void:
 	conveyor.input(Conveyor.ItemDataList.BLACK_WATER_BOTTLE)
 	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
 	conveyor.input(Conveyor.ItemDataList.BLUE_WATER_BOTTLE)
+
+
+func _on_shipper_get_money() -> void:
+	money += 10
+	hud.update_money(money)
+	
