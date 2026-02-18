@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://c6mvf84775rmp"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_q15tg"]
+
+[node name="TicketUI" type="CanvasLayer" unique_id=1152314469]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=887491401]
+modulate = Color(0.18359044, 0.18359044, 0.18359044, 1)
+position = Vector2(121.24999, 64.75)
+scale = Vector2(243.49998, 130.5)
+texture = SubResource("CanvasTexture_q15tg")
+
+[node name="TicketTile" type="RichTextLabel" parent="." unique_id=1463101606]
+modulate = Color(0.4454878, 0.4454878, 0.4454878, 1)
+offset_left = 1.0
+offset_top = 2.0
+offset_right = 95.0
+offset_bottom = 28.0
+text = "Ticket #01"
+fit_content = true
+
+[node name="TicketDescription" type="RichTextLabel" parent="." unique_id=1662629330]
+offset_left = 1.0
+offset_top = 29.0
+offset_right = 243.0
+offset_bottom = 130.0
+theme_override_font_sizes/normal_font_size = 12
+text = "Ticket Description"
+fit_content = true

@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://ctv5d2w42au35" path="res://objects/scanner/terminal/ticket_terminal.gd" id="1_3twg7"]
 [ext_resource type="Texture2D" uid="uid://cba3reeknyihx" path="res://objects/scanner/terminal/symbol-single-line-input-box.png" id="3_2t2yn"]
 [ext_resource type="PackedScene" uid="uid://cdhb2euh28ies" path="res://core/components/interaction_area/interaction_area.tscn" id="3_3yids"]
+[ext_resource type="Script" uid="uid://b11vphu4rdojx" path="res://objects/scanner/terminal/ticket_01.gd" id="4_4wgmk"]
+[ext_resource type="PackedScene" uid="uid://c6mvf84775rmp" path="res://objects/scanner/terminal/ticket.tscn" id="5_2t2yn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3yids"]
 size = Vector2(46.25, 24.75)
@@ -28,13 +30,11 @@ shape = SubResource("RectangleShape2D_3yids")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1128266295]
 shape = SubResource("RectangleShape2D_3twg7")
 
-[node name="TicketUI" type="CanvasLayer" parent="." unique_id=282904241]
+[node name="Ticket" type="Node2D" parent="InteractionArea" unique_id=1461088248]
+script = ExtResource("4_4wgmk")
+ticket_name = "New School Supplies Needed"
+ticket_description = "Quick! Customer needs 2 new bottles: pink bottle and black bottle.      Time limit: 60s"
+reached_goal_text = "Put item in the package box and ship!"
+metadata/_custom_type_script = "uid://b11vphu4rdojx"
 
-[node name="Button" type="Button" parent="TicketUI" unique_id=239759148]
-anchors_preset = -1
-offset_left = 1.0
-offset_top = 1.0
-offset_right = 9.0
-offset_bottom = 9.0
-
-[connection signal="pressed" from="TicketUI/Button" to="." method="_on_button_pressed"]
+[node name="TicketUI" parent="." unique_id=1152314469 instance=ExtResource("5_2t2yn")]
