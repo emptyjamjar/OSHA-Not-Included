@@ -3,16 +3,18 @@
 [ext_resource type="Script" uid="uid://ctv5d2w42au35" path="res://objects/scanner/terminal/ticket_terminal.gd" id="1_3twg7"]
 [ext_resource type="Texture2D" uid="uid://cba3reeknyihx" path="res://objects/scanner/terminal/symbol-single-line-input-box.png" id="3_2t2yn"]
 [ext_resource type="PackedScene" uid="uid://cdhb2euh28ies" path="res://core/components/interaction_area/interaction_area.tscn" id="3_3yids"]
-[ext_resource type="Script" uid="uid://b11vphu4rdojx" path="res://objects/scanner/terminal/ticket_01.gd" id="4_4wgmk"]
 [ext_resource type="PackedScene" uid="uid://c6mvf84775rmp" path="res://objects/scanner/terminal/ticket.tscn" id="5_2t2yn"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4wgmk"]
+size = Vector2(65, 37)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3yids"]
-size = Vector2(46.25, 24.75)
+size = Vector2(74, 48)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3twg7"]
 size = Vector2(101.875, 61)
 
-[node name="TicketTerminal" type="Node2D" unique_id=1261754474]
+[node name="TicketTerminal" type="Area2D" unique_id=1035499252]
 script = ExtResource("1_3twg7")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1972022688]
@@ -20,21 +22,19 @@ position = Vector2(-1.4901161e-08, 2.3841858e-07)
 scale = Vector2(0.118164055, 0.09765626)
 texture = ExtResource("3_2t2yn")
 
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=707984188]
+position = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_4wgmk")
+debug_color = Color(0.85330474, 0.0143930195, 0.48179376, 0.41960785)
+
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1012403777]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=2103687635]
+[node name="PlayerCollision" type="CollisionShape2D" parent="StaticBody2D" unique_id=2103687635]
 shape = SubResource("RectangleShape2D_3yids")
 
 [node name="InteractionArea" parent="." unique_id=2104453103 instance=ExtResource("3_3yids")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1128266295]
 shape = SubResource("RectangleShape2D_3twg7")
-
-[node name="Ticket" type="Node2D" parent="InteractionArea" unique_id=1461088248]
-script = ExtResource("4_4wgmk")
-ticket_name = "New School Supplies Needed"
-ticket_description = "Quick! Customer needs 2 new bottles: pink bottle and black bottle.      Time limit: 60s"
-reached_goal_text = "Put item in the package box and ship!"
-metadata/_custom_type_script = "uid://b11vphu4rdojx"
 
 [node name="TicketUI" parent="." unique_id=1152314469 instance=ExtResource("5_2t2yn")]
