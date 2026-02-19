@@ -6,8 +6,8 @@
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=887491401]
 modulate = Color(0.18359044, 0.18359044, 0.18359044, 1)
-position = Vector2(121.24999, 64.75)
-scale = Vector2(243.49998, 130.5)
+position = Vector2(146.75, 84.74999)
+scale = Vector2(294.49997, 170.49998)
 texture = SubResource("CanvasTexture_q15tg")
 
 [node name="TicketTile" type="RichTextLabel" parent="." unique_id=1463101606]
@@ -27,3 +27,11 @@ offset_bottom = 130.0
 theme_override_font_sizes/normal_font_size = 12
 text = "Ticket Description"
 fit_content = true
+
+[node name="TimeCountdown" type="RichTextLabel" parent="." unique_id=488469137]
+offset_left = 230.0
+offset_top = 145.0
+offset_right = 293.0
+offset_bottom = 168.0
+theme_override_font_sizes/normal_font_size = 13
+text = "Time left:"

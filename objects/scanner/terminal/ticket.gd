@@ -1,6 +1,10 @@
 extends Resource
 class_name Ticket
 
+
+signal time_updated(remaining_time: float)
+signal time_expired
+
 enum TicketStatus {
 	AVAILABLE,
 	STARTED,
@@ -17,8 +21,14 @@ enum TicketStatus {
 
 var status: TicketStatus = TicketStatus.AVAILABLE
 
+#Timer settings
+var max_time: float = 30.0 #seconds per ticket 
+var remaining_time : float = 0.0
+
 func start():
 	status = TicketStatus.STARTED
+	remaining_time = max_time
+
 
 func reach_goal():
 	status = TicketStatus.REACHED_GOAL

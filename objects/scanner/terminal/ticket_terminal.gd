@@ -17,14 +17,6 @@ func _ready() -> void:
 	Ticket_Manager.register_ui(ticket_ui)
 	ticket_ui.visible = false 
 
-
-func _on_body_entered(body:Node2D) -> void:
-	pass
-		
-	
-func _on_body_exited(body:Node2D) -> void:
-	pass
-
 	
 func _on_interact(): 
 	if not active: 
@@ -38,12 +30,5 @@ func _on_interact():
 		ticket_ui.visible = false 
 		print("Terminal closed")
 		
-	
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
-
-	
 	
