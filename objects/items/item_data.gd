@@ -1,4 +1,5 @@
-class_name ItemData extends Resource
+extends Resource
+class_name ItemData
 
 enum Type {
 	ANOMALOUS,
@@ -9,6 +10,7 @@ enum Type {
 
 @export var type : Type
 @export var name : String
+@export var price : float = 1.0
 # Description shown on hover
 @export_multiline var description : String
 @export var texture: Texture2D

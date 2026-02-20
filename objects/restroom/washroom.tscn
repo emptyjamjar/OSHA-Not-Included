@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://cv4vrnpxs40bf"]
+
+[ext_resource type="Texture2D" uid="uid://bmisxcq76lrat" path="res://icon.svg" id="1_mv5w4"]
+[ext_resource type="Script" path="res://objects/restroom/washroom.gd" id="1_v5y4u"]
+[ext_resource type="PackedScene" uid="uid://cdhb2euh28ies" path="res://core/components/interaction_area/interaction_area.tscn" id="3_v5y4u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4xol4"]
+size = Vector2(163.25784, 172.08258)
+
+[node name="Washroom" type="Node2D" unique_id=585966862 node_paths=PackedStringArray("interaction_area")]
+scale = Vector2(0.67990613, 0.67990613)
+script = ExtResource("1_v5y4u")
+interaction_area = NodePath("InteractionArea")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=62048555]
+texture = ExtResource("1_mv5w4")
+
+[node name="InteractionArea" parent="." unique_id=2104453103 instance=ExtResource("3_v5y4u")]
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=865336210]
+position = Vector2(0.7353964, 3.6769755)
+scale = Vector2(0.99999994, 0.99999994)
+shape = SubResource("RectangleShape2D_4xol4")

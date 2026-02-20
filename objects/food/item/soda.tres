@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://d2cesp280t2nt"]
+
+[ext_resource type="Script" uid="uid://c7i8xoc0ofw0m" path="res://objects/items/item_data.gd" id="1_hdobt"]
+[ext_resource type="Texture2D" uid="uid://6rqgyi2qxpuw" path="res://objects/food/food_assets/soda_coke.png" id="1_skpif"]
+
+[resource]
+script = ExtResource("1_hdobt")
+type = 2
+name = "Coke"
+price = 2.75
+texture = ExtResource("1_skpif")
+metadata/_custom_type_script = "uid://c7i8xoc0ofw0m"
