@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://rgnaipuerpmn" path="res://objects/scanner/terminal/TicketTerminal.tscn" id="6_ryrav"]
 [ext_resource type="PackedScene" path="res://objects/conveyor/conveyor.tscn" id="8_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://coa2sufhyfblt" path="res://objects/food/vending_machine.tscn" id="11_mfdv2"]
+[ext_resource type="PackedScene" uid="uid://cv4vrnpxs40bf" path="res://objects/restroom/washroom.tscn" id="12_iotsf"]
 
 [node name="Game" unique_id=645817684 instance=ExtResource("1_80nbo")]
 y_sort_enabled = true
@@ -68,5 +69,9 @@ position = Vector2(4.997291, 267)
 [node name="VendingMachine" parent="." index="10" unique_id=1840311720 instance=ExtResource("11_mfdv2")]
 position = Vector2(19.989166, 153)
 scale = Vector2(0.3295734, 0.3295734)
+
+[node name="Washroom" parent="." index="11" unique_id=585966862 instance=ExtResource("12_iotsf")]
+position = Vector2(365.80173, 144)
+scale = Vector2(0.24458057, 0.24458057)
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
