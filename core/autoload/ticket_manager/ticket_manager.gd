@@ -11,6 +11,7 @@ var desc_label: RichTextLabel
 var timer_label: RichTextLabel
 
 func _ready():
+	add_to_group("ticket_manager")
 	ticket_timer = Timer.new()
 	ticket_timer.wait_time = 1.0
 	ticket_timer.one_shot = false
@@ -73,17 +74,21 @@ func generate_random_ticket() -> Ticket:
 			"goal": "Package found!",
 			"reward": 50,
 			"perf": 1, 
-			"time_min": 20, 
-			"time_max": 60
+			"time_min": 40, 
+			"time_max": 60, 
+			"min_items": 1, 
+			"max_items": 1
 		},
 		{
 			"name": "Scanner Malfunction",
-			"desc": "Diagnose the broken scanner.",
-			"goal": "Scanner fixed!",
+			"desc": "Diagnose the broken scanner.\nShip the replacement parts!",
+			"goal": "Parts fixed!",
 			"reward": 30,
 			"perf": 1, 
-			"time_min": 15, 
-			"time_max": 40
+			"time_min": 30, 
+			"time_max": 40, 
+			"min_items": 1,
+			"max_items": 1
 		}
 	]
 
@@ -97,7 +102,15 @@ func generate_random_ticket() -> Ticket:
 	# Random time for each ticket 
 	t.max_time= randi_range(data.time_min, data.time_max)
 	
-
+	# Random required items 
+	var item_db = get_tree().get_first_node_in_group("conveyor")
+	var all_items = item_db.get_all_items()
+	
+	var count = randi_range(data.min_items, data.max_items)
+	for i in count: 
+		var item: ItemData = all_items.pick_random()
+		var id = item.id
+		t.required_items[id] = t.required_items.get(id, 0) + 1
 	return t
 
 # replace the standard text with ticket name and ticket description
@@ -109,18 +122,32 @@ func update_ui():
 	title_label.text = active_ticket.ticket_name
 	desc_label.text = active_ticket.ticket_description
 	
-	#var container = ticket_ui.get_node("RequiredItemsContainer")
-	#container.queue_free_children()
+	var container = ticket_ui.get_node("RequiredItemsContainer")
+	# Clear old UI entries
+	for child in container.get_children():
+		child.queue_free()
 
 	
-	# Optional: show progress
-	var progress := ""
+	var item_db = get_tree().get_first_node_in_group("conveyor")
+	
 	for id in active_ticket.required_items.keys():
-		var req = active_ticket.required_items[id]
-		var got = active_ticket.delivered_items.get(id, 0)
-		progress += "Item %s: %d / %d\n" % [str(id), got, req]
+		var needed = active_ticket.required_items[id]
+		var delivered = active_ticket.delivered_items.get(id, 0)
 
-	desc_label.text += "\n\n" + progress
+		var item_data: ItemData = item_db.get_item_by_id(id)
+
+		var hbox = HBoxContainer.new()
+
+		var icon = TextureRect.new()
+		icon.texture = item_data.texture
+		icon.custom_minimum_size = Vector2(32, 32)
+
+		var label = Label.new()
+		label.text = "%s: %d / %d" % [item_data.name, delivered, needed]
+
+		hbox.add_child(icon)
+		hbox.add_child(label)
+		container.add_child(hbox)
 
 	
 # function to track the delivered items
@@ -130,9 +157,14 @@ func register_delivery(ticket_id: int):
 
 	var delivered := active_ticket.delivered_items
 	delivered[ticket_id] = delivered.get(ticket_id, 0) + 1
-
+	
+	# Refresh UI so the player sees the updated counts
+	update_ui()
+	
 	if _is_ticket_complete():
 		reach_goal()
+		print("Completed:")
+		print(ticket_id)
 		
 
 func _is_ticket_complete() -> bool:
@@ -147,7 +179,17 @@ func _is_ticket_complete() -> bool:
 func reach_goal():
 	if active_ticket and active_ticket.status == Ticket.TicketStatus.STARTED:
 		active_ticket.reach_goal()
+		title_label.text = "COMPLETE!"
 		desc_label.text = active_ticket.reached_goal_text
+		
+		ticket_timer.stop()
+		var finish_timer := Timer.new()
+		finish_timer.wait_time = 1.5
+		finish_timer.one_shot = true
+		finish_timer.timeout.connect(finish_ticket)
+		add_child(finish_timer)
+		finish_timer.start()
+
 		
 # make sure the ticket is finished, ticket box will disappear 
 # will work on this further 
@@ -155,4 +197,5 @@ func finish_ticket():
 	if active_ticket and active_ticket.status == Ticket.TicketStatus.REACHED_GOAL:
 		active_ticket.finish()
 		ticket_ui.visible = false
-		
+		# Clear active ticket so terminal can request a new one
+		active_ticket = null
