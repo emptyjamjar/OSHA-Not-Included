@@ -72,14 +72,18 @@ func generate_random_ticket() -> Ticket:
 			"desc": "Find the missing package in the warehouse.",
 			"goal": "Package found!",
 			"reward": 50,
-			"perf": 1
+			"perf": 1, 
+			"time_min": 20, 
+			"time_max": 60
 		},
 		{
 			"name": "Scanner Malfunction",
 			"desc": "Diagnose the broken scanner.",
 			"goal": "Scanner fixed!",
 			"reward": 30,
-			"perf": 1
+			"perf": 1, 
+			"time_min": 15, 
+			"time_max": 40
 		}
 	]
 
@@ -89,6 +93,10 @@ func generate_random_ticket() -> Ticket:
 	t.reached_goal_text = data.goal
 	t.reward_money_amount = data.reward
 	t.performance_increase = data.perf
+	
+	# Random time for each ticket 
+	t.max_time= randi_range(data.time_min, data.time_max)
+	
 
 	return t
 
@@ -100,6 +108,39 @@ func update_ui():
 	ticket_ui.visible = true
 	title_label.text = active_ticket.ticket_name
 	desc_label.text = active_ticket.ticket_description
+	
+	#var container = ticket_ui.get_node("RequiredItemsContainer")
+	#container.queue_free_children()
+
+	
+	# Optional: show progress
+	var progress := ""
+	for id in active_ticket.required_items.keys():
+		var req = active_ticket.required_items[id]
+		var got = active_ticket.delivered_items.get(id, 0)
+		progress += "Item %s: %d / %d\n" % [str(id), got, req]
+
+	desc_label.text += "\n\n" + progress
+
+	
+# function to track the delivered items
+func register_delivery(ticket_id: int):
+	if not active_ticket:
+		return
+
+	var delivered := active_ticket.delivered_items
+	delivered[ticket_id] = delivered.get(ticket_id, 0) + 1
+
+	if _is_ticket_complete():
+		reach_goal()
+		
+
+func _is_ticket_complete() -> bool:
+	for req_id in active_ticket.required_items.keys():
+		if active_ticket.delivered_items.get(req_id, 0) < active_ticket.required_items[req_id]:
+			return false
+	return true
+
 
 # when ticket is satisfied, change the text to complete text and 
 # guide to the next step
@@ -114,3 +155,4 @@ func finish_ticket():
 	if active_ticket and active_ticket.status == Ticket.TicketStatus.REACHED_GOAL:
 		active_ticket.finish()
 		ticket_ui.visible = false
+		

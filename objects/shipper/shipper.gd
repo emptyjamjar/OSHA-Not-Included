@@ -38,6 +38,14 @@ func _on_interact():
 			shipped = true
 			player_collision.disabled = true
 			timer.start()
+	# #animate truck only when ticket is complete
+	#if ticket_manager.active_ticket.status == Ticket.TicketStatus.REACHED_GOAL:
+		#get_money.emit()
+		#animated_sprite.play("drive_away")
+		#shipped = true
+		#player_collision.disabled = true
+		#timer.start()
+
 
 func _on_arrive_timer_timeout() -> void:
 	animated_sprite.play("drive_up")

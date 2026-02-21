@@ -19,6 +19,10 @@ enum TicketStatus {
 @export var reward_money_amount: int
 @export var performance_increase: int
 
+@export var required_items : Dictionary = {} #{ticket_id: quantity}
+var delivered_items : Dictionary = {} #{ticket_id: quantity}
+
+
 var status: TicketStatus = TicketStatus.AVAILABLE
 
 #Timer settings
