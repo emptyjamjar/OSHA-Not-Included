@@ -1,4 +1,5 @@
 extends Node2D
+class_name GameManager
 
 @onready var hud: CanvasLayer = $Camera2D/HUD
 @onready var money := 0

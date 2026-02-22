@@ -49,6 +49,7 @@ var _output_timer: float = 0.0
 @onready var animated_belt_v_01 := $StaticBody2D/Belt_Vertical_01
 
 func _ready() -> void:
+	add_to_group("conveyor")
 	# Fill item_resources with needed item data
 	# Items should follow the order presented in the enums
 	item_resources.append(preload("res://objects/items/toilet_paper/toilet_paper.tres"))
@@ -134,3 +135,13 @@ func _spawn_into_first_slot(item: ItemDataList) -> void:
 func _on_item_picked_up(item: ItemBase, index: int):
 	_slots[index] = null
 	item.picked_up.disconnect(_on_item_picked_up)
+	
+# functions to help return all the item in the conveyor array 
+func get_all_items() -> Array[ItemData]: 
+	return item_resources
+	
+func get_item_by_id(id: int) -> ItemData: 
+	for item in item_resources: 
+		if item.id == id: 
+			return item
+	return null 
