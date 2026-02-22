@@ -9,3 +9,4 @@ type = 1
 name = "Blue Water Bottle"
 description = "People sure order a lot of these."
 texture = ExtResource("1_lgrr5")
+id = 2

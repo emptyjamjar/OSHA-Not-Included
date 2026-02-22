@@ -51,15 +51,12 @@ script = ExtResource("5_7jktm")
 [node name="Box" parent="." index="5" unique_id=189150552]
 position = Vector2(-58.96805, 112)
 
-[node name="InteractionManager" parent="." index="6" unique_id=938102348]
-visible = false
-
 [node name="Packager" parent="." index="7" unique_id=2093227932]
 position = Vector2(541.7063, 118.00001)
 scale = Vector2(0.40825486, 0.38389248)
 
 [node name="TicketTerminal" parent="." index="8" unique_id=982348100 instance=ExtResource("6_ryrav")]
-position = Vector2(311.831, 336)
+position = Vector2(307.83313, 340)
 
 [node name="Conveyor" parent="." index="9" unique_id=1135306595 instance=ExtResource("8_j5wjh")]
 position = Vector2(4.997291, 267)
