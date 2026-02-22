@@ -1,15 +1,26 @@
 extends Node
 class_name TicketManager
 
+# each ticket will have different status
+# available - ticket is ready to deploy through ticket_terminal 
+# started - player pressed E to interact with the terminal and now starts a ticket 
+# reached_goal - player satisfied the ticket requests
+# finished - this ticket is done, do not come back to it when you press E through
+# the terminal the next time
 var active_ticket: Ticket = null
+
+# timer assigned for each ticket 
 var ticket_timer: Timer
 
 # Reference to UI (assigned at runtime)
-var ticket_ui: CanvasLayer
-var title_label: RichTextLabel
-var desc_label: RichTextLabel
-var timer_label: RichTextLabel
+var ticket_ui: CanvasLayer # referred to the TicketUI (the layout of the box) 
 
+var title_label: RichTextLabel # ticket tile 
+var desc_label: RichTextLabel # description of the ticket request
+var timer_label: RichTextLabel # show time countdown after the ticket is assigned with a time valuee
+
+# when game scene is played, add this class to the group 
+# this ensure that object is created at run time and not returning null 
 func _ready():
 	add_to_group("ticket_manager")
 	ticket_timer = Timer.new()
@@ -17,6 +28,10 @@ func _ready():
 	ticket_timer.one_shot = false
 	ticket_timer.timeout.connect(_on_ticket_tick)
 	add_child(ticket_timer)
+
+# func that keep track of the availability of the ticket 
+# when ticket is still available, subtract the remaining time by 1 
+# when ticket is expired --> deducts the player's performance (EXPAND FROM THIS LOGIC) 
 
 func _on_ticket_tick():
 	if not active_ticket:
@@ -30,6 +45,22 @@ func _on_ticket_tick():
 		_on_ticket_time_updated(active_ticket.remaining_time)
 		
 
+# related to _on_ticket_tick() --> update the time 
+func _on_ticket_time_updated(time_left: float):
+	# Update UI countdown (added a label)
+	timer_label.text = str(time_left)
+
+
+# This is where you expand the logic --> further development 
+# PERFORMANCE LOGIC 
+# For now, when ticket is expired, the function print to the console output 
+# ticket is expired, turn off the ticket box, mark the ticket as FINISHED 
+func _on_ticket_time_expired():
+	print("Ticket expired!")
+	active_ticket.status = Ticket.TicketStatus.FINISHED
+	desc_label.text = "Ticket expired!"
+	ticket_ui.visible = false
+	ticket_timer.stop()
 		
 #calling the user interface of the ticket box -- TicketUI in the Ticket Terminal.tscn
 func register_ui(ui: CanvasLayer):
@@ -38,6 +69,8 @@ func register_ui(ui: CanvasLayer):
 	desc_label = ui.get_node("TicketDescription")
 	timer_label = ui.get_node("TimeCountdown")
 
+# function to return a new ticket, if one ticket is marked as FINISHED 
+# the manager won't deploy that ticket again 
 func request_ticket() -> Ticket:
 	if active_ticket and active_ticket.status != Ticket.TicketStatus.FINISHED:
 		return active_ticket
@@ -47,26 +80,20 @@ func request_ticket() -> Ticket:
 	active_ticket.time_updated.connect(_on_ticket_time_updated)
 	active_ticket.time_expired.connect(_on_ticket_time_expired)
 
+	# start the new ticket -- change ticket to STARTED
 	active_ticket.start()
 	ticket_timer.start()
+	
+	# update the new request 
 	update_ui()
 	return active_ticket
 	
-func _on_ticket_time_updated(time_left: float):
-	# Update UI countdown (added a label)
-	timer_label.text = str(time_left)
 
-
-func _on_ticket_time_expired():
-	print("Ticket expired!")
-	active_ticket.status = Ticket.TicketStatus.FINISHED
-	desc_label.text = "Ticket expired!"
-	ticket_ui.visible = false
-	ticket_timer.stop()
-
+# player request_ticket() 
 #create ticket function
 func generate_random_ticket() -> Ticket:
-	var t := Ticket.new()
+	var t := Ticket.new() # set new timer 
+	# ticket layout
 	var templates = [
 		{
 			"name": "Lost Package",
@@ -92,7 +119,11 @@ func generate_random_ticket() -> Ticket:
 		}
 	]
 
+	# this will pick random templates, fix this point if you want make the ticket 
+	# truly unique 
 	var data = templates.pick_random()
+	
+	# assign ticket ui with the given title, description, request, time, etc.
 	t.ticket_name = data.name
 	t.ticket_description = data.desc
 	t.reached_goal_text = data.goal
@@ -103,10 +134,14 @@ func generate_random_ticket() -> Ticket:
 	t.max_time= randi_range(data.time_min, data.time_max)
 	
 	# Random required items 
+	# call conveyor array --> this hold all the items that it generated
 	var item_db = get_tree().get_first_node_in_group("conveyor")
-	var all_items = item_db.get_all_items()
+	var all_items = item_db.get_all_items() # conveyor.gd to return the array
 	
+	# random number of the items required to complete the ticket
 	var count = randi_range(data.min_items, data.max_items)
+	
+	# choose random items based on their unique id
 	for i in count: 
 		var item: ItemData = all_items.pick_random()
 		var id = item.id
@@ -129,7 +164,8 @@ func update_ui():
 
 	
 	var item_db = get_tree().get_first_node_in_group("conveyor")
-	
+	# VBoxContainer to display the tres files -- texture of the image 
+	# for better visualization
 	for id in active_ticket.required_items.keys():
 		var needed = active_ticket.required_items[id]
 		var delivered = active_ticket.delivered_items.get(id, 0)
@@ -150,7 +186,9 @@ func update_ui():
 		container.add_child(hbox)
 
 	
-# function to track the delivered items
+# function to track the delivered items 
+# this will check if the required items are shipped or not, does it match 
+# check shipper.gd --> on_interact() 
 func register_delivery(ticket_id: int):
 	if not active_ticket:
 		return
@@ -167,7 +205,9 @@ func register_delivery(ticket_id: int):
 		print(ticket_id)
 		
 
+# related to register_delivery() 
 func _is_ticket_complete() -> bool:
+	# check if the id of item shipped match with required number
 	for req_id in active_ticket.required_items.keys():
 		if active_ticket.delivered_items.get(req_id, 0) < active_ticket.required_items[req_id]:
 			return false
@@ -183,6 +223,9 @@ func reach_goal():
 		desc_label.text = active_ticket.reached_goal_text
 		
 		ticket_timer.stop()
+		
+		# this add extra time for the player to acknowledge that they have completed 
+		# the ticket 
 		var finish_timer := Timer.new()
 		finish_timer.wait_time = 1.5
 		finish_timer.one_shot = true
