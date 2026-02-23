@@ -23,6 +23,7 @@ config/icon="res://icon.svg"
 
 InteractionManager="*uid://rs788b0iptdm"
 VendingSystem="*uid://dw0hnoeunims1"
+Ticket_Manager="*uid://dd2h2ayjq7ofo"
 
 [display]
 

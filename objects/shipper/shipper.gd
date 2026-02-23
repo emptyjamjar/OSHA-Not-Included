@@ -29,15 +29,41 @@ func _on_body_exited(body:Node2D) -> void:
 
 			
 func _on_interact():
+	var ticket_manager = get_tree().get_first_node_in_group("ticket_manager")
+	if ticket_manager == null: 
+		print("WARNING: TicketManager not found yet")
+		return
+	if ticket_manager.active_ticket == null: 
+		print("No ticket yet!")
+		return 
+
 	boxes = get_overlapping_areas()
 	for box in boxes:
 		if box.is_in_group("Shippable"):
-			box.get_parent().queue_free()
+			var area = box.get_parent()
+			var item_data = area.data #ItemBase.data
+			if ticket_manager.active_ticket.required_items.has(item_data.id):
+				ticket_manager.register_delivery(item_data.id)
+			else:
+				# Wrong item shipped — ignore for now
+				# TODO: Add penalty or feedback later
+				pass
+
+			area.queue_free()
+
 			get_money.emit()
 			animated_sprite.play("drive_away")
 			shipped = true
 			player_collision.disabled = true
 			timer.start()
+	# #animate truck only when ticket is complete
+	#if ticket_manager.active_ticket.status == Ticket.TicketStatus.REACHED_GOAL:
+		#get_money.emit()
+		#animated_sprite.play("drive_away")
+		#shipped = true
+		#player_collision.disabled = true
+		#timer.start()
+
 
 func _on_arrive_timer_timeout() -> void:
 	animated_sprite.play("drive_up")

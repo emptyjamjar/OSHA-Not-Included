@@ -1,11 +1,13 @@
 class_name Box extends RigidBody2D
 
 @export var weight := 10
+@export var item_data: ItemData
 @onready var interaction_area: InteractionArea = $InteractionArea
 @onready var picked_up = false
 @onready var player = get_tree().get_first_node_in_group("player")
 @onready var game = get_tree().get_first_node_in_group("game")
 @onready var energy_component = player.get_node("EnergyComponent")
+
 
 var print_timer := 0.0
 

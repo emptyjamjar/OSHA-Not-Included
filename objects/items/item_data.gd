@@ -21,6 +21,11 @@ enum Type {
 # Used for slowing player down
 @export var weight : float
 
+
+@export var id:int 
+@export var required_items : Dictionary #{ticket_id: quantity}
+
+
 func _init(p_type := Type.GENERIC, p_name := "Item", p_description := "Item data.",
 		p_texture : Texture2D = null, p_ticket := 0, p_size := 1, p_weight := 1
 	) -> void:
