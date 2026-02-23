@@ -3,15 +3,16 @@
 [ext_resource type="PackedScene" uid="uid://cp3eur47tnd7i" path="res://objects/packager/demo.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://cpt2knie07vvo" path="res://health_component.gd" id="2_e2o6t"]
 [ext_resource type="TileSet" uid="uid://b62knjg567jhh" path="res://levels/shared/tile_set.tres" id="2_eow3j"]
-[ext_resource type="PackedScene" path="res://ui/hud/hud.tscn" id="2_ryrav"]
-[ext_resource type="Script" path="res://temp_game.gd" id="2_vef74"]
+[ext_resource type="PackedScene" uid="uid://cxbnggs2xw8ne" path="res://ui/hud/hud.tscn" id="2_ryrav"]
+[ext_resource type="Script" uid="uid://bl3ck0x27xkv6" path="res://temp_game.gd" id="2_vef74"]
 [ext_resource type="Script" uid="uid://ck4p7gga13e5e" path="res://energy_component.gd" id="3_feb5d"]
 [ext_resource type="Script" uid="uid://b0ovv20hjaxi3" path="res://needs_component.gd" id="4_fc0e3"]
 [ext_resource type="Script" uid="uid://dka4wuamclaju" path="res://sanity_component.gd" id="5_7jktm"]
 [ext_resource type="PackedScene" uid="uid://rgnaipuerpmn" path="res://objects/scanner/terminal/TicketTerminal.tscn" id="6_ryrav"]
-[ext_resource type="PackedScene" path="res://objects/conveyor/conveyor.tscn" id="8_j5wjh"]
+[ext_resource type="PackedScene" uid="uid://cnumkt0ntauyy" path="res://objects/conveyor/conveyor.tscn" id="8_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://coa2sufhyfblt" path="res://objects/food/vending_machine.tscn" id="11_mfdv2"]
 [ext_resource type="PackedScene" uid="uid://cv4vrnpxs40bf" path="res://objects/restroom/washroom.tscn" id="12_iotsf"]
+[ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="13_lc2xo"]
 
 [node name="Game" unique_id=645817684 instance=ExtResource("1_80nbo")]
 y_sort_enabled = true
@@ -70,5 +71,8 @@ scale = Vector2(0.3295734, 0.3295734)
 [node name="Washroom" parent="." index="11" unique_id=585966862 instance=ExtResource("12_iotsf")]
 position = Vector2(365.80173, 144)
 scale = Vector2(0.24458057, 0.24458057)
+
+[node name="Pause" parent="." index="12" unique_id=1566201169 instance=ExtResource("13_lc2xo")]
+top_level = true
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
