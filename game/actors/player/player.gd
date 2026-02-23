@@ -7,7 +7,7 @@ class_name Player extends CharacterBody2D
 @export var move_speed := 150
 @export var push_speed := 20
 @export var sprint_speed := 1.5
-
+@export var bladder: int = 0 
 var last_direction = Vector2.DOWN
 
 
