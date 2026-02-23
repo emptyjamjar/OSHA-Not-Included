@@ -1,3 +1,20 @@
+## ShopSlot - Item display slot in vending machine UI
+##
+## Panel UI component that shows a single purchasable item in the vending machine.
+## Shows the item's icon, price, and slot code (e.g., "A1", "B2").
+##
+## Usage:
+## - Used as part of shop_slot.tscn scene
+## - Instantiated dynamically by VendingSystem
+##
+## Interaction:
+## - Put it a code to purchase when vending machine is open
+## - Automatically updates display when item property is set
+##
+## Dependencies:
+## - Requires VendingSystem autoload
+## - Works with ItemData resources
+
 extends Panel
 
 var _item : ItemData = null

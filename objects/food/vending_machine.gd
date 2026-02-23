@@ -1,3 +1,20 @@
+## VendingMachine - Interactive vending machine object
+##
+## StaticBody2D node that represents a physical vending machine in the world.
+## Player can interact with this object to open the VendingSystem UI and purchase items.
+## 
+## Usage:
+## - Attach to a StaticBody2D node in your scene
+## - Assign an InteractionArea child node for player interaction detection
+## - You can add ItemData resources to available_items to override default inventory
+## - Manager NPCs in the "managers" group will prevent usage when nearby
+##
+## Dependencies:
+## - Requires VendingSystem autoload singleton
+## - Requires InteractionArea component
+## - Works with ItemData resources
+
+
 extends StaticBody2D
 class_name VendingMachine
 

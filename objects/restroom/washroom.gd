@@ -1,3 +1,22 @@
+## Washroom - Interactive bathroom facility
+##
+## Node2D that represents a washroom in the game world.
+## Players can interact to reduce their bladder level.
+##
+## Usage:
+## - Attach to a Node2D in your scene
+## - Assign an InteractionArea child node for player interaction detection
+## - Player must be in "player" group
+## - Player must have a bladder property
+##
+## Behavior:
+## - 1 second wait time when used
+## - Reduces player bladder by 40 (minimum 0)
+##
+## Dependencies:
+## - Requires InteractionArea component
+## - Requires player node with bladder property in "player" group
+
 extends Node2D
 
 @export var interaction_area: InteractionArea

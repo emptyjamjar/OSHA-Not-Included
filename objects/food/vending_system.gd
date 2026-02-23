@@ -1,3 +1,22 @@
+## VendingSystem - Global vending machine UI and transaction manager
+##
+## Autoload singleton that manages the vending machine UI and purchase logic.
+## Control node displays a grid of items you can buy with slot codes (A1, A2, B1, etc.)
+##
+## Usage:
+## - Access globally via VendingSystem singleton
+## - Toggle with 'U' key or via VendingMachine interaction
+##
+## Key Features:
+## - Slot-based purchasing (type codes like "A1", "B2")
+## - Dynamically loads item inventory
+## - Processes even when game is paused
+##
+## Dependencies:
+## - Requires shop_slot.tscn scene for individual item slots
+## - Works with ItemData resources
+
+
 extends Control
 @export var ui : CanvasLayer
 @export var currency_label : Label
