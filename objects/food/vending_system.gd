@@ -16,7 +16,6 @@
 ## - Requires shop_slot.tscn scene for individual item slots
 ## - Works with ItemData resources
 
-
 extends Control
 @export var ui : CanvasLayer
 @export var currency_label : Label
@@ -31,8 +30,8 @@ enum MODE {
 	ON,
 	OFF
 }
-var _currency: int = 0
-var currency: int:
+var _currency: float = 0.0
+var currency: float:
 	set(value):
 		_currency = value
 		if currency_label: 
@@ -123,6 +122,7 @@ func load_shop_inventory():
 
 func index_to_code(index: int) -> String:
 	var cols := vending_container.columns
+	@warning_ignore("integer_division")
 	var row := index / cols
 	var col := index % cols
 	

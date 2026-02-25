@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://c7e7f64igaa5j" path="res://game/actors/player/player.tscn" id="5_rvswv"]
 [ext_resource type="PackedScene" uid="uid://rgnaipuerpmn" path="res://objects/scanner/terminal/TicketTerminal.tscn" id="6_ryrav"]
 [ext_resource type="PackedScene" uid="uid://cnumkt0ntauyy" path="res://objects/conveyor/conveyor.tscn" id="8_j5wjh"]
-[ext_resource type="PackedScene" uid="uid://d2r1f8py617s3" path="res://objects/package/box.tscn" id="10_boyg6"]
 [ext_resource type="PackedScene" uid="uid://rs788b0iptdm" path="res://core/autoload/interaction_manager/interaction_manager.tscn" id="11_e36ub"]
 [ext_resource type="PackedScene" uid="uid://coa2sufhyfblt" path="res://objects/food/vending_machine.tscn" id="11_mfdv2"]
 [ext_resource type="PackedScene" uid="uid://sxf3e0qydlfv" path="res://objects/packager/packager.tscn" id="12_hb5m1"]
@@ -57,9 +56,6 @@ script = ExtResource("4_fc0e3")
 
 [node name="SanityComponent" type="Node" parent="Player" unique_id=264741504]
 script = ExtResource("5_7jktm")
-
-[node name="Box" parent="." unique_id=189150552 instance=ExtResource("10_boyg6")]
-position = Vector2(-58.96805, 112)
 
 [node name="InteractionManager" parent="." unique_id=938102348 instance=ExtResource("11_e36ub")]
 
