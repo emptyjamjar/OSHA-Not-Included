@@ -44,16 +44,16 @@ layer = -1
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Node2D/CanvasLayer" unique_id=1288663064]
 texture_filter = 1
-position = Vector2(320.00003, 184.00002)
-scale = Vector2(0.19393939, 0.14431372)
+position = Vector2(384.00003, 216)
+scale = Vector2(0.23272727, 0.16941175)
 sprite_frames = SubResource("SpriteFrames_lwp85")
 
 [node name="Play" type="TextureButton" parent="." unique_id=1977710476]
 layout_mode = 0
-offset_left = 85.50001
-offset_top = 178.00002
-offset_right = 213.5
-offset_bottom = 210.00002
+offset_left = 120.00001
+offset_top = 199.00002
+offset_right = 248.0
+offset_bottom = 231.00002
 scale = Vector2(0.8117131, 0.8117131)
 texture_normal = ExtResource("2_ioe73")
 texture_pressed = ExtResource("3_j3h1s")

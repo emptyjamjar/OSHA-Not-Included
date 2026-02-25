@@ -27,12 +27,11 @@ Ticket_Manager="*uid://dd2h2ayjq7ofo"
 
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=368
+window/size/viewport_width=768
+window/size/viewport_height=432
 window/size/always_on_top=true
 window/stretch/mode="canvas_items"
 window/stretch/aspect="ignore"
-<<<<<<<project.godotwindow/size/always_on_top=true
 
 [global_group]
 
