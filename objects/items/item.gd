@@ -274,11 +274,13 @@ func is_empty() -> bool:
 func get_effect_types() -> Array[String]:
 	var types = []
 	for effect in _anomaly_effects:
-		if not types.has(effect.get_type().name()):
-			types.append(effect.get_type().name())
+		var type_name = effect.get_type_name()
+		if not types.has(type_name):
+			types.append(type_name)
 	for effect in _consumable_effects:
-		if not types.has(effect.get_type().name()):
-			types.append(effect.get_type().name())
+		var type_name = effect.get_type_name()
+		if not types.has(type_name):
+			types.append(type_name)
 	return types
 
 ## Gets display names of all effects (anomaly + consumable)
