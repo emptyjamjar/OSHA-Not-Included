@@ -33,6 +33,11 @@ var _repeat_limit: int = -1 # (-1 = infinite), acts as a ceiling cap
 var _elapsed_time: float = 0.0 # time active
 var _repeat_index: int = 0 # tracks current cycle (ex: 5th cycle)
 
+# Basic constructor for Effect
+func _init(type: Type = Type.NONE, effect_name: String = "No_Name") -> void:
+	_type = type
+	_effect_name = effect_name
+
 # API Methods #
 
 ## Called when the effect starts (e.g., play sound, start particles)
