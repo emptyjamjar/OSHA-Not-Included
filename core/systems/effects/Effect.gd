@@ -145,3 +145,118 @@ func set_repeat_index(new_index: int) -> void:
 ## @return: int - Current repeat count
 func get_repeat_index() -> int:
 	return _repeat_index
+
+# Helper and utility methods #
+
+## Resets the effect to its initial state (for reuse or restarting)
+## @param reset_elapsed: bool - Whether to reset elapsed time and repeat index
+func reset(reset_elapsed: bool = true) -> void:
+	_elapsed_time = 0.0 if reset_elapsed else _elapsed_time
+	_repeat_index = 0 if reset_elapsed else _repeat_index
+	_repeat_count = 0  # Reset repeat counter (can be incremented on next cycle)
+
+## Checks if the effect should repeat again (based on repeat count and limit)
+## @return: bool - True if should repeat, false if max repeats reached
+func should_repeat() -> bool:
+	if _repeat_limit == -1:  # Infinite
+		return true
+	return _repeat_count < _repeat_limit
+
+## Increments the repeat index and count (called after each cycle)
+func increment_repeat() -> void:
+	_repeat_index += 1
+	_repeat_count += 1
+
+## Restarts the effect (resets time, triggers enter again)
+## @param delta: float - Time since last frame (for timing)
+func restart(delta: float) -> void:
+	reset(true)
+	enter(delta)
+
+# Query methods #
+
+## Checks if the effect should still be active (based on duration and persistence)
+## @return: bool- True if active, false if expired
+func is_active() -> bool:
+	if _is_persistent:
+		return true
+	if _duration <= 0:
+		return false  # Instant effect (consider it expired after start() )
+	return _elapsed_time < _duration
+
+## Checks if the effect has finished (expired and not persistent)
+## @return: bool - True if finished, false if still active
+func is_finished() -> bool:
+	return not is_active()
+
+## Checks if the effect is in its first cycle (repeat_index == 0)
+## @return: bool - True if first cycle, false otherwise
+func is_first_cycle() -> bool:
+	return _repeat_index == 0
+
+## Checks if the effect has reached its repeat limit
+## @return: bool - True if max repeats reached, false otherwise
+func has_reached_repeat_limit() -> bool:
+	if _repeat_limit == -1:
+		return false
+	return _repeat_count >= _repeat_limit
+
+## Gets the percentage of duration completed (0.0 to 1.0)
+## @return: float - Progress as percentage (0.0 = start, 1.0 = end)
+func get_progress() -> float:
+	if _duration <= 0:
+		return 1.0
+	return min(_elapsed_time / _duration, 1.0)
+
+## Gets the remaining time until effect ends (0 if persistent or expired)
+## @return: float: Seconds left, or 0 if persistent/expired
+func get_remaining_time() -> float:
+	if _is_persistent:
+		return 0.0
+	if _elapsed_time >= _duration:
+		return 0.0
+	return _duration - _elapsed_time
+
+## Gets the current repeat cycle as a percentage (0.0 to 1.0)
+## @return: float - Progress through current cycle (0.0 = start, 1.0 = end)
+func get_cycle_progress() -> float:
+	if _duration <= 0:
+		return 1.0
+	return min(_elapsed_time / _duration, 1.0)
+
+## Gets the total number of cycles completed (including current)
+## @return: int - Number of cycles completed so far
+func get_completed_cycles() -> int:
+	return _repeat_index
+
+## Checks if the effect is a "buff" (positive effect)
+## @return: bool - True if type is BUFF, false otherwise
+func is_buff() -> bool:
+	return _type == Type.BUFF
+
+## Checks if the effect is a "debuff" (negative effect)
+## @return: bool - True if type is DEBUFF, false otherwise
+func is_debuff() -> bool:
+	return _type == Type.DEBUFF
+
+## Gets the effect’s type as a string (e.g., "BUFF", "HAZARD")
+## @return: String - Type name without "Type." (honestly great to have)
+func get_type_name() -> String:
+	return str(_type).replace("Type.", "")
+
+## Checks if the effect is "instant' (duration == 0)
+## @return: bool - True if instant, false otherwise
+func is_instant() -> bool:
+	return _duration == 0.0
+
+## Gets a string status ("Active (50% done)", "Finished", "Persistent")
+## @return: String - Status message for UI or logs
+func get_status() -> String:
+	if _is_persistent:
+		return "Persistent"
+	if _elapsed_time >= _duration:
+		return "Finished"
+	if _duration > 0:
+		var percent = int(get_progress() * 100)
+		return "Active (%d%% done)" % percent
+	return "Instant"
