@@ -43,6 +43,11 @@ var _texture_large: NinePatchRect = null
 var _anomaly_effects: Array[Effect] = []
 var _consumable_effects: Array[Effect] = []
 
+## Basic constructor for item
+func _init(type: Type = Type.NONE, item_name: String = "No_Name") -> void:
+	_type = type
+	_item_name = item_name
+
 # API methods #
 
 
