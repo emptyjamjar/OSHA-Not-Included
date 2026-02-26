@@ -288,9 +288,9 @@ func get_effect_types() -> Array[String]:
 func get_effect_names() -> Array[String]:
 	var names = []
 	for effect in _anomaly_effects:
-		names.append(effect.get_name())
+		names.append(effect.get_effect_name())
 	for effect in _consumable_effects:
-		names.append(effect.get_name())
+		names.append(effect.get_effect_name())
 	return names
 
 ## Calculates value per weight (price / weight) — useful for inventory optimization
@@ -327,10 +327,10 @@ func is_stackable_with(other: Item) -> bool:
 ## @return: bool - True if any effect matches, false otherwise
 func has_any_effect_of_type(effect_class: String) -> bool:
 	for effect in _anomaly_effects:
-		if effect.get_type().name() == effect_class:
+		if effect.get_type_name() == effect_class:
 			return true
 	for effect in _consumable_effects:
-		if effect.get_type().name() == effect_class:
+		if effect.get_type_name() == effect_class:
 			return true
 	return false
 
@@ -339,9 +339,9 @@ func has_any_effect_of_type(effect_class: String) -> bool:
 ## @return: Effect - First matching effect, or null if not found
 func get_effect_by_name(name: String) -> Effect:
 	for effect in _anomaly_effects:
-		if effect.get_name() == name:
+		if effect.get_effect_name() == name:
 			return effect
 	for effect in _consumable_effects:
-		if effect.get_name() == name:
+		if effect.get_effect_name() == name:
 			return effect
 	return null
