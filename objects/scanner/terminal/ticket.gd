@@ -1,6 +1,8 @@
 extends Resource
 class_name Ticket
 
+## Individual ticket for orders. Tracks the status
+## of player's ticket progress.
 
 signal time_updated(remaining_time: float)
 signal time_expired

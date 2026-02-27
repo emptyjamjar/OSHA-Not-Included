@@ -1,6 +1,11 @@
 extends Node
 class_name EnergyComponent
 
+## Energy Component can be placed on player and should
+## degrade over time (as the level progresses). Consuming
+## items should increase energy briefly, having an affect
+## on player speed.
+
 @export var MAX_ENERGY := 50.0 
 var energy : float 
 

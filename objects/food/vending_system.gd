@@ -16,7 +16,6 @@
 ## - Requires shop_slot.tscn scene for individual item slots
 ## - Works with ItemData resources
 
-
 extends Control
 @export var ui : CanvasLayer
 @export var currency_label : Label
@@ -31,8 +30,8 @@ enum MODE {
 	ON,
 	OFF
 }
-var _currency: int = 0
-var currency: int:
+var _currency: float = 0.0
+var currency: float:
 	set(value):
 		_currency = value
 		if currency_label: 
@@ -70,23 +69,15 @@ func _input(event):
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	
-	print("VendingSystem _ready called")
-	print("Vending Items count: ", vending_items.size())
-	print("Vending Container: ", vending_container)
-	print("Node path:", get_path())
 	currency = 100
-	print("starting currency: ", currency)
-	for item in vending_items:
-		print(item)
 	
 	if ui:
 		ui.hide()
 	if not is_loaded and vending_items.size() > 0:
 		load_shop_inventory()
 		is_loaded = true
-		print("Is loaded set to: ", is_loaded)
 	else:
-		print("NOT loading because is_loaded=", is_loaded, " or items size=", vending_items.size())
+		printerr("NOT loading because is_loaded=", is_loaded, " or items size=", vending_items.size())
 	
 	if slot_input:
 		slot_input.text_submitted.connect(_on_code_entered)
@@ -123,6 +114,7 @@ func load_shop_inventory():
 
 func index_to_code(index: int) -> String:
 	var cols := vending_container.columns
+	@warning_ignore("integer_division")
 	var row := index / cols
 	var col := index % cols
 	
