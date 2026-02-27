@@ -1,11 +1,15 @@
 [gd_scene format=3 uid="uid://cv4vrnpxs40bf"]
 
-[ext_resource type="Texture2D" uid="uid://bmisxcq76lrat" path="res://icon.svg" id="1_mv5w4"]
-[ext_resource type="Script" uid="uid://caekgntqv7en1" path="res://objects/restroom/washroom.gd" id="1_v5y4u"]
+[ext_resource type="Script" path="res://objects/restroom/washroom.gd" id="1_v5y4u"]
+[ext_resource type="Texture2D" uid="uid://dms1uvw6h6ice" path="res://levels/shared/Temporary Tilemap.png" id="2_v5y4u"]
 [ext_resource type="PackedScene" uid="uid://cdhb2euh28ies" path="res://core/components/interaction_area/interaction_area.tscn" id="3_v5y4u"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_86jpn"]
+atlas = ExtResource("2_v5y4u")
+region = Rect2(165, 0, 27, 64)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4xol4"]
-size = Vector2(163.25784, 172.08258)
+size = Vector2(163.25784, 211.79396)
 
 [node name="Washroom" type="Node2D" unique_id=585966862 node_paths=PackedStringArray("interaction_area")]
 scale = Vector2(0.67990613, 0.67990613)
@@ -13,12 +17,14 @@ script = ExtResource("1_v5y4u")
 interaction_area = NodePath("InteractionArea")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=62048555]
-texture = ExtResource("1_mv5w4")
+position = Vector2(0, 70.59799)
+scale = Vector2(6.1010594, 4.7800717)
+texture = SubResource("AtlasTexture_86jpn")
 
 [node name="InteractionArea" parent="." unique_id=2104453103 instance=ExtResource("3_v5y4u")]
 scale = Vector2(0.99999994, 0.99999994)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=865336210]
-position = Vector2(0.7353964, 3.6769755)
-scale = Vector2(0.99999994, 0.99999994)
+position = Vector2(0.7353964, 117.6633)
+scale = Vector2(0.9999999, 0.9999999)
 shape = SubResource("RectangleShape2D_4xol4")
