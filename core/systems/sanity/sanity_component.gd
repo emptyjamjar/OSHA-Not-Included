@@ -1,6 +1,9 @@
 extends Node
 class_name SanityComponent
 
+## Player's sanity controller. Stores information about
+## the current sanity level.
+
 @export var MAX_SANITY := 100.0 
 var sanity : float 
 

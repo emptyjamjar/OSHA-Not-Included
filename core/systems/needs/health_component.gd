@@ -1,6 +1,9 @@
 extends Node
 class_name HealthComponent
 
+## TODO: decide if we need this component, or if we
+## just want to rename.
+
 signal health_change(diff:float)
 signal max_health_change(diff:float)
 

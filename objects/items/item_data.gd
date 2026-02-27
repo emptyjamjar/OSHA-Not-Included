@@ -1,6 +1,8 @@
 extends Resource
 class_name ItemData
 
+## Stores data related to items which can be packaged.
+
 enum Type {
 	ANOMALOUS,
 	GENERIC,

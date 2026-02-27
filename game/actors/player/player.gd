@@ -1,5 +1,7 @@
 class_name Player extends CharacterBody2D
 
+## Player controller: mainly responsible for movement
+## and animation.
 
 @onready var animated_sprite : AnimatedSprite2D = $AnimatedSprite2D
 @onready var viewport_rect = get_viewport_rect()
