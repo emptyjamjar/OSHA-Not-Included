@@ -69,23 +69,15 @@ func _input(event):
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	
-	print("VendingSystem _ready called")
-	print("Vending Items count: ", vending_items.size())
-	print("Vending Container: ", vending_container)
-	print("Node path:", get_path())
 	currency = 100
-	print("starting currency: ", currency)
-	for item in vending_items:
-		print(item)
 	
 	if ui:
 		ui.hide()
 	if not is_loaded and vending_items.size() > 0:
 		load_shop_inventory()
 		is_loaded = true
-		print("Is loaded set to: ", is_loaded)
 	else:
-		print("NOT loading because is_loaded=", is_loaded, " or items size=", vending_items.size())
+		printerr("NOT loading because is_loaded=", is_loaded, " or items size=", vending_items.size())
 	
 	if slot_input:
 		slot_input.text_submitted.connect(_on_code_entered)
