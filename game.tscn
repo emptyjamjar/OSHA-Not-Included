@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://cj5ikori0r3jt"]
 
-[ext_resource type="PackedScene" uid="uid://cp3eur47tnd7i" path="res://objects/packager/demo.tscn" id="1_80nbo"]
+[ext_resource type="PackedScene" path="res://objects/packager/demo.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://cpt2knie07vvo" path="res://health_component.gd" id="2_e2o6t"]
 [ext_resource type="TileSet" uid="uid://b62knjg567jhh" path="res://levels/shared/tile_set.tres" id="2_eow3j"]
 [ext_resource type="PackedScene" uid="uid://cxbnggs2xw8ne" path="res://ui/hud/hud.tscn" id="2_ryrav"]
@@ -69,7 +69,7 @@ position = Vector2(19.989166, 153)
 scale = Vector2(0.3295734, 0.3295734)
 
 [node name="Washroom" parent="." index="11" unique_id=585966862 instance=ExtResource("12_iotsf")]
-position = Vector2(365.80173, 144)
+position = Vector2(615.66626, 232)
 scale = Vector2(0.24458057, 0.24458057)
 
 [node name="Pause" parent="." index="12" unique_id=1566201169 instance=ExtResource("13_lc2xo")]
