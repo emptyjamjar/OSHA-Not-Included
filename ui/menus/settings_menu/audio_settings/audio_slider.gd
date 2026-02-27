@@ -1,6 +1,10 @@
-extends HBoxContainer
+## Audio slider script that changes volume(db) of given audio bus.
+## Loads slider/button values from current audio bus values. 
+class_name AudioSlider extends HBoxContainer
 
-@export var audioBusIndex : int
+## Set to corresponding audio bus.
+## Defaults to index 0 which is the master bus.
+@export var audioBusIndex : int = 0
 @export var volumeSlider : HSlider
 @export var muteBtn : CheckBox
 @export var sliderLabel : Label

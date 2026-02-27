@@ -1,3 +1,6 @@
+## Tab container for settings.
+## Buttons will add corresponding menu scenes, found in folder structure, to the
+## scroll container node. Signals exit_pressed when user is finished.
 extends Control
 
 signal exit_pressed
