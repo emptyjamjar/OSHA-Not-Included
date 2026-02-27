@@ -1,0 +1,163 @@
+[gd_scene format=3 uid="uid://coednjjo17o83"]
+
+[ext_resource type="Script" uid="uid://dxuhcwuct0l8o" path="res://ui/menus/settings_menu/settings_menu.gd" id="1_n83iv"]
+[ext_resource type="Texture2D" uid="uid://c7drjuxq78brt" path="res://ui/menus/settings_menu/SettingsMenu.png" id="2_4qw4c"]
+[ext_resource type="ButtonGroup" uid="uid://wjv2ujus70md" path="res://ui/menus/settings_menu/settings_menu_btn_group.tres" id="3_23gqq"]
+[ext_resource type="Texture2D" uid="uid://cxl44ldhhdmpe" path="res://ui/menus/settings_menu/SmallButtonDefault.png" id="3_pfuhs"]
+[ext_resource type="Texture2D" uid="uid://cp5oouuix2m0k" path="res://ui/menus/settings_menu/SmallButtonPressed.png" id="4_pfuhs"]
+[ext_resource type="Texture2D" uid="uid://xh0d7p4g7bi5" path="res://ui/menus/settings_menu/SmallButtonHover.png" id="5_pfuhs"]
+
+[node name="SettingsMenu" type="Control" unique_id=604375138 node_paths=PackedStringArray("controlsBtn", "videoBtn", "audioBtn", "exitBtn", "scrollContainer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_n83iv")
+controlsBtn = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Controls")
+videoBtn = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Video")
+audioBtn = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Audio")
+exitBtn = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Exit")
+scrollContainer = NodePath("MarginContainer/HBoxContainer/MarginContainer/ScrollContainer")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1631373298]
+position = Vector2(384, 251)
+texture = ExtResource("2_4qw4c")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=245400883]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.27
+anchor_top = 0.27100003
+anchor_right = 0.73
+anchor_bottom = 0.77500004
+offset_left = -0.36001587
+offset_top = 0.92798615
+offset_right = 0.35998535
+offset_bottom = -0.8000183
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 26
+theme_override_constants/margin_right = 9
+theme_override_constants/margin_bottom = 9
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1097635971]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HBoxContainer" unique_id=1380299934]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=93585571]
+custom_minimum_size = Vector2(93, 56)
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 1
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 6
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer" unique_id=1986125132]
+layout_mode = 2
+text = "Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Controls" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=449226673]
+custom_minimum_size = Vector2(94, 26)
+layout_mode = 2
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("3_23gqq")
+texture_normal = ExtResource("3_pfuhs")
+texture_pressed = ExtResource("4_pfuhs")
+texture_hover = ExtResource("5_pfuhs")
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Controls" unique_id=2042186223]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Controls"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Video" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=608403964]
+custom_minimum_size = Vector2(94, 26)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("3_23gqq")
+texture_normal = ExtResource("3_pfuhs")
+texture_pressed = ExtResource("4_pfuhs")
+texture_hover = ExtResource("5_pfuhs")
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Video" unique_id=194395249]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Video"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Audio" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=81907948]
+custom_minimum_size = Vector2(94, 26)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("3_23gqq")
+texture_normal = ExtResource("3_pfuhs")
+texture_pressed = ExtResource("4_pfuhs")
+texture_hover = ExtResource("5_pfuhs")
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Audio" unique_id=1683606301]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Audio"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Exit" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=1624458197]
+custom_minimum_size = Vector2(94, 26)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("3_23gqq")
+texture_normal = ExtResource("3_pfuhs")
+texture_pressed = ExtResource("4_pfuhs")
+texture_hover = ExtResource("5_pfuhs")
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Exit" unique_id=910475564]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Exit"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer" unique_id=332697704]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 5
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HBoxContainer/MarginContainer" unique_id=242019340]
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Controls" to="." method="_on_controls_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Video" to="." method="_on_video_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Audio" to="." method="_on_audio_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
