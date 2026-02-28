@@ -3,6 +3,7 @@ class_name ManagerIdle
 
 @export var manager: CharacterBody2D
 @export var move_speed := 10.0 
+var player: CharacterBody2D
 
 var move_direction : Vector2
 var wander_time: float
@@ -13,6 +14,7 @@ func randomize_wander():
 
 func Enter(): 
 	print("Enter - begins to wander")
+	player = get_tree().get_first_node_in_group("player")
 	randomize_wander()
 
 func Update(delta: float): 
@@ -26,3 +28,6 @@ func Physics_Update(delta: float):
 		manager.velocity = move_direction * move_speed
 	else: 
 		print("NO MANAGER EXIST")
+	var direction = player.global_position - manager.global_position
+	if direction.length() < 30: 
+		transitioned.emit(self, "follow")
