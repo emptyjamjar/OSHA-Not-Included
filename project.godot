@@ -44,6 +44,10 @@ game=""
 Shippable=""
 Boxes=""
 
+[gui]
+
+theme/custom_font="uid://ok4ful8nolr"
+
 [input]
 
 move_up={
