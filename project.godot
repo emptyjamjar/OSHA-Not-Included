@@ -46,6 +46,7 @@ Boxes=""
 
 [gui]
 
+theme/default_font_generate_mipmaps=true
 theme/custom_font="uid://ok4ful8nolr"
 
 [input]
