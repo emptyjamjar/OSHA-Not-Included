@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://0u7jy0v8bieo" path="res://game/manager/states/state_machine.gd" id="2_p482c"]
 [ext_resource type="Script" uid="uid://dl4ctxgr4pq7p" path="res://game/manager/states/manager_idle.gd" id="3_6j6oq"]
 [ext_resource type="Script" uid="uid://dv8osrfd81nlg" path="res://game/manager/states/manager_follow.gd" id="5_st5h1"]
+[ext_resource type="Script" uid="uid://bfr4futc0fa0" path="res://game/manager/states/manager_patrol.gd" id="6_7plvi"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_adhsx"]
 radius = 11.045361
@@ -22,7 +23,7 @@ shape = SubResource("CircleShape2D_adhsx")
 
 [node name="StateMachine" type="Node" parent="." unique_id=2119156540 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_p482c")
-initial_state = NodePath("Idle")
+initial_state = NodePath("Patrol")
 
 [node name="Idle" type="Node" parent="StateMachine" unique_id=1770861042 node_paths=PackedStringArray("manager")]
 script = ExtResource("3_6j6oq")
@@ -32,3 +33,8 @@ manager = NodePath("../..")
 script = ExtResource("5_st5h1")
 manager = NodePath("../..")
 metadata/_custom_type_script = "uid://dv8osrfd81nlg"
+
+[node name="Patrol" type="Node" parent="StateMachine" unique_id=1658163480 node_paths=PackedStringArray("manager")]
+script = ExtResource("6_7plvi")
+manager = NodePath("../..")
+metadata/_custom_type_script = "uid://bfr4futc0fa0"

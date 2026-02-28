@@ -16,7 +16,6 @@
 [ext_resource type="PackedScene" uid="uid://cv4vrnpxs40bf" path="res://objects/restroom/washroom.tscn" id="12_iotsf"]
 [ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="13_lc2xo"]
 [ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
-[ext_resource type="Script" uid="uid://b4dtvnfkepnq3" path="res://game/manager/ai/manager.gd" id="17_e8heu"]
 
 [sub_resource type="GDScript" id="GDScript_7sc4i"]
 script/source = "extends Node2D
@@ -111,7 +110,6 @@ top_level = true
 metadata/_edit_use_anchors_ = true
 
 [node name="Manager" parent="." unique_id=565657217 instance=ExtResource("16_80cx4")]
-position = Vector2(512.7221, 247)
-script = ExtResource("17_e8heu")
+position = Vector2(451.75513, 98)
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
