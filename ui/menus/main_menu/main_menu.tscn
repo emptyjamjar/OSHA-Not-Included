@@ -25,6 +25,7 @@ animations = [{
 }]
 
 [sub_resource type="LabelSettings" id="LabelSettings_j3h1s"]
+font_size = 22
 font_color = Color(0.9843137, 0.9607843, 0.9372549, 1)
 
 [node name="MainMenu" type="Control" unique_id=1549026700]
@@ -69,11 +70,11 @@ texture_hover = ExtResource("4_igis3")
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Play" unique_id=1396505938]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_top = 7.0
+offset_bottom = 30.0
 grow_horizontal = 2
-grow_vertical = 2
 text = "PLAY"
 label_settings = SubResource("LabelSettings_j3h1s")
 horizontal_alignment = 1
@@ -89,11 +90,11 @@ texture_hover = ExtResource("4_igis3")
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Settings" unique_id=1376487676]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_top = 7.0
+offset_bottom = 29.0
 grow_horizontal = 2
-grow_vertical = 2
 text = "SETTINGS"
 label_settings = SubResource("LabelSettings_j3h1s")
 horizontal_alignment = 1
