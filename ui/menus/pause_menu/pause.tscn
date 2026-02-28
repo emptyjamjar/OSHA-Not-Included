@@ -48,7 +48,6 @@ offset_left = 31.0
 offset_top = 5.0
 offset_right = 128.0
 offset_bottom = 38.0
-tooltip_text = "RESUME"
 text = "RESUME"
 
 [node name="Settings" type="TextureButton" parent="." unique_id=550608397]
@@ -68,7 +67,6 @@ offset_left = 27.0
 offset_top = 6.0
 offset_right = 124.0
 offset_bottom = 39.0
-tooltip_text = "RESUME"
 text = "SETTINGS"
 
 [node name="Menu" type="TextureButton" parent="." unique_id=986626887]
@@ -88,7 +86,6 @@ offset_left = 16.0
 offset_top = 5.0
 offset_right = 113.0
 offset_bottom = 38.0
-tooltip_text = "RESUME"
 text = "MAIN MENU"
 
 [connection signal="button_up" from="Resume" to="Resume" method="_on_button_up"]
