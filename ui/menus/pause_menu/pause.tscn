@@ -57,12 +57,15 @@ texture_hover = ExtResource("5_6rct4")
 script = ExtResource("6_6rct4")
 
 [node name="Label" type="Label" parent="Resume" unique_id=2054482324]
-layout_mode = 0
-offset_left = 31.0
-offset_top = 5.0
-offset_right = 128.0
-offset_bottom = 38.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "RESUME"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Menu" type="TextureButton" parent="." unique_id=986626887]
 layout_mode = 0
@@ -76,12 +79,15 @@ texture_hover = ExtResource("5_6rct4")
 script = ExtResource("10_0cgtq")
 
 [node name="Label" type="Label" parent="Menu" unique_id=1003210372]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 5.0
-offset_right = 113.0
-offset_bottom = 38.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "MAIN MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Settings" type="TextureButton" parent="." unique_id=550608397]
 layout_mode = 0
@@ -95,12 +101,15 @@ texture_hover = ExtResource("5_6rct4")
 script = ExtResource("8_0cgtq")
 
 [node name="Label" type="Label" parent="Settings" unique_id=1843550794]
-layout_mode = 0
-offset_left = 27.0
-offset_top = 6.0
-offset_right = 124.0
-offset_bottom = 39.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "SETTINGS"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="button_up" from="Resume" to="Resume" method="_on_button_up"]
 [connection signal="button_up" from="Menu" to="Menu" method="_on_button_up"]
