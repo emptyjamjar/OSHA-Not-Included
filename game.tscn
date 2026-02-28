@@ -109,7 +109,52 @@ visible = false
 top_level = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Manager" parent="." unique_id=565657217 instance=ExtResource("16_80cx4")]
-position = Vector2(451.75513, 98)
+[node name="Manager" parent="." unique_id=565657217 node_paths=PackedStringArray("patrol_paths_at_root") instance=ExtResource("16_80cx4")]
+position = Vector2(601.6738, 425)
+patrol_paths_at_root = NodePath("../PatrolPaths")
+
+[node name="PatrolPaths" type="Node2D" parent="." unique_id=351301721]
+
+[node name="Path1" type="Node2D" parent="PatrolPaths" unique_id=46041390]
+
+[node name="p1_1" type="Marker2D" parent="PatrolPaths/Path1" unique_id=2052612545]
+position = Vector2(575.688, 191)
+
+[node name="p1_2" type="Marker2D" parent="PatrolPaths/Path1" unique_id=2114138325]
+position = Vector2(416.7741, 320)
+
+[node name="p1_3" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1365977136]
+position = Vector2(414.77518, 226)
+
+[node name="p1_4" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1875373551]
+position = Vector2(61.9664, 226)
+
+[node name="Path2" type="Node2D" parent="PatrolPaths" unique_id=1780100022]
+
+[node name="p2_1" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1106255408]
+position = Vector2(447.75732, 322)
+
+[node name="p2_2" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1918256563]
+position = Vector2(416.7741, 160)
+
+[node name="p2_3" type="Marker2D" parent="PatrolPaths/Path2" unique_id=136453742]
+position = Vector2(349.81036, 289)
+
+[node name="p2_4" type="Marker2D" parent="PatrolPaths/Path2" unique_id=87527126]
+position = Vector2(158.91385, 225)
+
+[node name="Path3" type="Node2D" parent="PatrolPaths" unique_id=1497011237]
+
+[node name="p3_1" type="Marker2D" parent="PatrolPaths/Path3" unique_id=475289346]
+position = Vector2(577.6868, 354)
+
+[node name="p3_2" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1576187183]
+position = Vector2(576.68744, 289)
+
+[node name="p3_3" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1656326002]
+position = Vector2(543.70526, 192)
+
+[node name="p3_4" type="Marker2D" parent="PatrolPaths/Path3" unique_id=29843830]
+position = Vector2(382.79248, 257)
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
