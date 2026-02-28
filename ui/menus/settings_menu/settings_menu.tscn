@@ -9,13 +9,13 @@
 
 [node name="SettingsMenu" type="Control" unique_id=604375138 node_paths=PackedStringArray("controlsBtn", "videoBtn", "audioBtn", "exitBtn", "scrollContainer")]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -110.0
-offset_top = -14.0
-offset_right = -110.0
-offset_bottom = -14.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_top = 8.0
+offset_bottom = 8.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n83iv")
@@ -26,22 +26,14 @@ exitBtn = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Exit")
 scrollContainer = NodePath("MarginContainer/HBoxContainer/MarginContainer/ScrollContainer")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1631373298]
-position = Vector2(384, 251)
 texture = ExtResource("2_4qw4c")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=245400883]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.27
-anchor_top = 0.27100003
-anchor_right = 0.73
-anchor_bottom = 0.77500004
-offset_left = -0.36001587
-offset_top = 0.92798615
-offset_right = 0.35998535
-offset_bottom = -0.8000183
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 0
+offset_left = -177.0
+offset_top = -134.0
+offset_right = -51.0
+offset_bottom = 85.0
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 26
 theme_override_constants/margin_right = 9
@@ -150,6 +142,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer" unique_id=332697704]
+custom_minimum_size = Vector2(237, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 6

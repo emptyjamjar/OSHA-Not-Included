@@ -1,7 +1,7 @@
 ## Tab container for settings.
 ## Buttons will add corresponding menu scenes, found in folder structure, to the
 ## scroll container node. Signals exit_pressed when user is finished.
-extends Control
+class_name SettingsMenu extends Control
 
 signal exit_pressed
 
@@ -72,3 +72,9 @@ func _on_btn_toggle(toggledBtn: TextureButton) -> void:
 
 func _on_exit_pressed() -> void:
 	exit_pressed.emit()
+	queue_free()
+
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause"):
+		_on_exit_pressed()
