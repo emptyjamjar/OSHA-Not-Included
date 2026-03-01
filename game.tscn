@@ -127,7 +127,7 @@ position = Vector2(416.7741, 320)
 position = Vector2(414.77518, 226)
 
 [node name="p1_4" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1875373551]
-position = Vector2(61.9664, 226)
+position = Vector2(-76.95828, 226)
 
 [node name="Path2" type="Node2D" parent="PatrolPaths" unique_id=1780100022]
 
@@ -135,13 +135,13 @@ position = Vector2(61.9664, 226)
 position = Vector2(447.75732, 322)
 
 [node name="p2_2" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1918256563]
-position = Vector2(416.7741, 160)
+position = Vector2(704.61804, 325)
 
 [node name="p2_3" type="Marker2D" parent="PatrolPaths/Path2" unique_id=136453742]
-position = Vector2(349.81036, 289)
+position = Vector2(478.7405, 290)
 
 [node name="p2_4" type="Marker2D" parent="PatrolPaths/Path2" unique_id=87527126]
-position = Vector2(158.91385, 225)
+position = Vector2(476.74158, 411)
 
 [node name="Path3" type="Node2D" parent="PatrolPaths" unique_id=1497011237]
 
@@ -149,12 +149,12 @@ position = Vector2(158.91385, 225)
 position = Vector2(577.6868, 354)
 
 [node name="p3_2" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1576187183]
-position = Vector2(576.68744, 289)
+position = Vector2(415.77463, 351)
 
 [node name="p3_3" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1656326002]
-position = Vector2(543.70526, 192)
+position = Vector2(416.77408, 193)
 
 [node name="p3_4" type="Marker2D" parent="PatrolPaths/Path3" unique_id=29843830]
-position = Vector2(382.79248, 257)
+position = Vector2(723.6078, 184)
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]

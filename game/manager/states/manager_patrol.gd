@@ -13,13 +13,15 @@ func Enter():
 	wait_timer = 0.0
 	
 func Physics_Update(delta: float) -> void:
+	if manager.waiting: 
+		return
 	var path = manager.current_path
 	if path.is_empty(): 
 		print("WARNING: current_path is empty")
 		return 
 	if manager.current_index >= path.size(): 
-		print("WARNING: index out of range")
-		manager.choose_random_path()
+		# print("WARNING: index out of range")
+		manager.wait_after_finished_a_path()
 		return 
 	var target = path[manager.current_index].global_position 
 	var direction = (target - manager.global_position).normalized() 
@@ -30,10 +32,10 @@ func Physics_Update(delta: float) -> void:
 		wait_timer += delta
 		manager.velocity = Vector2()
 		manager.current_index += 1 
-		if manager.current_index >= path.size(): 
-			manager.choose_random_path()
-		else: 
-			# wait time logic here
-			pass 
+		#if manager.current_index >= path.size(): 
+			#manager.choose_random_path()
+		#else: 
+			## wait time logic here
+			#pass 
 			
 	

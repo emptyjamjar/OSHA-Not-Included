@@ -1,6 +1,9 @@
 extends CharacterBody2D
 class_name Manager
 
+var waiting := false 
+var wait_time := 0.0
+var wait_timer := 0.0 
 
 # Called when the node enters the scene tree for the first time.
 #func _ready() -> void:
@@ -34,7 +37,19 @@ func choose_random_path():
 		return 
 	current_path = path_container[randi() % path_container.size()]
 	current_index = 0
+	waiting = false 
+	wait_timer = 0.0
 
-
+func wait_after_finished_a_path(): 
+	waiting = true 
+	wait_time = randf_range(0.5, 1.0) #random wait duration 
+	wait_timer = 0.0
+	
 func _physics_process(delta: float) -> void:
+	if waiting: 
+		wait_timer += delta
+		velocity = Vector2()
+		if wait_timer >= wait_time: 
+			choose_random_path()
+		return 
 	move_and_slide()
