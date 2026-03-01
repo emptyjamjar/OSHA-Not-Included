@@ -79,6 +79,7 @@ func _is_manager_nearby() -> bool:
 
 # Handle ESC key to close menu
 func _input(event):
-	if is_menu_open and event.is_action_pressed("ui_cancel"):
-		get_viewport().set_input_as_handled()
-		VendingSystem.mode = VendingSystem.MODE.OFF  # This will trigger the signal
+	#if is_menu_open and event.is_action_pressed("pause"):
+		#get_viewport().set_input_as_handled()
+		#VendingSystem.mode = VendingSystem.MODE.OFF  # This will trigger the signal
+		pass
