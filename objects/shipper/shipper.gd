@@ -52,10 +52,10 @@ func _on_interact():
 			area.queue_free()
 
 			get_money.emit()
-			animated_sprite.play("drive_away")
+			#animated_sprite.play("drive_away")
 			shipped = true
 			player_collision.disabled = true
-			timer.start()
+			#timer.start()
 	# #animate truck only when ticket is complete
 	#if ticket_manager.active_ticket.status == Ticket.TicketStatus.REACHED_GOAL:
 		#get_money.emit()
