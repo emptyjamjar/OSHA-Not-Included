@@ -1,11 +1,17 @@
+## Settings button for menus.
 extends TextureButton
 
-## Settings button for pause menu.
+signal settings_closed
 
-func _ready():
-	process_mode = Node.PROCESS_MODE_WHEN_PAUSED
-	
-func _on_button_up() -> void:
-	# todo: wait for dev to make relevant settings
-	#get_tree().paused = false
-	pass
+
+func _on_pressed() -> void:
+	var scene = preload("res://ui/menus/settings_menu/settings_menu.tscn")
+	var instance = scene.instantiate() as SettingsMenu
+	instance.global_position.y += 10
+	instance.exit_pressed.connect(_on_settings_exited.bind(instance))
+	add_child(instance)
+
+
+func _on_settings_exited(settings: SettingsMenu) -> void:
+	await settings.tree_exited
+	settings_closed.emit()
