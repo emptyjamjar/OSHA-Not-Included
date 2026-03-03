@@ -1,5 +1,3 @@
-## Generic Merge Request Template
-
 ### Overview
 **Title:** `(replace this) What is this merge request about in a sentence?`
 
