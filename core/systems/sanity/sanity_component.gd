@@ -4,6 +4,9 @@ class_name SanityComponent
 ## Player's sanity controller. Stores information about
 ## the current sanity level.
 
+signal sanity_changed(new_value : int)
+signal milestone_reached(threshold : int)
+
 @export var sanity_cap := 100.0 
 @export var value : int
 
@@ -20,19 +23,27 @@ func _ready() -> void:
 
 func increase(amount: int) -> void: 
 	value += amount
+	sanity_changed.emit(value)
 
 func decrease(amount: int) -> void: 
 	value -= amount
+	sanity_changed.emit(value)
 
 # Add milestone to the story dictionary.
 func set_milestone(threshold: int, effect_name: String) -> void:
 	milestones[threshold] = effect_name
+	milestone_reached.emit(threshold)
 
 # Remove a milestone from the story dictionary.
 # Returns whether or not it succeeded.
 func remove_milestone(threshold: int) -> bool:
 	var success : bool = milestones.erase(threshold)
 	return success
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+
+# Stub effect. Return the milestone dictionary for now.
+func check_milestones() -> Dictionary:
+	return milestones
+
+# Stub effect. Intended to cause an effect to sanity.
+func trigger_effect(node : Node) -> bool:
+	return true
