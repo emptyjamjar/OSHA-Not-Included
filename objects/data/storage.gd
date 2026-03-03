@@ -1,8 +1,15 @@
 extends Node
 class_name Storage
 
-## Player's sanity controller. Stores information about
-## the current sanity level.
+## Generic storage class to use
+## for anything with an inventory.
+
+
+signal storage_full
+signal storage_empty
+signal content_added(content: Node)
+signal content_removed(content: Node)
+signal storage_updated
 
 @export var max_capacity : int
 @export var current_capacity : int
@@ -38,7 +45,13 @@ func set_capacity(capacity: int) -> bool:
 func add(content: Node) -> bool: 
 	if current_capacity < max_capacity:
 		contents.insert(-1, content)
+		content_added.emit()
+		if current_capacity == max_capacity:
+			storage_full.emit()
+		current_capacity += 1
 		return true
+		
+	storage_full.emit()
 	return false
 
 # Remove an item from the list of contents.
@@ -50,6 +63,10 @@ func remove(content: Node) -> bool:
 	if index == -1:
 		return false
 	contents.remove_at(index)
+	content_removed.emit()
+	current_capacity -= 1
+	if contents.is_empty():
+		storage_empty.emit()
 	return true
 
 # Get remaining storage space.
@@ -78,6 +95,16 @@ func count(content_type: String) -> int:
 		if item.name == content_type:
 			count += 1
 	return count
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+
+# Get everything in the inventory.
+func get_all() -> Array[Node]:
+	return contents
+
+# Find an item in the list of contents by their string name.
+# Then get it.
+func get_by_type(content_type: String) -> Array[Node]:
+	var items : Array[Node]
+	for item in contents:
+		if item.name == content_type:
+			items.insert(-1, item)
+	return items
