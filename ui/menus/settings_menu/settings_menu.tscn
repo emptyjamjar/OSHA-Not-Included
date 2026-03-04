@@ -6,16 +6,15 @@
 [ext_resource type="Texture2D" uid="uid://cxl44ldhhdmpe" path="res://ui/menus/settings_menu/SmallButtonDefault.png" id="3_pfuhs"]
 [ext_resource type="Texture2D" uid="uid://cp5oouuix2m0k" path="res://ui/menus/settings_menu/SmallButtonPressed.png" id="4_pfuhs"]
 [ext_resource type="Texture2D" uid="uid://xh0d7p4g7bi5" path="res://ui/menus/settings_menu/SmallButtonHover.png" id="5_pfuhs"]
+[ext_resource type="LabelSettings" uid="uid://dwacii2d5ae6x" path="res://ui/menus/settings_menu/settings_menu_label_settings_.tres" id="7_ycfya"]
 
 [node name="SettingsMenu" type="Control" unique_id=604375138 node_paths=PackedStringArray("controlsBtn", "videoBtn", "audioBtn", "exitBtn", "scrollContainer")]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -110.0
-offset_top = -14.0
-offset_right = -110.0
-offset_bottom = -14.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n83iv")
@@ -26,22 +25,14 @@ exitBtn = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Exit")
 scrollContainer = NodePath("MarginContainer/HBoxContainer/MarginContainer/ScrollContainer")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1631373298]
-position = Vector2(384, 251)
 texture = ExtResource("2_4qw4c")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=245400883]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.27
-anchor_top = 0.27100003
-anchor_right = 0.73
-anchor_bottom = 0.77500004
-offset_left = -0.36001587
-offset_top = 0.92798615
-offset_right = 0.35998535
-offset_bottom = -0.8000183
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 0
+offset_left = -177.0
+offset_top = -134.0
+offset_right = -51.0
+offset_bottom = 85.0
 theme_override_constants/margin_left = 8
 theme_override_constants/margin_top = 26
 theme_override_constants/margin_right = 9
@@ -65,8 +56,8 @@ theme_override_constants/margin_bottom = 6
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/MarginContainer" unique_id=1986125132]
 layout_mode = 2
 text = "Settings"
+label_settings = ExtResource("7_ycfya")
 horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Controls" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=449226673]
 custom_minimum_size = Vector2(94, 26)
@@ -80,12 +71,13 @@ texture_hover = ExtResource("5_pfuhs")
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Controls" unique_id=2042186223]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_top = 7.0
+offset_bottom = 30.0
 grow_horizontal = 2
-grow_vertical = 2
 text = "Controls"
+label_settings = ExtResource("7_ycfya")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -100,12 +92,13 @@ texture_hover = ExtResource("5_pfuhs")
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Video" unique_id=194395249]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_top = 7.0
+offset_bottom = 30.0
 grow_horizontal = 2
-grow_vertical = 2
 text = "Video"
+label_settings = ExtResource("7_ycfya")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -120,12 +113,13 @@ texture_hover = ExtResource("5_pfuhs")
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Audio" unique_id=1683606301]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_top = 7.0
+offset_bottom = 30.0
 grow_horizontal = 2
-grow_vertical = 2
 text = "Audio"
+label_settings = ExtResource("7_ycfya")
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -140,16 +134,18 @@ texture_hover = ExtResource("5_pfuhs")
 
 [node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Exit" unique_id=910475564]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = 10
 anchor_right = 1.0
-anchor_bottom = 1.0
+offset_top = 7.0
+offset_bottom = 30.0
 grow_horizontal = 2
-grow_vertical = 2
 text = "Exit"
+label_settings = ExtResource("7_ycfya")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HBoxContainer" unique_id=332697704]
+custom_minimum_size = Vector2(237, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 6
