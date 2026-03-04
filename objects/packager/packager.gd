@@ -4,6 +4,7 @@ extends Area2D
 
 var package_texture : Texture2D
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$InteractionArea.interact = Callable(self, "_on_interact")
@@ -26,7 +27,6 @@ func _on_interact():
 	for box in scanner:
 		if box.is_in_group("Boxes"):
 			box.add_to_group("Shippable")
-			
 			# TODO - MANUALLY CHANGING SPRITE TO BOX TEXTURE HERE, FIX LATER
 			box.get_parent().sprite.texture = package_texture
 			print("Box is boxed")

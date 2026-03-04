@@ -1,19 +1,68 @@
 [gd_scene format=3 uid="uid://cxbnggs2xw8ne"]
 
 [ext_resource type="Script" uid="uid://bslxe4pk0838k" path="res://ui/hud/hud.gd" id="1_4d6w6"]
-[ext_resource type="Texture2D" uid="uid://bg2n0kx0sf7t6" path="res://ui/hud/HUD.png" id="2_e0nub"]
+[ext_resource type="Texture2D" uid="uid://bpss3x7abucmq" path="res://ui/hud/HUDBar.png" id="2_4d6w6"]
+[ext_resource type="Texture2D" uid="uid://da4u5gujnobcn" path="res://ui/hud/PlayerID.png" id="3_imuuq"]
+[ext_resource type="Texture2D" uid="uid://bigtlykgcw4yo" path="res://ui/hud/StatBarBack.png" id="4_kwc50"]
+[ext_resource type="Texture2D" uid="uid://by0viewb4ct5f" path="res://ui/hud/StatBarFill.png" id="5_o2lis"]
 
 [node name="HUD" type="CanvasLayer" unique_id=830642951]
 script = ExtResource("1_4d6w6")
 
 [node name="Background" type="TextureRect" parent="." unique_id=2145073693]
-offset_right = 96.0
-offset_bottom = 32.0
-texture = ExtResource("2_e0nub")
+offset_right = 640.0
+offset_bottom = 360.0
+texture = ExtResource("2_4d6w6")
 
 [node name="Money" type="Label" parent="Background" unique_id=1131186569]
-layout_mode = 0
-offset_right = 96.0
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -48.0
+offset_right = 48.0
 offset_bottom = 32.0
+grow_horizontal = 2
 text = "Money: 0"
 horizontal_alignment = 1
+
+[node name="Badge" type="TextureRect" parent="." unique_id=676530222]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_imuuq")
+
+[node name="SanityBar" type="TextureProgressBar" parent="Badge" unique_id=1113052502]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 138.0
+offset_right = 84.0
+offset_bottom = 146.0
+texture_under = ExtResource("4_kwc50")
+texture_progress = ExtResource("5_o2lis")
+
+[node name="HealthBar" type="TextureProgressBar" parent="Badge" unique_id=1445207114]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 180.0
+offset_right = 84.0
+offset_bottom = 188.0
+texture_under = ExtResource("4_kwc50")
+texture_progress = ExtResource("5_o2lis")
+
+[node name="NeedsBar" type="TextureProgressBar" parent="Badge" unique_id=265611349]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 167.0
+offset_right = 84.0
+offset_bottom = 175.0
+texture_under = ExtResource("4_kwc50")
+texture_progress = ExtResource("5_o2lis")
+
+[node name="StaminaBar" type="TextureProgressBar" parent="Badge" unique_id=484596915]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 153.0
+offset_right = 84.0
+offset_bottom = 161.0
+texture_under = ExtResource("4_kwc50")
+texture_progress = ExtResource("5_o2lis")

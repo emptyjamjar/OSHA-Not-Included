@@ -109,3 +109,4 @@ top_level = true
 metadata/_edit_use_anchors_ = true
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
+[connection signal="health_change" from="Player/HealthComponent" to="Camera2D/HUD" method="_on_health_component_health_change"]

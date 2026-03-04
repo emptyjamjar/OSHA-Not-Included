@@ -21,6 +21,18 @@ func _ready() -> void:
 	InteractionManager.player = self
 	InteractionManager.can_interact = true
 
+func _process(delta: float) -> void:
+	var box = null
+	for child in self.find_children("*"):
+		print(child)
+		if child.is_in_group("Shippable"):
+			box = child
+	if box:
+		if self.has_node(box):
+			#$EnergyComponent.draining = true
+			print("Draining")
+		else:
+			$EnergyComponent.draining = false
 
 #wasd is the movement for move_(direction). 
 func _physics_process(delta: float) -> void:
