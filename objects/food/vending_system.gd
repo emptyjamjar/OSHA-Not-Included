@@ -126,6 +126,7 @@ func _on_code_entered(code: String):
 	var item := slot_map[code]
 	if buy_item(item):
 		print("BOUGHT FROM SLOT ", code)
+		mode = MODE.OFF # turn off
 
 func set_shop_inventory(list : Array[ItemData]):
 	free_previous_slots()
