@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://bimhohbyv6s5d" path="res://objects/shipper/shipper.tscn" id="3_e8heu"]
 [ext_resource type="Script" uid="uid://ck4p7gga13e5e" path="res://core/systems/needs/energy_component.gd" id="3_feb5d"]
 [ext_resource type="Script" uid="uid://b0ovv20hjaxi3" path="res://core/systems/needs/needs_component.gd" id="4_fc0e3"]
-[ext_resource type="Script" uid="uid://dka4wuamclaju" path="res://core/systems/sanity/sanity_component.gd" id="5_7jktm"]
 [ext_resource type="PackedScene" uid="uid://c7e7f64igaa5j" path="res://game/actors/player/player.tscn" id="5_rvswv"]
 [ext_resource type="PackedScene" uid="uid://rgnaipuerpmn" path="res://objects/scanner/terminal/TicketTerminal.tscn" id="6_ryrav"]
+[ext_resource type="Script" uid="uid://bcb711ar041n5" path="res://objects/data/storage.gd" id="8_7sc4i"]
 [ext_resource type="PackedScene" uid="uid://cnumkt0ntauyy" path="res://objects/conveyor/conveyor.tscn" id="8_j5wjh"]
 [ext_resource type="PackedScene" uid="uid://rs788b0iptdm" path="res://core/autoload/interaction_manager/interaction_manager.tscn" id="11_e36ub"]
 [ext_resource type="PackedScene" uid="uid://coa2sufhyfblt" path="res://objects/food/vending_machine.tscn" id="11_mfdv2"]
@@ -81,7 +81,7 @@ script = ExtResource("3_feb5d")
 script = ExtResource("4_fc0e3")
 
 [node name="SanityComponent" type="Node" parent="Player" unique_id=264741504]
-script = ExtResource("5_7jktm")
+script = ExtResource("8_7sc4i")
 
 [node name="InteractionManager" parent="." unique_id=938102348 instance=ExtResource("11_e36ub")]
 
