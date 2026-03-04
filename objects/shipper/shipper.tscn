@@ -21,38 +21,6 @@ region = Rect2(128, 0, 64, 64)
 atlas = ExtResource("2_0ivfn")
 region = Rect2(192, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0ivfn"]
-atlas = ExtResource("2_0ivfn")
-region = Rect2(256, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_escnv"]
-atlas = ExtResource("2_0ivfn")
-region = Rect2(320, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ag84r"]
-atlas = ExtResource("2_0ivfn")
-region = Rect2(384, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ll81s"]
-atlas = ExtResource("2_0ivfn")
-region = Rect2(448, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_62ted"]
-atlas = ExtResource("2_0ivfn")
-region = Rect2(448, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_gehfp"]
-atlas = ExtResource("2_0ivfn")
-region = Rect2(384, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7vqd7"]
-atlas = ExtResource("2_0ivfn")
-region = Rect2(320, 0, 64, 64)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_7ok4b"]
-atlas = ExtResource("2_0ivfn")
-region = Rect2(256, 0, 64, 64)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_6m55v"]
 atlas = ExtResource("2_0ivfn")
 region = Rect2(192, 0, 64, 64)
@@ -90,43 +58,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0ivfn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_escnv")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ag84r")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ll81s")
-}],
-"loop": false,
-"name": &"drive_away",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": null
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_62ted")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_gehfp")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7vqd7")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7ok4b")
-}],
-"loop": false,
-"name": &"drive_up",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_6m55v")
 }, {
 "duration": 1.0,
@@ -153,7 +84,7 @@ script = ExtResource("1_ifo1u")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=624549937]
 sprite_frames = SubResource("SpriteFrames_6m55v")
-animation = &"drive_up"
+animation = &"close"
 
 [node name="ProximityCollisionShape" type="CollisionShape2D" parent="." unique_id=324685094]
 position = Vector2(1, 1.785965)
@@ -169,15 +100,9 @@ position = Vector2(-1.1920929e-06, 7.1525574e-07)
 scale = Vector2(0.18552363, 0.18552364)
 shape = ExtResource("2_1w0gl")
 
-[node name="ArriveTimer" type="Timer" parent="." unique_id=2144745874]
-wait_time = 5.0
-one_shot = true
-
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=392239997]
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="StaticBody2D" unique_id=1914355233]
 position = Vector2(0, -5)
 shape = SubResource("RectangleShape2D_0ivfn")
 debug_color = Color(0.9937126, 0, 0.24038288, 0.41960785)
-
-[connection signal="timeout" from="ArriveTimer" to="." method="_on_arrive_timer_timeout"]

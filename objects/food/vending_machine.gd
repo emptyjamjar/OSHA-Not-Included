@@ -48,6 +48,7 @@ func _on_interact():
 		return
 	
 	_open_vending_menu()
+	await VendingSystem.vending_closed
 
 func _open_vending_menu():
 	is_menu_open = true
@@ -76,10 +77,3 @@ func _is_manager_nearby() -> bool:
 			if distance < manager_interrupt_distance:
 				return true
 	return false
-
-# Handle ESC key to close menu
-func _input(event):
-	#if is_menu_open and event.is_action_pressed("pause"):
-		#get_viewport().set_input_as_handled()
-		#VendingSystem.mode = VendingSystem.MODE.OFF  # This will trigger the signal
-		pass
