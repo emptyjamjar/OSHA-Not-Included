@@ -4,12 +4,15 @@ class_name Player extends CharacterBody2D
 ## and animation.
 
 @onready var animated_sprite : AnimatedSprite2D = $AnimatedSprite2D
+@onready var energy_component: EnergyComponent = $EnergyComponent
+@onready var needs_component: NeedsComponent = $NeedsComponent
 @onready var viewport_rect = get_viewport_rect()
 
 @export var move_speed := 150
 @export var push_speed := 20
 @export var sprint_speed := 1.5
-@export var bladder: int = 0 
+var player_needs: bool = true
+var is_lifting: bool = false
 var last_direction = Vector2.DOWN
 
 
@@ -21,18 +24,6 @@ func _ready() -> void:
 	InteractionManager.player = self
 	InteractionManager.can_interact = true
 
-func _process(delta: float) -> void:
-	var box = null
-	for child in self.find_children("*"):
-		print(child)
-		if child.is_in_group("Shippable"):
-			box = child
-	if box:
-		if self.has_node(box):
-			#$EnergyComponent.draining = true
-			print("Draining")
-		else:
-			$EnergyComponent.draining = false
 
 #wasd is the movement for move_(direction). 
 func _physics_process(delta: float) -> void:
@@ -52,7 +43,6 @@ func _physics_process(delta: float) -> void:
 		else:
 			animated_sprite.play("idle_down" if last_direction.y > 0 else "idle_up")
 
-
 	
 	if (Input.is_action_pressed("sprint")):
 		animated_sprite.speed_scale = 1.5
@@ -68,6 +58,28 @@ func _physics_process(delta: float) -> void:
 	var sprite_height_half = get_animated_sprite_dimensions().y / 2.0
 	position.x = clamp(position.x, 0 + sprite_width_half, screen_size.x - sprite_width_half)
 	position.y = clamp(position.y, 0 + sprite_height_half, screen_size.y - sprite_height_half)
+	
+	
+	
+func _process(delta: float) -> void:
+	#connects the bathroom to the player needs
+	if player_needs:
+		needs_component.rising = true
+	else:
+		needs_component.rising = false
+		
+	#var box = null
+	#for child in self.find_children("*"):
+		#print(child)
+		#if child.is_in_group("Boxes"):
+			#print("Shippable")
+			#box = child
+	#if box:
+		#if self.has_node(box):
+			#energy_component.draining = true
+			#print("Draining")
+		#else:
+			#energy_component.draining = false
 
 
 ## Returns the full dimensions of the player's animated sprite in a Vector2i

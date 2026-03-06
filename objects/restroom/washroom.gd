@@ -36,7 +36,8 @@ func _on_interact():
 	# apply effect
 	var player := get_tree().get_first_node_in_group("player")
 	if player:
-		player.bladder = max(player.bladder - 40,0)
-		print("bladder reduced to: ", player.bladder)
+		player.player_needs = false
+		await get_tree().create_timer(1).timeout
+		player.player_needs = true
 	
 	

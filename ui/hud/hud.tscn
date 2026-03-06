@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://cxbnggs2xw8ne"]
 
 [ext_resource type="Script" uid="uid://bslxe4pk0838k" path="res://ui/hud/hud.gd" id="1_4d6w6"]
-[ext_resource type="Texture2D" uid="uid://bpss3x7abucmq" path="res://ui/hud/HUDBar.png" id="2_4d6w6"]
+[ext_resource type="Texture2D" uid="uid://cwls65qoyskqf" path="res://ui/hud/HUDBar.png" id="2_4d6w6"]
 [ext_resource type="Texture2D" uid="uid://da4u5gujnobcn" path="res://ui/hud/PlayerID.png" id="3_imuuq"]
 [ext_resource type="Texture2D" uid="uid://bigtlykgcw4yo" path="res://ui/hud/StatBarBack.png" id="4_kwc50"]
 [ext_resource type="Texture2D" uid="uid://by0viewb4ct5f" path="res://ui/hud/StatBarFill.png" id="5_o2lis"]
+[ext_resource type="Texture2D" uid="uid://cpuy4lkcklelg" path="res://ui/hud/InventorySlots.png" id="6_kwc50"]
+[ext_resource type="Texture2D" uid="uid://bmisxcq76lrat" path="res://icon.svg" id="6_o2lis"]
 
 [node name="HUD" type="CanvasLayer" unique_id=830642951]
 script = ExtResource("1_4d6w6")
@@ -66,3 +68,17 @@ offset_right = 84.0
 offset_bottom = 161.0
 texture_under = ExtResource("4_kwc50")
 texture_progress = ExtResource("5_o2lis")
+
+[node name="PlayerFace" type="TextureRect" parent="Badge" unique_id=100030904]
+layout_mode = 0
+offset_left = 31.0
+offset_top = 78.0
+offset_right = 65.0
+offset_bottom = 111.0
+texture = ExtResource("6_o2lis")
+expand_mode = 1
+
+[node name="Inventory" type="TextureRect" parent="." unique_id=1155430081]
+offset_right = 640.0
+offset_bottom = 360.0
+texture = ExtResource("6_kwc50")

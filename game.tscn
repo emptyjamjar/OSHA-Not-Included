@@ -36,6 +36,8 @@ func _ready() -> void:
 	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
 	conveyor.input(Conveyor.ItemDataList.BLUE_WATER_BOTTLE)
 
+func _process(delta: float) -> void:
+	pass
 
 func _on_shipper_get_money() -> void:
 	money += 10
@@ -121,3 +123,4 @@ metadata/_edit_use_anchors_ = true
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
 [connection signal="health_change" from="Player/HealthComponent" to="Camera2D/HUD" method="_on_health_component_health_change"]
+[connection signal="needs_change" from="Player/NeedsComponent" to="Camera2D/HUD" method="_on_needs_component_needs_change"]
