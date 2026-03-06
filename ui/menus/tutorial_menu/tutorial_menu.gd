@@ -1,6 +1,8 @@
-## Tab container for settings.
+## Tab container for tutorial.
 ## Buttons will add corresponding menu scenes, found in folder structure, to the
 ## scroll container node. Signals exit_pressed when user is finished.
+
+## Currently uses the same structure as the settings menu until new UI is found.
 class_name TutorialMenu extends Control
 
 signal exit_pressed
@@ -16,12 +18,11 @@ var curTab : int
 enum {
 	CONTROL_TAB,
 	VIDEO_TAB,
-	AUDIO_TAB,
 }
 
 const scenes = [
-	"res://ui/menus/settings_menu/controls_settings/controls_settings_menu.tscn",
-	"res://ui/menus/settings_menu/video_settings/video_settings_menu.tscn",
+	"res://ui/menus/tutorial_menu/controls/controls.tscn",
+	"res://ui/menus/tutorial_menu/objectives/objectives.tscn",
 	"res://ui/menus/settings_menu/audio_settings/audio_settings_menu.tscn",
 ]
 
