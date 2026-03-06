@@ -1,0 +1,56 @@
+[gd_scene format=3 uid="uid://bulorura3ecr8"]
+
+[ext_resource type="Texture2D" uid="uid://cba3reeknyihx" path="res://objects/scanner/terminal/symbol-single-line-input-box.png" id="1_j1ftt"]
+[ext_resource type="Texture2D" uid="uid://bk7pht5xfssn6" path="res://objects/packager/table.tres" id="2_gu8k1"]
+[ext_resource type="Texture2D" uid="uid://b51tbxfwuulw2" path="res://objects/shipper/Oil6DeliverStation.png" id="3_o41jb"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x7so6"]
+atlas = ExtResource("3_o41jb")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6ssb1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x7so6")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="AudioSettingsMenu" type="VBoxContainer" unique_id=598972902]
+offset_right = 760.0
+offset_bottom = 161.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="MasterLabel" type="Label" parent="." unique_id=1481161778]
+layout_mode = 2
+text = "
+Objective:
+
+Interact with terminal manager	                  to get tickets
+
+Take item on ticket to packaging table                   to package it
+
+Take package to truck                   to ship it
+
+Make enough money to get promoted!"
+horizontal_alignment = 1
+
+[node name="SymbolSingleLineInputBox" type="Sprite2D" parent="." unique_id=1856202169]
+position = Vector2(435.00003, 68)
+scale = Vector2(0.11718751, 0.06640624)
+texture = ExtResource("1_j1ftt")
+
+[node name="Table" type="Sprite2D" parent="." unique_id=1523268868]
+position = Vector2(458, 106.00001)
+scale = Vector2(0.9166667, 0.875)
+texture = ExtResource("2_gu8k1")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=442041558]
+position = Vector2(425.00003, 149)
+scale = Vector2(0.640625, 0.6875)
+sprite_frames = SubResource("SpriteFrames_6ssb1")
