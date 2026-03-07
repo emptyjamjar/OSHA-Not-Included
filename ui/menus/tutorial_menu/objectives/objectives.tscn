@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bulorura3ecr8"]
 
+[ext_resource type="LabelSettings" uid="uid://b8igq1w07t223" path="res://ui/menus/navy_blue.tres" id="1_gu8k1"]
 [ext_resource type="Texture2D" uid="uid://dd8qyir30yfhp" path="res://objects/scanner/terminal/warehouse-computer.png" id="1_j1ftt"]
 [ext_resource type="Texture2D" uid="uid://bk7pht5xfssn6" path="res://objects/packager/table.tres" id="2_gu8k1"]
 [ext_resource type="Texture2D" uid="uid://b1qiqwy4evkpm" path="res://ui/menus/tutorial_menu/objectives/single_truck.png" id="3_gu8k1"]
@@ -14,9 +15,10 @@ size_flags_horizontal = 3
 
 [node name="ObjectiveLabel" type="Label" parent="." unique_id=1481161778]
 layout_mode = 2
-text = "
-                    Objective:
+text = "Objective:
 "
+label_settings = ExtResource("1_gu8k1")
+horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1382207129]
 layout_mode = 2
@@ -25,6 +27,7 @@ size_flags_vertical = 0
 [node name="Label" type="Label" parent="HBoxContainer" unique_id=1162395797]
 layout_mode = 2
 text = "Get tickets by using terminal"
+label_settings = ExtResource("1_gu8k1")
 
 [node name="SymbolSingleLineInputBox" type="TextureRect" parent="HBoxContainer" unique_id=1502501868]
 layout_mode = 2
@@ -34,6 +37,7 @@ texture = ExtResource("1_j1ftt")
 visible = false
 layout_mode = 2
 text = "to get tickets"
+label_settings = ExtResource("1_gu8k1")
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="." unique_id=454193457]
 layout_mode = 2
@@ -45,6 +49,7 @@ layout_mode = 2
 size_flags_vertical = 0
 text = "
 Take ticket item to table"
+label_settings = ExtResource("1_gu8k1")
 
 [node name="Table" type="TextureRect" parent="HBoxContainer2" unique_id=816857896]
 layout_mode = 2
@@ -55,6 +60,7 @@ visible = false
 layout_mode = 2
 text = "
 to package it"
+label_settings = ExtResource("1_gu8k1")
 
 [node name="HBoxContainer3" type="HBoxContainer" parent="." unique_id=1706683761]
 layout_mode = 2
@@ -64,6 +70,7 @@ alignment = 1
 [node name="Label" type="Label" parent="HBoxContainer3" unique_id=1957949746]
 layout_mode = 2
 text = "Take package to truck"
+label_settings = ExtResource("1_gu8k1")
 
 [node name="AnimatedSprite2D" type="TextureRect" parent="HBoxContainer3" unique_id=1764532444]
 layout_mode = 2
@@ -73,8 +80,9 @@ texture = SubResource("AtlasTexture_o41jb")
 visible = false
 layout_mode = 2
 text = "to ship it"
+label_settings = ExtResource("1_gu8k1")
 
 [node name="Label" type="Label" parent="." unique_id=1702965479]
 layout_mode = 2
 text = "Make money to get promoted!"
-autowrap_mode = 2
+label_settings = ExtResource("1_gu8k1")
