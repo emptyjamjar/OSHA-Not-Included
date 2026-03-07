@@ -9,7 +9,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	for child in self.find_children("*"):
+		print(child)
 
 
 func _on_shipper_get_money() -> void:

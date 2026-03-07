@@ -33,8 +33,10 @@ debug_color = Color(0.85330474, 0.0143930195, 0.48179376, 0.41960785)
 shape = SubResource("RectangleShape2D_3yids")
 
 [node name="InteractionArea" parent="." unique_id=2104453103 instance=ExtResource("3_3yids")]
+action_name = "view tickets"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1128266295]
 shape = SubResource("RectangleShape2D_3twg7")
 
 [node name="TicketUI" parent="." unique_id=1152314469 instance=ExtResource("5_2t2yn")]
+visible = false
