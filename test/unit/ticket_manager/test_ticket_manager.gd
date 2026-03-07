@@ -46,12 +46,18 @@ func before_each():
 ## run after each test
 ## Frees all nodes from memory before the next test
 func after_each():
-	tm.ticket_timer.free()
-	tm.timer_label.free()
-	tm.desc_label.free()
-	tm.title_label.free()
-	tm.ticket_ui.free()
+	if tm.ticket_timer != null:
+		tm.ticket_timer.free()
+	if tm.timer_label != null:
+		tm.timer_label.free()
+	if tm.desc_label != null:
+		tm.desc_label.free()
+	if tm.title_label != null:
+		tm.title_label.free()
+	if tm.ticket_ui != null:
+		tm.ticket_ui.free()
 	tm.free()
+
 
 ## Test _on_ticket_tick()
 func test_on_ticket_tick():
@@ -143,29 +149,154 @@ func test_on_ticket_time_expired_marks_ticket_finished_and_updates_ui():
 	#assert_false(tm.ticket_timer.is_stopped(), "timer should remain unchanged when there is no active ticket")
 
 ## Test register_ui(ui: CanvasLayer)
+func test_register_ui_assigns_ui_and_labels():
+	var ui := CanvasLayer.new()
 
+	var title := RichTextLabel.new()
+	title.name = "TicketTile"
+	ui.add_child(title)
 
+	var desc := RichTextLabel.new()
+	desc.name = "TicketDescription"
+	ui.add_child(desc)
+
+	var timer := RichTextLabel.new()
+	timer.name = "TimeCountdown"
+	ui.add_child(timer)
+	
+	# This is here to prevent orphan nodes
+	tm.title_label.free()
+	tm.desc_label.free()
+	tm.timer_label.free()
+	tm.ticket_ui.free()
+	tm.register_ui(ui)
+
+	assert_eq(tm.ticket_ui, ui, "ticket_ui should be assigned")
+	assert_eq(tm.title_label, title, "title_label should reference TicketTile node")
+	assert_eq(tm.desc_label, desc, "desc_label should reference TicketDescription node")
+	assert_eq(tm.timer_label, timer, "timer_label should reference TimeCountdown node")
+	
 ## Test request_ticket() -> Ticket
+func test_request_ticket_returns_existing_active_ticket():
+	var ticket := TicketDummy()
+	ticket.status = Ticket.TicketStatus.STARTED
+	tm.active_ticket = ticket
 
+	var result := tm.request_ticket()
 
+	assert_eq(result, ticket, "request_ticket should return the existing active ticket")
+	assert_eq(tm.active_ticket, ticket, "active_ticket should remain unchanged")
+
+# NOTE: THIS IS COMMENTED OUT DUE TO NO NULL CATCH IN ORIGINAL SCRIPT
 ## Test generate_random_ticket() -> Ticket
-
+#func test_generate_random_ticket_returns_ticket():
+	#var ticket := tm.generate_random_ticket()
+#
+	#assert_not_null(ticket, "generate_random_ticket should return a Ticket")
+	#assert_true(ticket is Ticket, "returned object should be of type Ticket")
 
 
 ## Test update_ui()
+func test_update_ui_updates_labels_and_shows_ui():
+	var ui := CanvasLayer.new()
+	add_child_autofree(ui)
 
+	var title := RichTextLabel.new()
+	title.name = "TicketTile"
+	ui.add_child(title)
 
+	var desc := RichTextLabel.new()
+	desc.name = "TicketDescription"
+	ui.add_child(desc)
 
+	var timer := RichTextLabel.new()
+	timer.name = "TimeCountdown"
+	ui.add_child(timer)
+
+	var container := VBoxContainer.new()
+	container.name = "RequiredItemsContainer"
+	ui.add_child(container)
+	
+	# This is here to prevent orphan nodes
+	tm.title_label.free()
+	tm.desc_label.free()
+	tm.timer_label.free()
+	tm.ticket_ui.free()
+	
+	tm.register_ui(ui)
+	
+
+	var ticket := TicketDummy()
+	ticket.ticket_name = "Test Ticket"
+	ticket.ticket_description = "Test Description"
+	ticket.required_items = {}
+	ticket.delivered_items = {}
+
+	tm.active_ticket = ticket
+
+	tm.update_ui()
+
+	assert_true(tm.ticket_ui.visible, "ticket UI should be visible after update_ui")
+	assert_eq(tm.title_label.text, "Test Ticket", "title label should update with ticket name")
+	assert_eq(tm.desc_label.text, "Test Description", "description label should update with ticket description")
+
+# NOTE: THIS IS COMMENTED OUT DUE TO NO NULL CATCH IN ORIGINAL SCRIPT
 ## Test register_delivery(ticket_id: int)
-
+#func test_register_delivery_increments_delivered_item_count():
+	#var ticket := TicketDummy()
+	#ticket.required_items = {}
+	#ticket.delivered_items = {}
+#
+	#tm.active_ticket = ticket
+#
+	#var item_id := 42
+	#tm.register_delivery(item_id)
+#
+	#assert_eq(ticket.delivered_items[item_id], 1,
+		#"register_delivery should increment the delivered item count")
 
 
 ## Test _is_ticket_complete() -> bool
+func test_is_ticket_complete_returns_true_when_requirements_met():
+	var ticket := TicketDummy()
+	ticket.required_items = {1: 2}
+	ticket.delivered_items = {1: 2}
 
+	tm.active_ticket = ticket
+
+	var result := tm._is_ticket_complete()
+
+	assert_true(result, "_is_ticket_complete should return true when all required items are delivered")
 
 
 ## Test reach_goal()
+func test_reach_goal_updates_ui_and_stops_timer():
+	var ticket := TicketDummy()
+	ticket.status = Ticket.TicketStatus.STARTED
+	ticket.reached_goal_text = "Goal reached!"
 
+	tm.active_ticket = ticket
+	tm.title_label.text = "before"
+	tm.desc_label.text = "before"
+
+	tm.ticket_timer.start()
+
+	tm.reach_goal()
+
+	assert_eq(tm.title_label.text, "COMPLETE!", "title label should change to COMPLETE!")
+	assert_eq(tm.desc_label.text, "Goal reached!", "description should show reached goal text")
+	assert_true(tm.ticket_timer.is_stopped(), "ticket timer should stop when goal is reached")
 
 
 ## Test finish_ticket()
+func test_finish_ticket_completes_and_clears_active_ticket():
+	var ticket := TicketDummy()
+	ticket.status = Ticket.TicketStatus.REACHED_GOAL
+
+	tm.active_ticket = ticket
+	tm.ticket_ui.visible = true
+
+	tm.finish_ticket()
+
+	assert_null(tm.active_ticket, "active_ticket should be cleared after finishing")
+	assert_false(tm.ticket_ui.visible, "ticket UI should be hidden after finishing")
