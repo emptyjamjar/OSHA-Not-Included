@@ -18,16 +18,21 @@ var curTab : int
 enum {
 	CONTROL_TAB,
 	VIDEO_TAB,
+	AUDIO_TAB,
 }
 
 const scenes = [
 	"res://ui/menus/tutorial_menu/controls/controls.tscn",
 	"res://ui/menus/tutorial_menu/objectives/objectives.tscn",
-	"res://ui/menus/settings_menu/audio_settings/audio_settings_menu.tscn",
+	"res://ui/menus/tutorial_menu/credits/credits.tscn",
+	
 ]
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	controlsBtn = $MarginContainer/HBoxContainer/VBoxContainer/Controls
+	videoBtn = $MarginContainer/HBoxContainer/VBoxContainer/Controls
+	audioBtn = $MarginContainer/HBoxContainer/VBoxContainer/Audio
 	_on_controls_pressed()
 
 

@@ -115,7 +115,8 @@ anchor_right = 1.0
 offset_top = 7.0
 offset_bottom = 30.0
 grow_horizontal = 2
-text = "HOW TO PLAY"
+text = "TUTORIAL
+"
 label_settings = SubResource("LabelSettings_j3h1s")
 horizontal_alignment = 1
 vertical_alignment = 1
