@@ -14,7 +14,7 @@ var health : float
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	health = MAX_HEALTH
-	emit_signal("health_change")
+	health_change.emit(health)
 
 # check if the player is still alive or not. Return bool value 
 func is_dead() -> bool: 
@@ -61,9 +61,4 @@ func heal(amount: float) -> void:
 	elif health + amount >= MAX_HEALTH: 
 		set_health(MAX_HEALTH)
 	set_health(health + amount)
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
 	

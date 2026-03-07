@@ -22,7 +22,7 @@ func _process(delta: float) -> void:
 	energybar.value = energycomp.energy
 
 func update_money(money) -> void:
-	$Background/Money.text = "Money: " + str(money)
+	$Background/Money.text = str(money)
 
 
 
