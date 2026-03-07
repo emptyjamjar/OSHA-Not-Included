@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cba3reeknyihx" path="res://objects/scanner/terminal/symbol-single-line-input-box.png" id="3_2t2yn"]
 [ext_resource type="PackedScene" uid="uid://cdhb2euh28ies" path="res://core/components/interaction_area/interaction_area.tscn" id="3_3yids"]
 [ext_resource type="PackedScene" uid="uid://c6mvf84775rmp" path="res://objects/scanner/terminal/ticket.tscn" id="5_2t2yn"]
+[ext_resource type="PackedScene" uid="uid://bu8gpp7tljufp" path="res://objects/scanner/terminal/TicketQueue.tscn" id="5_4wgmk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4wgmk"]
 size = Vector2(65, 37)
@@ -38,3 +39,6 @@ shape = SubResource("RectangleShape2D_3yids")
 shape = SubResource("RectangleShape2D_3twg7")
 
 [node name="TicketUI" parent="." unique_id=1152314469 instance=ExtResource("5_2t2yn")]
+visible = false
+
+[node name="TicketQueueUI" parent="." unique_id=734139000 instance=ExtResource("5_4wgmk")]

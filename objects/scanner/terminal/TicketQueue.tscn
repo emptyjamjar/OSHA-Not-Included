@@ -1,0 +1,273 @@
+[gd_scene format=3 uid="uid://bu8gpp7tljufp"]
+
+[ext_resource type="Texture2D" uid="uid://brjl03whlgukn" path="res://objects/scanner/terminal/Ticket_SpriteSheet-PNG.png" id="1_vlja4"]
+[ext_resource type="Texture2D" uid="uid://btfptaejf4dhs" path="res://objects/scanner/terminal/TicketTimeBackPNG.png" id="2_dsuxn"]
+[ext_resource type="Texture2D" uid="uid://c0854h1cw2cb" path="res://objects/scanner/terminal/TicketTimeBarPNG.png" id="3_v8ihf"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wiggl"]
+atlas = ExtResource("1_vlja4")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ge43p"]
+atlas = ExtResource("1_vlja4")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q6qf8"]
+atlas = ExtResource("1_vlja4")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3e1dk"]
+atlas = ExtResource("1_vlja4")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rxvpx"]
+atlas = ExtResource("1_vlja4")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ecswf"]
+atlas = ExtResource("1_vlja4")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kbjjl"]
+atlas = ExtResource("1_vlja4")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ny0wb"]
+atlas = ExtResource("1_vlja4")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6b2ay"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wiggl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ge43p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q6qf8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3e1dk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rxvpx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ecswf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kbjjl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ny0wb")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="TicketQueueUI" type="CanvasLayer" unique_id=1534765680]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1292286621]
+offset_left = -1.0
+offset_top = 69.0
+offset_right = 39.0
+offset_bottom = 109.0
+
+[node name="Slot1" type="Control" parent="HBoxContainer" unique_id=2047756636]
+layout_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/Slot1" unique_id=2884994]
+position = Vector2(199, -13.000002)
+scale = Vector2(2.21875, 1.859375)
+sprite_frames = SubResource("SpriteFrames_6b2ay")
+autoplay = "default"
+frame_progress = 0.5686139
+
+[node name="TimeCountDownBar" type="TextureProgressBar" parent="HBoxContainer/Slot1/AnimatedSprite2D" unique_id=117550434]
+offset_left = -18.0
+offset_top = 20.0
+offset_right = 29.0
+offset_bottom = 28.0
+texture_under = ExtResource("2_dsuxn")
+texture_progress = ExtResource("3_v8ihf")
+metadata/_edit_use_anchors_ = true
+
+[node name="TicketTitle" type="RichTextLabel" parent="HBoxContainer/Slot1/AnimatedSprite2D" unique_id=1825323335]
+self_modulate = Color(0.096204735, 0.09620475, 0.096204735, 1)
+offset_left = -28.800003
+offset_top = -19.94203
+offset_right = 28.0
+offset_bottom = -13.449278
+theme_override_font_sizes/normal_font_size = 3
+text = "Title"
+fit_content = true
+metadata/_edit_use_anchors_ = true
+
+[node name="TicketDescription" type="RichTextLabel" parent="HBoxContainer/Slot1/AnimatedSprite2D" unique_id=266063604]
+self_modulate = Color(0.1428582, 0.14285824, 0.1428582, 1)
+offset_left = -28.800001
+offset_top = -15.304346
+offset_right = 23.199991
+offset_bottom = -6.028982
+theme_override_font_sizes/normal_font_size = 2
+text = "Description"
+fit_content = true
+metadata/_edit_use_anchors_ = true
+
+[node name="RequiredItemsContainer" type="VBoxContainer" parent="HBoxContainer/Slot1/AnimatedSprite2D" unique_id=1866141633]
+clip_contents = true
+offset_left = -28.8
+offset_top = -5.1014504
+offset_right = 28.8
+offset_bottom = 14.376808
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot2" type="Control" parent="HBoxContainer" unique_id=680985875]
+layout_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/Slot2" unique_id=1455227722]
+position = Vector2(340.99997, -13.000002)
+scale = Vector2(2.21875, 1.859375)
+sprite_frames = SubResource("SpriteFrames_6b2ay")
+autoplay = "default"
+frame_progress = 0.5686139
+
+[node name="TimeCountDownBar" type="TextureProgressBar" parent="HBoxContainer/Slot2/AnimatedSprite2D" unique_id=1391774862]
+offset_left = -18.0
+offset_top = 20.0
+offset_right = 29.0
+offset_bottom = 28.0
+texture_under = ExtResource("2_dsuxn")
+texture_progress = ExtResource("3_v8ihf")
+metadata/_edit_use_anchors_ = true
+
+[node name="TicketTitle" type="RichTextLabel" parent="HBoxContainer/Slot2/AnimatedSprite2D" unique_id=1465408278]
+self_modulate = Color(0.096204735, 0.09620475, 0.096204735, 1)
+offset_left = -28.800003
+offset_top = -19.94203
+offset_right = 28.0
+offset_bottom = -13.449278
+theme_override_font_sizes/normal_font_size = 3
+text = "Title"
+fit_content = true
+metadata/_edit_use_anchors_ = true
+
+[node name="TicketDescription" type="RichTextLabel" parent="HBoxContainer/Slot2/AnimatedSprite2D" unique_id=1587925023]
+self_modulate = Color(0.1428582, 0.14285824, 0.1428582, 1)
+offset_left = -28.800001
+offset_top = -15.304346
+offset_right = 23.199991
+offset_bottom = -6.028982
+theme_override_font_sizes/normal_font_size = 2
+text = "Description"
+fit_content = true
+metadata/_edit_use_anchors_ = true
+
+[node name="RequiredItemsContainer" type="VBoxContainer" parent="HBoxContainer/Slot2/AnimatedSprite2D" unique_id=597350513]
+clip_contents = true
+offset_left = -28.8
+offset_top = -5.1014504
+offset_right = 28.8
+offset_bottom = 14.376808
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot3" type="Control" parent="HBoxContainer" unique_id=432832531]
+layout_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/Slot3" unique_id=2106520008]
+position = Vector2(629, -13)
+scale = Vector2(2.21875, 1.859375)
+sprite_frames = SubResource("SpriteFrames_6b2ay")
+autoplay = "default"
+frame_progress = 0.5686139
+
+[node name="TimeCountDownBar" type="TextureProgressBar" parent="HBoxContainer/Slot3/AnimatedSprite2D" unique_id=57675418]
+offset_left = -18.0
+offset_top = 20.0
+offset_right = 29.0
+offset_bottom = 28.0
+texture_under = ExtResource("2_dsuxn")
+texture_progress = ExtResource("3_v8ihf")
+metadata/_edit_use_anchors_ = true
+
+[node name="TicketTitle" type="RichTextLabel" parent="HBoxContainer/Slot3/AnimatedSprite2D" unique_id=2014716421]
+self_modulate = Color(0.096204735, 0.09620475, 0.096204735, 1)
+offset_left = -28.800003
+offset_top = -19.94203
+offset_right = 28.0
+offset_bottom = -13.449278
+theme_override_font_sizes/normal_font_size = 3
+text = "Title"
+fit_content = true
+metadata/_edit_use_anchors_ = true
+
+[node name="TicketDescription" type="RichTextLabel" parent="HBoxContainer/Slot3/AnimatedSprite2D" unique_id=1862155246]
+self_modulate = Color(0.1428582, 0.14285824, 0.1428582, 1)
+offset_left = -28.800001
+offset_top = -15.304346
+offset_right = 23.199991
+offset_bottom = -6.028982
+theme_override_font_sizes/normal_font_size = 2
+text = "Description"
+fit_content = true
+metadata/_edit_use_anchors_ = true
+
+[node name="RequiredItemsContainer" type="VBoxContainer" parent="HBoxContainer/Slot3/AnimatedSprite2D" unique_id=431354000]
+clip_contents = true
+offset_left = -28.8
+offset_top = -5.1014504
+offset_right = 28.8
+offset_bottom = 14.376808
+metadata/_edit_use_anchors_ = true
+
+[node name="Slot4" type="Control" parent="HBoxContainer" unique_id=1700340132]
+layout_mode = 2
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/Slot4" unique_id=780171905]
+position = Vector2(479, -13.000002)
+scale = Vector2(2.21875, 1.859375)
+sprite_frames = SubResource("SpriteFrames_6b2ay")
+autoplay = "default"
+frame_progress = 0.5686139
+
+[node name="TimeCountDownBar" type="TextureProgressBar" parent="HBoxContainer/Slot4/AnimatedSprite2D" unique_id=728603532]
+offset_left = -18.0
+offset_top = 20.0
+offset_right = 29.0
+offset_bottom = 28.0
+texture_under = ExtResource("2_dsuxn")
+texture_progress = ExtResource("3_v8ihf")
+metadata/_edit_use_anchors_ = true
+
+[node name="TicketTitle" type="RichTextLabel" parent="HBoxContainer/Slot4/AnimatedSprite2D" unique_id=699266893]
+self_modulate = Color(0.096204735, 0.09620475, 0.096204735, 1)
+offset_left = -28.800003
+offset_top = -19.94203
+offset_right = 28.0
+offset_bottom = -13.449278
+theme_override_font_sizes/normal_font_size = 3
+text = "Title"
+fit_content = true
+metadata/_edit_use_anchors_ = true
+
+[node name="TicketDescription" type="RichTextLabel" parent="HBoxContainer/Slot4/AnimatedSprite2D" unique_id=1068020634]
+self_modulate = Color(0.1428582, 0.14285824, 0.1428582, 1)
+offset_left = -28.800001
+offset_top = -15.304346
+offset_right = 23.199991
+offset_bottom = -6.028982
+theme_override_font_sizes/normal_font_size = 2
+text = "Description"
+fit_content = true
+metadata/_edit_use_anchors_ = true
+
+[node name="RequiredItemsContainer" type="VBoxContainer" parent="HBoxContainer/Slot4/AnimatedSprite2D" unique_id=1773670303]
+clip_contents = true
+offset_left = -28.8
+offset_top = -5.1014504
+offset_right = 28.8
+offset_bottom = 14.376808
+metadata/_edit_use_anchors_ = true

@@ -6,8 +6,8 @@
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=887491401]
 modulate = Color(0.18359044, 0.18359044, 0.18359044, 1)
-position = Vector2(146.75, 84.74999)
-scale = Vector2(294.49997, 170.49998)
+position = Vector2(159.75, 95.74999)
+scale = Vector2(320.5, 192.49998)
 texture = SubResource("CanvasTexture_q15tg")
 
 [node name="TicketTile" type="RichTextLabel" parent="." unique_id=1463101606]

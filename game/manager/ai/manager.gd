@@ -14,11 +14,15 @@ var wait_timer := 0.0
 # X increase to the right
 # Y increase downward
 @export var patrol_paths_at_root: Node2D
+@export var out_bounds_area: Area2D
+
 var path_container: Array = []
 var current_path: Array = []
 var current_index := 0 
 
 func _ready() -> void:
+	add_to_group("agents")
+	
 	if patrol_paths_at_root == null:
 		print("No path to begin with -- Break from here") 
 		return 
@@ -30,7 +34,34 @@ func _ready() -> void:
 		path_container.append(points_num)
 	print(path_container)
 	choose_random_path()
+	#print("Manager starting inside polygon?", out_bounds_area.overlaps_body(self))
+	# Connect out-of-bounds signal 
+	if out_bounds_area: 
+		print("Entered")
+		out_bounds_area.connect("agent_entered", Callable(self, "_on_out_of_bounds"))
 		
+func _on_out_of_bounds(agent): 
+	print("Reaching this point")
+	if agent != self: 
+		return 
+	# 1. Respawn
+	visible = false 
+	set_physics_process(false)
+	velocity = Vector2()
+	# 2. Choose new path 
+	choose_random_path()
+	# 3. Teleport to start of new path 
+	if current_path.size() > 0: 
+		global_position = current_path[0].global_position 
+	# 4. Reset patrol state 
+	waiting = false 
+	wait_timer = 0.0
+	current_index = 0 
+	# 5. Respawn 
+	visible = true 
+	set_physics_process(true)
+	
+	
 func choose_random_path(): 
 	if path_container.size() <= 0:
 		print("Has no path in the path_container") 
@@ -53,3 +84,5 @@ func _physics_process(delta: float) -> void:
 			choose_random_path()
 		return 
 	move_and_slide()
+	
+	

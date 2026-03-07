@@ -1,6 +1,11 @@
 extends Node
 class_name TicketManager
 
+var all_tickets: Array[Ticket] = [] # 12 tickets for the level - can update it later
+var visible_queue: Array[Ticket] = [] # max 4 tickets 
+var timers: Dictionary = {} # ticket --> Timer 
+var max_visible: int = 4
+
 # each ticket will have different status
 # available - ticket is ready to deploy through ticket_terminal 
 # started - player pressed E to interact with the terminal and now starts a ticket 
@@ -8,6 +13,8 @@ class_name TicketManager
 # finished - this ticket is done, do not come back to it when you press E through
 # the terminal the next time
 var active_ticket: Ticket = null
+
+var queue_UI: CanvasLayer 
 
 # timer assigned for each ticket 
 var ticket_timer: Timer
@@ -23,24 +30,57 @@ var timer_label: RichTextLabel # show time countdown after the ticket is assigne
 # this ensure that object is created at run time and not returning null 
 func _ready():
 	add_to_group("ticket_manager")
-	ticket_timer = Timer.new()
-	ticket_timer.wait_time = 1.0
-	ticket_timer.one_shot = false
-	ticket_timer.timeout.connect(_on_ticket_tick)
-	add_child(ticket_timer)
+	#ticket_timer = Timer.new()
+	#ticket_timer.wait_time = 1.0
+	#ticket_timer.one_shot = false
+	#ticket_timer.timeout.connect(_on_ticket_tick)
+	#add_child(ticket_timer)
+	var item_db = get_tree().get_first_node_in_group("conveyor")
+	if item_db == null:
+		push_error("Conveyor STILL not found. Check group assignment.")
+		return
 
+	# generate_level_ticket(12)
+	
+	
+func generate_level_ticket(count: int): 
+	print("Generate Tickets")
+	for numb in range(count): 
+		all_tickets.append(generate_random_ticket())
+	fill_visible_queue()
+	start_timers_for_visible_queue()
+	update_queue_ui() 
+
+func fill_visible_queue(): 
+	print("Fill tickets into visible queue")
+	while visible_queue.size() < max_visible and all_tickets.size() > 0: 
+		var next_ticket = all_tickets.pop_front()
+		visible_queue.append(next_ticket)
+		
+func start_timers_for_visible_queue(): 
+	for t in visible_queue: 
+		if timers.has(t): 
+			continue
+		var timer := Timer.new()
+		timer.wait_time = 1.0
+		timer.one_shot = false 
+		timer.timeout.connect(func(): _on_ticket_tick(t))
+		add_child(timer)
+		timers[t] = timer 
+		timer.start()
+		
 # func that keep track of the availability of the ticket 
 # when ticket is still available, subtract the remaining time by 1 
 # when ticket is expired --> deducts the player's performance (EXPAND FROM THIS LOGIC) 
 
-func _on_ticket_tick():
+func _on_ticket_tick(ticket: Ticket):
 	if not active_ticket:
 		return
 
-	active_ticket.remaining_time -= 1
+	ticket.remaining_time -= 1
 
-	if active_ticket.remaining_time <= 0:
-		_on_ticket_time_expired()
+	if ticket.remaining_time <= 0:
+		_on_ticket_expired(ticket)
 	else:
 		_on_ticket_time_updated(active_ticket.remaining_time)
 		
@@ -55,38 +95,111 @@ func _on_ticket_time_updated(time_left: float):
 # PERFORMANCE LOGIC 
 # For now, when ticket is expired, the function print to the console output 
 # ticket is expired, turn off the ticket box, mark the ticket as FINISHED 
-func _on_ticket_time_expired():
+func _on_ticket_expired(ticket: Ticket):
 	print("Ticket expired!")
-	active_ticket.status = Ticket.TicketStatus.FINISHED
+	ticket.status = Ticket.TicketStatus.FINISHED
 	desc_label.text = "Ticket expired!"
-	ticket_ui.visible = false
-	ticket_timer.stop()
+	# stops and remove timer
+	timers[ticket].stop()
+	timers.erase(ticket)
+	
+	# remove from the queue
+	visible_queue.erase(ticket)
+	
+	# refill queue
+	fill_visible_queue()
+	start_timers_for_visible_queue()
+	update_queue_ui()
+	#ticket_ui.visible = false
+	#ticket_timer.stop()
+
+func complete_ticket(ticket: Ticket): 
+	ticket.status = Ticket.TicketStatus.FINISHED
+	timers[ticket].stop()
+	timers.erase(ticket)
+	visible_queue.erase(ticket)
+	fill_visible_queue()
+	start_timers_for_visible_queue()
+	update_queue_ui()
+
+func update_queue_ui(): 
+	#var queue_ui = get_node("TicketQueueUI")
+	if queue_UI == null: 
+		push_error("Queue UI not registered in update_queue_ui")
+		return 
+	var hbox_parent = queue_UI.get_node("HBoxContainer")
+	for i in range(max_visible):
+		var slot = hbox_parent.get_child(i)
+		if i >= visible_queue.size(): 
+			slot.visible = false 
+			continue
+		slot.visible = true 
+		var t = visible_queue[i]
+		
+		slot.get_node("AnimatedSprite2D/TicketTitle").text = t.ticket_name
+		slot.get_node("AnimatedSprite2D/TicketDescription").text = t.ticket_description
+		slot.get_node("AnimatedSprite2D/TimeCountDownBar").value = float(t.remaining_time) / float(t.max_time) * 100.0
+		
+		# Required items
+		var req_container = slot.get_node("AnimatedSprite2D/RequiredItemsContainer")
+		for icon in req_container.get_children(): 
+			icon.queue_free()
+		var item_db = get_tree().get_first_node_in_group("conveyor")
+		for id in t.required_items.keys(): 
+			var needed = t.required_items[id]
+			var delivered = t.delivered_items.get(id, 0)
+			var item_data = item_db.get_item_by_id(id)
+			var hbox = HBoxContainer.new()
+			hbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			hbox.custom_minimum_size = Vector2(0, 28)   # keeps row compact
+
+			var icon = TextureRect.new()
+			icon.texture = item_data.texture
+			icon.custom_minimum_size = Vector2(3, 3)
+			icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+
+
+			var label = Label.new()
+			label.text = "%s: %d / %d" % [item_data.name, delivered, needed]
+			label.autowrap_mode = TextServer.AUTOWRAP_WORD
+			label.clip_text = true
+			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			label.custom_minimum_size = Vector2(0, 24)
+			label.add_theme_color_override("font_color", Color.BLACK)
+
+			hbox.add_child(icon)
+			hbox.add_child(label)
+			req_container.add_child(hbox)
+			
+		
 		
 #calling the user interface of the ticket box -- TicketUI in the Ticket Terminal.tscn
-func register_ui(ui: CanvasLayer):
-	ticket_ui = ui
-	title_label = ui.get_node("TicketTile")
-	desc_label = ui.get_node("TicketDescription")
-	timer_label = ui.get_node("TimeCountdown")
+#func register_ui(ui: CanvasLayer):
+	#ticket_ui = ui
+	#title_label = ui.get_node("TicketTile")
+	#desc_label = ui.get_node("TicketDescription")
+	#timer_label = ui.get_node("TimeCountdown")
+func register_queue_ui(ui: CanvasLayer): 
+	queue_UI = ui 
 
 # function to return a new ticket, if one ticket is marked as FINISHED 
 # the manager won't deploy that ticket again 
-func request_ticket() -> Ticket:
-	if active_ticket and active_ticket.status != Ticket.TicketStatus.FINISHED:
-		return active_ticket
-
-	active_ticket = generate_random_ticket()
-	# Connect timer signal
-	active_ticket.time_updated.connect(_on_ticket_time_updated)
-	active_ticket.time_expired.connect(_on_ticket_time_expired)
-
-	# start the new ticket -- change ticket to STARTED
-	active_ticket.start()
-	ticket_timer.start()
-	
-	# update the new request 
-	update_ui()
-	return active_ticket
+#func request_ticket() -> Ticket:
+	#if active_ticket and active_ticket.status != Ticket.TicketStatus.FINISHED:
+		#return active_ticket
+#
+	#active_ticket = generate_random_ticket()
+	## Connect timer signal
+	#active_ticket.time_updated.connect(_on_ticket_time_updated)
+	#active_ticket.time_expired.connect(_on_ticket_expired)
+#
+	## start the new ticket -- change ticket to STARTED
+	#active_ticket.start()
+	#ticket_timer.start()
+	#
+	## update the new request 
+	#update_queue_ui()
+	#return active_ticket
 	
 
 # player request_ticket() 
@@ -116,6 +229,28 @@ func generate_random_ticket() -> Ticket:
 			"time_max": 40, 
 			"min_items": 1,
 			"max_items": 1
+		},
+		{
+			"name": "School Supplies!",
+			"desc": "New things for school comeback.\nShip the wanted items!!",
+			"goal": "Supplies shipped!",
+			"reward": 30,
+			"perf": 1, 
+			"time_min": 30, 
+			"time_max": 40, 
+			"min_items": 1,
+			"max_items": 1
+		},
+		{
+			"name": "Item Shortage",
+			"desc": "Customer at home now.\nHelp her buy the missing items!",
+			"goal": "Order finished!",
+			"reward": 30,
+			"perf": 1, 
+			"time_min": 30, 
+			"time_max": 40, 
+			"min_items": 1,
+			"max_items": 1
 		}
 	]
 
@@ -136,6 +271,8 @@ func generate_random_ticket() -> Ticket:
 	# Random required items 
 	# call conveyor array --> this hold all the items that it generated
 	var item_db = get_tree().get_first_node_in_group("conveyor")
+	if item_db == null: 
+		print("Return null on item database")
 	var all_items = item_db.get_all_items() # conveyor.gd to return the array
 	
 	# random number of the items required to complete the ticket
@@ -197,7 +334,7 @@ func register_delivery(ticket_id: int):
 	delivered[ticket_id] = delivered.get(ticket_id, 0) + 1
 	
 	# Refresh UI so the player sees the updated counts
-	update_ui()
+	update_queue_ui()
 	
 	if _is_ticket_complete():
 		reach_goal()

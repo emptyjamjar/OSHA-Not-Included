@@ -5,6 +5,9 @@ class_name ManagerPatrol
 var player: CharacterBody2D
 @export var move_speed := 40.0
 
+# Compute the bouding box of all tiles you've painted 
+
+
 var index := 0
 var wait_timer := 0.0
 
