@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://d253jfm6ma6dc"]
+
+[node name="AudioSettingsMenu" type="VBoxContainer" unique_id=598972902]
+offset_right = 760.0
+offset_bottom = 161.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="MasterLabel" type="Label" parent="." unique_id=1481161778]
+layout_mode = 2
+text = "
+Controls:
+
+W: Up
+A: Left
+S: Down
+D: Right
+
+E: Interact"
+horizontal_alignment = 1

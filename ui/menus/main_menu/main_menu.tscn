@@ -101,5 +101,27 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
+[node name="Tutorial" type="TextureButton" parent="MarginContainer/VBoxContainer" unique_id=1100713342]
+layout_mode = 2
+size_flags_vertical = 0
+texture_normal = ExtResource("2_ioe73")
+texture_pressed = ExtResource("3_j3h1s")
+texture_hover = ExtResource("4_igis3")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Tutorial" unique_id=1527298691]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 7.0
+offset_bottom = 30.0
+grow_horizontal = 2
+text = "TUTORIAL
+"
+label_settings = SubResource("LabelSettings_j3h1s")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Tutorial" to="." method="_on_tutorial_pressed"]

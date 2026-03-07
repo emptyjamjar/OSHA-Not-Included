@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://vivc0irvy08p"]
+
+[node name="AudioSettingsMenu" type="VBoxContainer" unique_id=598972902]
+offset_right = 760.0
+offset_bottom = 161.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="MasterLabel" type="Label" parent="." unique_id=1481161778]
+layout_mode = 2
+text = "
+Credits:
+
+Team Lead
+Jasmine Pawliw
+
+Design Lead
+Justin Taruc
+
+Artists:
+Daniel So
+Katherine Nguyen
+
+Test Lead
+Shane Fandrey
+
+Tech Lead
+Mark Luu
+
+Programmers:
+
+Logan Weckert
+Devanush Kurien Joseph
+Mark Mandac
+Thanh Phong Nguyen"
+horizontal_alignment = 1
