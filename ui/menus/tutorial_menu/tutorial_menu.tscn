@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://dvvlms3iuc1qm" path="res://ui/menus/tutorial_menu/SmallButtonPressed.png" id="6_brk4g"]
 [ext_resource type="Texture2D" uid="uid://c6kr05y5tu8bd" path="res://ui/menus/tutorial_menu/SmallButtonHover.png" id="7_03ntp"]
 
-[node name="SettingsMenu" type="Control" unique_id=604375138 node_paths=PackedStringArray("controlsBtn", "videoBtn", "exitBtn", "scrollContainer")]
+[node name="SettingsMenu" type="Control" unique_id=604375138 node_paths=PackedStringArray("controlsBtn", "videoBtn", "audioBtn", "exitBtn", "scrollContainer")]
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -20,6 +20,7 @@ grow_vertical = 2
 script = ExtResource("1_7iqa2")
 controlsBtn = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Controls")
 videoBtn = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Video")
+audioBtn = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Audio")
 exitBtn = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Exit")
 scrollContainer = NodePath("MarginContainer/HBoxContainer/MarginContainer/ScrollContainer")
 

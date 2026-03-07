@@ -30,9 +30,6 @@ const scenes = [
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	controlsBtn = $MarginContainer/HBoxContainer/VBoxContainer/Controls
-	videoBtn = $MarginContainer/HBoxContainer/VBoxContainer/Controls
-	audioBtn = $MarginContainer/HBoxContainer/VBoxContainer/Audio
 	_on_controls_pressed()
 
 
