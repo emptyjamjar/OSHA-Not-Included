@@ -56,7 +56,8 @@ func _physics_process(delta: float) -> void:
 	var screen_size = get_viewport_rect().size
 	var sprite_width_half = get_animated_sprite_dimensions().x / 2.0
 	var sprite_height_half = get_animated_sprite_dimensions().y / 2.0
-	position.x = clamp(position.x, 0 + sprite_width_half, screen_size.x - sprite_width_half)
+	const HUD_LEFT = 96.0
+	position.x = clamp(position.x, HUD_LEFT + sprite_width_half, screen_size.x - sprite_width_half)
 	position.y = clamp(position.y, 0 + sprite_height_half, screen_size.y - sprite_height_half)
 	
 	

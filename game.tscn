@@ -71,11 +71,11 @@ script = ExtResource("4_fc0e3")
 script = ExtResource("8_7sc4i")
 
 [node name="Packager" parent="." unique_id=2093227932 instance=ExtResource("12_hb5m1")]
-position = Vector2(640, 168)
+position = Vector2(640, 192)
 scale = Vector2(0.40825486, 0.38389248)
 
 [node name="TicketTerminal" parent="." unique_id=982348100 instance=ExtResource("6_ryrav")]
-position = Vector2(464, 392)
+position = Vector2(424, 408)
 
 [node name="Conveyor" parent="." unique_id=1135306595 instance=ExtResource("8_j5wjh")]
 position = Vector2(101, 331)
