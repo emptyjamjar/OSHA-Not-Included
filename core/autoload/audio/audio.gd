@@ -10,10 +10,20 @@ func play_click():
 	var click = $Click
 	click.play()
 	
-# Plays the click sound used for buttons or other click selections
+# Plays the click sound used for exit buttons
 func play_exit_click():
 	var exit_click = $ExitClick
 	exit_click.play()
+
+# Plays the sound used for menus opening
+func play_open_menu():
+	var open_menu = $OpenMenu
+	open_menu.play()
+
+# Plays the click sound used for menus closing
+func play_close_menu():
+	var close_menu = $CloseMenu
+	close_menu.play()
 
 ### Plays the background music of the game
 #func play_music():

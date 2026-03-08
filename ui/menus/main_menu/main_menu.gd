@@ -3,6 +3,7 @@ extends Control
 
 
 func _on_play_pressed() -> void:
+	# So play cannot be pressed if other menu is open
 	if (get_node_or_null("SettingsMenu") != null) or get_node_or_null("TutorialMenu") != null:
 		return
 	Audio.play_click()
@@ -10,7 +11,7 @@ func _on_play_pressed() -> void:
 
 
 func _on_settings_pressed() -> void:
-	if get_node_or_null("SettingsMenu") != null:
+	if get_node_or_null("SettingsMenu") != null: # To prevent multiple instances being available
 		return
 		
 	Audio.play_click()
@@ -20,7 +21,7 @@ func _on_settings_pressed() -> void:
 
 
 func _on_tutorial_pressed() -> void:
-	if get_node_or_null("TutorialMenu") != null:
+	if get_node_or_null("TutorialMenu") != null: # To prevent multiple instances being available
 		return
 	
 	Audio.play_click()
