@@ -102,4 +102,5 @@ label_settings = ExtResource("1_bax0w")
 [connection signal="toggled" from="SFX/CheckBox" to="SFX" method="_on_check_box_toggled"]
 [connection signal="value_changed" from="SFX/Slider" to="SFX" method="_on_slider_value_changed"]
 [connection signal="toggled" from="Music/CheckBox" to="Music" method="_on_check_box_toggled"]
+[connection signal="drag_ended" from="Music/Slider" to="Master" method="_on_slider_drag_ended"]
 [connection signal="value_changed" from="Music/Slider" to="Music" method="_on_slider_value_changed"]

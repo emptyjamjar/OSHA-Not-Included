@@ -17,6 +17,7 @@ func _ready() -> void:
 	sliderLabel.text = str(roundi(volumeSlider.ratio * 100))
 	
 	volumeSlider.value_changed.connect(_on_slider_value_changed)
+	volumeSlider.drag_ended.connect(_on_drag_ended)
 
 
 func _on_check_box_toggled(toggled_on: bool) -> void:
@@ -26,3 +27,7 @@ func _on_check_box_toggled(toggled_on: bool) -> void:
 func _on_slider_value_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(audioBusIndex, linear_to_db(value))
 	sliderLabel.text = str(roundi(volumeSlider.ratio * 100))
+	
+	
+func _on_drag_ended(_value_changed: bool) -> void:
+	Audio.play_click()
