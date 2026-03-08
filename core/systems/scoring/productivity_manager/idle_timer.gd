@@ -15,12 +15,13 @@ func _process(delta: float) -> void:
 			start(2)
 			set_paused(false)
 			running = true
-			print("Started")
+			#print("Started")
 	else:
 		if running == true:
 			set_paused(true)
+			running = false
 			#print("Paused")
 
 func _on_timeout() -> void:
 	start(2)
-	print("Timed out")
+	#print("Timed out")

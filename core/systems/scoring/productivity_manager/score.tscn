@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://c81h6ny71m2nb"]
+
+[ext_resource type="Script" uid="uid://dj2x2g3bdufl1" path="res://core/systems/scoring/productivity_manager/productivity_manager.gd" id="1_s7su0"]
+[ext_resource type="Script" uid="uid://ci5uk6gffqdwp" path="res://core/systems/scoring/productivity_manager/idle_timer.gd" id="2_y6pib"]
+
+[node name="Score" type="Node2D" unique_id=1161969462]
+script = ExtResource("1_s7su0")
+
+[node name="IdleTimer" type="Timer" parent="." unique_id=1571918475]
+wait_time = 5.0
+script = ExtResource("2_y6pib")
+
+[connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
+[connection signal="timeout" from="IdleTimer" to="IdleTimer" method="_on_timeout"]

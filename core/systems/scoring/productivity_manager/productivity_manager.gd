@@ -1,3 +1,6 @@
+# Score manager for level.
+# Depends on signals to washroom and shipper.
+
 extends Node2D
 
 signal productivity_changed(change: int, new: int)
