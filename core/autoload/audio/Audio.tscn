@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://cpauy0iyhojqc"]
+
+[ext_resource type="Script" uid="uid://b72tj52ytleqi" path="res://core/autoload/audio/audio.gd" id="1_k1vdp"]
+[ext_resource type="AudioStream" uid="uid://cgl88u7o7pfxr" path="res://core/autoload/audio/audio_assets/interface_sounds_final/click_003.ogg" id="2_jsxp3"]
+
+[node name="Audio" type="Node2D" unique_id=343061640]
+script = ExtResource("1_k1vdp")
+
+[node name="Click" type="AudioStreamPlayer" parent="." unique_id=253182636]
+stream = ExtResource("2_jsxp3")
+bus = &"SFX"
+
+[node name="ExitClick" type="AudioStreamPlayer" parent="." unique_id=996050759]
+stream = ExtResource("2_jsxp3")
+pitch_scale = 0.8
+bus = &"SFX"

@@ -34,16 +34,19 @@ func _ready() -> void:
 
 
 func _on_controls_pressed() -> void:
+	Audio.play_click()
 	_on_btn_toggle(controlsBtn)
 	_change_scroll_container_child(CONTROL_TAB)
 
 
 func _on_video_pressed() -> void:
+	Audio.play_click()
 	_on_btn_toggle(videoBtn)
 	_change_scroll_container_child(VIDEO_TAB)
 
 
 func _on_audio_pressed() -> void:
+	Audio.play_click()
 	_on_btn_toggle(audioBtn)
 	_change_scroll_container_child(AUDIO_TAB)
 	
@@ -74,6 +77,7 @@ func _on_btn_toggle(toggledBtn: TextureButton) -> void:
 
 
 func _on_exit_pressed() -> void:
+	Audio.play_exit_click()
 	exit_pressed.emit()
 	queue_free()
 
