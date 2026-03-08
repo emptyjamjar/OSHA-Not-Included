@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://31qxlr5k0ix4" path="res://objects/items/water_bottles/warehouse-large-black.png" id="1_30qcw"]
 [ext_resource type="Script" uid="uid://c7i8xoc0ofw0m" path="res://objects/items/item_data.gd" id="2_rpyia"]
+[ext_resource type="Texture2D" uid="uid://btjy75lc4a2jw" path="res://objects/items/water_bottles/warehouse-black-water.png" id="3_rpyia"]
 
 [resource]
 script = ExtResource("2_rpyia")
@@ -9,4 +10,5 @@ type = 1
 name = "Black Water Bottle"
 description = "People sure order a lot of these."
 texture = ExtResource("1_30qcw")
+uiTexture = ExtResource("3_rpyia")
 id = 1
