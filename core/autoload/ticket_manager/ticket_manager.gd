@@ -150,22 +150,27 @@ func update_queue_ui():
 			var delivered = t.delivered_items.get(id, 0)
 			var item_data = item_db.get_item_by_id(id)
 			var hbox = HBoxContainer.new()
-			hbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			hbox.custom_minimum_size = Vector2(0, 28)   # keeps row compact
+			#hbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			#hbox.custom_minimum_size = Vector2(0, 28)   # keeps row compact
 
 			var icon = TextureRect.new()
 			icon.texture = item_data.texture
-			icon.custom_minimum_size = Vector2(3, 3)
+			icon.custom_minimum_size = Vector2(10, 10)
 			icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-
-
+			icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			# Prevent container from overriding size
+			icon.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+			icon.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+		
+			
 			var label = Label.new()
-			label.text = "%s: %d / %d" % [item_data.name, delivered, needed]
-			label.autowrap_mode = TextServer.AUTOWRAP_WORD
-			label.clip_text = true
-			label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			label.custom_minimum_size = Vector2(0, 24)
-			label.add_theme_color_override("font_color", Color.BLACK)
+			label.text = "%d / %d" % [delivered, needed]
+			#label.autowrap_mode = TextServer.AUTOWRAP_WORD
+			#label.clip_text = true
+			#label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+			#label.custom_minimum_size = Vector2(0, 8)
+			label.add_theme_color_override("font_color", Color.DIM_GRAY)
+			label.add_theme_font_size_override("font_size", 3)
 
 			hbox.add_child(icon)
 			hbox.add_child(label)
@@ -286,41 +291,41 @@ func generate_random_ticket() -> Ticket:
 	return t
 
 # replace the standard text with ticket name and ticket description
-func update_ui():
-	if not active_ticket:
-		return
-
-	ticket_ui.visible = true
-	title_label.text = active_ticket.ticket_name
-	desc_label.text = active_ticket.ticket_description
-	
-	var container = ticket_ui.get_node("RequiredItemsContainer")
-	# Clear old UI entries
-	for child in container.get_children():
-		child.queue_free()
-
-	
-	var item_db = get_tree().get_first_node_in_group("conveyor")
-	# VBoxContainer to display the tres files -- texture of the image 
-	# for better visualization
-	for id in active_ticket.required_items.keys():
-		var needed = active_ticket.required_items[id]
-		var delivered = active_ticket.delivered_items.get(id, 0)
-
-		var item_data: ItemData = item_db.get_item_by_id(id)
-
-		var hbox = HBoxContainer.new()
-
-		var icon = TextureRect.new()
-		icon.texture = item_data.texture
-		icon.custom_minimum_size = Vector2(32, 32)
-
-		var label = Label.new()
-		label.text = "%s: %d / %d" % [item_data.name, delivered, needed]
-
-		hbox.add_child(icon)
-		hbox.add_child(label)
-		container.add_child(hbox)
+#func update_ui():
+	#if not active_ticket:
+		#return
+#
+	#ticket_ui.visible = true
+	#title_label.text = active_ticket.ticket_name
+	#desc_label.text = active_ticket.ticket_description
+	#
+	#var container = ticket_ui.get_node("RequiredItemsContainer")
+	## Clear old UI entries
+	#for child in container.get_children():
+		#child.queue_free()
+#
+	#
+	#var item_db = get_tree().get_first_node_in_group("conveyor")
+	## VBoxContainer to display the tres files -- texture of the image 
+	## for better visualization
+	#for id in active_ticket.required_items.keys():
+		#var needed = active_ticket.required_items[id]
+		#var delivered = active_ticket.delivered_items.get(id, 0)
+#
+		#var item_data: ItemData = item_db.get_item_by_id(id)
+#
+		#var hbox = HBoxContainer.new()
+#
+		#var icon = TextureRect.new()
+		#icon.texture = item_data.texture
+		#icon.custom_minimum_size = Vector2(32, 32)
+#
+		#var label = Label.new()
+		#label.text = "%s: %d / %d" % [item_data.name, delivered, needed]
+#
+		#hbox.add_child(icon)
+		#hbox.add_child(label)
+		#container.add_child(hbox)
 
 	
 # function to track the delivered items 
