@@ -41,40 +41,40 @@ texture = ExtResource("3_imuuq")
 
 [node name="SanityBar" type="TextureProgressBar" parent="Badge" unique_id=1113052502]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 114.0
-offset_right = 85.0
-offset_bottom = 122.0
+offset_left = 21.0
+offset_top = 129.0
+offset_right = 86.0
+offset_bottom = 137.0
 tooltip_text = "Sanity"
 texture_under = ExtResource("4_kwc50")
 texture_progress = ExtResource("5_o2lis")
 
 [node name="HealthBar" type="TextureProgressBar" parent="Badge" unique_id=1445207114]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 156.0
-offset_right = 85.0
-offset_bottom = 164.0
+offset_left = 21.0
+offset_top = 115.0
+offset_right = 86.0
+offset_bottom = 123.0
 tooltip_text = "Health"
 texture_under = ExtResource("4_kwc50")
 texture_progress = ExtResource("5_o2lis")
 
 [node name="NeedsBar" type="TextureProgressBar" parent="Badge" unique_id=265611349]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 142.0
-offset_right = 85.0
-offset_bottom = 150.0
+offset_left = 21.0
+offset_top = 157.0
+offset_right = 86.0
+offset_bottom = 165.0
 tooltip_text = "Bladder"
 texture_under = ExtResource("4_kwc50")
 texture_progress = ExtResource("5_o2lis")
 
 [node name="StaminaBar" type="TextureProgressBar" parent="Badge" unique_id=484596915]
 layout_mode = 0
-offset_left = 20.0
-offset_top = 128.0
-offset_right = 85.0
-offset_bottom = 136.0
+offset_left = 21.0
+offset_top = 143.0
+offset_right = 86.0
+offset_bottom = 151.0
 tooltip_text = "Stamina"
 texture_under = ExtResource("4_kwc50")
 texture_progress = ExtResource("5_o2lis")

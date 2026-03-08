@@ -21,6 +21,7 @@ offset_left = 25.0
 offset_top = 45.0
 offset_right = 71.0
 offset_bottom = 91.0
+mouse_filter = 2
 
 [node name="SlotButton" type="TextureButton" parent="Slot1" unique_id=1187112447]
 layout_mode = 0
@@ -37,16 +38,17 @@ texture_hover = ExtResource("2_tl8il")
 [node name="Slot2" type="TextureRect" parent="." unique_id=268453533]
 layout_mode = 0
 offset_left = 25.0
-offset_top = 45.0
-offset_right = 65.0
-offset_bottom = 85.0
+offset_top = 102.0
+offset_right = 71.0
+offset_bottom = 148.0
+mouse_filter = 2
 
 [node name="SlotButton" type="TextureButton" parent="Slot2" unique_id=2144614125]
 layout_mode = 0
 offset_left = -5.0
-offset_top = 51.0
+offset_top = -6.0
 offset_right = 51.0
-offset_bottom = 108.0
+offset_bottom = 51.0
 toggle_mode = true
 button_group = ExtResource("5_2ggu6")
 texture_pressed = ExtResource("3_mw73s")
