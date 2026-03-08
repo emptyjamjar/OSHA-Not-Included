@@ -7,7 +7,6 @@ const base_text = "[E] to "
 
 var active_areas : Array[InteractionArea] = []
 var can_interact = false
-var last_interacted : Node2D
 
 
 func register_area(area: InteractionArea):
@@ -23,7 +22,7 @@ func _process(_delta: float) -> void:
 	if active_areas.size() > 0 && can_interact:
 		# active_areas[0] will contain closest interactable object
 		active_areas.sort_custom(_sort_by_distance_to_player)
-		active_areas.sort_custom(_sort_last_interacted)
+
 		label.text = base_text + active_areas[0].action_name
 		# Move the label to the interactable object
 		label.global_position = active_areas[0].global_position
@@ -39,9 +38,7 @@ func _sort_by_distance_to_player(area1, area2):
 	var area2_to_player = player.global_position.distance_to(area2.global_position)
 	return area1_to_player < area2_to_player
 	
-func _sort_last_interacted(area1, area2):
-	var area1_to_player = player.global_position.distance_to(area1.global_position)
-	return area1_to_player != last_interacted
+
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact") && can_interact:
@@ -54,4 +51,4 @@ func _input(event: InputEvent) -> void:
 		
 		await active_areas[0].interact.call()
 		can_interact = true
-		last_interacted = active_areas[0]
+		

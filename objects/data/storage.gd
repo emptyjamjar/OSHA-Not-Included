@@ -7,19 +7,14 @@ class_name Storage
 
 signal storage_full
 signal storage_empty
-signal content_added(content: Node)
-signal content_removed(content: Node)
+signal content_added(content: ItemData)
+signal content_removed(content: ItemData)
 signal storage_updated
 
 @export var max_capacity : int
 @export var current_capacity : int
-enum STORED_TYPE {
-	NONE,
-	ITEM, 
-	PACKAGE,
-}
-@export var stored_type: STORED_TYPE
-@export var contents: Array[Node]
+
+@export var contents: Array[ItemData]
 
 # these two are kinda not useful
 @export var is_full: bool
@@ -42,7 +37,7 @@ func set_capacity(capacity: int) -> bool:
 	return true
 	
 # Add an item into the list of contents.
-func add(content: Node) -> bool: 
+func add(content : ItemData) -> bool: 
 	if current_capacity < max_capacity:
 		contents.insert(-1, content)
 		content_added.emit()
@@ -56,7 +51,7 @@ func add(content: Node) -> bool:
 
 # Remove an item from the list of contents.
 
-func remove(content: Node) -> bool: 
+func remove(content: ItemData) -> bool: 
 	# UML specs demand finding before erasing();
 	# use remove_at instead
 	var index = contents.find(content)
@@ -74,7 +69,7 @@ func get_remaining() -> int:
 	return max_capacity - current_capacity
 
 # Find an item in the list of contents.
-func contains(content: Node) -> bool: 
+func contains(content: ItemData) -> bool: 
 	# UML specs demand finding before erasing();
 	# use remove_at instead
 	var index = contents.find(content)
@@ -97,13 +92,13 @@ func count(content_type: String) -> int:
 	return count
 
 # Get everything in the inventory.
-func get_all() -> Array[Node]:
+func get_all() -> Array[ItemData]:
 	return contents
 
 # Find an item in the list of contents by their string name.
 # Then get it.
-func get_by_type(content_type: String) -> Array[Node]:
-	var items : Array[Node]
+func get_by_type(content_type: String) -> Array[ItemData]:
+	var items : Array[ItemData]
 	for item in contents:
 		if item.name == content_type:
 			items.insert(-1, item)
