@@ -57,14 +57,9 @@ var mode: MODE:
 		return _mode
 
 func _input(event):
-	if event is InputEventKey and event.is_pressed():
-		if event.keycode == KEY_U:
-			if mode == MODE.ON:
-				mode = MODE.OFF
-				print("VENDING MACHINE IS OFF")
-			else:
-				mode = MODE.ON
-				print("VENDING MACHINE IS ON: ", mode)
+	if mode == MODE.ON and event.is_action_pressed("pause"):
+		mode = MODE.OFF
+		print("VENDING MACHINE IS OFF: ", mode)
 
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
@@ -131,6 +126,7 @@ func _on_code_entered(code: String):
 	var item := slot_map[code]
 	if buy_item(item):
 		print("BOUGHT FROM SLOT ", code)
+		mode = MODE.OFF # turn off
 
 func set_shop_inventory(list : Array[ItemData]):
 	free_previous_slots()

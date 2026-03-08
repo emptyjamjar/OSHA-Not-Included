@@ -21,76 +21,107 @@ animations = [{
 }]
 
 [node name="Control" type="Control" unique_id=1566201169]
+process_mode = 3
 layout_mode = 3
-anchors_preset = 0
-offset_right = 646.5
-offset_bottom = 368.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_pk8xl")
 
+[node name="ColorRect" type="ColorRect" parent="." unique_id=45478017]
+layout_mode = 0
+offset_left = -384.0
+offset_top = -216.0
+offset_right = -344.0
+offset_bottom = -176.0
+scale = Vector2(19.218952, 10.82104)
+color = Color(0.15170373, 0.15170373, 0.26711738, 0.55700004)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=235870937]
-position = Vector2(323, 176)
 sprite_frames = SubResource("SpriteFrames_b8b55")
+
+[node name="Label" type="Label" parent="." unique_id=1509560840]
+layout_mode = 0
+offset_left = -68.0
+offset_top = -100.0
+offset_right = 68.0
+offset_bottom = -52.0
+text = "PAUSED"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Resume" type="TextureButton" parent="." unique_id=1812980109]
 layout_mode = 0
-offset_left = 259.0
-offset_top = 132.0
-offset_right = 387.0
-offset_bottom = 164.0
+offset_left = -64.0
+offset_top = -44.0
+offset_right = 64.0
+offset_bottom = -12.0
 texture_normal = ExtResource("3_ytg8p")
 texture_pressed = ExtResource("4_tnyp8")
 texture_hover = ExtResource("5_6rct4")
 script = ExtResource("6_6rct4")
 
 [node name="Label" type="Label" parent="Resume" unique_id=2054482324]
-layout_mode = 0
-offset_left = 31.0
-offset_top = 5.0
-offset_right = 128.0
-offset_bottom = 38.0
-tooltip_text = "RESUME"
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "RESUME"
-
-[node name="Settings" type="TextureButton" parent="." unique_id=550608397]
-layout_mode = 0
-offset_left = 259.0
-offset_top = 171.0
-offset_right = 387.0
-offset_bottom = 203.0
-texture_normal = ExtResource("3_ytg8p")
-texture_pressed = ExtResource("4_tnyp8")
-texture_hover = ExtResource("5_6rct4")
-script = ExtResource("8_0cgtq")
-
-[node name="Label" type="Label" parent="Settings" unique_id=1843550794]
-layout_mode = 0
-offset_left = 27.0
-offset_top = 6.0
-offset_right = 124.0
-offset_bottom = 39.0
-tooltip_text = "RESUME"
-text = "SETTINGS"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="Menu" type="TextureButton" parent="." unique_id=986626887]
 layout_mode = 0
-offset_left = 259.0
-offset_top = 212.0
-offset_right = 387.0
-offset_bottom = 244.0
+offset_left = -64.0
+offset_top = 36.0
+offset_right = 64.0
+offset_bottom = 68.0
 texture_normal = ExtResource("3_ytg8p")
 texture_pressed = ExtResource("4_tnyp8")
 texture_hover = ExtResource("5_6rct4")
 script = ExtResource("10_0cgtq")
 
 [node name="Label" type="Label" parent="Menu" unique_id=1003210372]
-layout_mode = 0
-offset_left = 16.0
-offset_top = 5.0
-offset_right = 113.0
-offset_bottom = 38.0
-tooltip_text = "RESUME"
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 text = "MAIN MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Settings" type="TextureButton" parent="." unique_id=550608397]
+layout_mode = 0
+offset_left = -64.0
+offset_top = -4.0
+offset_right = 64.0
+offset_bottom = 28.0
+texture_normal = ExtResource("3_ytg8p")
+texture_pressed = ExtResource("4_tnyp8")
+texture_hover = ExtResource("5_6rct4")
+script = ExtResource("8_0cgtq")
+
+[node name="Label" type="Label" parent="Settings" unique_id=1843550794]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "SETTINGS"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="button_up" from="Resume" to="Resume" method="_on_button_up"]
-[connection signal="button_up" from="Settings" to="Settings" method="_on_button_up"]
 [connection signal="button_up" from="Menu" to="Menu" method="_on_button_up"]
+[connection signal="pressed" from="Settings" to="." method="_on_sub_menu_opened"]
+[connection signal="pressed" from="Settings" to="Settings" method="_on_pressed"]
+[connection signal="settings_closed" from="Settings" to="." method="_on_sub_menu_closed"]

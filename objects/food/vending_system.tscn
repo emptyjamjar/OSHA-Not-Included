@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://c7i8xoc0ofw0m" path="res://objects/items/item_data.gd" id="2_s7a41"]
 [ext_resource type="Resource" uid="uid://d2cesp280t2nt" path="res://objects/food/item/soda.tres" id="3_q2db4"]
 [ext_resource type="Resource" uid="uid://bloipc0k3kn0x" path="res://objects/food/item/onigiri.tres" id="4_yguo5"]
+[ext_resource type="Script" uid="uid://dja3fqnd27ru1" path="res://objects/food/exit.gd" id="5_a6g0k"]
 
 [node name="VendingSystem" type="Control" unique_id=1682295057 node_paths=PackedStringArray("ui", "currency_label", "vending_container", "slot_input")]
 process_mode = 3
@@ -100,3 +101,13 @@ placeholder_text = "Enter Code"
 alignment = 1
 max_length = 2
 emoji_menu_enabled = false
+
+[node name="Exit" type="Button" parent="UI/Panel" unique_id=1681868968]
+layout_mode = 0
+offset_left = 280.0
+offset_right = 305.0
+offset_bottom = 27.0
+text = "X"
+script = ExtResource("5_a6g0k")
+
+[connection signal="button_up" from="UI/Panel/Exit" to="UI/Panel/Exit" method="_on_button_up"]

@@ -28,15 +28,22 @@ func _ready():
 
 func _on_interact():	
 	print("Washroom interact triggered")
+	var player := get_tree().get_first_node_in_group("player")
+	player.process_mode = Node.PROCESS_MODE_DISABLED
+	player.visible = false
 	
 	# Simulate waiting time in washroom
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(3.0).timeout
+	player.process_mode = Node.PROCESS_MODE_INHERIT
+	player.visible = true
+	player.last_direction.x = -1
+
 	print("TIMER STOPPED")
 	
 	# apply effect
-	var player := get_tree().get_first_node_in_group("player")
 	if player:
-		player.bladder = max(player.bladder - 40,0)
-		print("bladder reduced to: ", player.bladder)
+		player.player_needs = false
+		await get_tree().create_timer(1).timeout
+		player.player_needs = true
 	
 	

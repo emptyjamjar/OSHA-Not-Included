@@ -1,20 +1,25 @@
+## Pause menu for the game.
 extends Control
 
-## Pause menu for the game.
+var isSubMenuOpen := false
+
 
 func _ready() -> void:
-	visible = false # Replace with function body.
+	visible = false
 	process_mode = Node.PROCESS_MODE_ALWAYS
 
 
-func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("pause"):
-		if get_tree().paused == true:
-			get_tree().paused = false
-		else:
-			get_tree().paused = true
-		
-		if visible == true:
-			visible = false
-		else:
-			visible = true
+func _input(event: InputEvent) -> void:
+	if isSubMenuOpen:
+		return
+	if event.is_action_pressed("pause") and InteractionManager.can_interact:
+		get_tree().paused = not get_tree().paused
+		visible = not visible
+
+
+func _on_sub_menu_opened() -> void:
+	isSubMenuOpen = true
+
+
+func _on_sub_menu_closed() -> void:
+	isSubMenuOpen = false

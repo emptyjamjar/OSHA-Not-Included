@@ -1,0 +1,105 @@
+[gd_scene format=3 uid="uid://d382o467i06sq"]
+
+[ext_resource type="LabelSettings" uid="uid://b8igq1w07t223" path="res://ui/menus/navy_blue.tres" id="1_bax0w"]
+[ext_resource type="Script" uid="uid://dnew2q28wgt46" path="res://ui/menus/settings_menu/audio_settings/audio_slider.gd" id="1_idw1d"]
+
+[node name="AudioSettingsMenu" type="VBoxContainer" unique_id=598972902]
+offset_right = 760.0
+offset_bottom = 161.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+
+[node name="MasterLabel" type="Label" parent="." unique_id=1481161778]
+layout_mode = 2
+text = "Master Volume"
+label_settings = ExtResource("1_bax0w")
+
+[node name="Master" type="HBoxContainer" parent="." unique_id=403277794 node_paths=PackedStringArray("volumeSlider", "muteBtn", "sliderLabel")]
+layout_mode = 2
+script = ExtResource("1_idw1d")
+volumeSlider = NodePath("Slider")
+muteBtn = NodePath("CheckBox")
+sliderLabel = NodePath("Label")
+
+[node name="CheckBox" type="CheckBox" parent="Master" unique_id=1828139194]
+visible = false
+layout_mode = 2
+
+[node name="Slider" type="HSlider" parent="Master" unique_id=1843258858]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = -80.0
+max_value = 6.0
+
+[node name="Label" type="Label" parent="Master" unique_id=2053707904]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "100"
+label_settings = ExtResource("1_bax0w")
+
+[node name="SFXLabel" type="Label" parent="." unique_id=714124976]
+layout_mode = 2
+text = "SFX Volume"
+label_settings = ExtResource("1_bax0w")
+
+[node name="SFX" type="HBoxContainer" parent="." unique_id=731038161 node_paths=PackedStringArray("volumeSlider", "muteBtn", "sliderLabel")]
+layout_mode = 2
+script = ExtResource("1_idw1d")
+audioBusIndex = 1
+volumeSlider = NodePath("Slider")
+muteBtn = NodePath("CheckBox")
+sliderLabel = NodePath("Label")
+
+[node name="CheckBox" type="CheckBox" parent="SFX" unique_id=310188760]
+layout_mode = 2
+
+[node name="Slider" type="HSlider" parent="SFX" unique_id=1653952703]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = -80.0
+max_value = 6.0
+
+[node name="Label" type="Label" parent="SFX" unique_id=890429470]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "100"
+label_settings = ExtResource("1_bax0w")
+
+[node name="MusicLabel" type="Label" parent="." unique_id=1656028434]
+layout_mode = 2
+text = "Music Volume"
+label_settings = ExtResource("1_bax0w")
+
+[node name="Music" type="HBoxContainer" parent="." unique_id=524774878 node_paths=PackedStringArray("volumeSlider", "muteBtn", "sliderLabel")]
+layout_mode = 2
+script = ExtResource("1_idw1d")
+audioBusIndex = 2
+volumeSlider = NodePath("Slider")
+muteBtn = NodePath("CheckBox")
+sliderLabel = NodePath("Label")
+
+[node name="CheckBox" type="CheckBox" parent="Music" unique_id=1833728030]
+layout_mode = 2
+
+[node name="Slider" type="HSlider" parent="Music" unique_id=795728947]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = -80.0
+max_value = 6.0
+
+[node name="Label" type="Label" parent="Music" unique_id=1134770386]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+text = "100"
+label_settings = ExtResource("1_bax0w")
+
+[connection signal="toggled" from="Master/CheckBox" to="Master" method="_on_check_box_toggled"]
+[connection signal="value_changed" from="Master/Slider" to="Master" method="_on_slider_value_changed"]
+[connection signal="toggled" from="SFX/CheckBox" to="SFX" method="_on_check_box_toggled"]
+[connection signal="value_changed" from="SFX/Slider" to="SFX" method="_on_slider_value_changed"]
+[connection signal="toggled" from="Music/CheckBox" to="Music" method="_on_check_box_toggled"]
+[connection signal="value_changed" from="Music/Slider" to="Music" method="_on_slider_value_changed"]
