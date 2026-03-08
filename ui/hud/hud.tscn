@@ -12,8 +12,10 @@
 script = ExtResource("1_4d6w6")
 
 [node name="Background" type="TextureRect" parent="." unique_id=2145073693]
+z_index = -4
 offset_right = 640.0
 offset_bottom = 360.0
+mouse_filter = 2
 texture = ExtResource("2_4d6w6")
 
 [node name="Money" type="Label" parent="Background" unique_id=1131186569]
@@ -28,9 +30,19 @@ offset_bottom = 221.0
 grow_horizontal = 2
 text = "0"
 
+[node name="Inventory" type="TextureRect" parent="." unique_id=1155430081]
+z_index = -1
+offset_top = 12.0
+offset_right = 640.0
+offset_bottom = 372.0
+mouse_filter = 2
+texture = ExtResource("6_kwc50")
+
 [node name="Badge" type="TextureRect" parent="." unique_id=676530222]
+z_index = -1
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
 texture = ExtResource("3_imuuq")
 
 [node name="SanityBar" type="TextureProgressBar" parent="Badge" unique_id=1113052502]
@@ -39,6 +51,7 @@ offset_left = 19.0
 offset_top = 138.0
 offset_right = 84.0
 offset_bottom = 146.0
+tooltip_text = "Sanity"
 texture_under = ExtResource("4_kwc50")
 texture_progress = ExtResource("5_o2lis")
 
@@ -48,6 +61,7 @@ offset_left = 19.0
 offset_top = 180.0
 offset_right = 84.0
 offset_bottom = 188.0
+tooltip_text = "Health"
 texture_under = ExtResource("4_kwc50")
 texture_progress = ExtResource("5_o2lis")
 
@@ -57,6 +71,7 @@ offset_left = 19.0
 offset_top = 167.0
 offset_right = 84.0
 offset_bottom = 175.0
+tooltip_text = "Bladder"
 texture_under = ExtResource("4_kwc50")
 texture_progress = ExtResource("5_o2lis")
 
@@ -66,6 +81,7 @@ offset_left = 19.0
 offset_top = 153.0
 offset_right = 84.0
 offset_bottom = 161.0
+tooltip_text = "Stamina"
 texture_under = ExtResource("4_kwc50")
 texture_progress = ExtResource("5_o2lis")
 
@@ -94,12 +110,8 @@ offset_left = 22.0
 offset_top = 123.0
 offset_right = 74.0
 offset_bottom = 133.0
+tooltip_text = "Warehouse Associate"
+mouse_filter = 1
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 6
 text = "Warehouse Associate"
-
-[node name="Inventory" type="TextureRect" parent="." unique_id=1155430081]
-offset_top = 12.0
-offset_right = 640.0
-offset_bottom = 372.0
-texture = ExtResource("6_kwc50")

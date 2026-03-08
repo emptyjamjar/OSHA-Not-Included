@@ -42,7 +42,6 @@ func _process(delta: float) -> void:
 		empty_needs(delta)
 		
 func get_needs() -> float:
-	print(needs)
 	return needs
 	
 func get_max_needs() -> float:
