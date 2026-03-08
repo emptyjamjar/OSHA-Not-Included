@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cj5ikori0r3jt"]
 
-[ext_resource type="PackedScene" uid="uid://chidjbuid2cgd" path="res://levels/shared/World.tscn" id="1_7sc4i"]
+[ext_resource type="PackedScene" path="res://levels/shared/World.tscn" id="1_7sc4i"]
 [ext_resource type="Script" uid="uid://cpt2knie07vvo" path="res://core/systems/needs/health_component.gd" id="2_e2o6t"]
-[ext_resource type="Script" uid="uid://c8mj1grnlbspl" path="res://game/manager/ai/out_bounds_area.gd" id="2_e8heu"]
+[ext_resource type="Script" path="res://game/manager/ai/out_bounds_area.gd" id="2_e8heu"]
 [ext_resource type="PackedScene" uid="uid://cxbnggs2xw8ne" path="res://ui/hud/hud.tscn" id="2_ryrav"]
 [ext_resource type="PackedScene" uid="uid://bimhohbyv6s5d" path="res://objects/shipper/shipper.tscn" id="3_e8heu"]
 [ext_resource type="Script" uid="uid://ck4p7gga13e5e" path="res://core/systems/needs/energy_component.gd" id="3_feb5d"]
@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://sxf3e0qydlfv" path="res://objects/packager/packager.tscn" id="12_hb5m1"]
 [ext_resource type="PackedScene" uid="uid://cv4vrnpxs40bf" path="res://objects/restroom/washroom.tscn" id="12_iotsf"]
 [ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="13_lc2xo"]
-[ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
+[ext_resource type="PackedScene" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
 
 [sub_resource type="GDScript" id="GDScript_7sc4i"]
 script/source = "extends Node2D
@@ -90,7 +90,7 @@ scale = Vector2(0.40825486, 0.38389248)
 position = Vector2(101, 363)
 
 [node name="TicketTerminal" parent="." unique_id=982348100 instance=ExtResource("6_ryrav")]
-position = Vector2(307.83313, 340)
+position = Vector2(368, 392)
 
 [node name="VendingMachine" parent="." unique_id=1840311720 instance=ExtResource("11_mfdv2")]
 position = Vector2(117, 248)
