@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://dfh2tueiapfnq"]
+
+[ext_resource type="Texture2D" uid="uid://cpuy4lkcklelg" path="res://ui/hud/inventory/InventorySlots.png" id="1_5vcw3"]
+[ext_resource type="Script" uid="uid://tof8s457urwo" path="res://ui/hud/inventory/inventory_hud.gd" id="2_mw73s"]
+[ext_resource type="Texture2D" uid="uid://bbpgpleuyuynu" path="res://ui/hud/inventory/InventoryHovered.png" id="2_tl8il"]
+[ext_resource type="Texture2D" uid="uid://crdlqucv2cper" path="res://ui/hud/inventory/InventorySelected.png" id="3_mw73s"]
+[ext_resource type="ButtonGroup" uid="uid://ds48bs0csj1px" path="res://ui/hud/inventory/inventory_btn_group.tres" id="5_2ggu6"]
+
+[node name="Inventory" type="TextureRect" unique_id=988897325]
+z_index = -1
+offset_top = 240.0
+offset_right = 96.0
+offset_bottom = 432.0
+mouse_filter = 2
+texture = ExtResource("1_5vcw3")
+script = ExtResource("2_mw73s")
+
+[node name="Slot1" type="TextureRect" parent="." unique_id=217589248]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 45.0
+offset_right = 71.0
+offset_bottom = 91.0
+
+[node name="SlotButton" type="TextureButton" parent="Slot1" unique_id=1187112447]
+layout_mode = 0
+offset_left = -5.0
+offset_top = -6.0
+offset_right = 51.0
+offset_bottom = 51.0
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("5_2ggu6")
+texture_pressed = ExtResource("3_mw73s")
+texture_hover = ExtResource("2_tl8il")
+
+[node name="Slot2" type="TextureRect" parent="." unique_id=268453533]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 45.0
+offset_right = 65.0
+offset_bottom = 85.0
+
+[node name="SlotButton" type="TextureButton" parent="Slot2" unique_id=2144614125]
+layout_mode = 0
+offset_left = -5.0
+offset_top = 51.0
+offset_right = 51.0
+offset_bottom = 108.0
+toggle_mode = true
+button_group = ExtResource("5_2ggu6")
+texture_pressed = ExtResource("3_mw73s")
+texture_hover = ExtResource("2_tl8il")

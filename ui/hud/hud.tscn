@@ -3,9 +3,9 @@
 [ext_resource type="Script" uid="uid://bslxe4pk0838k" path="res://ui/hud/hud.gd" id="1_4d6w6"]
 [ext_resource type="Texture2D" uid="uid://cwls65qoyskqf" path="res://ui/hud/HUDBar.png" id="2_4d6w6"]
 [ext_resource type="Texture2D" uid="uid://da4u5gujnobcn" path="res://ui/hud/PlayerID.png" id="3_imuuq"]
+[ext_resource type="PackedScene" uid="uid://dfh2tueiapfnq" path="res://ui/hud/inventory/inventory.tscn" id="3_kwc50"]
 [ext_resource type="Texture2D" uid="uid://bigtlykgcw4yo" path="res://ui/hud/StatBarBack.png" id="4_kwc50"]
 [ext_resource type="Texture2D" uid="uid://by0viewb4ct5f" path="res://ui/hud/StatBarFill.png" id="5_o2lis"]
-[ext_resource type="Texture2D" uid="uid://cpuy4lkcklelg" path="res://ui/hud/InventorySlots.png" id="6_kwc50"]
 
 [node name="HUD" type="CanvasLayer" unique_id=830642951]
 script = ExtResource("1_4d6w6")
@@ -23,24 +23,19 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -354.0
-offset_top = 204.0
+offset_top = 253.0
 offset_right = -296.0
-offset_bottom = 221.0
+offset_bottom = 270.0
 grow_horizontal = 2
 text = "0"
 
-[node name="Inventory" type="TextureRect" parent="." unique_id=1155430081]
-z_index = -1
-offset_top = 190.0
-offset_right = 96.0
-offset_bottom = 382.0
-mouse_filter = 2
-texture = ExtResource("6_kwc50")
+[node name="Inventory" parent="." unique_id=988897325 instance=ExtResource("3_kwc50")]
 
 [node name="Badge" type="TextureRect" parent="." unique_id=676530222]
 z_index = -1
-offset_right = 40.0
-offset_bottom = 40.0
+offset_top = 64.0
+offset_right = 96.0
+offset_bottom = 238.0
 mouse_filter = 2
 texture = ExtResource("3_imuuq")
 
