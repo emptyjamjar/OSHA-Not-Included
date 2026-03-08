@@ -21,6 +21,7 @@ extends Node2D
 
 @export var interaction_area: InteractionArea
 
+signal washroom_used
 
 func _ready():
 	interaction_area.action_name = "Use Washroom"
@@ -45,5 +46,7 @@ func _on_interact():
 		player.player_needs = false
 		await get_tree().create_timer(1).timeout
 		player.player_needs = true
+	
+	washroom_used.emit()
 	
 	

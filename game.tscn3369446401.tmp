@@ -107,6 +107,7 @@ grow_vertical = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Score" type="Node2D" parent="." unique_id=1007668771]
+visible = false
 script = ExtResource("15_80cx4")
 
 [node name="IdleTimer" type="Timer" parent="Score" unique_id=1775782488]
