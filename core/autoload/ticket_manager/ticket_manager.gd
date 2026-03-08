@@ -199,7 +199,7 @@ func update_queue_ui():
 
 			var icon = TextureRect.new()
 			icon.texture = item_data.texture
-			icon.custom_minimum_size = Vector2(10, 10)
+			icon.custom_minimum_size = Vector2(16, 16)
 			icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
 			icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 			# Prevent container from overriding size
@@ -214,7 +214,7 @@ func update_queue_ui():
 			#label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 			#label.custom_minimum_size = Vector2(0, 8)
 			label.add_theme_color_override("font_color", Color.DIM_GRAY)
-			label.add_theme_font_size_override("font_size", 3)
+			label.add_theme_font_size_override("font_size", 8)
 
 			hbox.add_child(icon)
 			hbox.add_child(label)
