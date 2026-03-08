@@ -129,6 +129,7 @@ script = ExtResource("1_ncid3")
 item_scene = SubResource("Resource_ncid3")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1976208908]
+scale = Vector2(0.666, 0.666)
 
 [node name="Collision_Horizontal" type="CollisionShape2D" parent="StaticBody2D" unique_id=1512575671]
 position = Vector2(104, 20)
@@ -180,19 +181,25 @@ sprite_frames = SubResource("SpriteFrames_g3few")
 animation = &"Move_Down"
 
 [node name="Marker_Start" type="Marker2D" parent="." unique_id=2057746255]
-position = Vector2(40, 19)
+position = Vector2(26.64, 12.654)
+scale = Vector2(0.666, 0.666)
 
 [node name="Marker_Pos_01" type="Marker2D" parent="." unique_id=507846563]
-position = Vector2(80, 19)
+position = Vector2(53.28, 12.654)
+scale = Vector2(0.666, 0.666)
 
 [node name="Marker_Pos_02" type="Marker2D" parent="." unique_id=1152789713]
-position = Vector2(118, 19)
+position = Vector2(78.588, 12.654)
+scale = Vector2(0.666, 0.666)
 
 [node name="Marker_Pos_03" type="Marker2D" parent="." unique_id=1940192903]
-position = Vector2(168, 19)
+position = Vector2(111.888, 12.654)
+scale = Vector2(0.666, 0.666)
 
 [node name="Marker_Pos_04" type="Marker2D" parent="." unique_id=1522233274]
-position = Vector2(192, 48)
+position = Vector2(127.872, 31.968)
+scale = Vector2(0.666, 0.666)
 
 [node name="Marker_End" type="Marker2D" parent="." unique_id=1672538663]
-position = Vector2(192, 80)
+position = Vector2(127.872, 53.28)
+scale = Vector2(0.666, 0.666)
