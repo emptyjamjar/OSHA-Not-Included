@@ -63,6 +63,7 @@ tile_map_data = PackedByteArray("AAAAAAAAAQAAAAMAAAAAAAEAAQAAAAQAAAAAAAIAAQAAAAQ
 tile_set = ExtResource("2_eow3j")
 
 [node name="OutBoundsArea" type="Area2D" parent="." unique_id=1864494632]
+visible = false
 collision_layer = 2
 script = ExtResource("2_e8heu")
 

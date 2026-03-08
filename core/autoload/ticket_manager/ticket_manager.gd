@@ -5,6 +5,8 @@ var all_tickets: Array[Ticket] = [] # 12 tickets for the level - can update it l
 var visible_queue: Array[Ticket] = [] # max 4 tickets 
 var timers: Dictionary = {} # ticket --> Timer 
 var max_visible: int = 4
+var ticket_templates : Array = []
+var ticket_available: int 
 
 # each ticket will have different status
 # available - ticket is ready to deploy through ticket_terminal 
@@ -16,37 +18,81 @@ var active_ticket: Ticket = null
 
 var queue_UI: CanvasLayer 
 
-# timer assigned for each ticket 
-var ticket_timer: Timer
-
-# Reference to UI (assigned at runtime)
-var ticket_ui: CanvasLayer # referred to the TicketUI (the layout of the box) 
-
-var title_label: RichTextLabel # ticket tile 
-var desc_label: RichTextLabel # description of the ticket request
-var timer_label: RichTextLabel # show time countdown after the ticket is assigned with a time valuee
+func _init() -> void:
+	ticket_templates = [
+		{
+			"id": 1,
+			"name": "Lost Package",
+			"desc": "Find the missing package in the warehouse.",
+			"goal": "Package found!",
+			"reward": 50,
+			"perf": 1, 
+			"time_min": 40, 
+			"time_max": 60, 
+			"min_items": 1, 
+			"max_items": 1
+		},
+		{
+			"id": 2,
+			"name": "Scanner Malfunction",
+			"desc": "Diagnose the broken scanner.\nShip the replacement parts!",
+			"goal": "Parts fixed!",
+			"reward": 30,
+			"perf": 1, 
+			"time_min": 30, 
+			"time_max": 40, 
+			"min_items": 1,
+			"max_items": 1
+		},
+		{
+			"id": 3,
+			"name": "School Supplies!",
+			"desc": "New things for school comeback.\nShip the wanted items!!",
+			"goal": "Supplies shipped!",
+			"reward": 30,
+			"perf": 1, 
+			"time_min": 30, 
+			"time_max": 40, 
+			"min_items": 1,
+			"max_items": 1
+		},
+		#{
+			#"id": 4,
+			#"name": "Item Shortage",
+			#"desc": "Customer at home now.\nHelp her buy the missing items!",
+			#"goal": "Order finished!",
+			#"reward": 30,
+			#"perf": 1, 
+			#"time_min": 30, 
+			#"time_max": 40, 
+			#"min_items": 1,
+			#"max_items": 1
+		#}
+	]
+	print("TicketManager READY, templates loaded:", ticket_templates.size())
+	ticket_available = ticket_templates.size()
 
 # when game scene is played, add this class to the group 
 # this ensure that object is created at run time and not returning null 
 func _ready():
 	add_to_group("ticket_manager")
-	#ticket_timer = Timer.new()
-	#ticket_timer.wait_time = 1.0
-	#ticket_timer.one_shot = false
-	#ticket_timer.timeout.connect(_on_ticket_tick)
-	#add_child(ticket_timer)
+	
 	var item_db = get_tree().get_first_node_in_group("conveyor")
 	if item_db == null:
 		push_error("Conveyor STILL not found. Check group assignment.")
 		return
-
 	# generate_level_ticket(12)
-	
 	
 func generate_level_ticket(count: int): 
 	print("Generate Tickets")
 	for numb in range(count): 
-		all_tickets.append(generate_random_ticket())
+		var ticket = generate_random_ticket()
+		print(ticket)
+		if ticket != null: 
+			all_tickets.append(ticket)
+		else: 
+			print("No more available!")
+	print(all_tickets)
 	fill_visible_queue()
 	start_timers_for_visible_queue()
 	update_queue_ui() 
@@ -56,6 +102,7 @@ func fill_visible_queue():
 	while visible_queue.size() < max_visible and all_tickets.size() > 0: 
 		var next_ticket = all_tickets.pop_front()
 		visible_queue.append(next_ticket)
+	print(visible_queue)
 		
 func start_timers_for_visible_queue(): 
 	for t in visible_queue: 
@@ -74,22 +121,11 @@ func start_timers_for_visible_queue():
 # when ticket is expired --> deducts the player's performance (EXPAND FROM THIS LOGIC) 
 
 func _on_ticket_tick(ticket: Ticket):
-	if not active_ticket:
-		return
-
 	ticket.remaining_time -= 1
-
+	update_queue_ui()
 	if ticket.remaining_time <= 0:
 		_on_ticket_expired(ticket)
-	else:
-		_on_ticket_time_updated(active_ticket.remaining_time)
-		
-
-# related to _on_ticket_tick() --> update the time 
-func _on_ticket_time_updated(time_left: float):
-	# Update UI countdown (added a label)
-	timer_label.text = str(time_left)
-
+		return	
 
 # This is where you expand the logic --> further development 
 # PERFORMANCE LOGIC 
@@ -98,7 +134,7 @@ func _on_ticket_time_updated(time_left: float):
 func _on_ticket_expired(ticket: Ticket):
 	print("Ticket expired!")
 	ticket.status = Ticket.TicketStatus.FINISHED
-	desc_label.text = "Ticket expired!"
+	#desc_label.text = "Ticket expired!"
 	# stops and remove timer
 	timers[ticket].stop()
 	timers.erase(ticket)
@@ -110,8 +146,6 @@ func _on_ticket_expired(ticket: Ticket):
 	fill_visible_queue()
 	start_timers_for_visible_queue()
 	update_queue_ui()
-	#ticket_ui.visible = false
-	#ticket_timer.stop()
 
 func complete_ticket(ticket: Ticket): 
 	ticket.status = Ticket.TicketStatus.FINISHED
@@ -135,11 +169,21 @@ func update_queue_ui():
 			continue
 		slot.visible = true 
 		var t = visible_queue[i]
-		
+		var bar = slot.get_node("AnimatedSprite2D/TimeCountDownBar")
 		slot.get_node("AnimatedSprite2D/TicketTitle").text = t.ticket_name
 		slot.get_node("AnimatedSprite2D/TicketDescription").text = t.ticket_description
-		slot.get_node("AnimatedSprite2D/TimeCountDownBar").value = float(t.remaining_time) / float(t.max_time) * 100.0
-		
+		bar.max_value = t.max_time
+		bar.value = t.remaining_time
+		# color change based on time left
+		#var ratio = float(t.remaining_time) / float(t.max_time)
+		#if ratio < 0.25:
+			#bar.modulate = Color.RED
+		#elif ratio < 0.5:
+			#bar.modulate = Color.YELLOW
+		#else:
+			#bar.modulate = Color.GREEN
+
+	
 		# Required items
 		var req_container = slot.get_node("AnimatedSprite2D/RequiredItemsContainer")
 		for icon in req_container.get_children(): 
@@ -177,91 +221,28 @@ func update_queue_ui():
 			req_container.add_child(hbox)
 			
 		
-		
-#calling the user interface of the ticket box -- TicketUI in the Ticket Terminal.tscn
-#func register_ui(ui: CanvasLayer):
-	#ticket_ui = ui
-	#title_label = ui.get_node("TicketTile")
-	#desc_label = ui.get_node("TicketDescription")
-	#timer_label = ui.get_node("TimeCountdown")
 func register_queue_ui(ui: CanvasLayer): 
 	queue_UI = ui 
-
-# function to return a new ticket, if one ticket is marked as FINISHED 
-# the manager won't deploy that ticket again 
-#func request_ticket() -> Ticket:
-	#if active_ticket and active_ticket.status != Ticket.TicketStatus.FINISHED:
-		#return active_ticket
-#
-	#active_ticket = generate_random_ticket()
-	## Connect timer signal
-	#active_ticket.time_updated.connect(_on_ticket_time_updated)
-	#active_ticket.time_expired.connect(_on_ticket_expired)
-#
-	## start the new ticket -- change ticket to STARTED
-	#active_ticket.start()
-	#ticket_timer.start()
-	#
-	## update the new request 
-	#update_queue_ui()
-	#return active_ticket
-	
+		
 
 # player request_ticket() 
 #create ticket function
 func generate_random_ticket() -> Ticket:
+	if ticket_templates.is_empty(): 
+		push_error("No more ticket templates available!")
+		print("THE FUCK")
+		return 
 	var t := Ticket.new() # set new timer 
 	# ticket layout
-	var templates = [
-		{
-			"name": "Lost Package",
-			"desc": "Find the missing package in the warehouse.",
-			"goal": "Package found!",
-			"reward": 50,
-			"perf": 1, 
-			"time_min": 40, 
-			"time_max": 60, 
-			"min_items": 1, 
-			"max_items": 1
-		},
-		{
-			"name": "Scanner Malfunction",
-			"desc": "Diagnose the broken scanner.\nShip the replacement parts!",
-			"goal": "Parts fixed!",
-			"reward": 30,
-			"perf": 1, 
-			"time_min": 30, 
-			"time_max": 40, 
-			"min_items": 1,
-			"max_items": 1
-		},
-		{
-			"name": "School Supplies!",
-			"desc": "New things for school comeback.\nShip the wanted items!!",
-			"goal": "Supplies shipped!",
-			"reward": 30,
-			"perf": 1, 
-			"time_min": 30, 
-			"time_max": 40, 
-			"min_items": 1,
-			"max_items": 1
-		},
-		{
-			"name": "Item Shortage",
-			"desc": "Customer at home now.\nHelp her buy the missing items!",
-			"goal": "Order finished!",
-			"reward": 30,
-			"perf": 1, 
-			"time_min": 30, 
-			"time_max": 40, 
-			"min_items": 1,
-			"max_items": 1
-		}
-	]
-
+	
+	
 	# this will pick random templates, fix this point if you want make the ticket 
 	# truly unique 
-	var data = templates.pick_random()
+	var index := randi() % ticket_templates.size()
+	var data = ticket_templates[index]
+	ticket_templates.remove_at(index)
+	ticket_available = ticket_templates.size()
+	
 	
 	# assign ticket ui with the given title, description, request, time, etc.
 	t.ticket_name = data.name
@@ -272,6 +253,7 @@ func generate_random_ticket() -> Ticket:
 	
 	# Random time for each ticket 
 	t.max_time= randi_range(data.time_min, data.time_max)
+	t.remaining_time = t.max_time
 	
 	# Random required items 
 	# call conveyor array --> this hold all the items that it generated
@@ -288,44 +270,8 @@ func generate_random_ticket() -> Ticket:
 		var item: ItemData = all_items.pick_random()
 		var id = item.id
 		t.required_items[id] = t.required_items.get(id, 0) + 1
+		
 	return t
-
-# replace the standard text with ticket name and ticket description
-#func update_ui():
-	#if not active_ticket:
-		#return
-#
-	#ticket_ui.visible = true
-	#title_label.text = active_ticket.ticket_name
-	#desc_label.text = active_ticket.ticket_description
-	#
-	#var container = ticket_ui.get_node("RequiredItemsContainer")
-	## Clear old UI entries
-	#for child in container.get_children():
-		#child.queue_free()
-#
-	#
-	#var item_db = get_tree().get_first_node_in_group("conveyor")
-	## VBoxContainer to display the tres files -- texture of the image 
-	## for better visualization
-	#for id in active_ticket.required_items.keys():
-		#var needed = active_ticket.required_items[id]
-		#var delivered = active_ticket.delivered_items.get(id, 0)
-#
-		#var item_data: ItemData = item_db.get_item_by_id(id)
-#
-		#var hbox = HBoxContainer.new()
-#
-		#var icon = TextureRect.new()
-		#icon.texture = item_data.texture
-		#icon.custom_minimum_size = Vector2(32, 32)
-#
-		#var label = Label.new()
-		#label.text = "%s: %d / %d" % [item_data.name, delivered, needed]
-#
-		#hbox.add_child(icon)
-		#hbox.add_child(label)
-		#container.add_child(hbox)
 
 	
 # function to track the delivered items 
@@ -359,12 +305,15 @@ func _is_ticket_complete() -> bool:
 # when ticket is satisfied, change the text to complete text and 
 # guide to the next step
 func reach_goal():
-	if active_ticket and active_ticket.status == Ticket.TicketStatus.STARTED:
+	if active_ticket:
 		active_ticket.reach_goal()
-		title_label.text = "COMPLETE!"
-		desc_label.text = active_ticket.reached_goal_text
-		
-		ticket_timer.stop()
+		print("CHECKING 123")
+		#title_label.text = "COMPLETE!"
+		#desc_label.text = active_ticket.reached_goal_text
+		print(timers)
+		# Stop the timer for this ticket
+		if timers.has(active_ticket):
+			timers[active_ticket].stop()
 		
 		# this add extra time for the player to acknowledge that they have completed 
 		# the ticket 
@@ -381,6 +330,24 @@ func reach_goal():
 func finish_ticket():
 	if active_ticket and active_ticket.status == Ticket.TicketStatus.REACHED_GOAL:
 		active_ticket.finish()
-		ticket_ui.visible = false
-		# Clear active ticket so terminal can request a new one
-		active_ticket = null
+		# Remove timer for this ticket
+		if timers.has(active_ticket):
+			timers[active_ticket].stop()
+			timers.erase(active_ticket)
+
+		# Remove from visible queue
+		visible_queue.erase(active_ticket)
+
+		# Refill queue with next ticket(s)
+		fill_visible_queue()
+		start_timers_for_visible_queue()
+
+		# Update UI to reflect new queue
+		update_queue_ui()
+
+		# Set NEXT ticket as active
+		if visible_queue.size() > 0:
+			active_ticket = visible_queue[0]
+		else:
+			active_ticket = null
+			print("All tickets completed!")
