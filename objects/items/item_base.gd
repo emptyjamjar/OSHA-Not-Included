@@ -15,7 +15,7 @@ func _ready() -> void:
 	sprite.texture = data.texture
 
 func _on_interact():
-	picked_up.emit(self)
 	var result = PlayerInventory.add(data.duplicate(true))
 	if result:
+		picked_up.emit(self)
 		self.queue_free()

@@ -14,8 +14,6 @@ func _ready() -> void:
 
 
 func _on_interact():
-	pass
-	
 	var data : ItemData = PlayerInventory.get_item()
 	if  data == null:
 		return

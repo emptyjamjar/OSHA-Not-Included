@@ -1,7 +1,6 @@
 extends Area2D
 
 signal get_money
-@export var boxes = null
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var player_collision = $StaticBody2D/PlayerCollision
 
@@ -34,25 +33,22 @@ func _on_interact():
 	if ticket_manager.active_ticket == null: 
 		print("No ticket yet!")
 		return 
-
-	boxes = get_overlapping_areas()
-	for box in boxes:
-		if box.is_in_group("Shippable"):
-			var area = box.get_parent()
-			var item_data = area.data #ItemBase.data
-			if ticket_manager.active_ticket.required_items.has(item_data.id):
-				ticket_manager.register_delivery(item_data.id)
-			else:
-				# Wrong item shipped — ignore for now
-				# TODO: Add penalty or feedback later
-				pass
-
-			area.queue_free()
-
+	
+	var item = PlayerInventory.get_item()
+	var item_index = PlayerInventory.selectedIndex
+	if item.type == ItemData.Type.PACKAGE:
+		if ticket_manager.active_ticket.required_items.has(item.id):
+			ticket_manager.register_delivery(item.id)
+			PlayerInventory.remove_at(item_index)
 			get_money.emit()
 			animated_sprite.play("close")
 			shipped = true
 			player_collision.disabled = true
+		else:
+			# Wrong item shipped — ignore for now
+			# TODO: Add penalty or feedback later
+			pass
+
 
 
 func _on_arrive_timer_timeout() -> void:
