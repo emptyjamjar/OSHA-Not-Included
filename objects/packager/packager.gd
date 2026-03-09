@@ -15,7 +15,7 @@ func _ready() -> void:
 
 func _on_interact():
 	var data : ItemData = PlayerInventory.get_item()
-	if  data == null:
+	if  data == null or data.type == ItemData.Type.PACKAGE:
 		return
 	data.texture = load("res://objects/package/Temporary_Package.png")
 	data.uiTexture = null

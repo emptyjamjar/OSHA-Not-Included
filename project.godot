@@ -45,6 +45,7 @@ player=""
 game=""
 Shippable=""
 Boxes=""
+conveyor=""
 
 [gui]
 

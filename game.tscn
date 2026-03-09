@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://cj5ikori0r3jt"]
 
-[ext_resource type="PackedScene" path="res://levels/shared/World.tscn" id="1_7sc4i"]
+[ext_resource type="PackedScene" uid="uid://chidjbuid2cgd" path="res://levels/shared/World.tscn" id="1_7sc4i"]
 [ext_resource type="Script" uid="uid://cpt2knie07vvo" path="res://core/systems/needs/health_component.gd" id="2_e2o6t"]
-[ext_resource type="Script" path="res://game/manager/ai/out_bounds_area.gd" id="2_e8heu"]
+[ext_resource type="Script" uid="uid://c8mj1grnlbspl" path="res://game/manager/ai/out_bounds_area.gd" id="2_e8heu"]
 [ext_resource type="PackedScene" uid="uid://cxbnggs2xw8ne" path="res://ui/hud/hud.tscn" id="2_ryrav"]
 [ext_resource type="PackedScene" uid="uid://bimhohbyv6s5d" path="res://objects/shipper/shipper.tscn" id="3_e8heu"]
 [ext_resource type="Script" uid="uid://ck4p7gga13e5e" path="res://core/systems/needs/energy_component.gd" id="3_feb5d"]
@@ -16,8 +16,8 @@
 [ext_resource type="PackedScene" uid="uid://cv4vrnpxs40bf" path="res://objects/restroom/washroom.tscn" id="12_iotsf"]
 [ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="13_lc2xo"]
 [ext_resource type="Script" uid="uid://dj2x2g3bdufl1" path="res://core/systems/scoring/productivity_manager/productivity_manager.gd" id="15_80cx4"]
+[ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
 [ext_resource type="Script" uid="uid://ci5uk6gffqdwp" path="res://core/systems/scoring/productivity_manager/idle_timer.gd" id="16_e8heu"]
-[ext_resource type="PackedScene" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
 
 [sub_resource type="GDScript" id="GDScript_7sc4i"]
 script/source = "extends Node2D
@@ -28,6 +28,7 @@ class_name GameManager
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var conveyor := $Conveyor
+	Ticket_Manager.on_game_start()
 	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
 	conveyor.input(Conveyor.ItemDataList.PINK_WATER_BOTTLE)
 	conveyor.input(Conveyor.ItemDataList.BLACK_WATER_BOTTLE)
@@ -88,7 +89,7 @@ script = ExtResource("8_7sc4i")
 position = Vector2(640, 192)
 scale = Vector2(0.40825486, 0.38389248)
 
-[node name="Conveyor" parent="." unique_id=1135306595 instance=ExtResource("8_j5wjh")]
+[node name="Conveyor" parent="." unique_id=1135306595 groups=["conveyor"] instance=ExtResource("8_j5wjh")]
 position = Vector2(101, 363)
 
 [node name="TicketTerminal" parent="." unique_id=982348100 instance=ExtResource("6_ryrav")]
