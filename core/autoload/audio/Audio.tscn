@@ -4,6 +4,7 @@
 [ext_resource type="AudioStream" uid="uid://cgl88u7o7pfxr" path="res://core/autoload/audio/audio_assets/interface_sounds_final/click_003.ogg" id="2_jsxp3"]
 [ext_resource type="AudioStream" uid="uid://ptb5gjroh765" path="res://core/autoload/audio/audio_assets/interface_sounds_final/82378__gynation__paper-flip-2.wav" id="3_0k6me"]
 [ext_resource type="AudioStream" uid="uid://bskya1b4lusr5" path="res://core/autoload/audio/audio_assets/interface_sounds_final/536782__egomassive__flip.ogg" id="4_gtvgh"]
+[ext_resource type="AudioStream" uid="uid://dupg5bdasp64w" path="res://core/autoload/audio/audio_assets/world_sounds/toilet.ogg" id="5_gtvgh"]
 
 [node name="Audio" type="Node2D" unique_id=343061640]
 script = ExtResource("1_k1vdp")
@@ -23,4 +24,9 @@ bus = &"SFX"
 
 [node name="CloseMenu" type="AudioStreamPlayer" parent="." unique_id=87801361]
 stream = ExtResource("4_gtvgh")
+bus = &"SFX"
+
+[node name="Toilet" type="AudioStreamPlayer" parent="." unique_id=1245100637]
+stream = ExtResource("5_gtvgh")
+volume_db = -6.5
 bus = &"SFX"

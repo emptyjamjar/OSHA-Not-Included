@@ -20,10 +20,15 @@ func play_open_menu():
 	var open_menu = $OpenMenu
 	open_menu.play()
 
-# Plays the click sound used for menus closing
+# Plays the sound used for menus closing
 func play_close_menu():
 	var close_menu = $CloseMenu
 	close_menu.play()
+	
+# Plays the toilet flushing sound
+func play_toilet():
+	var toilet = $Toilet
+	toilet.play()
 
 ### Plays the background music of the game
 #func play_music():
