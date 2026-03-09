@@ -15,6 +15,10 @@ var player_needs: bool = true
 var is_lifting: bool = false
 var last_direction = Vector2.DOWN
 
+# Used for the idle timer component attached to the player,
+# hopefully with minimal player gd changes
+var idle: bool = true
+
 
 func _init() -> void:
 	add_to_group("player")
@@ -30,6 +34,7 @@ func _physics_process(delta: float) -> void:
 	var direction = Input.get_vector('move_left', 'move_right', 'move_up', 'move_down')
 	
 	if direction != Vector2.ZERO:
+		idle = false
 		last_direction = direction
 		
 		if abs(direction.x) > abs(direction.y):
@@ -37,6 +42,7 @@ func _physics_process(delta: float) -> void:
 		else:
 			animated_sprite.play("move_down" if direction.y > 0 else "move_up")
 	else:
+		idle = true
 		# last_direction determines idle animation
 		if abs(last_direction.x) > abs(last_direction.y):
 			animated_sprite.play("idle_right" if last_direction.x > 0 else "idle_left")
