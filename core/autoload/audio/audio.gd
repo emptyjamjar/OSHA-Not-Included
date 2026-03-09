@@ -29,6 +29,10 @@ func play_close_menu():
 func play_toilet():
 	var toilet = $Toilet
 	toilet.play()
+	
+func play_vending_machine():
+	var vm = $VendingMachine
+	vm.play()
 
 ### Plays the background music of the game
 #func play_music():

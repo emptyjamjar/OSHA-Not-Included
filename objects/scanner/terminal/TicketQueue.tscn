@@ -1,8 +1,8 @@
-[gd_scene format=3 uid="uid://bun321lsjuc76"]
+[gd_scene format=3 uid="uid://cgqi31rbqd03m"]
 
-[ext_resource type="Texture2D" path="res://objects/scanner/terminal/Ticket_SpriteSheet-PNG.png" id="1_vlja4"]
-[ext_resource type="Texture2D" path="res://objects/scanner/terminal/TicketTimeBackPNG.png" id="2_dsuxn"]
-[ext_resource type="Texture2D" path="res://objects/scanner/terminal/TicketTimeBarPNG.png" id="3_v8ihf"]
+[ext_resource type="Texture2D" uid="uid://brjl03whlgukn" path="res://objects/scanner/terminal/Ticket_SpriteSheet-PNG.png" id="1_vlja4"]
+[ext_resource type="Texture2D" uid="uid://btfptaejf4dhs" path="res://objects/scanner/terminal/TicketTimeBackPNG.png" id="2_dsuxn"]
+[ext_resource type="Texture2D" uid="uid://c0854h1cw2cb" path="res://objects/scanner/terminal/TicketTimeBarPNG.png" id="3_v8ihf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wiggl"]
 atlas = ExtResource("1_vlja4")

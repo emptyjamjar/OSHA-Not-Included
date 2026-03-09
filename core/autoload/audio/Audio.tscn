@@ -5,6 +5,7 @@
 [ext_resource type="AudioStream" uid="uid://ptb5gjroh765" path="res://core/autoload/audio/audio_assets/interface_sounds_final/82378__gynation__paper-flip-2.wav" id="3_0k6me"]
 [ext_resource type="AudioStream" uid="uid://bskya1b4lusr5" path="res://core/autoload/audio/audio_assets/interface_sounds_final/536782__egomassive__flip.ogg" id="4_gtvgh"]
 [ext_resource type="AudioStream" uid="uid://dupg5bdasp64w" path="res://core/autoload/audio/audio_assets/world_sounds/toilet.ogg" id="5_gtvgh"]
+[ext_resource type="AudioStream" uid="uid://cwy7p50xkkj2q" path="res://core/autoload/audio/audio_assets/world_sounds/vending_machine.ogg" id="6_j5bvv"]
 
 [node name="Audio" type="Node2D" unique_id=343061640]
 script = ExtResource("1_k1vdp")
@@ -30,3 +31,7 @@ bus = &"SFX"
 stream = ExtResource("5_gtvgh")
 volume_db = -6.5
 bus = &"SFX"
+
+[node name="VendingMachine" type="AudioStreamPlayer" parent="." unique_id=1900080037]
+stream = ExtResource("6_j5bvv")
+volume_db = -3.628
