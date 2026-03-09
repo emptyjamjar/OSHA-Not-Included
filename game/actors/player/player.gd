@@ -25,8 +25,8 @@ func _ready() -> void:
 	InteractionManager.can_interact = true
 
 
-#wasd is the movement for move_(direction). 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
+	# wasd is the movement for move_(direction). 
 	var direction = Input.get_vector('move_left', 'move_right', 'move_up', 'move_down')
 	
 	if direction != Vector2.ZERO:
@@ -62,25 +62,12 @@ func _physics_process(delta: float) -> void:
 	
 	
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	#connects the bathroom to the player needs
 	if player_needs:
 		needs_component.rising = true
 	else:
 		needs_component.rising = false
-		
-	#var box = null
-	#for child in self.find_children("*"):
-		#print(child)
-		#if child.is_in_group("Boxes"):
-			#print("Shippable")
-			#box = child
-	#if box:
-		#if self.has_node(box):
-			#energy_component.draining = true
-			#print("Draining")
-		#else:
-			#energy_component.draining = false
 
 
 ## Returns the full dimensions of the player's animated sprite in a Vector2i

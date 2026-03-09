@@ -3,6 +3,7 @@ extends Control
 
 
 func _on_play_pressed() -> void:
+	PlayerInventory.reset()
 	get_tree().change_scene_to_file("res://game.tscn")
 
 

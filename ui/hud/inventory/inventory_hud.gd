@@ -27,15 +27,15 @@ func _on_inventory_updated():
 	# Update currently selected slot
 	match PlayerInventory.selectedIndex:
 		0:
-			slot1Btn.set_pressed_no_signal(true)
+			slot1Btn.button_pressed = true
 		1:
-			slot2Btn.set_pressed_no_signal(true)
+			slot2Btn.button_pressed = true
 	
 	# Update inventory slots
 	for i in PlayerInventory.max_capacity:
 		if PlayerInventory.contents[i] != null:
 			slots[i].texture = PlayerInventory.contents[i].uiTexture
-			slots[i].tooltip_text = PlayerInventory.contents[i].description
+			slots[i].tooltip_text = PlayerInventory.contents[i].name + "\n" + PlayerInventory.contents[i].description
 		else:
 			slots[i].texture = null
 			slots[i].tooltip_text = ""
