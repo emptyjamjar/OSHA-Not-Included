@@ -17,7 +17,11 @@ enum Type {
 # Description shown on hover
 @export_multiline var description : String
 @export var texture: Texture2D
-@export var uiTexture: Texture2D
+@export var uiTexture: Texture2D:
+	get:
+		if uiTexture == null:
+			return texture
+		return uiTexture
 # How much space it takes up in inventories
 @export var size : int
 # Used for slowing player down
@@ -33,7 +37,7 @@ func _init(p_type := Type.GENERIC, p_name := "Item", p_description := "Item data
 	name = p_name
 	description = p_description
 	# Item's texture defaults to godot icon
-	texture = p_texture if p_texture else load("res://icon.svg")
-	uiTexture = p_inv if p_inv else load("res://icon.svg")
+	texture = p_texture
+	uiTexture = p_inv
 	size = p_size
 	weight = p_weight

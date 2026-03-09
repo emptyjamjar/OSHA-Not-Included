@@ -6,6 +6,7 @@ class_name Storage
 
 signal storage_full
 signal storage_empty
+signal storage_updated
 signal content_added(content: ItemData)
 signal content_removed(content: ItemData)
 
@@ -28,6 +29,7 @@ func set_capacity(capacity: int) -> bool:
 	if capacity < current_capacity:
 		return false
 	max_capacity = capacity
+	contents.resize(max_capacity)
 	return true
 
 
@@ -35,12 +37,10 @@ func set_capacity(capacity: int) -> bool:
 func add(content : ItemData) -> bool: 
 	if current_capacity < max_capacity:
 		contents.push_back(content)
-		content_added.emit()
-		if current_capacity == max_capacity:
-			storage_full.emit()
+		content_added.emit(content)
+		storage_updated.emit()
 		current_capacity += 1
 		return true
-		
 	storage_full.emit()
 	return false
 
@@ -53,7 +53,8 @@ func remove(content: ItemData) -> bool:
 	if index == -1:
 		return false
 	contents.remove_at(index)
-	content_removed.emit()
+	content_removed.emit(content)
+	storage_updated.emit()
 	current_capacity -= 1
 	if contents.is_empty():
 		storage_empty.emit()
