@@ -23,7 +23,6 @@ muteBtn = NodePath("CheckBox")
 sliderLabel = NodePath("Label")
 
 [node name="CheckBox" type="CheckBox" parent="Master" unique_id=1828139194]
-visible = false
 layout_mode = 2
 
 [node name="Slider" type="HSlider" parent="Master" unique_id=1843258858]

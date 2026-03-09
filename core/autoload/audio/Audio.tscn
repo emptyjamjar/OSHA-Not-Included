@@ -14,11 +14,13 @@ bus = &"SFX"
 
 [node name="ExitClick" type="AudioStreamPlayer" parent="." unique_id=996050759]
 stream = ExtResource("2_jsxp3")
-pitch_scale = 0.8
+pitch_scale = 0.75
 bus = &"SFX"
 
 [node name="OpenMenu" type="AudioStreamPlayer" parent="." unique_id=1658505649]
 stream = ExtResource("3_0k6me")
+bus = &"SFX"
 
 [node name="CloseMenu" type="AudioStreamPlayer" parent="." unique_id=87801361]
 stream = ExtResource("4_gtvgh")
+bus = &"SFX"

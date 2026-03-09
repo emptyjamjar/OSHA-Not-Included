@@ -15,6 +15,10 @@ func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause") and InteractionManager.can_interact:
 		get_tree().paused = not get_tree().paused
 		visible = not visible
+		if visible:
+			Audio.play_open_menu()
+		else:
+			Audio.play_close_menu()
 
 
 func _on_sub_menu_opened() -> void:

@@ -3,6 +3,6 @@ extends TextureButton
 
 
 func _on_button_up() -> void:
-	Audio.play_click()
+	Audio.play_close_menu()
 	get_tree().paused = false
 	$"..".visible = false
