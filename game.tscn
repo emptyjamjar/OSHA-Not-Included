@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://cj5ikori0r3jt"]
 
-[ext_resource type="PackedScene" uid="uid://chidjbuid2cgd" path="res://levels/shared/World.tscn" id="1_7sc4i"]
+[ext_resource type="PackedScene" path="res://levels/shared/World.tscn" id="1_7sc4i"]
 [ext_resource type="Script" uid="uid://cpt2knie07vvo" path="res://core/systems/needs/health_component.gd" id="2_e2o6t"]
+[ext_resource type="Script" path="res://game/manager/ai/out_bounds_area.gd" id="2_e8heu"]
 [ext_resource type="PackedScene" uid="uid://cxbnggs2xw8ne" path="res://ui/hud/hud.tscn" id="2_ryrav"]
 [ext_resource type="PackedScene" uid="uid://bimhohbyv6s5d" path="res://objects/shipper/shipper.tscn" id="3_e8heu"]
 [ext_resource type="Script" uid="uid://ck4p7gga13e5e" path="res://core/systems/needs/energy_component.gd" id="3_feb5d"]
@@ -14,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://sxf3e0qydlfv" path="res://objects/packager/packager.tscn" id="12_hb5m1"]
 [ext_resource type="PackedScene" uid="uid://cv4vrnpxs40bf" path="res://objects/restroom/washroom.tscn" id="12_iotsf"]
 [ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="13_lc2xo"]
+[ext_resource type="PackedScene" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
 
 [sub_resource type="GDScript" id="GDScript_7sc4i"]
 script/source = "extends Node2D
@@ -47,6 +49,16 @@ script = SubResource("GDScript_7sc4i")
 
 [node name="World" parent="." unique_id=2107734680 instance=ExtResource("1_7sc4i")]
 
+[node name="OutBoundsArea" type="Area2D" parent="." unique_id=1864494632]
+visible = false
+collision_layer = 2
+script = ExtResource("2_e8heu")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="OutBoundsArea" unique_id=995408817]
+position = Vector2(121.18235, 73.46653)
+scale = Vector2(0.6230469, 0.6540301)
+polygon = PackedVector2Array(-0.99945825, -1, 636.4481, 0.8156662, 637.65436, 365, 1.9989165, 365)
+
 [node name="Shipper" parent="." unique_id=441417436 instance=ExtResource("3_e8heu")]
 position = Vector2(216, 176)
 
@@ -74,11 +86,11 @@ script = ExtResource("8_7sc4i")
 position = Vector2(640, 192)
 scale = Vector2(0.40825486, 0.38389248)
 
-[node name="TicketTerminal" parent="." unique_id=982348100 instance=ExtResource("6_ryrav")]
-position = Vector2(384, 392)
-
 [node name="Conveyor" parent="." unique_id=1135306595 instance=ExtResource("8_j5wjh")]
 position = Vector2(101, 363)
+
+[node name="TicketTerminal" parent="." unique_id=982348100 instance=ExtResource("6_ryrav")]
+position = Vector2(368, 392)
 
 [node name="VendingMachine" parent="." unique_id=1840311720 instance=ExtResource("11_mfdv2")]
 position = Vector2(117, 248)
@@ -103,6 +115,56 @@ offset_bottom = 272.0
 grow_horizontal = 1
 grow_vertical = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="Manager" parent="." unique_id=565657217 node_paths=PackedStringArray("patrol_paths_at_root", "out_bounds_area") instance=ExtResource("16_80cx4")]
+position = Vector2(601.6738, 425)
+collision_mask = 2
+patrol_paths_at_root = NodePath("../PatrolPaths")
+out_bounds_area = NodePath("../OutBoundsArea")
+
+[node name="PatrolPaths" type="Node2D" parent="." unique_id=351301721]
+
+[node name="Path1" type="Node2D" parent="PatrolPaths" unique_id=46041390]
+
+[node name="p1_1" type="Marker2D" parent="PatrolPaths/Path1" unique_id=2052612545]
+position = Vector2(575.688, 191)
+
+[node name="p1_2" type="Marker2D" parent="PatrolPaths/Path1" unique_id=2114138325]
+position = Vector2(416.7741, 320)
+
+[node name="p1_3" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1365977136]
+position = Vector2(414.77518, 226)
+
+[node name="p1_4" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1875373551]
+position = Vector2(-76.95828, 226)
+
+[node name="Path2" type="Node2D" parent="PatrolPaths" unique_id=1780100022]
+
+[node name="p2_1" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1106255408]
+position = Vector2(447.75732, 322)
+
+[node name="p2_2" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1918256563]
+position = Vector2(704.61804, 325)
+
+[node name="p2_3" type="Marker2D" parent="PatrolPaths/Path2" unique_id=136453742]
+position = Vector2(478.7405, 290)
+
+[node name="p2_4" type="Marker2D" parent="PatrolPaths/Path2" unique_id=87527126]
+position = Vector2(476.74158, 411)
+
+[node name="Path3" type="Node2D" parent="PatrolPaths" unique_id=1497011237]
+
+[node name="p3_1" type="Marker2D" parent="PatrolPaths/Path3" unique_id=475289346]
+position = Vector2(577.6868, 354)
+
+[node name="p3_2" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1576187183]
+position = Vector2(415.77463, 351)
+
+[node name="p3_3" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1656326002]
+position = Vector2(416.77408, 193)
+
+[node name="p3_4" type="Marker2D" parent="PatrolPaths/Path3" unique_id=29843830]
+position = Vector2(723.6078, 184)
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
 [connection signal="health_change" from="Player/HealthComponent" to="Camera2D/HUD" method="_on_health_component_health_change"]

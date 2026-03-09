@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cdhb2euh28ies" path="res://core/components/interaction_area/interaction_area.tscn" id="3_3yids"]
 [ext_resource type="PackedScene" uid="uid://c6mvf84775rmp" path="res://objects/scanner/terminal/ticket.tscn" id="5_2t2yn"]
 [ext_resource type="TileSet" uid="uid://b62knjg567jhh" path="res://levels/shared/tile_set.tres" id="5_4wgmk"]
+[ext_resource type="PackedScene" uid="uid://bu8gpp7tljufp" path="res://objects/scanner/terminal/TicketQueue.tscn" id="6_4wgmk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4wgmk"]
 size = Vector2(65, 37)
@@ -47,3 +48,5 @@ shape = SubResource("RectangleShape2D_3twg7")
 
 [node name="TicketUI" parent="." unique_id=1152314469 instance=ExtResource("5_2t2yn")]
 visible = false
+
+[node name="TicketQueueUI" parent="." unique_id=734139000 instance=ExtResource("6_4wgmk")]
