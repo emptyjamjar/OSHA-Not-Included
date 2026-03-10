@@ -18,7 +18,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	energybar.value = energycomp.energy
 
 func update_money(money) -> void:
@@ -26,7 +26,7 @@ func update_money(money) -> void:
 
 
 
-func _on_health_component_health_change(diff: float) -> void:
+func _on_health_component_health_change(_diff: float) -> void:
 	healthbar.max_value = healthcomp.get_max_health()
 	healthbar.value = healthcomp.get_health()
 	

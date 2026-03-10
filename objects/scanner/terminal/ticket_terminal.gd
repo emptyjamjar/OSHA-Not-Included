@@ -29,7 +29,10 @@ func _on_interact():
 		#Ticket_Manager.generate_level_ticket(Ticket_Manager.ticket_available)
 		Ticket_Manager.generate_level_ticket(4)
 		# SET THE ACTIVE TICKET
-		Ticket_Manager.active_ticket = Ticket_Manager.visible_queue[0]
+		if !Ticket_Manager.visible_queue.is_empty():
+			Ticket_Manager.active_ticket = Ticket_Manager.visible_queue[0]
+		else:
+			printerr("Ticket manager's visible queue is empty")
 
 		ticket_queue_ui.visible = true 
 		Ticket_Manager.update_queue_ui()

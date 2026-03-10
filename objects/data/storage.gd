@@ -1,29 +1,19 @@
-extends Node
-class_name Storage
-
 ## Generic storage class to use
 ## for anything with an inventory.
+extends Node
+class_name Storage
 
 
 signal storage_full
 signal storage_empty
-signal content_added(content: Node)
-signal content_removed(content: Node)
 signal storage_updated
+signal content_added(content: ItemData)
+signal content_removed(content: ItemData)
 
 @export var max_capacity : int
 @export var current_capacity : int
-enum STORED_TYPE {
-	NONE,
-	ITEM, 
-	PACKAGE,
-}
-@export var stored_type: STORED_TYPE
-@export var contents: Array[Node]
 
-# these two are kinda not useful
-@export var is_full: bool
-@export var is_empty: bool
+@export var contents: Array[ItemData]
 
 
 # Called when the node enters the scene tree for the first time.
@@ -39,48 +29,53 @@ func set_capacity(capacity: int) -> bool:
 	if capacity < current_capacity:
 		return false
 	max_capacity = capacity
+	contents.resize(max_capacity)
 	return true
-	
+
+
 # Add an item into the list of contents.
-func add(content: Node) -> bool: 
+func add(content : ItemData) -> bool: 
 	if current_capacity < max_capacity:
-		contents.insert(-1, content)
-		content_added.emit()
-		if current_capacity == max_capacity:
-			storage_full.emit()
+		contents.push_back(content)
+		content_added.emit(content)
+		storage_updated.emit()
 		current_capacity += 1
 		return true
-		
 	storage_full.emit()
 	return false
 
-# Remove an item from the list of contents.
 
-func remove(content: Node) -> bool: 
+# Remove an item from the list of contents.
+func remove(content: ItemData) -> bool: 
 	# UML specs demand finding before erasing();
 	# use remove_at instead
 	var index = contents.find(content)
 	if index == -1:
 		return false
 	contents.remove_at(index)
-	content_removed.emit()
+	content_removed.emit(content)
+	storage_updated.emit()
 	current_capacity -= 1
 	if contents.is_empty():
 		storage_empty.emit()
 	return true
 
+
 # Get remaining storage space.
 func get_remaining() -> int:
 	return max_capacity - current_capacity
 
+
 # Find an item in the list of contents.
-func contains(content: Node) -> bool: 
+func contains(content: ItemData) -> bool: 
 	# UML specs demand finding before erasing();
 	# use remove_at instead
 	var index = contents.find(content)
 	if index == -1:
 		return false
 	return true
+
+
 # Find an item in the list of contents by their string name.
 func contains_type(content_type: String) -> bool: 
 	for item in contents:
@@ -88,22 +83,24 @@ func contains_type(content_type: String) -> bool:
 			return true
 	return false
 
+
 # Find the number of items in the list of contents by their string name.
 func count(content_type: String) -> int: 
-	var count = 0
+	var val = 0
 	for item in contents:
 		if item.name == content_type:
-			count += 1
-	return count
+			val += 1
+	return val
+
 
 # Get everything in the inventory.
-func get_all() -> Array[Node]:
+func get_all() -> Array[ItemData]:
 	return contents
 
-# Find an item in the list of contents by their string name.
-# Then get it.
-func get_by_type(content_type: String) -> Array[Node]:
-	var items : Array[Node]
+
+# Find items in the list of contents by their string name.
+func get_by_type(content_type: String) -> Array[ItemData]:
+	var items : Array[ItemData]
 	for item in contents:
 		if item.name == content_type:
 			items.insert(-1, item)

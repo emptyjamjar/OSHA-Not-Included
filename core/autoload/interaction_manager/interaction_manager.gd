@@ -22,6 +22,7 @@ func _process(_delta: float) -> void:
 	if active_areas.size() > 0 && can_interact:
 		# active_areas[0] will contain closest interactable object
 		active_areas.sort_custom(_sort_by_distance_to_player)
+
 		label.text = base_text + active_areas[0].action_name
 		# Move the label to the interactable object
 		label.global_position = active_areas[0].global_position
@@ -37,6 +38,7 @@ func _sort_by_distance_to_player(area1, area2):
 	var area2_to_player = player.global_position.distance_to(area2.global_position)
 	return area1_to_player < area2_to_player
 
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact") && can_interact:
 		# Check if player is within an interaction area
@@ -48,3 +50,4 @@ func _input(event: InputEvent) -> void:
 		
 		await active_areas[0].interact.call()
 		can_interact = true
+		

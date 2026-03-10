@@ -12,11 +12,12 @@ region = Rect2(96, 64, 48, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hlauf"]
 size = Vector2(306.07596, 181.99997)
 
-[node name="Packager" type="Area2D" unique_id=77134705]
+[node name="Packager" type="Area2D" unique_id=77134705 node_paths=PackedStringArray("iArea")]
 scale = Vector2(0.30384615, 0.2857143)
 collision_layer = 0
 collision_mask = 5
 script = ExtResource("1_hlauf")
+iArea = NodePath("InteractionArea")
 
 [node name="Image" type="Sprite2D" parent="." unique_id=1170182557]
 position = Vector2(8.8817837e-16, -3.8146973e-06)
@@ -39,7 +40,6 @@ shape = ExtResource("2_owb4y")
 debug_color = Color(0.99178, 0, 0.29680523, 0.41960785)
 
 [node name="InteractionArea" parent="." unique_id=2104453103 instance=ExtResource("4_owb4y")]
-action_name = "box item"
 
 [node name="InteractCollision" type="CollisionShape2D" parent="InteractionArea" unique_id=680122479]
 position = Vector2(7.0620185e-06, -0.6562499)
