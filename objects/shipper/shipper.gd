@@ -36,18 +36,21 @@ func _on_interact():
 	
 	var item = PlayerInventory.get_item()
 	var item_index = PlayerInventory.selectedIndex
-	if item.type == ItemData.Type.PACKAGE:
-		if ticket_manager.active_ticket.required_items.has(item.id):
-			ticket_manager.register_delivery(item.id)
-			PlayerInventory.remove_at(item_index)
-			get_money.emit()
-			animated_sprite.play("close")
-			shipped = true
-			player_collision.disabled = true
-		else:
-			# Wrong item shipped — ignore for now
-			# TODO: Add penalty or feedback later
-			pass
+	if item:
+		if item.type == ItemData.Type.PACKAGE:
+			if ticket_manager.active_ticket.required_items.has(item.id):
+				ticket_manager.register_delivery(item.id)
+				PlayerInventory.remove_at(item_index)
+				get_money.emit()
+				animated_sprite.play("close")
+				shipped = true
+				player_collision.disabled = true
+			else:
+				# Wrong item shipped — ignore for now
+				# TODO: Add penalty or feedback later
+				pass
+	else:
+		printerr("No item currently available")
 
 
 
