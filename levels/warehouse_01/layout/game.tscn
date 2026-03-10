@@ -1,0 +1,350 @@
+[gd_scene format=4 uid="uid://d0maw17r7yja7"]
+
+[ext_resource type="PackedScene" uid="uid://chidjbuid2cgd" path="res://levels/shared/World.tscn" id="1_7sc4i"]
+[ext_resource type="Script" uid="uid://cpt2knie07vvo" path="res://core/systems/needs/health_component.gd" id="2_e2o6t"]
+[ext_resource type="Script" uid="uid://c8mj1grnlbspl" path="res://game/manager/ai/out_bounds_area.gd" id="2_e8heu"]
+[ext_resource type="PackedScene" uid="uid://cxbnggs2xw8ne" path="res://ui/hud/hud.tscn" id="2_ryrav"]
+[ext_resource type="PackedScene" uid="uid://bimhohbyv6s5d" path="res://objects/shipper/shipper.tscn" id="3_e8heu"]
+[ext_resource type="Script" uid="uid://ck4p7gga13e5e" path="res://core/systems/needs/energy_component.gd" id="3_feb5d"]
+[ext_resource type="Script" uid="uid://b0ovv20hjaxi3" path="res://core/systems/needs/needs_component.gd" id="4_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://c7e7f64igaa5j" path="res://game/actors/player/player.tscn" id="5_rvswv"]
+[ext_resource type="PackedScene" uid="uid://rgnaipuerpmn" path="res://objects/scanner/terminal/TicketTerminal.tscn" id="6_ryrav"]
+[ext_resource type="Script" uid="uid://dka4wuamclaju" path="res://core/systems/sanity/sanity_component.gd" id="8_7sc4i"]
+[ext_resource type="PackedScene" uid="uid://cnumkt0ntauyy" path="res://objects/conveyor/conveyor.tscn" id="8_j5wjh"]
+[ext_resource type="PackedScene" uid="uid://coa2sufhyfblt" path="res://objects/food/vending_machine.tscn" id="11_mfdv2"]
+[ext_resource type="PackedScene" uid="uid://sxf3e0qydlfv" path="res://objects/packager/packager.tscn" id="12_hb5m1"]
+[ext_resource type="PackedScene" uid="uid://cv4vrnpxs40bf" path="res://objects/restroom/washroom.tscn" id="12_iotsf"]
+[ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="13_lc2xo"]
+[ext_resource type="Script" uid="uid://dj2x2g3bdufl1" path="res://core/systems/scoring/productivity_manager/productivity_manager.gd" id="15_80cx4"]
+[ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
+[ext_resource type="Script" uid="uid://ci5uk6gffqdwp" path="res://core/systems/scoring/productivity_manager/idle_timer.gd" id="16_e8heu"]
+[ext_resource type="Texture2D" uid="uid://be5kpdcsfdx3o" path="res://levels/shared/wall.png" id="19_kgoe6"]
+
+[sub_resource type="GDScript" id="GDScript_7sc4i"]
+script/source = "extends Node2D
+class_name GameManager
+
+@onready var hud: CanvasLayer = $Camera2D/HUD
+@onready var money := 0
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	var conveyor := $Conveyor
+	Ticket_Manager.on_game_start()
+	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
+	conveyor.input(Conveyor.ItemDataList.PINK_WATER_BOTTLE)
+	conveyor.input(Conveyor.ItemDataList.BLACK_WATER_BOTTLE)
+	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
+	conveyor.input(Conveyor.ItemDataList.BLUE_WATER_BOTTLE)
+	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
+	conveyor.input(Conveyor.ItemDataList.PINK_WATER_BOTTLE)
+	conveyor.input(Conveyor.ItemDataList.BLACK_WATER_BOTTLE)
+	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
+	conveyor.input(Conveyor.ItemDataList.BLUE_WATER_BOTTLE)
+
+func _on_shipper_get_money() -> void:
+	money += 10
+	hud.update_money(money)
+	
+"
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qi1hw"]
+texture = ExtResource("19_kgoe6")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_wth8k"]
+sources/0 = SubResource("TileSetAtlasSource_qi1hw")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oopfc"]
+size = Vector2(32, 32)
+
+[node name="Game" type="Node2D" unique_id=645817684 groups=["game"]]
+y_sort_enabled = true
+script = SubResource("GDScript_7sc4i")
+
+[node name="World" parent="." unique_id=2107734680 instance=ExtResource("1_7sc4i")]
+
+[node name="OutBoundsArea" type="Area2D" parent="." unique_id=1864494632]
+visible = false
+collision_layer = 2
+script = ExtResource("2_e8heu")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="OutBoundsArea" unique_id=995408817]
+position = Vector2(121.18235, 73.46653)
+scale = Vector2(0.6230469, 0.6540301)
+polygon = PackedVector2Array(-0.99945825, -1, 636.4481, 0.8156662, 637.65436, 365, 1.9989165, 365)
+
+[node name="Shipper" parent="." unique_id=441417436 instance=ExtResource("3_e8heu")]
+position = Vector2(216, 176)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=167263537]
+anchor_mode = 0
+
+[node name="HUD" parent="Camera2D" unique_id=830642951 instance=ExtResource("2_ryrav")]
+
+[node name="Player" parent="." unique_id=2112891127 instance=ExtResource("5_rvswv")]
+position = Vector2(612, 282)
+
+[node name="HealthComponent" type="Node" parent="Player" unique_id=1337526708]
+script = ExtResource("2_e2o6t")
+
+[node name="EnergyComponent" type="Node" parent="Player" unique_id=1556776905]
+script = ExtResource("3_feb5d")
+
+[node name="NeedsComponent" type="Node" parent="Player" unique_id=1834835802]
+script = ExtResource("4_fc0e3")
+
+[node name="SanityComponent" type="Node" parent="Player" unique_id=264741504]
+script = ExtResource("8_7sc4i")
+
+[node name="Packager" parent="." unique_id=2093227932 instance=ExtResource("12_hb5m1")]
+position = Vector2(640, 192)
+scale = Vector2(0.40825486, 0.38389248)
+
+[node name="Conveyor" parent="." unique_id=1135306595 groups=["conveyor"] instance=ExtResource("8_j5wjh")]
+position = Vector2(550, 249)
+rotation = 3.1415927
+
+[node name="TicketTerminal" parent="." unique_id=982348100 instance=ExtResource("6_ryrav")]
+position = Vector2(501, 394)
+
+[node name="VendingMachine" parent="." unique_id=1840311720 instance=ExtResource("11_mfdv2")]
+position = Vector2(646, 392)
+rotation = -1.5707964
+scale = Vector2(0.3295734, 0.3295734)
+
+[node name="Washroom" parent="." unique_id=585966862 instance=ExtResource("12_iotsf")]
+position = Vector2(744, 304)
+scale = Vector2(0.24458057, 0.24458057)
+
+[node name="Pause" parent="." unique_id=1566201169 instance=ExtResource("13_lc2xo")]
+visible = false
+top_level = true
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 400.0
+offset_top = 272.0
+offset_right = 400.0
+offset_bottom = 272.0
+grow_horizontal = 1
+grow_vertical = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Score" type="Node2D" parent="." unique_id=1007668771]
+script = ExtResource("15_80cx4")
+
+[node name="IdleTimer" type="Timer" parent="Score" unique_id=1775782488]
+wait_time = 5.0
+script = ExtResource("16_e8heu")
+
+[node name="Manager" parent="." unique_id=565657217 node_paths=PackedStringArray("patrol_paths_at_root", "out_bounds_area") instance=ExtResource("16_80cx4")]
+position = Vector2(601.6738, 425)
+collision_mask = 2
+patrol_paths_at_root = NodePath("../PatrolPaths")
+out_bounds_area = NodePath("../OutBoundsArea")
+
+[node name="PatrolPaths" type="Node2D" parent="." unique_id=351301721]
+
+[node name="Path1" type="Node2D" parent="PatrolPaths" unique_id=46041390]
+
+[node name="p1_1" type="Marker2D" parent="PatrolPaths/Path1" unique_id=2052612545]
+position = Vector2(575.688, 191)
+
+[node name="p1_2" type="Marker2D" parent="PatrolPaths/Path1" unique_id=2114138325]
+position = Vector2(416.7741, 320)
+
+[node name="p1_3" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1365977136]
+position = Vector2(415, 268)
+
+[node name="p1_4" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1875373551]
+position = Vector2(-76.95828, 226)
+
+[node name="Path2" type="Node2D" parent="PatrolPaths" unique_id=1780100022]
+
+[node name="p2_1" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1106255408]
+position = Vector2(447.75732, 322)
+
+[node name="p2_2" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1918256563]
+position = Vector2(704.61804, 325)
+
+[node name="p2_3" type="Marker2D" parent="PatrolPaths/Path2" unique_id=136453742]
+position = Vector2(478.7405, 290)
+
+[node name="p2_4" type="Marker2D" parent="PatrolPaths/Path2" unique_id=87527126]
+position = Vector2(509, 346)
+
+[node name="Path3" type="Node2D" parent="PatrolPaths" unique_id=1497011237]
+
+[node name="p3_1" type="Marker2D" parent="PatrolPaths/Path3" unique_id=475289346]
+position = Vector2(577.6868, 354)
+
+[node name="p3_2" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1576187183]
+position = Vector2(415.77463, 351)
+
+[node name="p3_3" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1656326002]
+position = Vector2(416.77408, 193)
+
+[node name="p3_4" type="Marker2D" parent="PatrolPaths/Path3" unique_id=29843830]
+position = Vector2(723.6078, 184)
+
+[node name="Walls" type="Node2D" parent="." unique_id=1799370527]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="Walls" unique_id=1047681160]
+tile_map_data = PackedByteArray("AAAWAAwAAAAAAAAAAAAWAA0AAAAAAAEAAAAXAAwAAAABAAAAAAAXAA0AAAABAAEAAAAWAA4AAAAAAAAAAAAWAA8AAAAAAAEAAAAXAA4AAAABAAAAAAAXAA8AAAABAAEAAAAWABAAAAAAAAAAAAAWABEAAAAAAAEAAAAXABAAAAABAAAAAAAXABEAAAABAAEAAAAWABIAAAAAAAAAAAAWABMAAAAAAAEAAAAXABIAAAABAAAAAAAXABMAAAABAAEAAAAUABAAAAAAAAAAAAAUABEAAAAAAAEAAAAVABAAAAABAAAAAAAVABEAAAABAAEAAAAUABIAAAAAAAAAAAAUABMAAAAAAAEAAAAVABIAAAABAAAAAAAVABMAAAABAAEAAAASABIAAAAAAAAAAAASABMAAAAAAAEAAAATABIAAAABAAAAAAATABMAAAABAAEAAAAWABoAAAAAAAAAAAAWABsAAAAAAAEAAAAXABoAAAABAAAAAAAXABsAAAABAAEAAAAUABoAAAAAAAAAAAAUABsAAAAAAAEAAAAVABoAAAABAAAAAAAVABsAAAABAAEAAAASABoAAAAAAAAAAAASABsAAAAAAAEAAAATABoAAAABAAAAAAATABsAAAABAAEAAAAQABoAAAAAAAAAAAAQABsAAAAAAAEAAAARABoAAAABAAAAAAARABsAAAABAAEAAAAOABoAAAAAAAAAAAAOABsAAAAAAAEAAAAPABoAAAABAAAAAAAPABsAAAABAAEAAAALABoAAAAAAAAAAAALABsAAAAAAAEAAAAMABoAAAAAAAAAAAAMABsAAAAAAAEAAAANABoAAAABAAAAAAANABsAAAABAAEAAAAJABoAAAABAAAAAAAJABsAAAABAAEAAAAKABoAAAABAAAAAAAKABsAAAABAAEAAAAIABoAAAAAAAAAAAAIABsAAAAAAAEAAAAQABYAAAAAAAAAAAAQABcAAAAAAAEAAAARABYAAAABAAAAAAARABcAAAABAAEAAAASABQAAAAAAAAAAAASABUAAAAAAAEAAAATABQAAAABAAAAAAATABUAAAABAAEAAAAQABQAAAAAAAAAAAAQABUAAAAAAAEAAAARABQAAAABAAAAAAARABUAAAABAAEAAAAOABYAAAAAAAAAAAAOABcAAAAAAAEAAAAPABYAAAABAAAAAAAPABcAAAABAAEAAAAKABQAAAAAAAAAAAAKABUAAAAAAAEAAAALABQAAAABAAAAAAALABUAAAABAAEAAAAGABoAAAAAAAAAAAAGABsAAAAAAAEAAAAHABoAAAABAAAAAAAHABsAAAABAAEAAAAGABgAAAAAAAAAAAAGABkAAAAAAAEAAAAHABgAAAABAAAAAAAHABkAAAABAAEAAAAGABYAAAAAAAAAAAAGABcAAAAAAAEAAAAHABYAAAABAAAAAAAHABcAAAABAAEAAAAGABQAAAAAAAAAAAAGABUAAAAAAAEAAAAHABQAAAABAAAAAAAHABUAAAABAAEAAAAGABIAAAAAAAAAAAAGABMAAAAAAAEAAAAHABIAAAABAAAAAAAHABMAAAABAAEAAAAMABYAAAAAAAAAAAAMABcAAAAAAAEAAAANABYAAAABAAAAAAANABcAAAABAAEAAAAGABAAAAAAAAAAAAAGABEAAAAAAAEAAAAHABAAAAABAAAAAAAHABEAAAABAAEAAAAGAA4AAAAAAAAAAAAGAA8AAAAAAAEAAAAHAA4AAAABAAAAAAAHAA8AAAABAAEAAAAQABIAAAAAAAAAAAAQABMAAAAAAAEAAAARABIAAAABAAAAAAARABMAAAABAAEAAAAIABAAAAAAAAAAAAAIABEAAAAAAAEAAAAJABAAAAABAAAAAAAJABEAAAABAAEAAAAKABAAAAAAAAAAAAAKABEAAAAAAAEAAAALABAAAAABAAAAAAALABEAAAABAAEAAAAGAAwAAAAAAAAAAAAGAA0AAAAAAAEAAAAHAAwAAAABAAAAAAAHAA0AAAABAAEAAAA=")
+tile_set = SubResource("TileSet_wth8k")
+
+[node name="Area2D" type="StaticBody2D" parent="Walls" unique_id=592172379]
+collision_layer = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Area2D" unique_id=164671307]
+position = Vector2(368, 431.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls/Area2D" unique_id=2025309344]
+position = Vector2(336, 431.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Walls/Area2D" unique_id=221066983]
+position = Vector2(304, 431.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D4" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1746686021]
+position = Vector2(272, 431.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1184873541]
+position = Vector2(240, 431.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Walls/Area2D" unique_id=2088255140]
+position = Vector2(208, 431.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D7" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1906567436]
+position = Vector2(176, 431.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D8" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1281556816]
+position = Vector2(144, 431.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D9" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1674994029]
+position = Vector2(112, 431.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D10" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1015155067]
+position = Vector2(112, 398.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D11" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1967315031]
+position = Vector2(112, 365.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D12" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1554983968]
+position = Vector2(112, 332.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D13" type="CollisionShape2D" parent="Walls/Area2D" unique_id=790909601]
+position = Vector2(112, 299.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D14" type="CollisionShape2D" parent="Walls/Area2D" unique_id=202999777]
+position = Vector2(112, 271.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D15" type="CollisionShape2D" parent="Walls/Area2D" unique_id=403431461]
+position = Vector2(144, 272.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D16" type="CollisionShape2D" parent="Walls/Area2D" unique_id=807339462]
+position = Vector2(175, 272.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D17" type="CollisionShape2D" parent="Walls/Area2D" unique_id=783618465]
+position = Vector2(112, 239.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D18" type="CollisionShape2D" parent="Walls/Area2D" unique_id=695447316]
+position = Vector2(112, 208.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D19" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1506711286]
+position = Vector2(175, 336.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D20" type="CollisionShape2D" parent="Walls/Area2D" unique_id=470200869]
+position = Vector2(207, 368.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D21" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1170681252]
+position = Vector2(240, 368.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D22" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1619333989]
+position = Vector2(272, 368.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D23" type="CollisionShape2D" parent="Walls/Area2D" unique_id=584336881]
+position = Vector2(272, 335.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D24" type="CollisionShape2D" parent="Walls/Area2D" unique_id=335187362]
+position = Vector2(304, 335.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D25" type="CollisionShape2D" parent="Walls/Area2D" unique_id=809312216]
+position = Vector2(304, 304.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D26" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1665723291]
+position = Vector2(272, 304.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D27" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1871070230]
+position = Vector2(336, 304.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D28" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1517440822]
+position = Vector2(336, 272.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D29" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1211384298]
+position = Vector2(368, 272.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D30" type="CollisionShape2D" parent="Walls/Area2D" unique_id=751221745]
+position = Vector2(368, 240.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D31" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1152001376]
+position = Vector2(368, 208.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[node name="CollisionShape2D32" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1171215521]
+position = Vector2(368, 304.5)
+shape = SubResource("RectangleShape2D_oopfc")
+
+[connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
+[connection signal="get_money" from="Shipper" to="Score" method="_on_shipper_add_score"]
+[connection signal="health_change" from="Player/HealthComponent" to="Camera2D/HUD" method="_on_health_component_health_change"]
+[connection signal="needs_change" from="Player/NeedsComponent" to="Camera2D/HUD" method="_on_needs_component_needs_change"]
+[connection signal="washroom_used" from="Washroom" to="Score" method="_on_washroom_washroom_used"]
+[connection signal="timeout" from="Score/IdleTimer" to="Score" method="_on_idle_timer_timeout"]
+[connection signal="timeout" from="Score/IdleTimer" to="Score/IdleTimer" method="_on_timeout"]
