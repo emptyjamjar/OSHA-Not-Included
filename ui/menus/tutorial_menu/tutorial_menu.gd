@@ -13,7 +13,7 @@ signal exit_pressed
 @export var exitBtn : TextureButton
 @export var scrollContainer : ScrollContainer
 
-var curTab : int 
+var curTab : int = -1
 
 enum {
 	CONTROL_TAB,

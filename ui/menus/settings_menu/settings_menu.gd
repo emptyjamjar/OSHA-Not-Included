@@ -11,7 +11,7 @@ signal exit_pressed
 @export var exitBtn : TextureButton
 @export var scrollContainer : ScrollContainer
 
-var curTab : int 
+var curTab : int = -1
 
 enum {
 	CONTROL_TAB,
@@ -27,7 +27,7 @@ const scenes = [
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	_on_controls_pressed()
+	_on_audio_pressed()
 
 
 func _on_controls_pressed() -> void:

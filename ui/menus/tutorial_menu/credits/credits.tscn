@@ -3,35 +3,33 @@
 [ext_resource type="LabelSettings" uid="uid://b8igq1w07t223" path="res://ui/menus/navy_blue.tres" id="1_1uxo4"]
 
 [node name="AudioSettingsMenu" type="VBoxContainer" unique_id=598972902]
-offset_right = 760.0
-offset_bottom = 161.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 
 [node name="MasterLabel" type="Label" parent="." unique_id=1481161778]
 layout_mode = 2
-text = "
-Credits:
-
-Team Lead
+text = "Credits
+Team Lead:
 Jasmine Pawliw
 
-Design Lead
+Design Lead:
 Justin Taruc
+
+Test Lead:
+Shane Fandrey
+
+Tech Lead:
+Mark Luu
 
 Artists:
 Daniel So
 Katherine Nguyen
 
-Test Lead
-Shane Fandrey
-
-Tech Lead
-Mark Luu
-
 Programmers:
-
 Logan Weckert
 Devanush Kurien Joseph
 Mark Mandac

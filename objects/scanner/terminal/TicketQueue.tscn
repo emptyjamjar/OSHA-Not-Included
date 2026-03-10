@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cgqi31rbqd03m"]
+[gd_scene format=3 uid="uid://bu8gpp7tljufp"]
 
 [ext_resource type="Texture2D" uid="uid://brjl03whlgukn" path="res://objects/scanner/terminal/Ticket_SpriteSheet-PNG.png" id="1_vlja4"]
 [ext_resource type="Texture2D" uid="uid://btfptaejf4dhs" path="res://objects/scanner/terminal/TicketTimeBackPNG.png" id="2_dsuxn"]
@@ -71,11 +71,10 @@ animations = [{
 [node name="TicketQueueUI" type="CanvasLayer" unique_id=1534765680]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1292286621]
-offset_left = 96.0
-offset_right = 673.0
+offset_right = 1378.5657
 offset_bottom = 114.88048
 scale = Vector2(0.5571007, 0.5571007)
-size_flags_horizontal = 3
+size_flags_horizontal = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 4
 

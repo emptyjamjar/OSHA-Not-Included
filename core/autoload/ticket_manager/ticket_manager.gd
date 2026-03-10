@@ -76,13 +76,16 @@ func _init() -> void:
 # this ensure that object is created at run time and not returning null 
 func _ready():
 	add_to_group("ticket_manager")
-	
+	# generate_level_ticket(12)
+
+
+func on_game_start():
 	var item_db = get_tree().get_first_node_in_group("conveyor")
 	if item_db == null:
 		push_error("Conveyor STILL not found. Check group assignment.")
 		return
-	# generate_level_ticket(12)
-	
+
+
 func generate_level_ticket(count: int): 
 	print("Generate Tickets")
 	for numb in range(count): 

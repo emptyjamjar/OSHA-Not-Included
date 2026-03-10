@@ -7,6 +7,7 @@ func _on_play_pressed() -> void:
 	if (get_node_or_null("SettingsMenu") != null) or get_node_or_null("TutorialMenu") != null:
 		return
 	Audio.play_click()
+	PlayerInventory.reset()
 	get_tree().change_scene_to_file("res://game.tscn")
 
 
