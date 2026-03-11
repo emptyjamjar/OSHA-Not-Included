@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://brapivegqmg0f"]
+[gd_scene format=3 uid="uid://d0maw17r7yja7"]
 
 [ext_resource type="PackedScene" uid="uid://chidjbuid2cgd" path="res://levels/shared/World.tscn" id="1_7sc4i"]
 [ext_resource type="Script" uid="uid://cpt2knie07vvo" path="res://core/systems/needs/health_component.gd" id="2_e2o6t"]
@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="13_lc2xo"]
 [ext_resource type="PackedScene" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
 [ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="17_8onr1"]
-[ext_resource type="PackedScene" uid="uid://fgdqaq0g3f3g" path="res://levels/warehouse_01/layout/walls.tscn" id="18_kgoe6"]
+[ext_resource type="PackedScene" uid="uid://u3cnys6nkx03" path="res://levels/warehouse_01/layout/walls.tscn" id="18_kgoe6"]
 
 [sub_resource type="GDScript" id="GDScript_7sc4i"]
 script/source = "extends Node2D

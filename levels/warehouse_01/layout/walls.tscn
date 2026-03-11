@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://fgdqaq0g3f3g"]
+[gd_scene format=3 uid="uid://u3cnys6nkx03"]
 
 [ext_resource type="Texture2D" uid="uid://be5kpdcsfdx3o" path="res://levels/shared/wall.png" id="1_yfoyf"]
 [ext_resource type="PackedScene" uid="uid://cmysh8kqsje1j" path="res://objects/shelves/shelf.tscn" id="2_sgp1x"]
@@ -34,19 +34,19 @@ tile_set = SubResource("TileSet_wth8k")
 collision_layer = 3
 
 [node name="Shelf" parent="Area2D" unique_id=1206098896 instance=ExtResource("2_sgp1x")]
-position = Vector2(152, 128)
+position = Vector2(152, 120)
 
 [node name="Shelf3" parent="Area2D" unique_id=147681333 instance=ExtResource("2_sgp1x")]
-position = Vector2(312, 208)
+position = Vector2(312, 200)
 
 [node name="Shelf5" parent="Area2D" unique_id=131584990 instance=ExtResource("2_sgp1x")]
-position = Vector2(312, 128)
+position = Vector2(312, 120)
 
 [node name="Shelf6" parent="Area2D" unique_id=2005945040 instance=ExtResource("2_sgp1x")]
-position = Vector2(232, 296)
+position = Vector2(240, 280)
 
 [node name="Shelf8" parent="Area2D" unique_id=1409527809 instance=ExtResource("2_sgp1x")]
-position = Vector2(312, 296)
+position = Vector2(312, 280)
 
 [node name="Shelf7" parent="Area2D" unique_id=658865655 instance=ExtResource("2_sgp1x")]
-position = Vector2(152, 208)
+position = Vector2(152, 200)
