@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://d0maw17r7yja7"]
+[gd_scene format=3 uid="uid://brapivegqmg0f"]
 
 [ext_resource type="PackedScene" uid="uid://chidjbuid2cgd" path="res://levels/shared/World.tscn" id="1_7sc4i"]
 [ext_resource type="Script" uid="uid://cpt2knie07vvo" path="res://core/systems/needs/health_component.gd" id="2_e2o6t"]
@@ -15,9 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://sxf3e0qydlfv" path="res://objects/packager/packager.tscn" id="12_hb5m1"]
 [ext_resource type="PackedScene" uid="uid://cv4vrnpxs40bf" path="res://objects/restroom/washroom.tscn" id="12_iotsf"]
 [ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="13_lc2xo"]
-[ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
+[ext_resource type="PackedScene" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
 [ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="17_8onr1"]
-[ext_resource type="PackedScene" uid="uid://u3cnys6nkx03" path="res://levels/warehouse_01/layout/walls.tscn" id="18_kgoe6"]
+[ext_resource type="PackedScene" uid="uid://fgdqaq0g3f3g" path="res://levels/warehouse_01/layout/walls.tscn" id="18_kgoe6"]
 
 [sub_resource type="GDScript" id="GDScript_7sc4i"]
 script/source = "extends Node2D
@@ -97,8 +97,7 @@ rotation = 3.1415927
 position = Vector2(501, 394)
 
 [node name="VendingMachine" parent="." unique_id=1840311720 instance=ExtResource("11_mfdv2")]
-position = Vector2(646, 392)
-rotation = -1.5707964
+position = Vector2(671.99994, 384)
 scale = Vector2(0.3295734, 0.3295734)
 
 [node name="Washroom" parent="." unique_id=585966862 instance=ExtResource("12_iotsf")]
@@ -176,6 +175,7 @@ position = Vector2(416.77408, 193)
 position = Vector2(723.6078, 184)
 
 [node name="Walls" parent="." unique_id=897807902 instance=ExtResource("18_kgoe6")]
+position = Vector2(-16, 80)
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
 [connection signal="get_money" from="Shipper" to="Score" method="_on_shipper_get_money"]

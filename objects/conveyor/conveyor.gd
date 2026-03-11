@@ -1,4 +1,4 @@
-class_name Conveyor extends Node
+class_name Conveyor extends Node2D
 ## The conveyor belt outputs items
 
 ## All items that the conveyor can spawn are found here
@@ -117,6 +117,9 @@ func _spawn_into_first_slot(item: ItemDataList) -> void:
 		if _slots[i] == null:
 			# Create sprite of texture
 			var scene := item_scene.instantiate() as ItemBase
+			
+			scene.rotation = self.rotation # for levels where conveyor is rotated
+			
 			# Connect to function to remove from list on pickup
 			scene.picked_up.connect(_on_item_picked_up.bind(i))
 			scene.data = item_resources[item].duplicate(true)
