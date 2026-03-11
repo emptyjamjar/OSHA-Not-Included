@@ -11,11 +11,12 @@ extends Node
 ## Current volume of the background music
 var music_volume:float
 
+
 ## Plays the click sound used for buttons or other click selections
 func play_click():
 	var click = $Click
 	click.play()
-	
+
 ## Plays the click sound used for exit buttons
 func play_exit_click():
 	var exit_click = $ExitClick

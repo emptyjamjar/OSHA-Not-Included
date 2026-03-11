@@ -36,6 +36,7 @@ bus = &"SFX"
 [node name="VendingMachine" type="AudioStreamPlayer" parent="." unique_id=1900080037]
 stream = ExtResource("6_j5bvv")
 volume_db = -3.628
+bus = &"SFX"
 
 [node name="Music" type="AudioStreamPlayer" parent="." unique_id=2068551632]
 process_mode = 3

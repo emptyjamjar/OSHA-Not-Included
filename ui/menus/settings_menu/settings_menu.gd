@@ -31,19 +31,16 @@ func _ready() -> void:
 
 
 func _on_controls_pressed() -> void:
-	Audio.play_click()
 	_on_btn_toggle(controlsBtn)
 	_change_scroll_container_child(CONTROL_TAB)
 
 
 func _on_video_pressed() -> void:
-	Audio.play_click()
 	_on_btn_toggle(videoBtn)
 	_change_scroll_container_child(VIDEO_TAB)
 
 
 func _on_audio_pressed() -> void:
-	Audio.play_click()
 	_on_btn_toggle(audioBtn)
 	_change_scroll_container_child(AUDIO_TAB)
 	
@@ -53,6 +50,7 @@ func _on_audio_pressed() -> void:
 func _change_scroll_container_child(tab: int):
 	if tab == curTab:
 		return
+	Audio.play_click()
 	curTab = tab
 	if scrollContainer.get_child_count() > 0:
 		scrollContainer.get_child(0).queue_free()
