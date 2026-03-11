@@ -5,6 +5,9 @@ extends Node
 ## @tutorial: https://youtu.be/8RECF55sK_o?si=6f7m7FGJyVX0WbDt
 ## Some sounds attained from https://freesound.org/
 
+@onready var music:AudioStreamPlayer = $Music
+var music_volume:float
+
 # Plays the click sound used for buttons or other click selections
 func play_click():
 	var click = $Click
@@ -34,8 +37,16 @@ func play_vending_machine():
 	var vm = $VendingMachine
 	vm.play()
 
-### Plays the background music of the game
-#func play_music():
-	#var music = $Music
-	#music.stream.loop = true
-	#music.play()
+## Plays the background music of the game
+func play_music():
+	music.stream.loop = true
+	music.process_mode = Node.PROCESS_MODE_ALWAYS
+	music.play()
+	
+func lower_music():
+	music_volume = music.volume_db
+	music.volume_db = music_volume - 10
+	
+func reset_music_volume():
+	music.volume_db = music_volume
+	

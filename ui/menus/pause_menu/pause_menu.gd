@@ -2,6 +2,7 @@
 extends Control
 
 var isSubMenuOpen := false
+var volume:float
 
 
 func _ready() -> void:
@@ -17,8 +18,10 @@ func _input(event: InputEvent) -> void:
 		visible = not visible
 		if visible:
 			Audio.play_open_menu()
+			Audio.lower_music()
 		else:
 			Audio.play_close_menu()
+			Audio.reset_music_volume()
 
 
 func _on_sub_menu_opened() -> void:
