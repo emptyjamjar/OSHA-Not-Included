@@ -1,14 +1,72 @@
 [gd_scene format=3 uid="uid://c81h6ny71m2nb"]
 
 [ext_resource type="Script" uid="uid://dj2x2g3bdufl1" path="res://core/systems/scoring/productivity_manager/productivity_manager.gd" id="1_s7su0"]
+[ext_resource type="Texture2D" uid="uid://brnkvi1rqmftb" path="res://core/systems/scoring/productivity_manager/EndOfDayPayReport.png" id="2_ip3r8"]
 [ext_resource type="Script" uid="uid://ci5uk6gffqdwp" path="res://core/systems/scoring/productivity_manager/idle_timer.gd" id="2_y6pib"]
+[ext_resource type="Texture2D" uid="uid://lr2pyeohab3a" path="res://ui/widgets/buttons/ButtonDefault.png" id="4_nsn5p"]
+[ext_resource type="Texture2D" uid="uid://cm0to3pv0uikr" path="res://ui/widgets/buttons/ButtonPressed.png" id="5_mubud"]
+[ext_resource type="Texture2D" uid="uid://btey00488kkp5" path="res://ui/widgets/buttons/ButtonHover.png" id="6_hl4pr"]
+[ext_resource type="Script" uid="uid://c56k0cmxwtgjb" path="res://core/systems/scoring/productivity_manager/next.gd" id="7_mubud"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_j6npo"]
+font_size = 22
+font_color = Color(0.9843137, 0.9607843, 0.9372549, 1)
 
 [node name="Score" type="Node2D" unique_id=1161969462]
 script = ExtResource("1_s7su0")
+
+[node name="EndOfDayPayReport" type="Sprite2D" parent="." unique_id=164273407]
+position = Vector2(385, 215)
+texture = ExtResource("2_ip3r8")
 
 [node name="IdleTimer" type="Timer" parent="." unique_id=1571918475]
 wait_time = 5.0
 script = ExtResource("2_y6pib")
 
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1069454096]
+offset_left = 231.0
+offset_top = 83.0
+offset_right = 541.0
+offset_bottom = 324.0
+
+[node name="Quota" type="Label" parent="VBoxContainer" unique_id=1515995340]
+layout_mode = 2
+
+[node name="Breaks" type="Label" parent="VBoxContainer" unique_id=1862912031]
+layout_mode = 2
+
+[node name="IdleDings" type="Label" parent="VBoxContainer" unique_id=1870777289]
+layout_mode = 2
+
+[node name="Productivity" type="Label" parent="VBoxContainer" unique_id=334321387]
+layout_mode = 2
+
+[node name="Next" type="TextureButton" parent="." unique_id=1589968990]
+offset_left = 407.0
+offset_top = 327.0
+offset_right = 535.0
+offset_bottom = 359.0
+size_flags_vertical = 0
+texture_normal = ExtResource("4_nsn5p")
+texture_pressed = ExtResource("5_mubud")
+texture_hover = ExtResource("6_hl4pr")
+script = ExtResource("7_mubud")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Next" unique_id=916964366]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 7.0
+offset_bottom = 30.0
+grow_horizontal = 2
+text = "Next Day"
+label_settings = SubResource("LabelSettings_j6npo")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
 [connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="IdleTimer" to="IdleTimer" method="_on_timeout"]
+[connection signal="pressed" from="Next" to="Next" method="_on_pressed"]
