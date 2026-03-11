@@ -51,6 +51,7 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 120
@@ -60,6 +61,7 @@ theme_override_constants/margin_bottom = 10
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1422033951]
 layout_mode = 2
+theme_override_constants/separation = 4
 
 [node name="Play" type="TextureButton" parent="MarginContainer/VBoxContainer" unique_id=1977710476]
 layout_mode = 2
@@ -122,6 +124,28 @@ horizontal_alignment = 1
 vertical_alignment = 1
 uppercase = true
 
+[node name="Quit" type="TextureButton" parent="MarginContainer/VBoxContainer" unique_id=1164808703]
+layout_mode = 2
+size_flags_vertical = 0
+texture_normal = ExtResource("2_ioe73")
+texture_pressed = ExtResource("3_j3h1s")
+texture_hover = ExtResource("4_igis3")
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Quit" unique_id=81285421]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 7.0
+offset_bottom = 30.0
+grow_horizontal = 2
+text = "QUIT
+"
+label_settings = SubResource("LabelSettings_j3h1s")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Play" to="." method="_on_play_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Settings" to="." method="_on_settings_pressed"]
 [connection signal="pressed" from="MarginContainer/VBoxContainer/Tutorial" to="." method="_on_tutorial_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

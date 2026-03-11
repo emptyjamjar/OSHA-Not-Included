@@ -27,3 +27,7 @@ func _on_tutorial_pressed() -> void:
 	var scene = preload("res://ui/menus/tutorial_menu/tutorial_menu.tscn")
 	var instance = scene.instantiate() as TutorialMenu
 	add_child(instance)
+
+
+func _on_quit_pressed() -> void:
+	get_tree().quit()
