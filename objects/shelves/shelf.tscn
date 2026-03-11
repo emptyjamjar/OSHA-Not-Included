@@ -1,15 +1,18 @@
 [gd_scene format=3 uid="uid://cmysh8kqsje1j"]
 
-[ext_resource type="Texture2D" uid="uid://ddr2t23aido6j" path="res://art/shelf.png" id="1_ep4vj"]
+[ext_resource type="Texture2D" uid="uid://dms1uvw6h6ice" path="res://levels/shared/Temporary Tilemap.png" id="1_ep4vj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nypve"]
-size = Vector2(32, 16)
+size = Vector2(64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nypve"]
+atlas = ExtResource("1_ep4vj")
+region = Rect2(96, 0, 64, 64)
 
 [node name="Shelf" type="StaticBody2D" unique_id=1206098896]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1705772933]
-position = Vector2(0, 8)
 shape = SubResource("RectangleShape2D_nypve")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=628488997]
-texture = ExtResource("1_ep4vj")
+texture = SubResource("AtlasTexture_nypve")
