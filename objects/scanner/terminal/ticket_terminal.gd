@@ -1,6 +1,7 @@
 extends Area2D
 class_name TicketTerminal 
 
+signal ticketsEmpty
 @export var ticket: Ticket
 
 @onready var interaction_area: InteractionArea = $InteractionArea
@@ -32,7 +33,8 @@ func _on_interact():
 		if !Ticket_Manager.visible_queue.is_empty():
 			Ticket_Manager.active_ticket = Ticket_Manager.visible_queue[0]
 		else:
-			printerr("Ticket manager's visible queue is empty")
+			print("Ticket manager's visible queue is empty")
+			ticketsEmpty.emit()
 
 		ticket_queue_ui.visible = true 
 		Ticket_Manager.update_queue_ui()

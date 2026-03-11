@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cj5ikori0r3jt"]
+[gd_scene format=3 uid="uid://d0maw17r7yja7"]
 
 [ext_resource type="PackedScene" uid="uid://chidjbuid2cgd" path="res://levels/shared/World.tscn" id="1_7sc4i"]
 [ext_resource type="Script" uid="uid://cpt2knie07vvo" path="res://core/systems/needs/health_component.gd" id="2_e2o6t"]
@@ -15,8 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://sxf3e0qydlfv" path="res://objects/packager/packager.tscn" id="12_hb5m1"]
 [ext_resource type="PackedScene" uid="uid://cv4vrnpxs40bf" path="res://objects/restroom/washroom.tscn" id="12_iotsf"]
 [ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="13_lc2xo"]
-[ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="15_e8heu"]
 [ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
+[ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="17_8onr1"]
+[ext_resource type="PackedScene" uid="uid://u3cnys6nkx03" path="res://levels/warehouse_01/layout/walls.tscn" id="18_kgoe6"]
 
 [sub_resource type="GDScript" id="GDScript_7sc4i"]
 script/source = "extends Node2D
@@ -70,7 +71,7 @@ anchor_mode = 0
 [node name="HUD" parent="Camera2D" unique_id=830642951 instance=ExtResource("2_ryrav")]
 
 [node name="Player" parent="." unique_id=2112891127 instance=ExtResource("5_rvswv")]
-position = Vector2(323, 263)
+position = Vector2(612, 282)
 
 [node name="HealthComponent" type="Node" parent="Player" unique_id=1337526708]
 script = ExtResource("2_e2o6t")
@@ -89,13 +90,15 @@ position = Vector2(640, 192)
 scale = Vector2(0.40825486, 0.38389248)
 
 [node name="Conveyor" parent="." unique_id=1135306595 groups=["conveyor"] instance=ExtResource("8_j5wjh")]
-position = Vector2(101, 363)
+position = Vector2(550, 249)
+rotation = 3.1415927
 
 [node name="TicketTerminal" parent="." unique_id=982348100 instance=ExtResource("6_ryrav")]
-position = Vector2(368, 392)
+position = Vector2(501, 394)
 
 [node name="VendingMachine" parent="." unique_id=1840311720 instance=ExtResource("11_mfdv2")]
-position = Vector2(117, 248)
+position = Vector2(646, 392)
+rotation = -1.5707964
 scale = Vector2(0.3295734, 0.3295734)
 
 [node name="Washroom" parent="." unique_id=585966862 instance=ExtResource("12_iotsf")]
@@ -118,16 +121,15 @@ grow_horizontal = 1
 grow_vertical = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Score" parent="." unique_id=1161969462 instance=ExtResource("15_e8heu")]
-visible = false
-top_level = true
-position = Vector2(-1, 18)
-
 [node name="Manager" parent="." unique_id=565657217 node_paths=PackedStringArray("patrol_paths_at_root", "out_bounds_area") instance=ExtResource("16_80cx4")]
 position = Vector2(601.6738, 425)
 collision_mask = 2
 patrol_paths_at_root = NodePath("../PatrolPaths")
 out_bounds_area = NodePath("../OutBoundsArea")
+
+[node name="Score" parent="." unique_id=1161969462 instance=ExtResource("17_8onr1")]
+visible = false
+top_level = true
 
 [node name="PatrolPaths" type="Node2D" parent="." unique_id=351301721]
 
@@ -140,7 +142,7 @@ position = Vector2(575.688, 191)
 position = Vector2(416.7741, 320)
 
 [node name="p1_3" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1365977136]
-position = Vector2(414.77518, 226)
+position = Vector2(415, 268)
 
 [node name="p1_4" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1875373551]
 position = Vector2(-76.95828, 226)
@@ -157,7 +159,7 @@ position = Vector2(704.61804, 325)
 position = Vector2(478.7405, 290)
 
 [node name="p2_4" type="Marker2D" parent="PatrolPaths/Path2" unique_id=87527126]
-position = Vector2(476.74158, 411)
+position = Vector2(509, 346)
 
 [node name="Path3" type="Node2D" parent="PatrolPaths" unique_id=1497011237]
 
@@ -172,6 +174,8 @@ position = Vector2(416.77408, 193)
 
 [node name="p3_4" type="Marker2D" parent="PatrolPaths/Path3" unique_id=29843830]
 position = Vector2(723.6078, 184)
+
+[node name="Walls" parent="." unique_id=897807902 instance=ExtResource("18_kgoe6")]
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
 [connection signal="get_money" from="Shipper" to="Score" method="_on_shipper_get_money"]
