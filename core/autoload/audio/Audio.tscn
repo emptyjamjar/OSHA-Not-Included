@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://cpauy0iyhojqc"]
 
 [ext_resource type="Script" uid="uid://b72tj52ytleqi" path="res://core/autoload/audio/audio.gd" id="1_k1vdp"]
-[ext_resource type="AudioStream" uid="uid://cgl88u7o7pfxr" path="res://core/autoload/audio/audio_assets/interface_sounds_final/click_003.ogg" id="2_jsxp3"]
-[ext_resource type="AudioStream" uid="uid://ptb5gjroh765" path="res://core/autoload/audio/audio_assets/interface_sounds_final/82378__gynation__paper-flip-2.wav" id="3_0k6me"]
-[ext_resource type="AudioStream" uid="uid://bskya1b4lusr5" path="res://core/autoload/audio/audio_assets/interface_sounds_final/536782__egomassive__flip.ogg" id="4_gtvgh"]
+[ext_resource type="AudioStream" uid="uid://cgl88u7o7pfxr" path="res://core/autoload/audio/audio_assets/interface_sounds/click_003.ogg" id="2_jsxp3"]
+[ext_resource type="AudioStream" uid="uid://ptb5gjroh765" path="res://core/autoload/audio/audio_assets/interface_sounds/82378__gynation__paper-flip-2.wav" id="3_0k6me"]
+[ext_resource type="AudioStream" uid="uid://bskya1b4lusr5" path="res://core/autoload/audio/audio_assets/interface_sounds/536782__egomassive__flip.ogg" id="4_gtvgh"]
 [ext_resource type="AudioStream" uid="uid://dupg5bdasp64w" path="res://core/autoload/audio/audio_assets/world_sounds/toilet.ogg" id="5_gtvgh"]
 [ext_resource type="AudioStream" uid="uid://cwy7p50xkkj2q" path="res://core/autoload/audio/audio_assets/world_sounds/vending_machine.ogg" id="6_j5bvv"]
 [ext_resource type="AudioStream" uid="uid://dt5l1qgpgqfj4" path="res://core/autoload/audio/audio_assets/music/level1_loop.wav" id="7_nxjot"]
