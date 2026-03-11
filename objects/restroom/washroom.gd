@@ -32,14 +32,13 @@ func _on_interact():
 	var player := get_tree().get_first_node_in_group("player")
 	player.process_mode = Node.PROCESS_MODE_DISABLED
 	player.visible = false
+	Audio.play_toilet()
 	
 	# Simulate waiting time in washroom
 	await get_tree().create_timer(3.0).timeout
 	player.process_mode = Node.PROCESS_MODE_INHERIT
 	player.visible = true
 	player.last_direction.x = -1
-
-	print("TIMER STOPPED")
 	
 	# apply effect
 	if player:

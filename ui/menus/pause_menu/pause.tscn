@@ -22,6 +22,7 @@ animations = [{
 
 [node name="Control" type="Control" unique_id=1566201169]
 process_mode = 3
+z_index = 2
 layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
@@ -42,14 +43,15 @@ scale = Vector2(19.218952, 10.82104)
 color = Color(0.15170373, 0.15170373, 0.26711738, 0.55700004)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=235870937]
+position = Vector2(0, 36)
 sprite_frames = SubResource("SpriteFrames_b8b55")
 
 [node name="Label" type="Label" parent="." unique_id=1509560840]
 layout_mode = 0
 offset_left = -68.0
-offset_top = -100.0
+offset_top = -64.0
 offset_right = 68.0
-offset_bottom = -52.0
+offset_bottom = -16.0
 text = "PAUSED"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -57,9 +59,9 @@ vertical_alignment = 1
 [node name="Resume" type="TextureButton" parent="." unique_id=1812980109]
 layout_mode = 0
 offset_left = -64.0
-offset_top = -44.0
+offset_top = -8.0
 offset_right = 64.0
-offset_bottom = -12.0
+offset_bottom = 24.0
 texture_normal = ExtResource("3_ytg8p")
 texture_pressed = ExtResource("4_tnyp8")
 texture_hover = ExtResource("5_6rct4")
@@ -79,9 +81,9 @@ vertical_alignment = 1
 [node name="Menu" type="TextureButton" parent="." unique_id=986626887]
 layout_mode = 0
 offset_left = -64.0
-offset_top = 36.0
+offset_top = 72.0
 offset_right = 64.0
-offset_bottom = 68.0
+offset_bottom = 104.0
 texture_normal = ExtResource("3_ytg8p")
 texture_pressed = ExtResource("4_tnyp8")
 texture_hover = ExtResource("5_6rct4")
@@ -101,9 +103,9 @@ vertical_alignment = 1
 [node name="Settings" type="TextureButton" parent="." unique_id=550608397]
 layout_mode = 0
 offset_left = -64.0
-offset_top = -4.0
+offset_top = 32.0
 offset_right = 64.0
-offset_bottom = 28.0
+offset_bottom = 64.0
 texture_normal = ExtResource("3_ytg8p")
 texture_pressed = ExtResource("4_tnyp8")
 texture_hover = ExtResource("5_6rct4")

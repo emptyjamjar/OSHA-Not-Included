@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://cpauy0iyhojqc"]
+
+[ext_resource type="Script" uid="uid://b72tj52ytleqi" path="res://core/autoload/audio/audio.gd" id="1_k1vdp"]
+[ext_resource type="AudioStream" uid="uid://cgl88u7o7pfxr" path="res://core/autoload/audio/audio_assets/interface_sounds/click_003.ogg" id="2_jsxp3"]
+[ext_resource type="AudioStream" uid="uid://ptb5gjroh765" path="res://core/autoload/audio/audio_assets/interface_sounds/82378__gynation__paper-flip-2.wav" id="3_0k6me"]
+[ext_resource type="AudioStream" uid="uid://bskya1b4lusr5" path="res://core/autoload/audio/audio_assets/interface_sounds/536782__egomassive__flip.ogg" id="4_gtvgh"]
+[ext_resource type="AudioStream" uid="uid://dupg5bdasp64w" path="res://core/autoload/audio/audio_assets/world_sounds/toilet.ogg" id="5_gtvgh"]
+[ext_resource type="AudioStream" uid="uid://cwy7p50xkkj2q" path="res://core/autoload/audio/audio_assets/world_sounds/vending_machine.ogg" id="6_j5bvv"]
+[ext_resource type="AudioStream" uid="uid://dt5l1qgpgqfj4" path="res://core/autoload/audio/audio_assets/music/level1_loop.wav" id="7_nxjot"]
+
+[node name="Audio" type="Node2D" unique_id=343061640]
+script = ExtResource("1_k1vdp")
+
+[node name="Click" type="AudioStreamPlayer" parent="." unique_id=253182636]
+stream = ExtResource("2_jsxp3")
+bus = &"SFX"
+
+[node name="ExitClick" type="AudioStreamPlayer" parent="." unique_id=996050759]
+stream = ExtResource("2_jsxp3")
+pitch_scale = 0.75
+bus = &"SFX"
+
+[node name="OpenMenu" type="AudioStreamPlayer" parent="." unique_id=1658505649]
+stream = ExtResource("3_0k6me")
+bus = &"SFX"
+
+[node name="CloseMenu" type="AudioStreamPlayer" parent="." unique_id=87801361]
+stream = ExtResource("4_gtvgh")
+bus = &"SFX"
+
+[node name="Toilet" type="AudioStreamPlayer" parent="." unique_id=1245100637]
+stream = ExtResource("5_gtvgh")
+volume_db = -6.5
+bus = &"SFX"
+
+[node name="VendingMachine" type="AudioStreamPlayer" parent="." unique_id=1900080037]
+stream = ExtResource("6_j5bvv")
+volume_db = -3.628
+bus = &"SFX"
+
+[node name="Music" type="AudioStreamPlayer" parent="." unique_id=2068551632]
+process_mode = 3
+stream = ExtResource("7_nxjot")
+volume_db = -2.016
+autoplay = true
+bus = &"Music"

@@ -47,6 +47,8 @@ action_name = "view tickets"
 shape = SubResource("RectangleShape2D_3twg7")
 
 [node name="TicketUI" parent="." unique_id=1152314469 instance=ExtResource("5_2t2yn")]
+layer = -1
 visible = false
 
 [node name="TicketQueueUI" parent="." unique_id=734139000 instance=ExtResource("6_4wgmk")]
+layer = -1

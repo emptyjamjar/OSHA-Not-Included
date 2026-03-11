@@ -11,14 +11,22 @@ class_name AudioSlider extends HBoxContainer
 
 func _ready() -> void:
 	muteBtn.button_pressed = not AudioServer.is_bus_mute(audioBusIndex)
-	volumeSlider.value = AudioServer.get_bus_volume_db(audioBusIndex)
+	volumeSlider.value = db_to_linear(AudioServer.get_bus_volume_db(audioBusIndex))
 	sliderLabel.text = str(roundi(volumeSlider.ratio * 100))
+	
+	volumeSlider.value_changed.connect(_on_slider_value_changed)
+	volumeSlider.drag_ended.connect(_on_drag_ended)
 
 
 func _on_check_box_toggled(toggled_on: bool) -> void:
 	AudioServer.set_bus_mute(audioBusIndex, not toggled_on)
+	Audio.play_click()
 
 
 func _on_slider_value_changed(value: float) -> void:
-	AudioServer.set_bus_volume_db(audioBusIndex, value)
+	AudioServer.set_bus_volume_db(audioBusIndex, linear_to_db(value))
 	sliderLabel.text = str(roundi(volumeSlider.ratio * 100))
+	
+	
+func _on_drag_ended(_value_changed: bool) -> void:
+	Audio.play_click()

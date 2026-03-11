@@ -50,6 +50,7 @@ func _on_audio_pressed() -> void:
 func _change_scroll_container_child(tab: int):
 	if tab == curTab:
 		return
+	Audio.play_click()
 	curTab = tab
 	if scrollContainer.get_child_count() > 0:
 		scrollContainer.get_child(0).queue_free()
@@ -71,6 +72,7 @@ func _on_btn_toggle(toggledBtn: TextureButton) -> void:
 
 
 func _on_exit_pressed() -> void:
+	Audio.play_exit_click()
 	exit_pressed.emit()
 	queue_free()
 

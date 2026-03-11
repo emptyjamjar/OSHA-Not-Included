@@ -105,17 +105,16 @@ position = Vector2(744, 304)
 scale = Vector2(0.24458057, 0.24458057)
 
 [node name="Pause" parent="." unique_id=1566201169 instance=ExtResource("13_lc2xo")]
-visible = false
 top_level = true
 anchors_preset = 0
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-offset_left = 400.0
-offset_top = 272.0
-offset_right = 400.0
-offset_bottom = 272.0
+offset_left = 384.0
+offset_top = 216.0
+offset_right = 384.0
+offset_bottom = 216.0
 grow_horizontal = 1
 grow_vertical = 1
 metadata/_edit_use_anchors_ = true
@@ -128,7 +127,6 @@ out_bounds_area = NodePath("../OutBoundsArea")
 
 [node name="Score" parent="." unique_id=1161969462 instance=ExtResource("17_8onr1")]
 visible = false
-top_level = true
 
 [node name="PatrolPaths" type="Node2D" parent="." unique_id=351301721]
 

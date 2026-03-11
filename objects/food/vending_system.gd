@@ -87,6 +87,7 @@ func buy_item(item: ItemData) -> bool:
 	
 	currency -= item.price
 	print("Bought item: ", item.name)
+	Audio.play_vending_machine()
 	return true
 
 func free_previous_slots():
