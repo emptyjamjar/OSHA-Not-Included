@@ -119,6 +119,7 @@ grow_vertical = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Score" parent="." unique_id=1161969462 instance=ExtResource("15_e8heu")]
+visible = false
 
 [node name="Manager" parent="." unique_id=565657217 node_paths=PackedStringArray("patrol_paths_at_root", "out_bounds_area") instance=ExtResource("16_80cx4")]
 position = Vector2(601.6738, 425)
