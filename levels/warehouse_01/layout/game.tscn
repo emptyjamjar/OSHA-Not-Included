@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://d0maw17r7yja7"]
+[gd_scene format=3 uid="uid://d0maw17r7yja7"]
 
 [ext_resource type="PackedScene" uid="uid://chidjbuid2cgd" path="res://levels/shared/World.tscn" id="1_7sc4i"]
 [ext_resource type="Script" uid="uid://cpt2knie07vvo" path="res://core/systems/needs/health_component.gd" id="2_e2o6t"]
@@ -15,10 +15,9 @@
 [ext_resource type="PackedScene" uid="uid://sxf3e0qydlfv" path="res://objects/packager/packager.tscn" id="12_hb5m1"]
 [ext_resource type="PackedScene" uid="uid://cv4vrnpxs40bf" path="res://objects/restroom/washroom.tscn" id="12_iotsf"]
 [ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="13_lc2xo"]
-[ext_resource type="Script" uid="uid://dj2x2g3bdufl1" path="res://core/systems/scoring/productivity_manager/productivity_manager.gd" id="15_80cx4"]
 [ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
-[ext_resource type="Script" uid="uid://ci5uk6gffqdwp" path="res://core/systems/scoring/productivity_manager/idle_timer.gd" id="16_e8heu"]
-[ext_resource type="Texture2D" uid="uid://be5kpdcsfdx3o" path="res://levels/shared/wall.png" id="19_kgoe6"]
+[ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="17_8onr1"]
+[ext_resource type="PackedScene" uid="uid://u3cnys6nkx03" path="res://levels/warehouse_01/layout/walls.tscn" id="18_kgoe6"]
 
 [sub_resource type="GDScript" id="GDScript_7sc4i"]
 script/source = "extends Node2D
@@ -46,31 +45,6 @@ func _on_shipper_get_money() -> void:
 	hud.update_money(money)
 	
 "
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qi1hw"]
-texture = ExtResource("19_kgoe6")
-0:0/0 = 0
-1:0/0 = 0
-2:0/0 = 0
-3:0/0 = 0
-0:1/0 = 0
-1:1/0 = 0
-2:1/0 = 0
-3:1/0 = 0
-0:2/0 = 0
-1:2/0 = 0
-2:2/0 = 0
-3:2/0 = 0
-0:3/0 = 0
-1:3/0 = 0
-2:3/0 = 0
-3:3/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_wth8k"]
-sources/0 = SubResource("TileSetAtlasSource_qi1hw")
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oopfc"]
-size = Vector2(32, 32)
 
 [node name="Game" type="Node2D" unique_id=645817684 groups=["game"]]
 y_sort_enabled = true
@@ -147,18 +121,15 @@ grow_horizontal = 1
 grow_vertical = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Score" type="Node2D" parent="." unique_id=1007668771]
-script = ExtResource("15_80cx4")
-
-[node name="IdleTimer" type="Timer" parent="Score" unique_id=1775782488]
-wait_time = 5.0
-script = ExtResource("16_e8heu")
-
 [node name="Manager" parent="." unique_id=565657217 node_paths=PackedStringArray("patrol_paths_at_root", "out_bounds_area") instance=ExtResource("16_80cx4")]
 position = Vector2(601.6738, 425)
 collision_mask = 2
 patrol_paths_at_root = NodePath("../PatrolPaths")
 out_bounds_area = NodePath("../OutBoundsArea")
+
+[node name="Score" parent="." unique_id=1161969462 instance=ExtResource("17_8onr1")]
+visible = false
+top_level = true
 
 [node name="PatrolPaths" type="Node2D" parent="." unique_id=351301721]
 
@@ -204,147 +175,11 @@ position = Vector2(416.77408, 193)
 [node name="p3_4" type="Marker2D" parent="PatrolPaths/Path3" unique_id=29843830]
 position = Vector2(723.6078, 184)
 
-[node name="Walls" type="Node2D" parent="." unique_id=1799370527]
-
-[node name="TileMapLayer" type="TileMapLayer" parent="Walls" unique_id=1047681160]
-tile_map_data = PackedByteArray("AAAWAAwAAAAAAAAAAAAWAA0AAAAAAAEAAAAXAAwAAAABAAAAAAAXAA0AAAABAAEAAAAWAA4AAAAAAAAAAAAWAA8AAAAAAAEAAAAXAA4AAAABAAAAAAAXAA8AAAABAAEAAAAWABAAAAAAAAAAAAAWABEAAAAAAAEAAAAXABAAAAABAAAAAAAXABEAAAABAAEAAAAWABIAAAAAAAAAAAAWABMAAAAAAAEAAAAXABIAAAABAAAAAAAXABMAAAABAAEAAAAUABAAAAAAAAAAAAAUABEAAAAAAAEAAAAVABAAAAABAAAAAAAVABEAAAABAAEAAAAUABIAAAAAAAAAAAAUABMAAAAAAAEAAAAVABIAAAABAAAAAAAVABMAAAABAAEAAAASABIAAAAAAAAAAAASABMAAAAAAAEAAAATABIAAAABAAAAAAATABMAAAABAAEAAAAWABoAAAAAAAAAAAAWABsAAAAAAAEAAAAXABoAAAABAAAAAAAXABsAAAABAAEAAAAUABoAAAAAAAAAAAAUABsAAAAAAAEAAAAVABoAAAABAAAAAAAVABsAAAABAAEAAAASABoAAAAAAAAAAAASABsAAAAAAAEAAAATABoAAAABAAAAAAATABsAAAABAAEAAAAQABoAAAAAAAAAAAAQABsAAAAAAAEAAAARABoAAAABAAAAAAARABsAAAABAAEAAAAOABoAAAAAAAAAAAAOABsAAAAAAAEAAAAPABoAAAABAAAAAAAPABsAAAABAAEAAAALABoAAAAAAAAAAAALABsAAAAAAAEAAAAMABoAAAAAAAAAAAAMABsAAAAAAAEAAAANABoAAAABAAAAAAANABsAAAABAAEAAAAJABoAAAABAAAAAAAJABsAAAABAAEAAAAKABoAAAABAAAAAAAKABsAAAABAAEAAAAIABoAAAAAAAAAAAAIABsAAAAAAAEAAAAQABYAAAAAAAAAAAAQABcAAAAAAAEAAAARABYAAAABAAAAAAARABcAAAABAAEAAAASABQAAAAAAAAAAAASABUAAAAAAAEAAAATABQAAAABAAAAAAATABUAAAABAAEAAAAQABQAAAAAAAAAAAAQABUAAAAAAAEAAAARABQAAAABAAAAAAARABUAAAABAAEAAAAOABYAAAAAAAAAAAAOABcAAAAAAAEAAAAPABYAAAABAAAAAAAPABcAAAABAAEAAAAKABQAAAAAAAAAAAAKABUAAAAAAAEAAAALABQAAAABAAAAAAALABUAAAABAAEAAAAGABoAAAAAAAAAAAAGABsAAAAAAAEAAAAHABoAAAABAAAAAAAHABsAAAABAAEAAAAGABgAAAAAAAAAAAAGABkAAAAAAAEAAAAHABgAAAABAAAAAAAHABkAAAABAAEAAAAGABYAAAAAAAAAAAAGABcAAAAAAAEAAAAHABYAAAABAAAAAAAHABcAAAABAAEAAAAGABQAAAAAAAAAAAAGABUAAAAAAAEAAAAHABQAAAABAAAAAAAHABUAAAABAAEAAAAGABIAAAAAAAAAAAAGABMAAAAAAAEAAAAHABIAAAABAAAAAAAHABMAAAABAAEAAAAMABYAAAAAAAAAAAAMABcAAAAAAAEAAAANABYAAAABAAAAAAANABcAAAABAAEAAAAGABAAAAAAAAAAAAAGABEAAAAAAAEAAAAHABAAAAABAAAAAAAHABEAAAABAAEAAAAGAA4AAAAAAAAAAAAGAA8AAAAAAAEAAAAHAA4AAAABAAAAAAAHAA8AAAABAAEAAAAQABIAAAAAAAAAAAAQABMAAAAAAAEAAAARABIAAAABAAAAAAARABMAAAABAAEAAAAIABAAAAAAAAAAAAAIABEAAAAAAAEAAAAJABAAAAABAAAAAAAJABEAAAABAAEAAAAKABAAAAAAAAAAAAAKABEAAAAAAAEAAAALABAAAAABAAAAAAALABEAAAABAAEAAAAGAAwAAAAAAAAAAAAGAA0AAAAAAAEAAAAHAAwAAAABAAAAAAAHAA0AAAABAAEAAAA=")
-tile_set = SubResource("TileSet_wth8k")
-
-[node name="Area2D" type="StaticBody2D" parent="Walls" unique_id=592172379]
-collision_layer = 3
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/Area2D" unique_id=164671307]
-position = Vector2(368, 431.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Walls/Area2D" unique_id=2025309344]
-position = Vector2(336, 431.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D3" type="CollisionShape2D" parent="Walls/Area2D" unique_id=221066983]
-position = Vector2(304, 431.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D4" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1746686021]
-position = Vector2(272, 431.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D5" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1184873541]
-position = Vector2(240, 431.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D6" type="CollisionShape2D" parent="Walls/Area2D" unique_id=2088255140]
-position = Vector2(208, 431.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D7" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1906567436]
-position = Vector2(176, 431.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D8" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1281556816]
-position = Vector2(144, 431.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D9" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1674994029]
-position = Vector2(112, 431.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D10" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1015155067]
-position = Vector2(112, 398.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D11" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1967315031]
-position = Vector2(112, 365.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D12" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1554983968]
-position = Vector2(112, 332.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D13" type="CollisionShape2D" parent="Walls/Area2D" unique_id=790909601]
-position = Vector2(112, 299.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D14" type="CollisionShape2D" parent="Walls/Area2D" unique_id=202999777]
-position = Vector2(112, 271.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D15" type="CollisionShape2D" parent="Walls/Area2D" unique_id=403431461]
-position = Vector2(144, 272.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D16" type="CollisionShape2D" parent="Walls/Area2D" unique_id=807339462]
-position = Vector2(175, 272.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D17" type="CollisionShape2D" parent="Walls/Area2D" unique_id=783618465]
-position = Vector2(112, 239.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D18" type="CollisionShape2D" parent="Walls/Area2D" unique_id=695447316]
-position = Vector2(112, 208.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D19" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1506711286]
-position = Vector2(175, 336.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D20" type="CollisionShape2D" parent="Walls/Area2D" unique_id=470200869]
-position = Vector2(207, 368.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D21" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1170681252]
-position = Vector2(240, 368.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D22" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1619333989]
-position = Vector2(272, 368.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D23" type="CollisionShape2D" parent="Walls/Area2D" unique_id=584336881]
-position = Vector2(272, 335.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D24" type="CollisionShape2D" parent="Walls/Area2D" unique_id=335187362]
-position = Vector2(304, 335.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D25" type="CollisionShape2D" parent="Walls/Area2D" unique_id=809312216]
-position = Vector2(304, 304.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D26" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1665723291]
-position = Vector2(272, 304.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D27" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1871070230]
-position = Vector2(336, 304.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D28" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1517440822]
-position = Vector2(336, 272.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D29" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1211384298]
-position = Vector2(368, 272.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D30" type="CollisionShape2D" parent="Walls/Area2D" unique_id=751221745]
-position = Vector2(368, 240.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D31" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1152001376]
-position = Vector2(368, 208.5)
-shape = SubResource("RectangleShape2D_oopfc")
-
-[node name="CollisionShape2D32" type="CollisionShape2D" parent="Walls/Area2D" unique_id=1171215521]
-position = Vector2(368, 304.5)
-shape = SubResource("RectangleShape2D_oopfc")
+[node name="Walls" parent="." unique_id=897807902 instance=ExtResource("18_kgoe6")]
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
-[connection signal="get_money" from="Shipper" to="Score" method="_on_shipper_add_score"]
+[connection signal="get_money" from="Shipper" to="Score" method="_on_shipper_get_money"]
 [connection signal="health_change" from="Player/HealthComponent" to="Camera2D/HUD" method="_on_health_component_health_change"]
 [connection signal="needs_change" from="Player/NeedsComponent" to="Camera2D/HUD" method="_on_needs_component_needs_change"]
+[connection signal="ticketsEmpty" from="TicketTerminal" to="Score" method="_on_ticket_terminal_tickets_empty"]
 [connection signal="washroom_used" from="Washroom" to="Score" method="_on_washroom_washroom_used"]
-[connection signal="timeout" from="Score/IdleTimer" to="Score" method="_on_idle_timer_timeout"]
-[connection signal="timeout" from="Score/IdleTimer" to="Score/IdleTimer" method="_on_timeout"]
