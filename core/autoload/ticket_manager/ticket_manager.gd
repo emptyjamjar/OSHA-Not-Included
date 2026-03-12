@@ -1,6 +1,7 @@
 extends Node
 class_name TicketManager
 
+signal ticket_empty
 var all_tickets: Array[Ticket] = [] # 12 tickets for the level - can update it later
 var visible_queue: Array[Ticket] = [] # max 4 tickets 
 var timers: Dictionary = {} # ticket --> Timer 
@@ -244,8 +245,8 @@ func register_queue_ui(ui: CanvasLayer):
 #create ticket function
 func generate_random_ticket() -> Ticket:
 	if ticket_templates.is_empty(): 
-		push_error("No more ticket templates available!")
-		print("THE FUCK")
+		print("No more ticket templates available!")
+		ticket_empty.emit()
 		return 
 	var t := Ticket.new() # set new timer 
 	# ticket layout
@@ -372,7 +373,7 @@ func reset() -> void:
 	all_tickets.clear()
 	visible_queue.clear()
 	active_ticket = null
-	if level > 5: 
+	if level < 5: 
 		level += 1
 	else: 
 		level = 1 # RESET point (infinite levels)
