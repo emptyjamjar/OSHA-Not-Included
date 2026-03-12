@@ -1,10 +1,12 @@
 extends Node
 class_name TicketManager
 
+signal ticket_empty
 var all_tickets: Array[Ticket] = [] # 12 tickets for the level - can update it later
 var visible_queue: Array[Ticket] = [] # max 4 tickets 
 var timers: Dictionary = {} # ticket --> Timer 
 var max_visible: int = 4
+var level: int = 1
 var ticket_templates : Array = []
 var ticket_available: int 
 
@@ -19,56 +21,57 @@ var active_ticket: Ticket = null
 var queue_UI: CanvasLayer 
 
 func _init() -> void:
-	ticket_templates = [
-		{
-			"id": 1,
-			"name": "Lost Package",
-			"desc": "Find the missing package in the warehouse.",
-			"goal": "Package found!",
-			"reward": 50,
-			"perf": 1, 
-			"time_min": 40, 
-			"time_max": 60, 
-			"min_items": 1, 
-			"max_items": 1
-		},
-		{
-			"id": 2,
-			"name": "Scanner Malfunction",
-			"desc": "Diagnose the broken scanner.\nShip the replacement parts!",
-			"goal": "Parts fixed!",
-			"reward": 30,
-			"perf": 1, 
-			"time_min": 30, 
-			"time_max": 40, 
-			"min_items": 1,
-			"max_items": 1
-		},
-		{
-			"id": 3,
-			"name": "School Supplies!",
-			"desc": "New things for school comeback.\nShip the wanted items!!",
-			"goal": "Supplies shipped!",
-			"reward": 30,
-			"perf": 1, 
-			"time_min": 30, 
-			"time_max": 40, 
-			"min_items": 1,
-			"max_items": 1
-		},
+	#ticket_templates = [
 		#{
-			#"id": 4,
-			#"name": "Item Shortage",
-			#"desc": "Customer at home now.\nHelp her buy the missing items!",
-			#"goal": "Order finished!",
+			#"id": 1,
+			#"name": "Lost Package",
+			#"desc": "Find the missing package in the warehouse.",
+			#"goal": "Package found!",
+			#"reward": 50,
+			#"perf": 1, 
+			#"time_min": 40, 
+			#"time_max": 60, 
+			#"min_items": 1, 
+			#"max_items": 1
+		#},
+		#{
+			#"id": 2,
+			#"name": "Scanner Malfunction",
+			#"desc": "Diagnose the broken scanner.\nShip the replacement parts!",
+			#"goal": "Parts fixed!",
 			#"reward": 30,
 			#"perf": 1, 
 			#"time_min": 30, 
 			#"time_max": 40, 
 			#"min_items": 1,
 			#"max_items": 1
-		#}
-	]
+		#},
+		#{
+			#"id": 3,
+			#"name": "School Supplies!",
+			#"desc": "School comeback begins.\nShip the wanted items!",
+			#"goal": "Supplies shipped!",
+			#"reward": 30,
+			#"perf": 1, 
+			#"time_min": 30, 
+			#"time_max": 40, 
+			#"min_items": 1,
+			#"max_items": 1
+		#},
+		##{
+			##"id": 4,
+			##"name": "Item Shortage",
+			##"desc": "Customer at home now.\nHelp her buy the missing items!",
+			##"goal": "Order finished!",
+			##"reward": 30,
+			##"perf": 1, 
+			##"time_min": 30, 
+			##"time_max": 40, 
+			##"min_items": 1,
+			##"max_items": 1
+		##}
+	#]
+	load_templates_for_level(level)
 	print("TicketManager READY, templates loaded:", ticket_templates.size())
 	ticket_available = ticket_templates.size()
 
@@ -78,6 +81,16 @@ func _ready():
 	add_to_group("ticket_manager")
 	# generate_level_ticket(12)
 
+func load_templates_for_level(level: int): 
+	var path := "res://objects/scanner/terminal/level%d_tickets.gd" % level
+	var script = load(path)
+	if script == null: 
+		print("Cannot find path to the ticket files")
+		return 
+	var instance = script.new()
+	ticket_templates = instance.get_templates()
+	ticket_available = ticket_templates.size()
+	print("Loaded", ticket_available, "ticket templates for level", level)
 
 func on_game_start():
 	var item_db = get_tree().get_first_node_in_group("conveyor")
@@ -232,8 +245,8 @@ func register_queue_ui(ui: CanvasLayer):
 #create ticket function
 func generate_random_ticket() -> Ticket:
 	if ticket_templates.is_empty(): 
-		push_error("No more ticket templates available!")
-		print("THE FUCK")
+		print("No more ticket templates available!")
+		ticket_empty.emit()
 		return 
 	var t := Ticket.new() # set new timer 
 	# ticket layout
@@ -356,62 +369,16 @@ func finish_ticket():
 			print("All tickets completed!")
 			
 			
-func reset(new_ticket_count: int = 3) -> void:
+func reset() -> void:
 	all_tickets.clear()
 	visible_queue.clear()
 	active_ticket = null
-
-	ticket_templates = [
-			{
-			"id": 1,
-			"name": "Lost Package",
-			"desc": "Find the missing package in the warehouse.",
-			"goal": "Package found!",
-			"reward": 50,
-			"perf": 1,
-			"time_min": 40,
-			"time_max": 60,
-			"min_items": 1,
-			"max_items": 1
-			},
-			{
-			"id": 2,
-			"name": "Scanner Malfunction",
-			"desc": "Diagnose the broken scanner.\nShip the replacement parts!",
-			"goal": "Parts fixed!",
-			"reward": 30,
-			"perf": 1,
-			"time_min": 30,
-			"time_max": 40,
-			"min_items": 1,
-			"max_items": 1
-			},
-			{
-			"id": 3,
-			"name": "School Supplies!",
-			"desc": "New things for school comeback.\nShip the wanted items!!",
-			"goal": "Supplies shipped!",
-			"reward": 30,
-			"perf": 1,
-			"time_min": 30,
-			"time_max": 40,
-			"min_items": 1,
-			"max_items": 1
-			},
-			{
-			"id": 4,
-			"name": "Item Shortage",
-			"desc": "Customer at home now.\nHelp her buy the missing items!",
-			"goal": "Order finished!",
-			"reward": 30,
-			"perf": 1, 
-			"time_min": 50, 
-			"time_max": 60, 
-			"min_items": 1,
-			"max_items": 1
-			}
-		]
+	if level < 5: 
+		level += 1
+	else: 
+		level = 1 # RESET point (infinite levels)
+	load_templates_for_level(level)
 	ticket_available = ticket_templates.size()
 
 	# Regenerate
-	generate_level_ticket(new_ticket_count)
+	generate_level_ticket(ticket_available)

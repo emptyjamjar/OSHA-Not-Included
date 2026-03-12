@@ -28,7 +28,7 @@ func _on_interact():
 		print("Terminal activated")
 		print("Templates at interact:", Ticket_Manager.ticket_templates.size())
 		#Ticket_Manager.generate_level_ticket(Ticket_Manager.ticket_available)
-		Ticket_Manager.generate_level_ticket(4)
+		Ticket_Manager.generate_level_ticket(6)
 		# SET THE ACTIVE TICKET
 		if !Ticket_Manager.visible_queue.is_empty():
 			Ticket_Manager.active_ticket = Ticket_Manager.visible_queue[0]
