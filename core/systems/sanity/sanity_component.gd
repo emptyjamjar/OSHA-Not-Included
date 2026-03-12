@@ -47,3 +47,9 @@ func check_milestones() -> Dictionary:
 # Stub effect. Intended to cause an effect to sanity.
 func trigger_effect(node : Node) -> bool:
 	return true
+
+func get_max_sanity():
+	return sanity_cap
+	
+func get_sanity():
+	return value

@@ -273,6 +273,9 @@ animations = [{
 "speed": 4.0
 }]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_em52k"]
+radius = 70.0
+
 [node name="Player" type="CharacterBody2D" unique_id=2112891127 groups=["player"]]
 collision_layer = 2
 motion_mode = 1
@@ -285,3 +288,10 @@ shape = SubResource("RectangleShape2D_g2els")
 sprite_frames = SubResource("SpriteFrames_j5vpa")
 animation = &"idle_up"
 autoplay = "idle_down"
+
+[node name="SanityArea" type="Area2D" parent="." unique_id=1675091596]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SanityArea" unique_id=1967021166]
+shape = SubResource("CircleShape2D_em52k")
+
+[connection signal="area_entered" from="SanityArea" to="." method="_on_sanity_area_area_entered"]

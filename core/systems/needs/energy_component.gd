@@ -12,8 +12,9 @@ var energy : float
 
 
 @export var regen_rate: float = 5.0  #energy per second
-@export var drain_rate: float = 0.05 #base drain per second
+@export var drain_rate: float = 0.5 #base drain per second
 var draining := false 
+signal energy_change()
 
 var hold_time: float = 0.0	# how long the player has been doing the work
 
@@ -33,12 +34,19 @@ func energy_deduction(delta:float) -> void:
 	
 	energy = clamp(energy - amount, 0.0, MAX_ENERGY)
 	
+func get_max_energy():
+	return MAX_ENERGY
+
+func get_energy():
+	return energy
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	if draining: 
 		hold_time += delta
 		energy_deduction(delta)
+		energy_change.emit()
 	else: 
 		hold_time = 0.0
 		regain_energy(delta)
+		energy_change.emit()

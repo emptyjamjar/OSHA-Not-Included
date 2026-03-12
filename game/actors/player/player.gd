@@ -6,9 +6,12 @@ class_name Player extends CharacterBody2D
 @onready var animated_sprite : AnimatedSprite2D = $AnimatedSprite2D
 @onready var energy_component: EnergyComponent = $EnergyComponent
 @onready var needs_component: NeedsComponent = $NeedsComponent
+@onready var sanity_component: SanityComponent = $SanityComponent
+@onready var sanity_area: Area2D = $SanityArea
 @onready var viewport_rect = get_viewport_rect()
 
 @export var move_speed := 150
+@export var slow_speed := 75
 @export var push_speed := 20
 @export var sprint_speed := 1.5
 var player_needs: bool = true
@@ -49,15 +52,24 @@ func _physics_process(_delta: float) -> void:
 		else:
 			animated_sprite.play("idle_down" if last_direction.y > 0 else "idle_up")
 
-	
-	if (Input.is_action_pressed("sprint")):
-		animated_sprite.speed_scale = 1.5
-		velocity = direction * move_speed * sprint_speed
-		move_and_slide()
+	if energy_component.draining:
+		if (Input.is_action_pressed("sprint")):
+			animated_sprite.speed_scale = 1.5
+			velocity = direction * slow_speed * sprint_speed
+			move_and_slide()
+		else:
+			animated_sprite.speed_scale = 1
+			velocity = direction * slow_speed
+			move_and_slide()
 	else:
-		animated_sprite.speed_scale = 1
-		velocity = direction * move_speed
-		move_and_slide()
+		if (Input.is_action_pressed("sprint")):
+			animated_sprite.speed_scale = 1.5
+			velocity = direction * move_speed * sprint_speed
+			move_and_slide()
+		else:
+			animated_sprite.speed_scale = 1
+			velocity = direction * move_speed
+			move_and_slide()
 
 	var screen_size = get_viewport_rect().size
 	var sprite_width_half = get_animated_sprite_dimensions().x / 2.0
@@ -74,8 +86,15 @@ func _process(_delta: float) -> void:
 		needs_component.rising = true
 	else:
 		needs_component.rising = false
+	
 
 
 ## Returns the full dimensions of the player's animated sprite in a Vector2i
 func get_animated_sprite_dimensions() -> Vector2i:
 	return animated_sprite.sprite_frames.get_frame_texture(animated_sprite.animation, animated_sprite.frame).get_size()
+
+
+func _on_sanity_area_area_entered(area: Area2D) -> void:
+	for overlapped_body in sanity_area.get_overlapping_bodies():
+		if overlapped_body.is_in_group("Manager"):
+			sanity_component.decrease(10)

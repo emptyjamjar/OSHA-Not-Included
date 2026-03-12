@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://cv4vrnpxs40bf" path="res://objects/restroom/washroom.tscn" id="12_iotsf"]
 [ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="13_lc2xo"]
 [ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="15_e8heu"]
-[ext_resource type="PackedScene" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
+[ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
 
 [sub_resource type="GDScript" id="GDScript_7sc4i"]
 script/source = "extends Node2D
@@ -121,7 +121,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Score" parent="." unique_id=1161969462 instance=ExtResource("15_e8heu")]
 visible = false
 
-[node name="Manager" parent="." unique_id=565657217 node_paths=PackedStringArray("patrol_paths_at_root", "out_bounds_area") instance=ExtResource("16_80cx4")]
+[node name="Manager" parent="." unique_id=565657217 node_paths=PackedStringArray("patrol_paths_at_root", "out_bounds_area") groups=["Manager"] instance=ExtResource("16_80cx4")]
 position = Vector2(601.6738, 425)
 collision_mask = 2
 patrol_paths_at_root = NodePath("../PatrolPaths")
@@ -174,6 +174,8 @@ position = Vector2(723.6078, 184)
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
 [connection signal="get_money" from="Shipper" to="Score" method="_on_shipper_get_money"]
 [connection signal="health_change" from="Player/HealthComponent" to="Camera2D/HUD" method="_on_health_component_health_change"]
+[connection signal="energy_change" from="Player/EnergyComponent" to="Camera2D/HUD" method="_on_energy_component_energy_change"]
 [connection signal="needs_change" from="Player/NeedsComponent" to="Camera2D/HUD" method="_on_needs_component_needs_change"]
+[connection signal="sanity_changed" from="Player/SanityComponent" to="Camera2D/HUD" method="_on_sanity_component_sanity_changed"]
 [connection signal="ticketsEmpty" from="TicketTerminal" to="Score" method="_on_ticket_terminal_tickets_empty"]
 [connection signal="washroom_used" from="Washroom" to="Score" method="_on_washroom_washroom_used"]
