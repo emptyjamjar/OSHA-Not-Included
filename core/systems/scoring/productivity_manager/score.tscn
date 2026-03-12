@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://lr2pyeohab3a" path="res://ui/widgets/buttons/ButtonDefault.png" id="4_nsn5p"]
 [ext_resource type="Texture2D" uid="uid://cm0to3pv0uikr" path="res://ui/widgets/buttons/ButtonPressed.png" id="5_mubud"]
 [ext_resource type="Texture2D" uid="uid://btey00488kkp5" path="res://ui/widgets/buttons/ButtonHover.png" id="6_hl4pr"]
-[ext_resource type="Script" path="res://core/systems/scoring/productivity_manager/next.gd" id="7_mubud"]
+[ext_resource type="Script" uid="uid://c56k0cmxwtgjb" path="res://core/systems/scoring/productivity_manager/next.gd" id="7_mubud"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_j6npo"]
 font_size = 22

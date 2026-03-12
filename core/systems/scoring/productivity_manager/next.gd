@@ -13,4 +13,5 @@ func _process(delta: float) -> void:
 func _on_pressed() -> void:
 	get_tree().paused = false
 	Audio.play_click()
+	Ticket_Manager.reset(4)
 	get_tree().change_scene_to_file("res://levels/warehouse_01/layout/game.tscn")
