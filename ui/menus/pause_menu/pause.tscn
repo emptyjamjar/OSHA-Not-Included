@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://cwcjgawy0towo" path="res://ui/menus/pause_menu/mockup.png" id="1_k0utw"]
 [ext_resource type="Script" uid="uid://bx55qlq7n468w" path="res://ui/menus/pause_menu/pause_menu.gd" id="1_pk8xl"]
+[ext_resource type="LabelSettings" uid="uid://ch4rycdvqikvf" path="res://ui/menus/navy_blue_title.tres" id="3_tnyp8"]
 [ext_resource type="Texture2D" uid="uid://lr2pyeohab3a" path="res://ui/widgets/buttons/ButtonDefault.png" id="3_ytg8p"]
 [ext_resource type="Texture2D" uid="uid://cm0to3pv0uikr" path="res://ui/widgets/buttons/ButtonPressed.png" id="4_tnyp8"]
 [ext_resource type="Texture2D" uid="uid://btey00488kkp5" path="res://ui/widgets/buttons/ButtonHover.png" id="5_6rct4"]
@@ -53,6 +54,7 @@ offset_top = -64.0
 offset_right = 68.0
 offset_bottom = -16.0
 text = "PAUSED"
+label_settings = ExtResource("3_tnyp8")
 horizontal_alignment = 1
 vertical_alignment = 1
 
