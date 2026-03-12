@@ -11,7 +11,7 @@ class_name Player extends CharacterBody2D
 @onready var viewport_rect = get_viewport_rect()
 
 @export var move_speed := 150
-@export var slow_speed := 75
+@export var slow_speed := 125
 @export var push_speed := 20
 @export var sprint_speed := 1.5
 var player_needs: bool = true
