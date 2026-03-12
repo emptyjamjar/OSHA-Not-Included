@@ -40,3 +40,6 @@ func _init(p_type := Type.GENERIC, p_name := "Item", p_description := "Item data
 	uiTexture = p_inv
 	size = p_size
 	weight = p_weight
+	
+func return_type():
+	return type

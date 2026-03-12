@@ -97,3 +97,11 @@ func remove_at(index : int) -> bool:
 
 func reset():
 	contents.fill(null)
+	
+func has_box():
+	for i in contents:
+		if i != null:
+			if i.return_type() != 3:
+				return false
+			else:
+				return true
