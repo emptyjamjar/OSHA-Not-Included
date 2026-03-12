@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bb2mtfafbuatt"]
 
-[ext_resource type="Script" uid="uid://bl5rpdm6xw3cw" path="res://objects/food/shop_slot.gd" id="1_hf6s4"]
+[ext_resource type="Script" path="res://objects/food/shop_slot.gd" id="1_hf6s4"]
 [ext_resource type="Texture2D" uid="uid://6rqgyi2qxpuw" path="res://objects/food/food_assets/soda_coke.png" id="3_7wafy"]
 
 [node name="ShopSlot" type="Panel" unique_id=1253106311]

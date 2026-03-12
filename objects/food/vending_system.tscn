@@ -3,8 +3,13 @@
 [ext_resource type="Script" uid="uid://1lw00b5y277b" path="res://objects/food/vending_system.gd" id="1_xggib"]
 [ext_resource type="Script" uid="uid://c7i8xoc0ofw0m" path="res://objects/items/item_data.gd" id="2_s7a41"]
 [ext_resource type="Resource" uid="uid://d2cesp280t2nt" path="res://objects/food/item/soda.tres" id="3_q2db4"]
+[ext_resource type="Resource" uid="uid://tdrpbq6x6suy" path="res://objects/food/item/protein_bar.tres" id="4_kal06"]
 [ext_resource type="Resource" uid="uid://bloipc0k3kn0x" path="res://objects/food/item/onigiri.tres" id="4_yguo5"]
 [ext_resource type="Script" uid="uid://dja3fqnd27ru1" path="res://objects/food/exit.gd" id="5_a6g0k"]
+[ext_resource type="Texture2D" uid="uid://dbe5ugkrcig6d" path="res://objects/food/warehouse-v-machine.png" id="5_hndpr"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kal06"]
+texture = ExtResource("5_hndpr")
 
 [node name="VendingSystem" type="Control" unique_id=1682295057 node_paths=PackedStringArray("ui", "currency_label", "vending_container", "slot_input")]
 process_mode = 3
@@ -13,13 +18,14 @@ anchors_preset = 0
 script = ExtResource("1_xggib")
 ui = NodePath("UI")
 currency_label = NodePath("UI/Currency")
-vending_items = Array[ExtResource("2_s7a41")]([ExtResource("4_yguo5"), ExtResource("4_yguo5"), ExtResource("3_q2db4"), ExtResource("3_q2db4"), ExtResource("4_yguo5"), ExtResource("3_q2db4"), ExtResource("3_q2db4"), ExtResource("3_q2db4"), ExtResource("3_q2db4")])
+vending_items = Array[ExtResource("2_s7a41")]([ExtResource("4_yguo5"), ExtResource("4_kal06"), ExtResource("3_q2db4"), ExtResource("4_yguo5"), ExtResource("4_yguo5"), ExtResource("3_q2db4"), ExtResource("4_kal06"), ExtResource("3_q2db4"), ExtResource("4_kal06")])
 vending_container = NodePath("UI/Panel/MarginContainer/VendingInventory")
 slot_input = NodePath("UI/Panel/LineEdit")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=715410091]
 
 [node name="Currency" type="Label" parent="UI" unique_id=1919819601]
+visible = false
 anchors_preset = -1
 anchor_left = -0.0328125
 anchor_top = -0.019444445
@@ -41,35 +47,23 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -153.0
-offset_top = -153.0
-offset_right = 153.0
-offset_bottom = 153.0
+offset_left = -288.0
+offset_top = -152.0
+offset_right = 384.0
+offset_bottom = 216.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-
-[node name="Label" type="Label" parent="UI/Panel" unique_id=175638953]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -73.16177
-offset_top = 7.0
-offset_right = 73.16177
-offset_bottom = 32.0
-grow_horizontal = 2
-theme_override_font_sizes/font_size = 16
-text = "Vending Machine"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_styles/panel = SubResource("StyleBoxTexture_kal06")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/Panel" unique_id=1120294155]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 144.0
+offset_top = 24.0
+offset_right = -224.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 70
@@ -79,8 +73,8 @@ theme_override_constants/margin_bottom = 40
 
 [node name="VendingInventory" type="GridContainer" parent="UI/Panel/MarginContainer" unique_id=1012539820]
 layout_mode = 2
-theme_override_constants/h_separation = 25
-theme_override_constants/v_separation = 15
+theme_override_constants/h_separation = 40
+theme_override_constants/v_separation = 50
 columns = 3
 
 [node name="LineEdit" type="LineEdit" parent="UI/Panel" unique_id=877089204]
@@ -90,10 +84,10 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -42.145172
-offset_top = -32.0
-offset_right = 44.145172
-offset_bottom = -7.0
+offset_left = 139.0
+offset_top = -266.0
+offset_right = 219.0
+offset_bottom = -239.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_font_sizes/font_size = 12
@@ -104,9 +98,10 @@ emoji_menu_enabled = false
 
 [node name="Exit" type="Button" parent="UI/Panel" unique_id=1681868968]
 layout_mode = 0
-offset_left = 280.0
-offset_right = 305.0
-offset_bottom = 27.0
+offset_left = 536.0
+offset_top = 8.0
+offset_right = 561.0
+offset_bottom = 35.0
 text = "X"
 script = ExtResource("5_a6g0k")
 
