@@ -398,6 +398,18 @@ func reset(new_ticket_count: int = 3) -> void:
 			"min_items": 1,
 			"max_items": 1
 			},
+			{
+			"id": 4,
+			"name": "Item Shortage",
+			"desc": "Customer at home now.\nHelp her buy the missing items!",
+			"goal": "Order finished!",
+			"reward": 30,
+			"perf": 1, 
+			"time_min": 50, 
+			"time_max": 60, 
+			"min_items": 1,
+			"max_items": 1
+			}
 		]
 	ticket_available = ticket_templates.size()
 
