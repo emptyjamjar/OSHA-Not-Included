@@ -178,13 +178,13 @@ func update_queue_ui():
 		bar.max_value = t.max_time
 		bar.value = t.remaining_time
 		# color change based on time left
-		#var ratio = float(t.remaining_time) / float(t.max_time)
-		#if ratio < 0.25:
-			#bar.modulate = Color.RED
-		#elif ratio < 0.5:
-			#bar.modulate = Color.YELLOW
-		#else:
-			#bar.modulate = Color.GREEN
+		var ratio = float(t.remaining_time) / float(t.max_time)
+		if ratio < 0.25:
+			bar.modulate = Color('#ff0044', 0.25) # red
+		elif ratio < 0.5:
+			bar.modulate = Color('#ffc300', 0.25) # yellow
+		else:
+			bar.modulate = Color('#00b515', 0.25) # green
 
 	
 		# Required items
@@ -354,3 +354,52 @@ func finish_ticket():
 		else:
 			active_ticket = null
 			print("All tickets completed!")
+			
+			
+func reset(new_ticket_count: int = 3) -> void:
+	all_tickets.clear()
+	visible_queue.clear()
+	active_ticket = null
+
+	ticket_templates = [
+			{
+			"id": 1,
+			"name": "Lost Package",
+			"desc": "Find the missing package in the warehouse.",
+			"goal": "Package found!",
+			"reward": 50,
+			"perf": 1,
+			"time_min": 40,
+			"time_max": 60,
+			"min_items": 1,
+			"max_items": 1
+			},
+			{
+			"id": 2,
+			"name": "Scanner Malfunction",
+			"desc": "Diagnose the broken scanner.\nShip the replacement parts!",
+			"goal": "Parts fixed!",
+			"reward": 30,
+			"perf": 1,
+			"time_min": 30,
+			"time_max": 40,
+			"min_items": 1,
+			"max_items": 1
+			},
+			{
+			"id": 3,
+			"name": "School Supplies!",
+			"desc": "New things for school comeback.\nShip the wanted items!!",
+			"goal": "Supplies shipped!",
+			"reward": 30,
+			"perf": 1,
+			"time_min": 30,
+			"time_max": 40,
+			"min_items": 1,
+			"max_items": 1
+			},
+		]
+	ticket_available = ticket_templates.size()
+
+	# Regenerate
+	generate_level_ticket(new_ticket_count)
