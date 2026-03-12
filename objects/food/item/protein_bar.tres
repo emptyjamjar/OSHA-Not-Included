@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://tdrpbq6x6suy"]
+
+[ext_resource type="Script" uid="uid://c7i8xoc0ofw0m" path="res://objects/items/item_data.gd" id="1_t7ett"]
+[ext_resource type="Texture2D" uid="uid://dp0l0xh3grjra" path="res://objects/food/food_assets/warehouse-protein-bar.png" id="2_w0krf"]
+
+[resource]
+script = ExtResource("1_t7ett")
+type = 2
+name = "Protein Bar"
+price = 5.0
+description = "It's filling"
+texture = ExtResource("2_w0krf")
+metadata/_custom_type_script = "uid://c7i8xoc0ofw0m"
