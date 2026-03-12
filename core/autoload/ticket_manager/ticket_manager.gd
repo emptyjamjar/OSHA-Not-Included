@@ -47,7 +47,7 @@ func _init() -> void:
 		{
 			"id": 3,
 			"name": "School Supplies!",
-			"desc": "New things for school comeback.\nShip the wanted items!!",
+			"desc": "School comeback begins.\nShip the wanted items!",
 			"goal": "Supplies shipped!",
 			"reward": 30,
 			"perf": 1, 

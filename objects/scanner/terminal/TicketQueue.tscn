@@ -103,28 +103,28 @@ offset_left = -28.800003
 offset_top = -19.94203
 offset_right = 28.0
 offset_bottom = -13.449278
-theme_override_font_sizes/normal_font_size = 3
+theme_override_font_sizes/normal_font_size = 5
 text = "Title"
 fit_content = true
 metadata/_edit_use_anchors_ = true
 
 [node name="TicketDescription" type="RichTextLabel" parent="HBoxContainer/Slot1/AnimatedSprite2D" unique_id=266063604]
 self_modulate = Color(0.1428582, 0.14285824, 0.1428582, 1)
-offset_left = -28.800001
-offset_top = -15.304346
-offset_right = 23.199991
-offset_bottom = -6.028982
-theme_override_font_sizes/normal_font_size = 2
+offset_left = -27.50421
+offset_top = -14.781783
+offset_right = 24.495783
+offset_bottom = -5.506419
+theme_override_font_sizes/normal_font_size = 4
 text = "Description"
 fit_content = true
 metadata/_edit_use_anchors_ = true
 
 [node name="RequiredItemsContainer" type="VBoxContainer" parent="HBoxContainer/Slot1/AnimatedSprite2D" unique_id=1866141633]
 clip_contents = true
-offset_left = -27.492958
-offset_top = -6.4537826
-offset_right = 8.113041
-offset_bottom = 11.294216
+offset_left = -27.50421
+offset_top = -2.231813
+offset_right = 8.101789
+offset_bottom = 15.516186
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot2" type="Control" parent="HBoxContainer" unique_id=680985875]
@@ -152,28 +152,28 @@ offset_left = -28.800003
 offset_top = -19.94203
 offset_right = 28.0
 offset_bottom = -13.449278
-theme_override_font_sizes/normal_font_size = 3
+theme_override_font_sizes/normal_font_size = 5
 text = "Title"
 fit_content = true
 metadata/_edit_use_anchors_ = true
 
 [node name="TicketDescription" type="RichTextLabel" parent="HBoxContainer/Slot2/AnimatedSprite2D" unique_id=1587925023]
 self_modulate = Color(0.1428582, 0.14285824, 0.1428582, 1)
-offset_left = -28.800001
-offset_top = -15.304346
-offset_right = 23.199991
-offset_bottom = -6.028982
-theme_override_font_sizes/normal_font_size = 2
+offset_left = -27.684
+offset_top = -14.78
+offset_right = 24.315992
+offset_bottom = -5.504636
+theme_override_font_sizes/normal_font_size = 4
 text = "Description"
 fit_content = true
 metadata/_edit_use_anchors_ = true
 
 [node name="RequiredItemsContainer" type="VBoxContainer" parent="HBoxContainer/Slot2/AnimatedSprite2D" unique_id=597350513]
 clip_contents = true
-offset_left = -27.492958
-offset_top = -6.4537826
-offset_right = 8.113041
-offset_bottom = 11.294216
+offset_left = -27.493
+offset_top = -2.232
+offset_right = 8.112999
+offset_bottom = 15.515999
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot3" type="Control" parent="HBoxContainer" unique_id=432832531]
@@ -201,28 +201,28 @@ offset_left = -28.800003
 offset_top = -19.94203
 offset_right = 28.0
 offset_bottom = -13.449278
-theme_override_font_sizes/normal_font_size = 3
+theme_override_font_sizes/normal_font_size = 5
 text = "Title"
 fit_content = true
 metadata/_edit_use_anchors_ = true
 
 [node name="TicketDescription" type="RichTextLabel" parent="HBoxContainer/Slot3/AnimatedSprite2D" unique_id=1862155246]
 self_modulate = Color(0.1428582, 0.14285824, 0.1428582, 1)
-offset_left = -28.800001
-offset_top = -15.304346
-offset_right = 23.199991
-offset_bottom = -6.028982
-theme_override_font_sizes/normal_font_size = 2
+offset_left = -27.864
+offset_top = -14.78
+offset_right = 24.135992
+offset_bottom = -5.504636
+theme_override_font_sizes/normal_font_size = 4
 text = "Description"
 fit_content = true
 metadata/_edit_use_anchors_ = true
 
 [node name="RequiredItemsContainer" type="VBoxContainer" parent="HBoxContainer/Slot3/AnimatedSprite2D" unique_id=431354000]
 clip_contents = true
-offset_left = -27.492958
-offset_top = -6.4537826
-offset_right = 8.113041
-offset_bottom = 11.294216
+offset_left = -27.493
+offset_top = -2.232
+offset_right = 8.112999
+offset_bottom = 15.515999
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot4" type="Control" parent="HBoxContainer" unique_id=1700340132]
@@ -250,26 +250,26 @@ offset_left = -28.800003
 offset_top = -19.94203
 offset_right = 28.0
 offset_bottom = -13.449278
-theme_override_font_sizes/normal_font_size = 3
+theme_override_font_sizes/normal_font_size = 5
 text = "Title"
 fit_content = true
 metadata/_edit_use_anchors_ = true
 
 [node name="TicketDescription" type="RichTextLabel" parent="HBoxContainer/Slot4/AnimatedSprite2D" unique_id=1068020634]
 self_modulate = Color(0.1428582, 0.14285824, 0.1428582, 1)
-offset_left = -28.800001
-offset_top = -15.304346
-offset_right = 23.199991
-offset_bottom = -6.028982
-theme_override_font_sizes/normal_font_size = 2
+offset_left = -28.044226
+offset_top = -14.781783
+offset_right = 23.955767
+offset_bottom = -5.506419
+theme_override_font_sizes/normal_font_size = 4
 text = "Description"
 fit_content = true
 metadata/_edit_use_anchors_ = true
 
 [node name="RequiredItemsContainer" type="VBoxContainer" parent="HBoxContainer/Slot4/AnimatedSprite2D" unique_id=1773670303]
 clip_contents = true
-offset_left = -26.591549
-offset_top = -6.453783
-offset_right = 9.01445
-offset_bottom = 11.294216
+offset_left = -26.592
+offset_top = -2.232
+offset_right = 9.014
+offset_bottom = 15.515999
 metadata/_edit_use_anchors_ = true
