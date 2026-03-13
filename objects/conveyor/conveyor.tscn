@@ -240,12 +240,10 @@ item_scene = SubResource("Resource_ncid3")
 scale = Vector2(0.666, 0.666)
 
 [node name="Collision_Horizontal" type="CollisionShape2D" parent="StaticBody2D" unique_id=1512575671]
-visible = false
 position = Vector2(104, 20)
 shape = SubResource("RectangleShape2D_ncid3")
 
 [node name="Collision_Vertical" type="CollisionShape2D" parent="StaticBody2D" unique_id=509053654]
-visible = false
 position = Vector2(192, 68)
 shape = SubResource("RectangleShape2D_ywffn")
 
@@ -297,7 +295,7 @@ sprite_frames = SubResource("SpriteFrames_g3few")
 animation = &"Move_Down"
 frame_progress = 0.8266908
 
-[node name="TileMapLayer" type="TileMapLayer" parent="StaticBody2D" unique_id=1815729401]
+[node name="Conveyor Belt TileMap" type="TileMapLayer" parent="StaticBody2D" unique_id=1815729401]
 scale = Vector2(3, 3)
 tile_map_data = PackedByteArray("AAAAAAAAAQAAAAMAAAABAAAAAQABAAIAAAACAAAAAQABAAIAAAADAAAAAQABAAIAAAAEAAAAAQAEAAEAAAAEAAEAAQAAAAEAAAA=")
 tile_set = SubResource("TileSet_ywffn")
