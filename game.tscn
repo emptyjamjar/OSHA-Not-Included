@@ -91,6 +91,9 @@ scale = Vector2(0.40825486, 0.38389248)
 [node name="Conveyor" parent="." unique_id=1135306595 groups=["conveyor"] instance=ExtResource("8_j5wjh")]
 position = Vector2(101, 363)
 
+[node name="Collision_Vertical" parent="Conveyor/StaticBody2D" parent_id_path=PackedInt32Array(1135306595, 1976208908) index="1" unique_id=509053654]
+position = Vector2(207.2072, 67.56757)
+
 [node name="TicketTerminal" parent="." unique_id=982348100 instance=ExtResource("6_ryrav")]
 position = Vector2(368, 392)
 
@@ -179,3 +182,5 @@ position = Vector2(723.6078, 184)
 [connection signal="sanity_changed" from="Player/SanityComponent" to="Camera2D/HUD" method="_on_sanity_component_sanity_changed"]
 [connection signal="ticketsEmpty" from="TicketTerminal" to="Score" method="_on_ticket_terminal_tickets_empty"]
 [connection signal="washroom_used" from="Washroom" to="Score" method="_on_washroom_washroom_used"]
+
+[editable path="Conveyor"]
