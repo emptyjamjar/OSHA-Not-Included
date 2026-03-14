@@ -71,45 +71,44 @@ animations = [{
 [node name="TicketQueueUI" type="CanvasLayer" unique_id=1534765680]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1292286621]
+layout_direction = 2
 offset_right = 1378.5657
 offset_bottom = 114.88048
-scale = Vector2(0.5571007, 0.5571007)
 size_flags_horizontal = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 4
+theme_override_constants/separation = 64
 
 [node name="Slot1" type="Control" parent="HBoxContainer" unique_id=2047756636]
 layout_mode = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/Slot1" unique_id=2884994]
-position = Vector2(70, 58.000004)
-scale = Vector2(2.21875, 1.859375)
 sprite_frames = SubResource("SpriteFrames_6b2ay")
 autoplay = "default"
 frame_progress = 0.5686139
+centered = false
 
 [node name="TimeCountDownBarBackSprite" type="TextureProgressBar" parent="HBoxContainer/Slot1/AnimatedSprite2D" unique_id=388964652]
-offset_left = -18.0
-offset_top = 20.000006
-offset_right = 29.0
-offset_bottom = 28.000006
+offset_left = 14.0
+offset_top = 52.0
+offset_right = 61.0
+offset_bottom = 60.0
 texture_under = ExtResource("2_dsuxn")
 metadata/_edit_use_anchors_ = true
 
 [node name="TimeCountDownBar" type="TextureProgressBar" parent="HBoxContainer/Slot1/AnimatedSprite2D" unique_id=836871361]
-offset_left = -18.0
-offset_top = 20.000002
-offset_right = 29.0
-offset_bottom = 28.000002
+offset_left = 14.0
+offset_top = 52.0
+offset_right = 61.0
+offset_bottom = 60.0
 texture_progress = ExtResource("3_v8ihf")
 metadata/_edit_use_anchors_ = true
 
 [node name="TicketTitle" type="RichTextLabel" parent="HBoxContainer/Slot1/AnimatedSprite2D" unique_id=1825323335]
 self_modulate = Color(0.096204735, 0.09620475, 0.096204735, 1)
-offset_left = -28.800003
-offset_top = -19.94203
-offset_right = 28.0
-offset_bottom = -13.449278
+offset_left = 3.2
+offset_top = 12.0
+offset_right = 60.000004
+offset_bottom = 18.492752
 theme_override_font_sizes/normal_font_size = 5
 text = "Title"
 fit_content = true
@@ -117,10 +116,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="TicketDescription" type="RichTextLabel" parent="HBoxContainer/Slot1/AnimatedSprite2D" unique_id=266063604]
 self_modulate = Color(0.1428582, 0.14285824, 0.1428582, 1)
-offset_left = -27.50421
-offset_top = -14.781783
-offset_right = 24.495783
-offset_bottom = -5.506419
+offset_left = 4.136
+offset_top = 18.0
+offset_right = 56.135994
+offset_bottom = 27.275364
 theme_override_font_sizes/normal_font_size = 4
 text = "Description"
 fit_content = true
@@ -128,44 +127,43 @@ metadata/_edit_use_anchors_ = true
 
 [node name="RequiredItemsContainer" type="VBoxContainer" parent="HBoxContainer/Slot1/AnimatedSprite2D" unique_id=1866141633]
 clip_contents = true
-offset_left = -27.50421
-offset_top = -2.231813
-offset_right = 8.101789
-offset_bottom = 15.516186
+offset_left = 5.408
+offset_top = 29.768
+offset_right = 41.014
+offset_bottom = 47.516
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot2" type="Control" parent="HBoxContainer" unique_id=680985875]
 layout_mode = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/Slot2" unique_id=1455227722]
-position = Vector2(210, 58)
-scale = Vector2(2.21875, 1.859375)
 sprite_frames = SubResource("SpriteFrames_6b2ay")
 autoplay = "default"
 frame_progress = 0.5686139
+centered = false
 
 [node name="TimeCountDownBarBackSprite" type="TextureProgressBar" parent="HBoxContainer/Slot2/AnimatedSprite2D" unique_id=1342371323]
-offset_left = -18.0
-offset_top = 20.000002
-offset_right = 29.0
-offset_bottom = 28.000002
+offset_left = 14.0
+offset_top = 52.0
+offset_right = 61.0
+offset_bottom = 60.0
 texture_under = ExtResource("2_dsuxn")
 metadata/_edit_use_anchors_ = true
 
 [node name="TimeCountDownBar" type="TextureProgressBar" parent="HBoxContainer/Slot2/AnimatedSprite2D" unique_id=1391774862]
-offset_left = -18.0
-offset_top = 20.0
-offset_right = 29.0
-offset_bottom = 28.0
+offset_left = 14.0
+offset_top = 52.0
+offset_right = 61.0
+offset_bottom = 60.0
 texture_progress = ExtResource("3_v8ihf")
 metadata/_edit_use_anchors_ = true
 
 [node name="TicketTitle" type="RichTextLabel" parent="HBoxContainer/Slot2/AnimatedSprite2D" unique_id=1465408278]
 self_modulate = Color(0.096204735, 0.09620475, 0.096204735, 1)
-offset_left = -28.800003
-offset_top = -19.94203
-offset_right = 28.0
-offset_bottom = -13.449278
+offset_left = 3.2
+offset_top = 12.0
+offset_right = 60.000004
+offset_bottom = 18.492752
 theme_override_font_sizes/normal_font_size = 5
 text = "Title"
 fit_content = true
@@ -173,10 +171,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="TicketDescription" type="RichTextLabel" parent="HBoxContainer/Slot2/AnimatedSprite2D" unique_id=1587925023]
 self_modulate = Color(0.1428582, 0.14285824, 0.1428582, 1)
-offset_left = -27.684
-offset_top = -14.78
-offset_right = 24.315992
-offset_bottom = -5.504636
+offset_left = 4.136
+offset_top = 18.0
+offset_right = 56.135994
+offset_bottom = 27.275364
 theme_override_font_sizes/normal_font_size = 4
 text = "Description"
 fit_content = true
@@ -184,44 +182,43 @@ metadata/_edit_use_anchors_ = true
 
 [node name="RequiredItemsContainer" type="VBoxContainer" parent="HBoxContainer/Slot2/AnimatedSprite2D" unique_id=597350513]
 clip_contents = true
-offset_left = -27.493
-offset_top = -2.232
-offset_right = 8.112999
-offset_bottom = 15.515999
+offset_left = 5.408
+offset_top = 29.768
+offset_right = 41.014
+offset_bottom = 47.516
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot3" type="Control" parent="HBoxContainer" unique_id=432832531]
 layout_mode = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/Slot3" unique_id=2106520008]
-position = Vector2(350, 58.000004)
-scale = Vector2(2.21875, 1.859375)
 sprite_frames = SubResource("SpriteFrames_6b2ay")
 autoplay = "default"
 frame_progress = 0.5686139
+centered = false
 
 [node name="TimeCountDownBarBackSprite" type="TextureProgressBar" parent="HBoxContainer/Slot3/AnimatedSprite2D" unique_id=1609744569]
-offset_left = -18.0
-offset_top = 20.000006
-offset_right = 29.0
-offset_bottom = 28.000006
+offset_left = 14.0
+offset_top = 52.0
+offset_right = 61.0
+offset_bottom = 60.0
 texture_under = ExtResource("2_dsuxn")
 metadata/_edit_use_anchors_ = true
 
 [node name="TimeCountDownBar" type="TextureProgressBar" parent="HBoxContainer/Slot3/AnimatedSprite2D" unique_id=1987564752]
-offset_left = -18.0
-offset_top = 20.000002
-offset_right = 29.0
-offset_bottom = 28.000002
+offset_left = 14.0
+offset_top = 52.0
+offset_right = 61.0
+offset_bottom = 60.0
 texture_progress = ExtResource("3_v8ihf")
 metadata/_edit_use_anchors_ = true
 
 [node name="TicketTitle" type="RichTextLabel" parent="HBoxContainer/Slot3/AnimatedSprite2D" unique_id=2014716421]
 self_modulate = Color(0.096204735, 0.09620475, 0.096204735, 1)
-offset_left = -28.800003
-offset_top = -19.94203
-offset_right = 28.0
-offset_bottom = -13.449278
+offset_left = 3.2
+offset_top = 12.0
+offset_right = 60.000004
+offset_bottom = 18.492752
 theme_override_font_sizes/normal_font_size = 5
 text = "Title"
 fit_content = true
@@ -229,10 +226,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="TicketDescription" type="RichTextLabel" parent="HBoxContainer/Slot3/AnimatedSprite2D" unique_id=1862155246]
 self_modulate = Color(0.1428582, 0.14285824, 0.1428582, 1)
-offset_left = -27.864
-offset_top = -14.78
-offset_right = 24.135992
-offset_bottom = -5.504636
+offset_left = 4.136
+offset_top = 18.0
+offset_right = 56.135994
+offset_bottom = 27.275364
 theme_override_font_sizes/normal_font_size = 4
 text = "Description"
 fit_content = true
@@ -240,44 +237,43 @@ metadata/_edit_use_anchors_ = true
 
 [node name="RequiredItemsContainer" type="VBoxContainer" parent="HBoxContainer/Slot3/AnimatedSprite2D" unique_id=431354000]
 clip_contents = true
-offset_left = -27.493
-offset_top = -2.232
-offset_right = 8.112999
-offset_bottom = 15.515999
+offset_left = 5.408
+offset_top = 29.768
+offset_right = 41.014
+offset_bottom = 47.516
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot4" type="Control" parent="HBoxContainer" unique_id=1700340132]
 layout_mode = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/Slot4" unique_id=780171905]
-position = Vector2(489.99997, 58.000004)
-scale = Vector2(2.21875, 1.859375)
 sprite_frames = SubResource("SpriteFrames_6b2ay")
 autoplay = "default"
 frame_progress = 0.5686139
+centered = false
 
 [node name="TimeCountDownBarBackSprite" type="TextureProgressBar" parent="HBoxContainer/Slot4/AnimatedSprite2D" unique_id=1942080217]
-offset_left = -18.0
-offset_top = 20.000006
-offset_right = 29.0
-offset_bottom = 28.000006
+offset_left = 14.0
+offset_top = 52.0
+offset_right = 61.0
+offset_bottom = 60.0
 texture_under = ExtResource("2_dsuxn")
 metadata/_edit_use_anchors_ = true
 
 [node name="TimeCountDownBar" type="TextureProgressBar" parent="HBoxContainer/Slot4/AnimatedSprite2D" unique_id=1631605592]
-offset_left = -18.0
-offset_top = 20.000002
-offset_right = 29.0
-offset_bottom = 28.000002
+offset_left = 14.0
+offset_top = 52.0
+offset_right = 61.0
+offset_bottom = 60.0
 texture_progress = ExtResource("3_v8ihf")
 metadata/_edit_use_anchors_ = true
 
 [node name="TicketTitle" type="RichTextLabel" parent="HBoxContainer/Slot4/AnimatedSprite2D" unique_id=699266893]
 self_modulate = Color(0.096204735, 0.09620475, 0.096204735, 1)
-offset_left = -28.800003
-offset_top = -19.94203
-offset_right = 28.0
-offset_bottom = -13.449278
+offset_left = 3.2
+offset_top = 12.0
+offset_right = 60.000004
+offset_bottom = 18.492752
 theme_override_font_sizes/normal_font_size = 5
 text = "Title"
 fit_content = true
@@ -285,10 +281,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="TicketDescription" type="RichTextLabel" parent="HBoxContainer/Slot4/AnimatedSprite2D" unique_id=1068020634]
 self_modulate = Color(0.1428582, 0.14285824, 0.1428582, 1)
-offset_left = -28.044226
-offset_top = -14.781783
-offset_right = 23.955767
-offset_bottom = -5.506419
+offset_left = 4.136
+offset_top = 18.0
+offset_right = 56.135994
+offset_bottom = 27.275364
 theme_override_font_sizes/normal_font_size = 4
 text = "Description"
 fit_content = true
@@ -296,8 +292,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="RequiredItemsContainer" type="VBoxContainer" parent="HBoxContainer/Slot4/AnimatedSprite2D" unique_id=1773670303]
 clip_contents = true
-offset_left = -26.592
-offset_top = -2.232
-offset_right = 9.014
-offset_bottom = 15.515999
+offset_left = 5.408
+offset_top = 29.768
+offset_right = 41.014
+offset_bottom = 47.516
 metadata/_edit_use_anchors_ = true
