@@ -86,7 +86,6 @@ script = ExtResource("8_7sc4i")
 
 [node name="Packager" parent="." unique_id=2093227932 instance=ExtResource("12_hb5m1")]
 position = Vector2(640, 192)
-scale = Vector2(0.40825486, 0.38389248)
 
 [node name="Conveyor" parent="." unique_id=1135306595 groups=["conveyor"] instance=ExtResource("8_j5wjh")]
 position = Vector2(101, 363)
