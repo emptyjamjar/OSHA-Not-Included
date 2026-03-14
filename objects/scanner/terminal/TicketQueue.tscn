@@ -88,12 +88,19 @@ sprite_frames = SubResource("SpriteFrames_6b2ay")
 autoplay = "default"
 frame_progress = 0.5686139
 
-[node name="TimeCountDownBar" type="TextureProgressBar" parent="HBoxContainer/Slot1/AnimatedSprite2D" unique_id=117550434]
+[node name="TimeCountDownBarBackSprite" type="TextureProgressBar" parent="HBoxContainer/Slot1/AnimatedSprite2D" unique_id=388964652]
 offset_left = -18.0
-offset_top = 20.0
+offset_top = 20.000006
 offset_right = 29.0
-offset_bottom = 28.0
+offset_bottom = 28.000006
 texture_under = ExtResource("2_dsuxn")
+metadata/_edit_use_anchors_ = true
+
+[node name="TimeCountDownBar" type="TextureProgressBar" parent="HBoxContainer/Slot1/AnimatedSprite2D" unique_id=836871361]
+offset_left = -18.0
+offset_top = 20.000002
+offset_right = 29.0
+offset_bottom = 28.000002
 texture_progress = ExtResource("3_v8ihf")
 metadata/_edit_use_anchors_ = true
 
@@ -137,12 +144,19 @@ sprite_frames = SubResource("SpriteFrames_6b2ay")
 autoplay = "default"
 frame_progress = 0.5686139
 
+[node name="TimeCountDownBarBackSprite" type="TextureProgressBar" parent="HBoxContainer/Slot2/AnimatedSprite2D" unique_id=1342371323]
+offset_left = -18.0
+offset_top = 20.000002
+offset_right = 29.0
+offset_bottom = 28.000002
+texture_under = ExtResource("2_dsuxn")
+metadata/_edit_use_anchors_ = true
+
 [node name="TimeCountDownBar" type="TextureProgressBar" parent="HBoxContainer/Slot2/AnimatedSprite2D" unique_id=1391774862]
 offset_left = -18.0
 offset_top = 20.0
 offset_right = 29.0
 offset_bottom = 28.0
-texture_under = ExtResource("2_dsuxn")
 texture_progress = ExtResource("3_v8ihf")
 metadata/_edit_use_anchors_ = true
 
@@ -186,12 +200,19 @@ sprite_frames = SubResource("SpriteFrames_6b2ay")
 autoplay = "default"
 frame_progress = 0.5686139
 
-[node name="TimeCountDownBar" type="TextureProgressBar" parent="HBoxContainer/Slot3/AnimatedSprite2D" unique_id=57675418]
+[node name="TimeCountDownBarBackSprite" type="TextureProgressBar" parent="HBoxContainer/Slot3/AnimatedSprite2D" unique_id=1609744569]
 offset_left = -18.0
-offset_top = 20.0
+offset_top = 20.000006
 offset_right = 29.0
-offset_bottom = 28.0
+offset_bottom = 28.000006
 texture_under = ExtResource("2_dsuxn")
+metadata/_edit_use_anchors_ = true
+
+[node name="TimeCountDownBar" type="TextureProgressBar" parent="HBoxContainer/Slot3/AnimatedSprite2D" unique_id=1987564752]
+offset_left = -18.0
+offset_top = 20.000002
+offset_right = 29.0
+offset_bottom = 28.000002
 texture_progress = ExtResource("3_v8ihf")
 metadata/_edit_use_anchors_ = true
 
@@ -235,12 +256,19 @@ sprite_frames = SubResource("SpriteFrames_6b2ay")
 autoplay = "default"
 frame_progress = 0.5686139
 
-[node name="TimeCountDownBar" type="TextureProgressBar" parent="HBoxContainer/Slot4/AnimatedSprite2D" unique_id=728603532]
+[node name="TimeCountDownBarBackSprite" type="TextureProgressBar" parent="HBoxContainer/Slot4/AnimatedSprite2D" unique_id=1942080217]
 offset_left = -18.0
-offset_top = 20.0
+offset_top = 20.000006
 offset_right = 29.0
-offset_bottom = 28.0
+offset_bottom = 28.000006
 texture_under = ExtResource("2_dsuxn")
+metadata/_edit_use_anchors_ = true
+
+[node name="TimeCountDownBar" type="TextureProgressBar" parent="HBoxContainer/Slot4/AnimatedSprite2D" unique_id=1631605592]
+offset_left = -18.0
+offset_top = 20.000002
+offset_right = 29.0
+offset_bottom = 28.000002
 texture_progress = ExtResource("3_v8ihf")
 metadata/_edit_use_anchors_ = true
 
