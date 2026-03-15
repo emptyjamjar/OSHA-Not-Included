@@ -24,13 +24,13 @@ horizontal_alignment = 1
 layout_mode = 2
 action_name = "move_up"
 
-[node name="MoveDownRebindButton" parent="." unique_id=508526054 instance=ExtResource("3_x1638")]
-layout_mode = 2
-action_name = "move_down"
-
 [node name="MoveLeftRebindButton" parent="." unique_id=174298867 instance=ExtResource("3_x1638")]
 layout_mode = 2
 action_name = "move_left"
+
+[node name="MoveDownRebindButton" parent="." unique_id=508526054 instance=ExtResource("3_x1638")]
+layout_mode = 2
+action_name = "move_down"
 
 [node name="MoveRightRebindButton" parent="." unique_id=790416439 instance=ExtResource("3_x1638")]
 layout_mode = 2
