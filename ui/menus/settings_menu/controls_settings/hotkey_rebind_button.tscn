@@ -6,37 +6,70 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v65qg"]
 
-[node name="HotkeyRebindButton" type="HBoxContainer" unique_id=1776112691]
-anchors_preset = 10
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cj8xu"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_cj8xu"]
+color = Color(0.15294118, 0.15294118, 0.26666668, 1)
+grow_begin = 0.0
+grow_end = 0.0
+
+[node name="HotkeyRebindButton" type="VBoxContainer" unique_id=1544566693 node_paths=PackedStringArray("label", "button")]
+anchors_preset = 15
 anchor_right = 1.0
-offset_bottom = 25.0
+anchor_bottom = 1.0
 grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_v1gvj")
+label = NodePath("HboxContainer/Label")
+button = NodePath("HboxContainer/Button")
+
+[node name="HboxContainer" type="HBoxContainer" parent="." unique_id=1776112691]
+layout_mode = 2
 size_flags_horizontal = 3
 alignment = 1
-script = ExtResource("1_v1gvj")
 
-[node name="VSeparator2" type="VSeparator" parent="." unique_id=1899422804]
+[node name="VSeparator2" type="VSeparator" parent="HboxContainer" unique_id=1899422804]
 layout_mode = 2
 theme_override_constants/separation = 10
 theme_override_styles/separator = SubResource("StyleBoxEmpty_v65qg")
 
-[node name="Label" type="Label" parent="." unique_id=1201774020]
+[node name="Label" type="Label" parent="HboxContainer" unique_id=1201774020]
 layout_mode = 2
 text = "ACTION"
 label_settings = ExtResource("2_v65qg")
 uppercase = true
 
-[node name="VSeparator" type="VSeparator" parent="." unique_id=1491956341]
+[node name="VSeparator" type="VSeparator" parent="HboxContainer" unique_id=1491956341]
 layout_mode = 2
 size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_cj8xu")
 
-[node name="Button" type="Button" parent="." unique_id=663510788]
+[node name="Button" type="Button" parent="HboxContainer" unique_id=663510788]
 layout_mode = 2
 toggle_mode = true
 button_group = ExtResource("3_cj8xu")
 text = "ACTION_KEY"
 
-[node name="VSeparator3" type="VSeparator" parent="." unique_id=1804430363]
+[node name="VSeparator3" type="VSeparator" parent="HboxContainer" unique_id=1804430363]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_v65qg")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=410514725]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="HBoxContainer" unique_id=758165642]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_v65qg")
+
+[node name="HSeparator" type="HSeparator" parent="HBoxContainer" unique_id=563091570]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+theme_override_styles/separator = SubResource("StyleBoxLine_cj8xu")
+
+[node name="VSeparator2" type="VSeparator" parent="HBoxContainer" unique_id=1172621690]
 layout_mode = 2
 theme_override_constants/separation = 10
 theme_override_styles/separator = SubResource("StyleBoxEmpty_v65qg")

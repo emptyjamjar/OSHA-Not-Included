@@ -11,7 +11,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
-theme_override_constants/separation = 16
+theme_override_constants/separation = 20
 script = ExtResource("1_3p7to")
 
 [node name="ControlsLabel" type="Label" parent="." unique_id=148490123]
@@ -20,32 +20,42 @@ text = "Controls"
 label_settings = ExtResource("2_j0dxi")
 horizontal_alignment = 1
 
-[node name="HotkeyRebindButton" parent="." unique_id=1776112691 instance=ExtResource("3_x1638")]
+[node name="MoveUpRebindButton" parent="." unique_id=1776112691 instance=ExtResource("3_x1638")]
 layout_mode = 2
+action_name = "move_up"
 
-[node name="HotkeyRebindButton2" parent="." unique_id=508526054 instance=ExtResource("3_x1638")]
+[node name="MoveDownRebindButton" parent="." unique_id=508526054 instance=ExtResource("3_x1638")]
 layout_mode = 2
+action_name = "move_down"
 
-[node name="HotkeyRebindButton3" parent="." unique_id=174298867 instance=ExtResource("3_x1638")]
+[node name="MoveLeftRebindButton" parent="." unique_id=174298867 instance=ExtResource("3_x1638")]
 layout_mode = 2
+action_name = "move_left"
 
-[node name="HotkeyRebindButton4" parent="." unique_id=790416439 instance=ExtResource("3_x1638")]
+[node name="MoveRightRebindButton" parent="." unique_id=790416439 instance=ExtResource("3_x1638")]
 layout_mode = 2
+action_name = "move_right"
 
-[node name="HotkeyRebindButton5" parent="." unique_id=321818579 instance=ExtResource("3_x1638")]
+[node name="InteractRebindButton" parent="." unique_id=321818579 instance=ExtResource("3_x1638")]
 layout_mode = 2
+action_name = "interact"
 
-[node name="HotkeyRebindButton6" parent="." unique_id=1064137123 instance=ExtResource("3_x1638")]
+[node name="DropRebindButton" parent="." unique_id=226969851 instance=ExtResource("3_x1638")]
 layout_mode = 2
+action_name = "drop"
 
-[node name="HotkeyRebindButton7" parent="." unique_id=112926725 instance=ExtResource("3_x1638")]
+[node name="SprintRebindButton" parent="." unique_id=1064137123 instance=ExtResource("3_x1638")]
 layout_mode = 2
+action_name = "sprint"
 
-[node name="HotkeyRebindButton8" parent="." unique_id=632392272 instance=ExtResource("3_x1638")]
+[node name="BuyRebindButton" parent="." unique_id=112926725 instance=ExtResource("3_x1638")]
 layout_mode = 2
+action_name = "buy"
 
-[node name="HotkeyRebindButton9" parent="." unique_id=963551380 instance=ExtResource("3_x1638")]
+[node name="Slot1RebindButton" parent="." unique_id=632392272 instance=ExtResource("3_x1638")]
 layout_mode = 2
+action_name = "inventory_1"
 
-[node name="HotkeyRebindButton10" parent="." unique_id=37171636 instance=ExtResource("3_x1638")]
+[node name="Slot2RebindButton" parent="." unique_id=963551380 instance=ExtResource("3_x1638")]
 layout_mode = 2
+action_name = "inventory_2"
