@@ -31,6 +31,7 @@ Ticket_Manager="*uid://dd2h2ayjq7ofo"
 Audio="*uid://cpauy0iyhojqc"
 PlayerInventory="*uid://hx53g7dc4i10"
 ItemSpawner="*uid://biwgn8hxrtv3d"
+LoadKeybinds="*uid://df1nx734uoekf"
 
 [display]
 

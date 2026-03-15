@@ -16,6 +16,7 @@ signal exit_pressed
 
 var curTab : int = -1
 var config : ConfigFile
+var isSubMenuOpen := false
 
 enum {
 	CONTROL_TAB,
@@ -34,29 +35,23 @@ func _ready() -> void:
 	# Create settings config file if not created already
 	config = ConfigFile.new()
 	var err = config.load("user://settings.cfg")
+	
 	if err != OK:
-		# Create sections with default values, Audio settings must go first
-		# Audio
-		var volume = db_to_linear(AudioServer.get_bus_volume_db(0))
-		var state = not AudioServer.is_bus_mute(0)
-		config.set_value("Master_Audio", "toggle", state)
-		config.set_value("Master_Audio", "volume", volume)
-		volume = db_to_linear(AudioServer.get_bus_volume_db(1))
-		state = not AudioServer.is_bus_mute(1)
-		config.set_value("SFX_Audio", "toggle", state)
-		config.set_value("SFX_Audio", "volume", volume)
-		volume = db_to_linear(AudioServer.get_bus_volume_db(2))
-		state = not AudioServer.is_bus_mute(2)
-		config.set_value("Music_Audio", "toggle", state)
-		config.set_value("Music_Audio", "volume", volume)
-		# Controls
-		#TODO
 		# Video
 		#TODO
 		# Save settings
 		config.save("user://settings.cfg")
 	
-	_on_audio_pressed()
+	match config.get_value("General", "last_tab", curTab):
+		CONTROL_TAB:
+			controlsBtn.button_pressed = true
+			_on_controls_pressed()
+		VIDEO_TAB:
+			videoBtn.button_pressed = true
+			_on_video_pressed()
+		AUDIO_TAB:
+			audioBtn.button_pressed = true
+			_on_audio_pressed()
 
 
 func _on_controls_pressed() -> void:
@@ -72,19 +67,22 @@ func _on_video_pressed() -> void:
 func _on_audio_pressed() -> void:
 	_on_btn_toggle(audioBtn)
 	_change_scroll_container_child(AUDIO_TAB)
-	
 
 
 ## Scroll container should only ever have 1 child
 func _change_scroll_container_child(tab: int):
-	if tab == curTab:
-		return
+	config = ConfigFile.new()
+	config.load("user://settings.cfg")
 	Audio.play_click()
 	curTab = tab
+	config.set_value("General", "last_tab", curTab)
+	config.save("user://settings.cfg")
 	if scrollContainer.get_child_count() > 0:
 		scrollContainer.get_child(0).queue_free()
 	var instance = load(scenes[tab]).instantiate()
 	instance.config = config
+	if tab == CONTROL_TAB:
+		instance.changing_keybind.connect(_on_sub_menu_changed)
 	scrollContainer.add_child(instance)
 
 
@@ -101,6 +99,8 @@ func _on_btn_toggle(toggledBtn: TextureButton) -> void:
 
 
 func _on_exit_pressed() -> void:
+	if isSubMenuOpen:
+		return
 	Audio.play_exit_click()
 	exit_pressed.emit()
 	queue_free()
@@ -109,3 +109,7 @@ func _on_exit_pressed() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		_on_exit_pressed()
+
+
+func _on_sub_menu_changed(toggled_on: bool) -> void:
+	isSubMenuOpen = toggled_on
