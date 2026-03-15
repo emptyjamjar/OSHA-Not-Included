@@ -12,6 +12,20 @@ extends Node
 var music_volume:float
 
 
+func _ready() -> void:
+	# Load from saved data
+	var config = ConfigFile.new()
+	var err = config.load("user://settings.cfg")
+	if err != OK:
+		return
+	var sections = ["Master_Audio", "SFX_Audio", "Music_Audio"]
+	for bus in range(AudioServer.bus_count):
+		var state = config.get_value(sections[bus], "toggle", true)
+		AudioServer.set_bus_mute(bus, not state)
+		var value = config.get_value(sections[bus], "volume", 100.0)
+		AudioServer.set_bus_volume_db(bus, linear_to_db(value))
+
+
 ## Plays the click sound used for buttons or other click selections
 func play_click():
 	var click = $Click
