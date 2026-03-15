@@ -1,6 +1,9 @@
 ## Tab container for settings.
+##
 ## Buttons will add corresponding menu scenes, found in folder structure, to the
 ## scroll container node. Signals exit_pressed when user is finished.
+## 
+## Settings will be saved/loaded to/from a config file called settings.cfg
 class_name SettingsMenu extends Control
 
 signal exit_pressed
@@ -12,6 +15,7 @@ signal exit_pressed
 @export var scrollContainer : ScrollContainer
 
 var curTab : int = -1
+var config : ConfigFile
 
 enum {
 	CONTROL_TAB,
@@ -27,6 +31,31 @@ const scenes = [
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	# Create settings config file if not created already
+	config = ConfigFile.new()
+	var err = config.load("user://settings.cfg")
+	if err != OK:
+		# Create sections with default values, Audio settings must go first
+		# Audio
+		var volume = db_to_linear(AudioServer.get_bus_volume_db(0))
+		var state = not AudioServer.is_bus_mute(0)
+		config.set_value("Master_Audio", "toggle", state)
+		config.set_value("Master_Audio", "volume", volume)
+		volume = db_to_linear(AudioServer.get_bus_volume_db(1))
+		state = not AudioServer.is_bus_mute(1)
+		config.set_value("SFX_Audio", "toggle", state)
+		config.set_value("SFX_Audio", "volume", volume)
+		volume = db_to_linear(AudioServer.get_bus_volume_db(2))
+		state = not AudioServer.is_bus_mute(2)
+		config.set_value("Music_Audio", "toggle", state)
+		config.set_value("Music_Audio", "volume", volume)
+		# Controls
+		#TODO
+		# Video
+		#TODO
+		# Save settings
+		config.save("user://settings.cfg")
+	
 	_on_audio_pressed()
 
 
@@ -55,6 +84,7 @@ func _change_scroll_container_child(tab: int):
 	if scrollContainer.get_child_count() > 0:
 		scrollContainer.get_child(0).queue_free()
 	var instance = load(scenes[tab]).instantiate()
+	instance.config = config
 	scrollContainer.add_child(instance)
 
 
@@ -66,7 +96,6 @@ func _on_btn_toggle(toggledBtn: TextureButton) -> void:
 	controlLabel.modulate.v = 1
 	videoLabel.modulate.v = 1
 	audioLabel.modulate.v = 1
-	
 	var toggledLabel = toggledBtn.get_child(0) as CanvasItem
 	toggledLabel.modulate.v = 0.4
 
