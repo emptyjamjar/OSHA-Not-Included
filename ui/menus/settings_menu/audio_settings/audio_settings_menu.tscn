@@ -2,11 +2,13 @@
 
 [ext_resource type="LabelSettings" uid="uid://b8igq1w07t223" path="res://ui/menus/navy_blue.tres" id="1_bax0w"]
 [ext_resource type="Script" uid="uid://ivu4mubibp45" path="res://ui/menus/settings_menu/audio_settings/audio_settings_menu.gd" id="1_ulpe7"]
+[ext_resource type="LabelSettings" uid="uid://ch4rycdvqikvf" path="res://ui/menus/navy_blue_title.tres" id="2_pbbvb"]
 [ext_resource type="PackedScene" uid="uid://bfytd6b7n583b" path="res://ui/menus/settings_menu/audio_settings/audio_slider.tscn" id="3_ulpe7"]
 
 [node name="AudioSettingsMenu" type="VBoxContainer" unique_id=598972902 node_paths=PackedStringArray("Master", "SFX", "Music")]
-offset_right = 760.0
-offset_bottom = 161.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
@@ -14,6 +16,12 @@ script = ExtResource("1_ulpe7")
 Master = NodePath("Master")
 SFX = NodePath("SFX")
 Music = NodePath("Music")
+
+[node name="AudioLabel" type="Label" parent="." unique_id=599710161]
+layout_mode = 2
+text = "Audio"
+label_settings = ExtResource("2_pbbvb")
+horizontal_alignment = 1
 
 [node name="MasterLabel" type="Label" parent="." unique_id=1481161778]
 layout_mode = 2

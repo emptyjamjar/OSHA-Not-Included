@@ -1,0 +1,42 @@
+[gd_scene format=3 uid="uid://cm2805tujr5mn"]
+
+[ext_resource type="Script" uid="uid://dirjbfakvbphd" path="res://ui/menus/settings_menu/controls_settings/hotkey_rebind_button.gd" id="1_v1gvj"]
+[ext_resource type="LabelSettings" uid="uid://b8igq1w07t223" path="res://ui/menus/navy_blue.tres" id="2_v65qg"]
+[ext_resource type="ButtonGroup" uid="uid://b5l7gx4578eb4" path="res://ui/menus/settings_menu/controls_settings/hotkey_button_group.tres" id="3_cj8xu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v65qg"]
+
+[node name="HotkeyRebindButton" type="HBoxContainer" unique_id=1776112691]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 25.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+alignment = 1
+script = ExtResource("1_v1gvj")
+
+[node name="VSeparator2" type="VSeparator" parent="." unique_id=1899422804]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_v65qg")
+
+[node name="Label" type="Label" parent="." unique_id=1201774020]
+layout_mode = 2
+text = "ACTION"
+label_settings = ExtResource("2_v65qg")
+uppercase = true
+
+[node name="VSeparator" type="VSeparator" parent="." unique_id=1491956341]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Button" type="Button" parent="." unique_id=663510788]
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("3_cj8xu")
+text = "ACTION_KEY"
+
+[node name="VSeparator3" type="VSeparator" parent="." unique_id=1804430363]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_v65qg")
