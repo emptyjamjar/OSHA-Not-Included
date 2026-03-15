@@ -1,6 +1,9 @@
 ## Button used to rebind controls
 class_name HotkeyRebindButton extends VBoxContainer
 
+signal rebind_started
+signal rebind_ended(action_name: String)
+
 @export var label : Label
 @export var button : Button
 
@@ -24,6 +27,7 @@ func set_text_for_key() -> void:
 
 func _on_button_toggled(toggled_on: bool) -> void:
 	if toggled_on:
+		rebind_started.emit()
 		button.text = "Press any key..."
 		set_process_unhandled_key_input(true)
 	else:
@@ -38,3 +42,4 @@ func _unhandled_key_input(event: InputEvent) -> void:
 	set_process_unhandled_key_input(false)
 	set_text_for_key()
 	button.button_pressed = false
+	rebind_ended.emit(action_name)
