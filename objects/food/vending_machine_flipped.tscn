@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://b5kkxsvnf154u"]
+
+[ext_resource type="Script" uid="uid://g0cm8hh0am4t" path="res://objects/food/vending_machine.gd" id="1_yj4n6"]
+[ext_resource type="Texture2D" uid="uid://cvn74s4s7w2e6" path="res://objects/food/vending machine.png" id="2_ypon2"]
+[ext_resource type="PackedScene" uid="uid://cdhb2euh28ies" path="res://core/components/interaction_area/interaction_area.tscn" id="3_agmbv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p5dhj"]
+size = Vector2(90.5, 158)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h7hfa"]
+size = Vector2(94, 157)
+
+[node name="VendingMachine" type="StaticBody2D" unique_id=1840311720 node_paths=PackedStringArray("interaction_area")]
+script = ExtResource("1_yj4n6")
+interaction_area = NodePath("InteractionArea")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=648677199]
+scale = Vector2(1.0054482, 0.98964304)
+texture = ExtResource("2_ypon2")
+flip_h = true
+hframes = 4
+vframes = 2
+frame = 3
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1724356584]
+position = Vector2(-3.25, 41)
+shape = SubResource("RectangleShape2D_p5dhj")
+debug_color = Color(0.3871518, 0.2810755, 0.7993455, 0.41960785)
+
+[node name="InteractionArea" parent="." unique_id=2104453103 instance=ExtResource("3_agmbv")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=372857546]
+position = Vector2(-28, 42)
+scale = Vector2(1, 1.0070777)
+shape = SubResource("RectangleShape2D_h7hfa")
