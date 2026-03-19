@@ -64,7 +64,6 @@ horizontal_alignment = 1
 custom_minimum_size = Vector2(94, 26)
 layout_mode = 2
 toggle_mode = true
-button_pressed = true
 button_group = ExtResource("3_23gqq")
 texture_normal = ExtResource("3_pfuhs")
 texture_pressed = ExtResource("4_pfuhs")

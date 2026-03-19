@@ -1,6 +1,9 @@
 ## Tab container for settings.
+##
 ## Buttons will add corresponding menu scenes, found in folder structure, to the
 ## scroll container node. Signals exit_pressed when user is finished.
+## 
+## Settings will be saved/loaded to/from a config file called settings.cfg
 class_name SettingsMenu extends Control
 
 signal exit_pressed
@@ -12,6 +15,8 @@ signal exit_pressed
 @export var scrollContainer : ScrollContainer
 
 var curTab : int = -1
+var config : ConfigFile
+var isSubMenuOpen := false
 
 enum {
 	CONTROL_TAB,
@@ -27,7 +32,26 @@ const scenes = [
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	_on_audio_pressed()
+	# Create settings config file if not created already
+	config = ConfigFile.new()
+	var err = config.load("user://settings.cfg")
+	
+	if err != OK:
+		# Video
+		#TODO
+		# Save settings
+		config.save("user://settings.cfg")
+	
+	match config.get_value("General", "last_tab", curTab):
+		CONTROL_TAB:
+			controlsBtn.button_pressed = true
+			_on_controls_pressed()
+		VIDEO_TAB:
+			videoBtn.button_pressed = true
+			_on_video_pressed()
+		AUDIO_TAB:
+			audioBtn.button_pressed = true
+			_on_audio_pressed()
 
 
 func _on_controls_pressed() -> void:
@@ -43,18 +67,22 @@ func _on_video_pressed() -> void:
 func _on_audio_pressed() -> void:
 	_on_btn_toggle(audioBtn)
 	_change_scroll_container_child(AUDIO_TAB)
-	
 
 
 ## Scroll container should only ever have 1 child
 func _change_scroll_container_child(tab: int):
-	if tab == curTab:
-		return
+	config = ConfigFile.new()
+	config.load("user://settings.cfg")
 	Audio.play_click()
 	curTab = tab
+	config.set_value("General", "last_tab", curTab)
+	config.save("user://settings.cfg")
 	if scrollContainer.get_child_count() > 0:
 		scrollContainer.get_child(0).queue_free()
 	var instance = load(scenes[tab]).instantiate()
+	instance.config = config
+	if tab == CONTROL_TAB:
+		instance.changing_keybind.connect(_on_sub_menu_changed)
 	scrollContainer.add_child(instance)
 
 
@@ -66,12 +94,13 @@ func _on_btn_toggle(toggledBtn: TextureButton) -> void:
 	controlLabel.modulate.v = 1
 	videoLabel.modulate.v = 1
 	audioLabel.modulate.v = 1
-	
 	var toggledLabel = toggledBtn.get_child(0) as CanvasItem
 	toggledLabel.modulate.v = 0.4
 
 
 func _on_exit_pressed() -> void:
+	if isSubMenuOpen:
+		return
 	Audio.play_exit_click()
 	exit_pressed.emit()
 	queue_free()
@@ -80,3 +109,7 @@ func _on_exit_pressed() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("pause"):
 		_on_exit_pressed()
+
+
+func _on_sub_menu_changed(toggled_on: bool) -> void:
+	isSubMenuOpen = toggled_on

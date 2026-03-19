@@ -1,3 +1,61 @@
 [gd_scene format=3 uid="uid://cji8762jho2qp"]
 
+[ext_resource type="Script" uid="uid://gkk3mby6vajo" path="res://ui/menus/settings_menu/controls_settings/controls_settings_menu.gd" id="1_3p7to"]
+[ext_resource type="LabelSettings" uid="uid://ch4rycdvqikvf" path="res://ui/menus/navy_blue_title.tres" id="2_j0dxi"]
+[ext_resource type="PackedScene" uid="uid://cm2805tujr5mn" path="res://ui/menus/settings_menu/controls_settings/hotkey_rebind_button.tscn" id="3_x1638"]
+
 [node name="ControlsSettingsMenu" type="VBoxContainer" unique_id=740932850]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 20
+script = ExtResource("1_3p7to")
+
+[node name="ControlsLabel" type="Label" parent="." unique_id=148490123]
+layout_mode = 2
+text = "Controls"
+label_settings = ExtResource("2_j0dxi")
+horizontal_alignment = 1
+
+[node name="MoveUpRebindButton" parent="." unique_id=1776112691 instance=ExtResource("3_x1638")]
+layout_mode = 2
+action_name = "move_up"
+
+[node name="MoveLeftRebindButton" parent="." unique_id=174298867 instance=ExtResource("3_x1638")]
+layout_mode = 2
+action_name = "move_left"
+
+[node name="MoveDownRebindButton" parent="." unique_id=508526054 instance=ExtResource("3_x1638")]
+layout_mode = 2
+action_name = "move_down"
+
+[node name="MoveRightRebindButton" parent="." unique_id=790416439 instance=ExtResource("3_x1638")]
+layout_mode = 2
+action_name = "move_right"
+
+[node name="InteractRebindButton" parent="." unique_id=321818579 instance=ExtResource("3_x1638")]
+layout_mode = 2
+action_name = "interact"
+
+[node name="DropRebindButton" parent="." unique_id=226969851 instance=ExtResource("3_x1638")]
+layout_mode = 2
+action_name = "drop"
+
+[node name="SprintRebindButton" parent="." unique_id=1064137123 instance=ExtResource("3_x1638")]
+layout_mode = 2
+action_name = "sprint"
+
+[node name="BuyRebindButton" parent="." unique_id=112926725 instance=ExtResource("3_x1638")]
+layout_mode = 2
+action_name = "buy"
+
+[node name="Slot1RebindButton" parent="." unique_id=632392272 instance=ExtResource("3_x1638")]
+layout_mode = 2
+action_name = "inventory_1"
+
+[node name="Slot2RebindButton" parent="." unique_id=963551380 instance=ExtResource("3_x1638")]
+layout_mode = 2
+action_name = "inventory_2"
