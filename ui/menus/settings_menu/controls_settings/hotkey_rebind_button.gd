@@ -6,7 +6,6 @@ signal rebind_ended(action_name: String)
 
 @export var label : Label
 @export var button : Button
-
 @export var action_name : String = "action"
 
 
