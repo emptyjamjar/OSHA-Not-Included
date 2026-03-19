@@ -3,9 +3,15 @@
 [ext_resource type="Script" uid="uid://ctv5d2w42au35" path="res://objects/scanner/terminal/ticket_terminal.gd" id="1_3twg7"]
 [ext_resource type="Texture2D" uid="uid://dd8qyir30yfhp" path="res://objects/scanner/terminal/warehouse-computer.png" id="2_3twg7"]
 [ext_resource type="PackedScene" uid="uid://cdhb2euh28ies" path="res://core/components/interaction_area/interaction_area.tscn" id="3_3yids"]
+[ext_resource type="Script" uid="uid://d0emwvf7jtlx3" path="res://objects/scanner/terminal/ready_flicker.gd" id="4_wiggl"]
 [ext_resource type="PackedScene" uid="uid://c6mvf84775rmp" path="res://objects/scanner/terminal/ticket.tscn" id="5_2t2yn"]
 [ext_resource type="TileSet" uid="uid://b62knjg567jhh" path="res://levels/shared/tile_set.tres" id="5_4wgmk"]
 [ext_resource type="PackedScene" uid="uid://bu8gpp7tljufp" path="res://objects/scanner/terminal/TicketQueue.tscn" id="6_4wgmk"]
+
+[sub_resource type="Gradient" id="Gradient_wiggl"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ge43p"]
+gradient = SubResource("Gradient_wiggl")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4wgmk"]
 size = Vector2(65, 37)
@@ -28,6 +34,12 @@ tile_set = ExtResource("5_4wgmk")
 position = Vector2(0, -4.404812)
 scale = Vector2(1.156, 1)
 texture = ExtResource("2_3twg7")
+
+[node name="ReadyFlicker" type="PointLight2D" parent="Sprite2D" unique_id=1602790154]
+texture = SubResource("GradientTexture2D_ge43p")
+script = ExtResource("4_wiggl")
+
+[node name="Timer" type="Timer" parent="Sprite2D/ReadyFlicker" unique_id=1752658332]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=707984188]
 position = Vector2(0.5, 0.5)
@@ -52,3 +64,5 @@ visible = false
 
 [node name="TicketQueueUI" parent="." unique_id=734139000 instance=ExtResource("6_4wgmk")]
 layer = -1
+
+[connection signal="timeout" from="Sprite2D/ReadyFlicker/Timer" to="Sprite2D/ReadyFlicker" method="_on_timer_timeout"]
