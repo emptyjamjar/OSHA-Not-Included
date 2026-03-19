@@ -293,21 +293,23 @@ func generate_random_ticket() -> Ticket:
 # function to track the delivered items 
 # this will check if the required items are shipped or not, does it match 
 # check shipper.gd --> on_interact() 
-func register_delivery(ticket_id: int):
+func register_delivery(ticket_id: int) -> bool:
 	if not active_ticket:
-		return
-
-	var delivered := active_ticket.delivered_items
-	delivered[ticket_id] = delivered.get(ticket_id, 0) + 1
-	
-	# Refresh UI so the player sees the updated counts
-	update_queue_ui()
+		return false
 	
 	if _is_ticket_complete():
 		reach_goal()
 		print("Completed:")
 		print(ticket_id)
-		
+		return false
+
+	var delivered := active_ticket.delivered_items
+	
+	delivered[ticket_id] = delivered.get(ticket_id, 0) + 1
+	
+	# Refresh UI so the player sees the updated counts
+	update_queue_ui()
+	return true
 
 # related to register_delivery() 
 func _is_ticket_complete() -> bool:
@@ -315,6 +317,8 @@ func _is_ticket_complete() -> bool:
 	for req_id in active_ticket.required_items.keys():
 		if active_ticket.delivered_items.get(req_id, 0) < active_ticket.required_items[req_id]:
 			return false
+		#else: 
+			#active_ticket.delivered_items.get(req_id,0) = active.required_items[req_id]
 	return true
 
 
@@ -334,7 +338,7 @@ func reach_goal():
 		# this add extra time for the player to acknowledge that they have completed 
 		# the ticket 
 		var finish_timer := Timer.new()
-		finish_timer.wait_time = 1.5
+		finish_timer.wait_time = 1
 		finish_timer.one_shot = true
 		finish_timer.timeout.connect(finish_ticket)
 		add_child(finish_timer)
