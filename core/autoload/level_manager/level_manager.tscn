@@ -2,23 +2,5 @@
 
 [ext_resource type="Script" uid="uid://8mioeba2l82t" path="res://core/autoload/level_manager/level_manager.gd" id="1_07p4e"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_0rpua"]
-outline_size = 3
-outline_color = Color(0, 0, 0, 1)
-
 [node name="InteractionManager" type="Node2D" unique_id=938102348]
 script = ExtResource("1_07p4e")
-
-[node name="Label" type="Label" parent="." unique_id=308802333]
-z_index = 20
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -48.0
-offset_right = 48.0
-offset_bottom = 23.0
-grow_horizontal = 2
-text = "[E] to pickup"
-label_settings = SubResource("LabelSettings_0rpua")
-horizontal_alignment = 1
-vertical_alignment = 1

@@ -90,10 +90,10 @@ position = Vector2(640, 192)
 scale = Vector2(0.40825486, 0.38389248)
 
 [node name="Conveyor" parent="." unique_id=1135306595 groups=["conveyor"] instance=ExtResource("11_2p8ph")]
-position = Vector2(620, 336)
+position = Vector2(620, 363)
 
 [node name="TicketTerminal" parent="." unique_id=982348100 instance=ExtResource("12_3mx75")]
-position = Vector2(470, 424)
+position = Vector2(470, 403)
 
 [node name="VendingMachine" parent="." unique_id=1840311720 instance=ExtResource("13_halqj")]
 position = Vector2(403.99994, 279.99997)

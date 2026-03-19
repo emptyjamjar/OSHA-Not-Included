@@ -10,8 +10,13 @@ var levels : Array[NodePath] = [
 var level = 0
 
 func next_level():
-	get_tree().change_scene_to_file(levels[level])
-	level += 1
+	var max_levels = levels.size()
+	if level == max_levels:
+		get_tree().change_scene_to_file(levels[level - 1])
+	else:
+		get_tree().change_scene_to_file(levels[level])
+		level += 1
+	
 
 func reset():
 	level = 0
