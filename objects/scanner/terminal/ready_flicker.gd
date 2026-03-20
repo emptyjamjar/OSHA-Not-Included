@@ -9,9 +9,8 @@ func _ready() -> void:
 	tickets.tickets_done.connect(_on_tickets_done)
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	texture.noise.offset.x = randf() * 1000.0
 
 
 func _on_tickets_done() -> void:
