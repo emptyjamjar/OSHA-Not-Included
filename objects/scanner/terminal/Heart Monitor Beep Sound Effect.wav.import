@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c4yu8mk26dj28"
+path="res://.godot/imported/Heart Monitor Beep Sound Effect.wav-66afa15b6424cf51dd6efd47eed0e0ea.sample"
+
+[deps]
+
+source_file="res://objects/scanner/terminal/Heart Monitor Beep Sound Effect.wav"
+dest_files=["res://.godot/imported/Heart Monitor Beep Sound Effect.wav-66afa15b6424cf51dd6efd47eed0e0ea.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

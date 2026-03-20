@@ -7,6 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://c6mvf84775rmp" path="res://objects/scanner/terminal/ticket.tscn" id="5_2t2yn"]
 [ext_resource type="TileSet" uid="uid://b62knjg567jhh" path="res://levels/shared/tile_set.tres" id="5_4wgmk"]
 [ext_resource type="PackedScene" uid="uid://bu8gpp7tljufp" path="res://objects/scanner/terminal/TicketQueue.tscn" id="6_4wgmk"]
+[ext_resource type="AudioStream" uid="uid://c4yu8mk26dj28" path="res://objects/scanner/terminal/Heart Monitor Beep Sound Effect.wav" id="8_q6qf8"]
+[ext_resource type="Script" uid="uid://c7qhsjjsn78s6" path="res://objects/scanner/terminal/beep.gd" id="9_3e1dk"]
 
 [sub_resource type="Gradient" id="Gradient_wiggl"]
 
@@ -36,10 +38,19 @@ scale = Vector2(1.156, 1)
 texture = ExtResource("2_3twg7")
 
 [node name="ReadyFlicker" type="PointLight2D" parent="Sprite2D" unique_id=1602790154]
+energy = 3.62
 texture = SubResource("GradientTexture2D_ge43p")
 script = ExtResource("4_wiggl")
 
-[node name="Timer" type="Timer" parent="Sprite2D/ReadyFlicker" unique_id=1752658332]
+[node name="Beep" type="AudioStreamPlayer2D" parent="Sprite2D" unique_id=333336414]
+position = Vector2(0, 4.404812)
+scale = Vector2(0.86505187, 1)
+stream = ExtResource("8_q6qf8")
+script = ExtResource("9_3e1dk")
+
+[node name="Timer" type="Timer" parent="Sprite2D" unique_id=1752658332]
+wait_time = 2.0
+autostart = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=707984188]
 position = Vector2(0.5, 0.5)
@@ -65,4 +76,6 @@ visible = false
 [node name="TicketQueueUI" parent="." unique_id=734139000 instance=ExtResource("6_4wgmk")]
 layer = -1
 
-[connection signal="timeout" from="Sprite2D/ReadyFlicker/Timer" to="Sprite2D/ReadyFlicker" method="_on_timer_timeout"]
+[connection signal="activated" from="." to="Sprite2D/ReadyFlicker" method="_on_ticket_terminal_activated"]
+[connection signal="timeout" from="Sprite2D/Timer" to="Sprite2D/ReadyFlicker" method="_on_timer_timeout"]
+[connection signal="timeout" from="Sprite2D/Timer" to="Sprite2D/Beep" method="_on_timer_timeout"]

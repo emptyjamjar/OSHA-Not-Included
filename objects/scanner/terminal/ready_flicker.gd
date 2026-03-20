@@ -1,8 +1,8 @@
 # Light controller for the terminal.
 
 extends PointLight2D
-@onready var timer = $LightTimer
-@onready var tickets = TicketManager
+@onready var timer = $"../Timer"
+@onready var tickets = Ticket_Manager
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -22,3 +22,8 @@ func _on_tickets_done() -> void:
 func _on_timer_timeout() -> void:
 	visible = !visible
 	timer.start()
+
+
+func _on_ticket_terminal_activated() -> void:
+	timer.paused = true
+	visible = false
