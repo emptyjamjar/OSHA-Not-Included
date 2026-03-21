@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://cnumkt0ntauyy"]
+[gd_scene format=4 uid="uid://cnumkt0ntauyy"]
 
 [ext_resource type="Script" uid="uid://dnn46uikhe1lo" path="res://objects/conveyor/conveyor.gd" id="1_ncid3"]
 [ext_resource type="Texture2D" uid="uid://b262ubqhs8k2j" path="res://objects/conveyor/Input_Station.png" id="1_ob2mf"]
@@ -124,6 +124,123 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ncid3"]
+texture = ExtResource("1_ob2mf")
+2:1/animation_columns = 4
+2:1/animation_separation = Vector2i(4, 0)
+2:1/animation_speed = 6.0
+2:1/animation_frame_0/duration = 1.0
+2:1/animation_frame_1/duration = 1.0
+2:1/animation_frame_2/duration = 1.0
+2:1/animation_frame_3/duration = 1.0
+2:1/0 = 0
+2:2/animation_columns = 4
+2:2/animation_separation = Vector2i(4, 0)
+2:2/animation_speed = 6.0
+2:2/animation_frame_0/duration = 1.0
+2:2/animation_frame_1/duration = 1.0
+2:2/animation_frame_2/duration = 1.0
+2:2/animation_frame_3/duration = 1.0
+2:2/0 = 0
+1:2/animation_columns = 4
+1:2/animation_separation = Vector2i(4, 0)
+1:2/animation_speed = 6.0
+1:2/animation_frame_0/duration = 1.0
+1:2/animation_frame_1/duration = 1.0
+1:2/animation_frame_2/duration = 1.0
+1:2/animation_frame_3/duration = 1.0
+1:2/0 = 0
+0:2/animation_columns = 4
+0:2/animation_separation = Vector2i(4, 0)
+0:2/animation_speed = 6.0
+0:2/animation_frame_0/duration = 1.0
+0:2/animation_frame_1/duration = 1.0
+0:2/animation_frame_2/duration = 1.0
+0:2/animation_frame_3/duration = 1.0
+0:2/0 = 0
+0:1/animation_columns = 4
+0:1/animation_separation = Vector2i(4, 0)
+0:1/animation_speed = 6.0
+0:1/animation_frame_0/duration = 1.0
+0:1/animation_frame_1/duration = 1.0
+0:1/animation_frame_2/duration = 1.0
+0:1/animation_frame_3/duration = 1.0
+0:1/0 = 0
+3:0/animation_columns = 4
+3:0/animation_separation = Vector2i(4, 0)
+3:0/animation_speed = 6.0
+3:0/animation_frame_0/duration = 1.0
+3:0/animation_frame_1/duration = 1.0
+3:0/animation_frame_2/duration = 1.0
+3:0/animation_frame_3/duration = 1.0
+3:0/0 = 0
+4:0/animation_columns = 4
+4:0/animation_separation = Vector2i(4, 0)
+4:0/animation_speed = 6.0
+4:0/animation_frame_0/duration = 1.0
+4:0/animation_frame_1/duration = 1.0
+4:0/animation_frame_2/duration = 1.0
+4:0/animation_frame_3/duration = 1.0
+4:0/0 = 0
+4:1/animation_columns = 4
+4:1/animation_separation = Vector2i(4, 0)
+4:1/animation_speed = 6.0
+4:1/animation_frame_0/duration = 1.0
+4:1/animation_frame_1/duration = 1.0
+4:1/animation_frame_2/duration = 1.0
+4:1/animation_frame_3/duration = 1.0
+4:1/0 = 0
+3:1/animation_columns = 4
+3:1/animation_separation = Vector2i(4, 0)
+3:1/animation_speed = 6.0
+3:1/animation_frame_0/duration = 1.0
+3:1/animation_frame_1/duration = 1.0
+3:1/animation_frame_2/duration = 1.0
+3:1/animation_frame_3/duration = 1.0
+3:1/0 = 0
+2:3/animation_columns = 2
+2:3/animation_separation = Vector2i(4, 0)
+2:3/animation_frame_0/duration = 3.75
+2:3/animation_frame_1/duration = 0.25
+2:3/0 = 0
+1:3/animation_columns = 2
+1:3/animation_separation = Vector2i(4, 0)
+1:3/animation_frame_0/duration = 3.75
+1:3/animation_frame_1/duration = 0.25
+1:3/0 = 0
+0:3/animation_columns = 2
+0:3/animation_separation = Vector2i(4, 0)
+0:3/animation_frame_0/duration = 3.75
+0:3/animation_frame_1/duration = 0.25
+0:3/0 = 0
+0:0/animation_columns = 4
+0:0/animation_separation = Vector2i(4, 0)
+0:0/animation_speed = 6.0
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/0 = 0
+1:0/animation_columns = 4
+1:0/animation_separation = Vector2i(4, 0)
+1:0/animation_speed = 6.0
+1:0/animation_frame_0/duration = 1.0
+1:0/animation_frame_1/duration = 1.0
+1:0/animation_frame_2/duration = 1.0
+1:0/animation_frame_3/duration = 1.0
+1:0/0 = 0
+2:0/animation_columns = 4
+2:0/animation_separation = Vector2i(4, 0)
+2:0/animation_speed = 6.0
+2:0/animation_frame_0/duration = 1.0
+2:0/animation_frame_1/duration = 1.0
+2:0/animation_frame_2/duration = 1.0
+2:0/animation_frame_3/duration = 1.0
+2:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_ywffn"]
+sources/1 = SubResource("TileSetAtlasSource_ncid3")
+
 [node name="Conveyor" type="Node2D" unique_id=1135306595]
 script = ExtResource("1_ncid3")
 item_scene = SubResource("Resource_ncid3")
@@ -140,12 +257,14 @@ position = Vector2(192, 68)
 shape = SubResource("RectangleShape2D_ywffn")
 
 [node name="Belt_Input" type="NinePatchRect" parent="StaticBody2D" unique_id=1422485525]
+visible = false
 texture_filter = 1
 offset_right = 48.0
 offset_bottom = 48.0
 texture = SubResource("AtlasTexture_ncid3")
 
 [node name="Belt_Horizontal_01" type="AnimatedSprite2D" parent="StaticBody2D" unique_id=844702504]
+visible = false
 texture_filter = 1
 position = Vector2(48, 24)
 scale = Vector2(3, 3)
@@ -153,6 +272,7 @@ sprite_frames = SubResource("SpriteFrames_dbokv")
 animation = &"Move_Right"
 
 [node name="Belt_Horizontal_02" type="AnimatedSprite2D" parent="StaticBody2D" unique_id=673973688]
+visible = false
 texture_filter = 1
 position = Vector2(96.00001, 24.000002)
 scale = Vector2(3.0000002, 2.9999995)
@@ -160,6 +280,7 @@ sprite_frames = SubResource("SpriteFrames_dbokv")
 animation = &"Move_Right"
 
 [node name="Belt_Horizontal_03" type="AnimatedSprite2D" parent="StaticBody2D" unique_id=2077580728]
+visible = false
 texture_filter = 1
 position = Vector2(144.00002, 24)
 scale = Vector2(2.9999998, 2.9999998)
@@ -167,6 +288,7 @@ sprite_frames = SubResource("SpriteFrames_dbokv")
 animation = &"Move_Right"
 
 [node name="Belt_Corner_01" type="AnimatedSprite2D" parent="StaticBody2D" unique_id=1113883413]
+visible = false
 texture_filter = 1
 position = Vector2(192, 24)
 scale = Vector2(2.999999, 2.9999998)
@@ -174,11 +296,18 @@ sprite_frames = SubResource("SpriteFrames_r2g2m")
 animation = &"Move_Right_to_Down"
 
 [node name="Belt_Vertical_01" type="AnimatedSprite2D" parent="StaticBody2D" unique_id=217516374]
+visible = false
 texture_filter = 1
 position = Vector2(192, 72.00001)
 scale = Vector2(2.9999993, 2.999999)
 sprite_frames = SubResource("SpriteFrames_g3few")
 animation = &"Move_Down"
+frame_progress = 0.8266908
+
+[node name="Conveyor Belt TileMap" type="TileMapLayer" parent="StaticBody2D" unique_id=1815729401]
+scale = Vector2(3, 3)
+tile_map_data = PackedByteArray("AAAAAAAAAQAAAAMAAAABAAAAAQABAAIAAAACAAAAAQABAAIAAAADAAAAAQABAAIAAAAEAAAAAQAEAAEAAAAEAAEAAQAAAAEAAAA=")
+tile_set = SubResource("TileSet_ywffn")
 
 [node name="Marker_Start" type="Marker2D" parent="." unique_id=2057746255]
 position = Vector2(26.64, 12.654)
@@ -197,9 +326,9 @@ position = Vector2(111.888, 12.654)
 scale = Vector2(0.666, 0.666)
 
 [node name="Marker_Pos_04" type="Marker2D" parent="." unique_id=1522233274]
-position = Vector2(127.872, 31.968)
+position = Vector2(144, 31.968)
 scale = Vector2(0.666, 0.666)
 
 [node name="Marker_End" type="Marker2D" parent="." unique_id=1672538663]
-position = Vector2(127.872, 53.28)
+position = Vector2(144, 53.28)
 scale = Vector2(0.666, 0.666)
