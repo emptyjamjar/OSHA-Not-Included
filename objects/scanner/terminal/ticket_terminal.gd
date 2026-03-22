@@ -2,6 +2,7 @@ extends Area2D
 class_name TicketTerminal 
 
 signal ticketsEmpty
+signal activated
 @export var ticket: Ticket
 
 @onready var interaction_area: InteractionArea = $InteractionArea
@@ -38,6 +39,7 @@ func _on_interact():
 
 		ticket_queue_ui.visible = true 
 		Ticket_Manager.update_queue_ui()
+		activated.emit()
 		
 	else: 
 		active = false 

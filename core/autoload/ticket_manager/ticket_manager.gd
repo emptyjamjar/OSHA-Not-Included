@@ -2,6 +2,7 @@ extends Node
 class_name TicketManager
 
 signal ticket_empty
+signal tickets_done
 var all_tickets: Array[Ticket] = [] # 12 tickets for the level - can update it later
 var visible_queue: Array[Ticket] = [] # max 4 tickets 
 var timers: Dictionary = {} # ticket --> Timer 
@@ -118,6 +119,10 @@ func fill_visible_queue():
 	while visible_queue.size() < max_visible and all_tickets.size() > 0: 
 		var next_ticket = all_tickets.pop_front()
 		visible_queue.append(next_ticket)
+	if !visible_queue.is_empty():
+		active_ticket = visible_queue[0]
+	else:
+		tickets_done.emit()
 	print(visible_queue)
 		
 func start_timers_for_visible_queue(): 
@@ -371,6 +376,9 @@ func finish_ticket():
 		else:
 			active_ticket = null
 			print("All tickets completed!")
+			# fallback option in case the fill visible queue
+			# signaller fails
+			tickets_done.emit()
 			
 			
 func reset() -> void:

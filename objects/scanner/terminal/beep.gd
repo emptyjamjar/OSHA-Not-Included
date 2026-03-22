@@ -1,17 +1,15 @@
-extends TextureButton
+extends AudioStreamPlayer2D
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	process_mode = Node.PROCESS_MODE_ALWAYS
+	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
 
-func _on_pressed() -> void:
-	get_tree().paused = false
-	Audio.play_click()
-	Ticket_Manager.reset()
-	Level_Manager.next_level()
+
+func _on_timer_timeout() -> void:
+	play()
