@@ -74,6 +74,11 @@ func play_vending_machine():
 	var vm = $VendingMachine
 	vm.play()
 
+## Play invalid interaction sound when interacting with empty inventory slot.
+func play_invalid_interaction():
+	var invalid = $InvalidInteraction
+	invalid.play()
+
 ## Plays the background music of the game
 func play_music():
 	music.stream.loop = true

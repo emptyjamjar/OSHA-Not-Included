@@ -31,6 +31,7 @@ func _on_interact():
 		print("WARNING: TicketManager not found yet")
 		return
 	if ticket_manager.active_ticket == null: 
+		invalid_interaction()
 		print("No ticket yet!")
 		return 
 	
@@ -50,8 +51,16 @@ func _on_interact():
 				# TODO: Add penalty or feedback later
 				pass
 	else:
+		invalid_interaction()
 		printerr("No item currently available")
 
+
+##What happens when an invalid (no ticket/ no package in hand) interaction happens.
+func invalid_interaction():
+	#Interaction manager calls the HUD to shake.
+	InteractionManager.invalid_interaction()
+	#Play a sound to indicate the interaction can't be done.
+	Audio.play_invalid_interaction()
 
 
 func _on_arrive_timer_timeout() -> void:

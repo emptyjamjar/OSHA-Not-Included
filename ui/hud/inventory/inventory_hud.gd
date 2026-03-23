@@ -5,6 +5,7 @@ extends TextureRect
 @export var slot1Btn : TextureButton
 @export var slot2 : TextureRect
 @export var slot2Btn : TextureButton
+@export var AnimPlayer: AnimationPlayer
 
 var slots : Array[TextureRect] = []
 
@@ -13,6 +14,7 @@ func _ready() -> void:
 	slots.push_back(slot1)
 	slots.push_back(slot2)
 	PlayerInventory.storage_updated.connect(_on_inventory_updated)
+	InteractionManager.invalid_interact.connect(_hud_shake)
 
 
 func _on_slot_1_button_pressed() -> void:
@@ -21,6 +23,11 @@ func _on_slot_1_button_pressed() -> void:
 
 func _on_slot_2_button_pressed() -> void:
 	PlayerInventory.selectedIndex = 1
+
+
+##Make selection sprite shake
+func _hud_shake():
+	AnimPlayer.play("HUD_Shake")
 
 
 func _on_inventory_updated():
