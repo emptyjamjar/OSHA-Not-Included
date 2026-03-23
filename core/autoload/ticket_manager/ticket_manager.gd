@@ -30,7 +30,7 @@ func _init() -> void:
 # this ensure that object is created at run time and not returning null 
 func _ready():
 	add_to_group("ticket_manager")
-	# generate_level_ticket(12)
+	
 
 func load_templates_for_level(level: int): 
 	var path := "res://objects/scanner/terminal/level%d_tickets.gd" % level
@@ -42,6 +42,8 @@ func load_templates_for_level(level: int):
 	ticket_templates = instance.get_templates()
 	ticket_available = ticket_templates.size()
 	print("Loaded", ticket_available, "ticket templates for level", level)
+	
+
 
 func on_game_start():
 	var item_db = get_tree().get_first_node_in_group("conveyor")
@@ -135,16 +137,17 @@ func update_queue_ui():
 	var hbox_parent = queue_UI.get_node("HBoxContainer")
 	for i in range(max_visible):
 		var slot = hbox_parent.get_child(i)
+		# hide unused slots 
 		if i >= visible_queue.size(): 
 			slot.visible = false 
 			continue
 		slot.visible = true 
 		var t = visible_queue[i]
+		# only update the slot's ticket if it changed
+		if slot.ticket != t:
 		# fix for the UI press to update the active ticket: 
-		slot.set_ticket(t)
-		# Connect only once -- ensure each slot notifies the Ticket Manager when right-clicked
-		if not slot.is_connected("ticket_selected", Callable(self, "_on_ticket_selected")): 
-			slot.connect("ticket_selected", Callable(self, "_on_ticket_selected"))
+			slot.set_ticket(t) # runs every time the UI updates, every timer tick, seconds
+
 		# Highlight active ticket
 		if t == active_ticket:
 			slot.modulate = Color(1, 1, 1, 1) # bright
@@ -168,6 +171,7 @@ func update_queue_ui():
 	
 		# Required items
 		var req_container = slot.get_node("AnimatedSprite2D/RequiredItemsContainer")
+		
 		for icon in req_container.get_children(): 
 			icon.queue_free()
 		var item_db = get_tree().get_first_node_in_group("conveyor")
@@ -176,8 +180,6 @@ func update_queue_ui():
 			var delivered = t.delivered_items.get(id, 0)
 			var item_data = item_db.get_item_by_id(id)
 			var hbox = HBoxContainer.new()
-			#hbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			#hbox.custom_minimum_size = Vector2(0, 28)   # keeps row compact
 
 			var icon = TextureRect.new()
 			icon.texture = item_data.texture
@@ -197,6 +199,8 @@ func update_queue_ui():
 			hbox.add_child(icon)
 			hbox.add_child(label)
 			req_container.add_child(hbox)
+	
+
 			
 		
 func _on_ticket_selected(ticket: Ticket):
@@ -205,6 +209,13 @@ func _on_ticket_selected(ticket: Ticket):
 
 func register_queue_ui(ui: CanvasLayer): 
 	queue_UI = ui 
+	# alternative fix with ticket signal connection not being stable 
+	var hbox = queue_UI.get_node("HBoxContainer")
+	if hbox == null: 
+		print("HBOX error in ready() ticket_manager.gd")
+	else: 
+		for slot in hbox.get_children(): 
+			slot.connect("ticket_selected", Callable(self, "_on_ticket_selected"))
 		
 
 # player request_ticket() 

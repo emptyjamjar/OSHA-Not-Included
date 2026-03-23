@@ -137,6 +137,7 @@ func _on_item_picked_up(item: ItemBase, index: int):
 	_slots[index] = null
 	item.picked_up.disconnect(_on_item_picked_up)
 	
+
 # functions to help return all the item in the conveyor array 
 func get_all_items() -> Array[ItemData]: 
 	return item_resources
