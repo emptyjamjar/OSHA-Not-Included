@@ -52,6 +52,7 @@ func _on_interact():
 				# TODO: Add penalty or feedback later
 				pass
 		else:
+			# Item held is not a package.
 			invalid_interaction()
 	else:
 		invalid_interaction()
