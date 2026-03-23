@@ -46,11 +46,8 @@ func _on_shipper_get_money() -> void:
 	
 "
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_y5cwl"]
-polygon = PackedVector2Array(-27, -32, -21, -32, -21, 16, -27, 16)
-
 [sub_resource type="Gradient" id="Gradient_halqj"]
-offsets = PackedFloat32Array(0, 0.84210527, 1)
+offsets = PackedFloat32Array(0, 0.6263158, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.2842105, 0.2842105, 0.2842105, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_dd2np"]
@@ -59,36 +56,14 @@ fill = 1
 fill_from = Vector2(0.47008547, 0.4871795)
 fill_to = Vector2(0.8333333, 0.78205127)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_olr4i"]
-polygon = PackedVector2Array(-24, -10, -24, 15, 23, 15, 23, -10)
-
-[sub_resource type="Gradient" id="Gradient_55o4m"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_olr4i"]
-gradient = SubResource("Gradient_55o4m")
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_55o4m"]
-polygon = PackedVector2Array(0, -1, 0, 32, 17, 32, 18, 29, 130, 29, 130, 64, 158, 64, 158, 18, 155, 11, 149, 4, 145, 2, 16, 2, 16, -1)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wkw6b"]
-polygon = PackedVector2Array(-32, 2, -32, 23, -31, 24, -29, 23, -29, 14, 29, 14, 29, 23, 30, 24, 32, 23, 32, 2, 12, 2, -15, 2)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dd2np"]
-closed = false
-polygon = PackedVector2Array(-48.48474, -39.39386, -48.48474, 115.15161, 48.484985, 115.15161, 48.484985, -39.39386, -48.48474, -39.39386, 6.060791, -21.212036, 6.060791, 63.636475, -42.424072, 63.636475, -42.424072, -24.24231, 6.060791, -24.24231)
-
 [sub_resource type="Gradient" id="Gradient_wkw6b"]
-offsets = PackedFloat32Array(0, 0.83157897, 1)
-colors = PackedColorArray(0, 0, 0, 1, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1)
+offsets = PackedFloat32Array(0, 0.2736842, 0.6, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.41578948, 0.41578948, 0.41578948, 1, 0.02410373, 0.02410373, 0.02410373, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_55o4m"]
 gradient = SubResource("Gradient_wkw6b")
-fill_from = Vector2(0.5555556, 1)
-fill_to = Vector2(0.54273504, 0)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_halqj"]
-closed = false
-polygon = PackedVector2Array(-30, 16, -30, 21, 29, 21, 29, 16, -30, 16)
+fill = 1
+fill_from = Vector2(0.491453, 0.5)
 
 [sub_resource type="Gradient" id="Gradient_dd2np"]
 offsets = PackedFloat32Array(0.43157893, 1)
@@ -117,9 +92,6 @@ polygon = PackedVector2Array(-0.99945825, -1, 636.4481, 0.8156662, 637.65436, 36
 [node name="Shipper" parent="." unique_id=441417436 instance=ExtResource("3_wkw6b")]
 position = Vector2(216, 176)
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Shipper" unique_id=1153347393]
-occluder = SubResource("OccluderPolygon2D_y5cwl")
-
 [node name="Camera2D" type="Camera2D" parent="." unique_id=167263537]
 anchor_mode = 0
 
@@ -141,9 +113,9 @@ script = ExtResource("8_f71xe")
 script = ExtResource("9_itvml")
 
 [node name="PointLight2D" type="PointLight2D" parent="Player" unique_id=694927071]
-position = Vector2(2.0000038, 1.9999988)
+position = Vector2(2.0000038, -2.0000012)
 scale = Vector2(1.7500001, 1.6249998)
-color = Color(0.54509807, 0.42745098, 0.6117647, 1)
+color = Color(0.72156864, 0.5803922, 0.40392157, 1)
 energy = 0.87
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_dd2np")
@@ -151,40 +123,15 @@ texture = SubResource("GradientTexture2D_dd2np")
 [node name="Packager" parent="." unique_id=2093227932 instance=ExtResource("10_pqdvj")]
 position = Vector2(640, 192)
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Packager" unique_id=151368615]
-occluder = SubResource("OccluderPolygon2D_olr4i")
-
 [node name="Conveyor" parent="." unique_id=1135306595 groups=["conveyor"] instance=ExtResource("11_2p8ph")]
 position = Vector2(620, 363)
-
-[node name="PointLight2D" type="PointLight2D" parent="Conveyor" unique_id=471876164]
-position = Vector2(5.9999924, 7.9999886)
-scale = Vector2(0.06249976, 0.06250039)
-color = Color(0.9490196, 0.827451, 0.67058825, 1)
-energy = 0.6
-texture = SubResource("GradientTexture2D_olr4i")
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Conveyor" unique_id=176768554]
-occluder = SubResource("OccluderPolygon2D_55o4m")
 
 [node name="TicketTerminal" parent="." unique_id=982348100 instance=ExtResource("12_3mx75")]
 position = Vector2(470, 403)
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="TicketTerminal" unique_id=1419478783]
-occluder = SubResource("OccluderPolygon2D_wkw6b")
-
 [node name="VendingMachine" parent="." unique_id=1840311720 instance=ExtResource("13_halqj")]
 position = Vector2(403.99994, 279.99997)
 scale = Vector2(0.33, 0.33)
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="VendingMachine" unique_id=368629401]
-occluder = SubResource("OccluderPolygon2D_dd2np")
-
-[node name="PointLight2D" type="PointLight2D" parent="VendingMachine" unique_id=1450209001]
-position = Vector2(-18.18164, 21.878906)
-scale = Vector2(0.7575757, 1.399621)
-shadow_enabled = true
-texture = SubResource("GradientTexture2D_55o4m")
 
 [node name="Washroom" parent="." unique_id=585966862 instance=ExtResource("14_dd2np")]
 position = Vector2(117, 367.00003)
@@ -204,6 +151,13 @@ position = Vector2(339, 374)
 collision_mask = 2
 patrol_paths_at_root = NodePath("../PatrolPaths")
 out_bounds_area = NodePath("../OutBoundsArea")
+
+[node name="PointLight2D" type="PointLight2D" parent="Manager" unique_id=238068845]
+position = Vector2(-3.000002, -6.000001)
+scale = Vector2(1.671875, 1.671875)
+color = Color(0.4862745, 0.4862745, 0.5764706, 1)
+energy = 0.87
+texture = SubResource("GradientTexture2D_55o4m")
 
 [node name="PatrolPaths" type="Node2D" parent="." unique_id=351301721]
 
@@ -260,35 +214,14 @@ position = Vector2(661, 298)
 [node name="Shelf" parent="." unique_id=1085808159 instance=ExtResource("18_wkw6b")]
 position = Vector2(593, 297)
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Shelf" unique_id=1496535646]
-position = Vector2(0, 2)
-occluder = SubResource("OccluderPolygon2D_halqj")
-
-[node name="LightOccluder2D2" type="LightOccluder2D" parent="Shelf" unique_id=461238651]
-position = Vector2(137, 2)
-occluder = SubResource("OccluderPolygon2D_halqj")
-
 [node name="Shelf2" parent="." unique_id=1925849212 instance=ExtResource("18_wkw6b")]
 position = Vector2(524, 296)
-
-[node name="LightOccluder2D2" type="LightOccluder2D" parent="Shelf2" unique_id=1852087996]
-position = Vector2(0, 1)
-occluder = SubResource("OccluderPolygon2D_halqj")
-
-[node name="LightOccluder2D3" type="LightOccluder2D" parent="Shelf2" unique_id=2068805840]
-position = Vector2(138, 3)
-occluder = SubResource("OccluderPolygon2D_halqj")
 
 [node name="Shelf3" parent="." unique_id=1123887325 instance=ExtResource("18_wkw6b")]
 position = Vector2(455, 296)
 
-[node name="LightOccluder2D3" type="LightOccluder2D" parent="Shelf3" unique_id=694271466]
-position = Vector2(0, 1)
-occluder = SubResource("OccluderPolygon2D_halqj")
-
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2024396508]
-light_mask = 3
-color = Color(0.27618003, 0.30734295, 0.37408197, 1)
+color = Color(0.34233037, 0.3785334, 0.45536244, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=113270195]
 position = Vector2(680.8126, 122.281265)

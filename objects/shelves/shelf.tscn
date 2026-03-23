@@ -9,6 +9,10 @@ size = Vector2(64, 64)
 atlas = ExtResource("1_ep4vj")
 region = Rect2(96, 0, 64, 64)
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ep4vj"]
+closed = false
+polygon = PackedVector2Array(-30, 16, -30, 21, 29, 21, 29, 16, -30, 16)
+
 [node name="Shelf" type="StaticBody2D" unique_id=1206098896]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1705772933]
@@ -16,3 +20,7 @@ shape = SubResource("RectangleShape2D_nypve")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=628488997]
 texture = SubResource("AtlasTexture_nypve")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D" unique_id=1690820936]
+position = Vector2(0, 2)
+occluder = SubResource("OccluderPolygon2D_ep4vj")

@@ -241,6 +241,14 @@ texture = ExtResource("1_ob2mf")
 [sub_resource type="TileSet" id="TileSet_ywffn"]
 sources/1 = SubResource("TileSetAtlasSource_ncid3")
 
+[sub_resource type="Gradient" id="Gradient_55o4m"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ncid3"]
+gradient = SubResource("Gradient_55o4m")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ywffn"]
+polygon = PackedVector2Array(0, -1, 0, 32, 17, 32, 18, 29, 130, 29, 130, 64, 158, 64, 158, 18, 155, 11, 149, 4, 145, 2, 16, 2, 16, -1)
+
 [node name="Conveyor" type="Node2D" unique_id=1135306595]
 script = ExtResource("1_ncid3")
 item_scene = SubResource("Resource_ncid3")
@@ -332,3 +340,13 @@ scale = Vector2(0.666, 0.666)
 [node name="Marker_End" type="Marker2D" parent="." unique_id=1672538663]
 position = Vector2(144, 53.28)
 scale = Vector2(0.666, 0.666)
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=2145686838]
+position = Vector2(5.9999924, 7.9999886)
+scale = Vector2(0.06249976, 0.06250039)
+color = Color(0.9490196, 0.827451, 0.67058825, 1)
+energy = 0.6
+texture = SubResource("GradientTexture2D_ncid3")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=2137971514]
+occluder = SubResource("OccluderPolygon2D_ywffn")

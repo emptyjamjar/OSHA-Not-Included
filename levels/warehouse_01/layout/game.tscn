@@ -117,6 +117,10 @@ position = Vector2(528, 236)
 [node name="Marker_End" parent="Conveyor" index="6" unique_id=1672538663]
 position = Vector2(560, 236)
 
+[node name="LightOccluder2D" parent="Conveyor" index="8" unique_id=2137971514]
+position = Vector2(576, 256)
+rotation = -3.1415927
+
 [node name="TicketTerminal" parent="." unique_id=982348100 instance=ExtResource("6_ryrav")]
 position = Vector2(501, 394)
 
