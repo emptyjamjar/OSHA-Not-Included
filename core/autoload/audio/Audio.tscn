@@ -7,6 +7,7 @@
 [ext_resource type="AudioStream" uid="uid://dupg5bdasp64w" path="res://core/autoload/audio/audio_assets/world_sounds/toilet.ogg" id="5_gtvgh"]
 [ext_resource type="AudioStream" uid="uid://cwy7p50xkkj2q" path="res://core/autoload/audio/audio_assets/world_sounds/vending_machine.ogg" id="6_j5bvv"]
 [ext_resource type="AudioStream" uid="uid://dt5l1qgpgqfj4" path="res://core/autoload/audio/audio_assets/music/level1_loop.wav" id="7_nxjot"]
+[ext_resource type="AudioStream" uid="uid://beb70xikxwref" path="res://core/autoload/audio/audio_assets/interface_sounds/Invalid.wav" id="8_dbsto"]
 
 [node name="Audio" type="Node2D" unique_id=343061640]
 script = ExtResource("1_k1vdp")
@@ -44,3 +45,7 @@ stream = ExtResource("7_nxjot")
 volume_db = -2.016
 autoplay = true
 bus = &"Music"
+
+[node name="InvalidInteraction" type="AudioStreamPlayer" parent="." unique_id=1997185625]
+stream = ExtResource("8_dbsto")
+bus = &"SFX"
