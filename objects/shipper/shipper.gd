@@ -47,9 +47,12 @@ func _on_interact():
 				shipped = true
 				player_collision.disabled = true
 			else:
+				invalid_interaction()
 				# Wrong item shipped — ignore for now
 				# TODO: Add penalty or feedback later
 				pass
+		else:
+			invalid_interaction()
 	else:
 		invalid_interaction()
 		printerr("No item currently available")
