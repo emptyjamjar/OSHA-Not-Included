@@ -38,6 +38,7 @@ func _ready() -> void:
 	conveyor.input(Conveyor.ItemDataList.BLACK_WATER_BOTTLE)
 	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
 	conveyor.input(Conveyor.ItemDataList.BLUE_WATER_BOTTLE)
+	Dialogic.start(\"timeline\")
 
 func _on_shipper_get_money() -> void:
 	money += 10
