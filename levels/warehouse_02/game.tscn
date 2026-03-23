@@ -193,7 +193,11 @@ scale = Vector2(0.245, 0.245)
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1192117838]
 
 [node name="Pause" parent="CanvasLayer" unique_id=1566201169 instance=ExtResource("15_ve8kv")]
+visible = false
 metadata/_edit_use_anchors_ = true
+
+[node name="Score" parent="CanvasLayer" unique_id=1161969462 instance=ExtResource("17_oadin")]
+visible = false
 
 [node name="Manager" parent="." unique_id=565657217 node_paths=PackedStringArray("patrol_paths_at_root", "out_bounds_area") instance=ExtResource("16_4qtht")]
 visible = false
@@ -201,9 +205,6 @@ position = Vector2(339, 374)
 collision_mask = 2
 patrol_paths_at_root = NodePath("../PatrolPaths")
 out_bounds_area = NodePath("../OutBoundsArea")
-
-[node name="Score" parent="." unique_id=1161969462 instance=ExtResource("17_oadin")]
-visible = false
 
 [node name="PatrolPaths" type="Node2D" parent="." unique_id=351301721]
 
@@ -288,7 +289,7 @@ occluder = SubResource("OccluderPolygon2D_halqj")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2024396508]
 light_mask = 3
-color = Color(0.23002675, 0.2606663, 0.31693414, 1)
+color = Color(0.27618003, 0.30734295, 0.37408197, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=113270195]
 position = Vector2(680.8126, 122.281265)
@@ -298,8 +299,8 @@ shadow_enabled = true
 texture = SubResource("GradientTexture2D_wkw6b")
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
-[connection signal="get_money" from="Shipper" to="Score" method="_on_shipper_get_money"]
+[connection signal="get_money" from="Shipper" to="CanvasLayer/Score" method="_on_shipper_get_money"]
 [connection signal="health_change" from="Player/HealthComponent" to="Camera2D/HUD" method="_on_health_component_health_change"]
 [connection signal="needs_change" from="Player/NeedsComponent" to="Camera2D/HUD" method="_on_needs_component_needs_change"]
-[connection signal="ticketsEmpty" from="TicketTerminal" to="Score" method="_on_ticket_terminal_tickets_empty"]
-[connection signal="washroom_used" from="Washroom" to="Score" method="_on_washroom_washroom_used"]
+[connection signal="ticketsEmpty" from="TicketTerminal" to="CanvasLayer/Score" method="_on_ticket_terminal_tickets_empty"]
+[connection signal="washroom_used" from="Washroom" to="CanvasLayer/Score" method="_on_washroom_washroom_used"]
