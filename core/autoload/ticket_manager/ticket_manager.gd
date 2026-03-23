@@ -22,56 +22,6 @@ var active_ticket: Ticket = null
 var queue_UI: CanvasLayer 
 
 func _init() -> void:
-	#ticket_templates = [
-		#{
-			#"id": 1,
-			#"name": "Lost Package",
-			#"desc": "Find the missing package in the warehouse.",
-			#"goal": "Package found!",
-			#"reward": 50,
-			#"perf": 1, 
-			#"time_min": 40, 
-			#"time_max": 60, 
-			#"min_items": 1, 
-			#"max_items": 1
-		#},
-		#{
-			#"id": 2,
-			#"name": "Scanner Malfunction",
-			#"desc": "Diagnose the broken scanner.\nShip the replacement parts!",
-			#"goal": "Parts fixed!",
-			#"reward": 30,
-			#"perf": 1, 
-			#"time_min": 30, 
-			#"time_max": 40, 
-			#"min_items": 1,
-			#"max_items": 1
-		#},
-		#{
-			#"id": 3,
-			#"name": "School Supplies!",
-			#"desc": "School comeback begins.\nShip the wanted items!",
-			#"goal": "Supplies shipped!",
-			#"reward": 30,
-			#"perf": 1, 
-			#"time_min": 30, 
-			#"time_max": 40, 
-			#"min_items": 1,
-			#"max_items": 1
-		#},
-		##{
-			##"id": 4,
-			##"name": "Item Shortage",
-			##"desc": "Customer at home now.\nHelp her buy the missing items!",
-			##"goal": "Order finished!",
-			##"reward": 30,
-			##"perf": 1, 
-			##"time_min": 30, 
-			##"time_max": 40, 
-			##"min_items": 1,
-			##"max_items": 1
-		##}
-	#]
 	load_templates_for_level(level)
 	print("TicketManager READY, templates loaded:", ticket_templates.size())
 	ticket_available = ticket_templates.size()
@@ -190,6 +140,17 @@ func update_queue_ui():
 			continue
 		slot.visible = true 
 		var t = visible_queue[i]
+		# fix for the UI press to update the active ticket: 
+		slot.set_ticket(t)
+		# Connect only once -- ensure each slot notifies the Ticket Manager when right-clicked
+		if not slot.is_connected("ticket_selected", Callable(self, "_on_ticket_selected")): 
+			slot.connect("ticket_selected", Callable(self, "_on_ticket_selected"))
+		# Highlight active ticket
+		if t == active_ticket:
+			slot.modulate = Color(1, 1, 1, 1) # bright
+		else:
+			slot.modulate = Color(0.7, 0.7, 0.7, 1) # dim
+
 		var bar = slot.get_node("AnimatedSprite2D/TimeCountDownBar")
 		slot.get_node("AnimatedSprite2D/TicketTitle").text = t.ticket_name
 		slot.get_node("AnimatedSprite2D/TicketDescription").text = t.ticket_description
@@ -230,10 +191,6 @@ func update_queue_ui():
 			
 			var label = Label.new()
 			label.text = "%d / %d" % [delivered, needed]
-			#label.autowrap_mode = TextServer.AUTOWRAP_WORD
-			#label.clip_text = true
-			#label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			#label.custom_minimum_size = Vector2(0, 8)
 			label.add_theme_color_override("font_color", Color.DIM_GRAY)
 			label.add_theme_font_size_override("font_size", 8)
 
@@ -242,6 +199,10 @@ func update_queue_ui():
 			req_container.add_child(hbox)
 			
 		
+func _on_ticket_selected(ticket: Ticket):
+	active_ticket = ticket
+	update_queue_ui()
+
 func register_queue_ui(ui: CanvasLayer): 
 	queue_UI = ui 
 		
@@ -299,14 +260,10 @@ func generate_random_ticket() -> Ticket:
 # this will check if the required items are shipped or not, does it match 
 # check shipper.gd --> on_interact() 
 func register_delivery(ticket_id: int) -> bool:
+	print("Current ticket: ", active_ticket);
 	if not active_ticket:
 		return false
 	
-	if _is_ticket_complete():
-		reach_goal()
-		print("Completed:")
-		print(ticket_id)
-		return false
 
 	var delivered := active_ticket.delivered_items
 	
@@ -314,6 +271,10 @@ func register_delivery(ticket_id: int) -> bool:
 	
 	# Refresh UI so the player sees the updated counts
 	update_queue_ui()
+	if _is_ticket_complete():
+		reach_goal()
+		print("Completed:")
+		print(ticket_id)
 	return true
 
 # related to register_delivery() 
@@ -348,6 +309,8 @@ func reach_goal():
 		finish_timer.timeout.connect(finish_ticket)
 		add_child(finish_timer)
 		finish_timer.start()
+	else: 
+		print("reach_goal() -- error happened here!")
 
 		
 # make sure the ticket is finished, ticket box will disappear 

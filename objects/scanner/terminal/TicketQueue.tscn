@@ -1,8 +1,12 @@
 [gd_scene format=3 uid="uid://bu8gpp7tljufp"]
 
+[ext_resource type="Script" uid="uid://45cqga2rjbih" path="res://objects/scanner/terminal/slot_1.gd" id="1_dsuxn"]
 [ext_resource type="Texture2D" uid="uid://brjl03whlgukn" path="res://objects/scanner/terminal/Ticket_SpriteSheet-PNG.png" id="1_vlja4"]
 [ext_resource type="Texture2D" uid="uid://btfptaejf4dhs" path="res://objects/scanner/terminal/TicketTimeBackPNG.png" id="2_dsuxn"]
 [ext_resource type="Texture2D" uid="uid://c0854h1cw2cb" path="res://objects/scanner/terminal/TicketTimeBarPNG.png" id="3_v8ihf"]
+[ext_resource type="Script" uid="uid://0n1wwwmlkbx7" path="res://objects/scanner/terminal/slot_2.gd" id="5_u133q"]
+[ext_resource type="Script" uid="uid://dhgisybrihjmm" path="res://objects/scanner/terminal/slot_3.gd" id="6_0imhw"]
+[ext_resource type="Script" uid="uid://bbjyh7x7epkrg" path="res://objects/scanner/terminal/slot_4.gd" id="7_2t5fm"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wiggl"]
 atlas = ExtResource("1_vlja4")
@@ -80,6 +84,7 @@ theme_override_constants/separation = 64
 
 [node name="Slot1" type="Control" parent="HBoxContainer" unique_id=2047756636]
 layout_mode = 2
+script = ExtResource("1_dsuxn")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/Slot1" unique_id=2884994]
 sprite_frames = SubResource("SpriteFrames_6b2ay")
@@ -135,6 +140,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Slot2" type="Control" parent="HBoxContainer" unique_id=680985875]
 layout_mode = 2
+script = ExtResource("5_u133q")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/Slot2" unique_id=1455227722]
 sprite_frames = SubResource("SpriteFrames_6b2ay")
@@ -190,6 +196,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Slot3" type="Control" parent="HBoxContainer" unique_id=432832531]
 layout_mode = 2
+script = ExtResource("6_0imhw")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/Slot3" unique_id=2106520008]
 sprite_frames = SubResource("SpriteFrames_6b2ay")
@@ -245,6 +252,7 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Slot4" type="Control" parent="HBoxContainer" unique_id=1700340132]
 layout_mode = 2
+script = ExtResource("7_2t5fm")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/Slot4" unique_id=780171905]
 sprite_frames = SubResource("SpriteFrames_6b2ay")
