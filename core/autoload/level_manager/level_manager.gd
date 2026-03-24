@@ -11,6 +11,7 @@ var level = 0
 
 func next_level():
 	var max_levels = levels.size()
+	PlayerInventory.reset()
 	if level == max_levels:
 		get_tree().change_scene_to_file(levels[level - 1])
 	else:
