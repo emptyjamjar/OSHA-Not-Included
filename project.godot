@@ -31,13 +31,15 @@ Ticket_Manager="*uid://dd2h2ayjq7ofo"
 Audio="*uid://cpauy0iyhojqc"
 PlayerInventory="*uid://hx53g7dc4i10"
 ItemSpawner="*uid://biwgn8hxrtv3d"
+Dialogic="*uid://ds2q0uclmolvu"
 LoadKeybinds="*uid://df1nx734uoekf"
 Level_Manager="*uid://bxgyur2ge8voh"
-Dialogic="*uid://ds2q0uclmolvu"
 
 [dialogic]
 
-directories/dch_directory={}
+directories/dch_directory={
+"Player": "res://ui/Timeline/Characters/Player.dch"
+}
 directories/dtl_directory={
 "timeline": "res://ui/Timeline/timeline.dtl"
 }
