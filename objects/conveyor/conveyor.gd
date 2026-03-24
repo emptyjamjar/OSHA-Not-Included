@@ -41,12 +41,6 @@ var _slots: Array[ItemBase] = []
 ## Timer for output speed control
 var _output_timer: float = 0.0
 
-## Animation nodes for conveyor belt
-@onready var animated_belt_h_01 := $StaticBody2D/Belt_Horizontal_01
-@onready var animated_belt_h_02 := $StaticBody2D/Belt_Horizontal_02
-@onready var animated_belt_h_03 := $StaticBody2D/Belt_Horizontal_03
-@onready var animated_corner_01 := $StaticBody2D/Belt_Corner_01
-@onready var animated_belt_v_01 := $StaticBody2D/Belt_Vertical_01
 
 func _ready() -> void:
 	add_to_group("conveyor")
@@ -59,13 +53,6 @@ func _ready() -> void:
 	
 	# Used to instantiate new children
 	item_scene = load("res://objects/items/item_base.tscn")
-	
-	# PLACEHOLDER: Set animations to run on start
-	animated_belt_h_01.play("Move_Right")
-	animated_belt_h_02.play("Move_Right")
-	animated_belt_h_03.play("Move_Right")
-	animated_corner_01.play("Move_Right_to_Down")
-	animated_belt_v_01.play("Move_Down")
 	
 	# PLACEHOLDER: Build slot marker list in order
 	_slot_markers = [
