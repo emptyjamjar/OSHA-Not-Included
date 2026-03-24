@@ -16,6 +16,9 @@ func _ready() -> void:
 func _on_interact():
 	var data : ItemData = PlayerInventory.get_item()
 	if  data == null or data.type == ItemData.Type.PACKAGE:
+		#Play a sound to say that nothing happens.
+		InteractionManager.invalid_interaction()
+		Audio.play_invalid_interaction()
 		return
 	data.texture = load("res://objects/package/Temporary_Package.png")
 	data.uiTexture = null

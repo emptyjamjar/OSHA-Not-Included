@@ -22,56 +22,6 @@ var active_ticket: Ticket = null
 var queue_UI: CanvasLayer 
 
 func _init() -> void:
-	#ticket_templates = [
-		#{
-			#"id": 1,
-			#"name": "Lost Package",
-			#"desc": "Find the missing package in the warehouse.",
-			#"goal": "Package found!",
-			#"reward": 50,
-			#"perf": 1, 
-			#"time_min": 40, 
-			#"time_max": 60, 
-			#"min_items": 1, 
-			#"max_items": 1
-		#},
-		#{
-			#"id": 2,
-			#"name": "Scanner Malfunction",
-			#"desc": "Diagnose the broken scanner.\nShip the replacement parts!",
-			#"goal": "Parts fixed!",
-			#"reward": 30,
-			#"perf": 1, 
-			#"time_min": 30, 
-			#"time_max": 40, 
-			#"min_items": 1,
-			#"max_items": 1
-		#},
-		#{
-			#"id": 3,
-			#"name": "School Supplies!",
-			#"desc": "School comeback begins.\nShip the wanted items!",
-			#"goal": "Supplies shipped!",
-			#"reward": 30,
-			#"perf": 1, 
-			#"time_min": 30, 
-			#"time_max": 40, 
-			#"min_items": 1,
-			#"max_items": 1
-		#},
-		##{
-			##"id": 4,
-			##"name": "Item Shortage",
-			##"desc": "Customer at home now.\nHelp her buy the missing items!",
-			##"goal": "Order finished!",
-			##"reward": 30,
-			##"perf": 1, 
-			##"time_min": 30, 
-			##"time_max": 40, 
-			##"min_items": 1,
-			##"max_items": 1
-		##}
-	#]
 	load_templates_for_level(level)
 	print("TicketManager READY, templates loaded:", ticket_templates.size())
 	ticket_available = ticket_templates.size()
@@ -80,7 +30,7 @@ func _init() -> void:
 # this ensure that object is created at run time and not returning null 
 func _ready():
 	add_to_group("ticket_manager")
-	# generate_level_ticket(12)
+	
 
 func load_templates_for_level(level: int): 
 	var path := "res://objects/scanner/terminal/level%d_tickets.gd" % level
@@ -92,6 +42,8 @@ func load_templates_for_level(level: int):
 	ticket_templates = instance.get_templates()
 	ticket_available = ticket_templates.size()
 	print("Loaded", ticket_available, "ticket templates for level", level)
+	
+
 
 func on_game_start():
 	var item_db = get_tree().get_first_node_in_group("conveyor")
@@ -185,11 +137,23 @@ func update_queue_ui():
 	var hbox_parent = queue_UI.get_node("HBoxContainer")
 	for i in range(max_visible):
 		var slot = hbox_parent.get_child(i)
+		# hide unused slots 
 		if i >= visible_queue.size(): 
 			slot.visible = false 
 			continue
 		slot.visible = true 
 		var t = visible_queue[i]
+		# only update the slot's ticket if it changed
+		if slot.ticket != t:
+		# fix for the UI press to update the active ticket: 
+			slot.set_ticket(t) # runs every time the UI updates, every timer tick, seconds
+
+		# Highlight active ticket
+		if t == active_ticket:
+			slot.modulate = Color(1, 1, 1, 1) # bright
+		else:
+			slot.modulate = Color(0.7, 0.7, 0.7, 1) # dim
+
 		var bar = slot.get_node("AnimatedSprite2D/TimeCountDownBar")
 		slot.get_node("AnimatedSprite2D/TicketTitle").text = t.ticket_name
 		slot.get_node("AnimatedSprite2D/TicketDescription").text = t.ticket_description
@@ -207,6 +171,7 @@ func update_queue_ui():
 	
 		# Required items
 		var req_container = slot.get_node("AnimatedSprite2D/RequiredItemsContainer")
+		
 		for icon in req_container.get_children(): 
 			icon.queue_free()
 		var item_db = get_tree().get_first_node_in_group("conveyor")
@@ -215,8 +180,6 @@ func update_queue_ui():
 			var delivered = t.delivered_items.get(id, 0)
 			var item_data = item_db.get_item_by_id(id)
 			var hbox = HBoxContainer.new()
-			#hbox.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			#hbox.custom_minimum_size = Vector2(0, 28)   # keeps row compact
 
 			var icon = TextureRect.new()
 			icon.texture = item_data.texture
@@ -230,20 +193,29 @@ func update_queue_ui():
 			
 			var label = Label.new()
 			label.text = "%d / %d" % [delivered, needed]
-			#label.autowrap_mode = TextServer.AUTOWRAP_WORD
-			#label.clip_text = true
-			#label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-			#label.custom_minimum_size = Vector2(0, 8)
 			label.add_theme_color_override("font_color", Color.DIM_GRAY)
 			label.add_theme_font_size_override("font_size", 8)
 
 			hbox.add_child(icon)
 			hbox.add_child(label)
 			req_container.add_child(hbox)
+	
+
 			
 		
+func _on_ticket_selected(ticket: Ticket):
+	active_ticket = ticket
+	update_queue_ui()
+
 func register_queue_ui(ui: CanvasLayer): 
 	queue_UI = ui 
+	# alternative fix with ticket signal connection not being stable 
+	var hbox = queue_UI.get_node("HBoxContainer")
+	if hbox == null: 
+		print("HBOX error in ready() ticket_manager.gd")
+	else: 
+		for slot in hbox.get_children(): 
+			slot.connect("ticket_selected", Callable(self, "_on_ticket_selected"))
 		
 
 # player request_ticket() 
@@ -298,21 +270,23 @@ func generate_random_ticket() -> Ticket:
 # function to track the delivered items 
 # this will check if the required items are shipped or not, does it match 
 # check shipper.gd --> on_interact() 
-func register_delivery(ticket_id: int):
+func register_delivery(ticket_id: int) -> bool:
+	print("Current ticket: ", active_ticket);
 	if not active_ticket:
-		return
+		return false
+	
 
 	var delivered := active_ticket.delivered_items
+	
 	delivered[ticket_id] = delivered.get(ticket_id, 0) + 1
 	
 	# Refresh UI so the player sees the updated counts
 	update_queue_ui()
-	
 	if _is_ticket_complete():
 		reach_goal()
 		print("Completed:")
 		print(ticket_id)
-		
+	return true
 
 # related to register_delivery() 
 func _is_ticket_complete() -> bool:
@@ -320,6 +294,8 @@ func _is_ticket_complete() -> bool:
 	for req_id in active_ticket.required_items.keys():
 		if active_ticket.delivered_items.get(req_id, 0) < active_ticket.required_items[req_id]:
 			return false
+		#else: 
+			#active_ticket.delivered_items.get(req_id,0) = active.required_items[req_id]
 	return true
 
 
@@ -339,11 +315,13 @@ func reach_goal():
 		# this add extra time for the player to acknowledge that they have completed 
 		# the ticket 
 		var finish_timer := Timer.new()
-		finish_timer.wait_time = 1.5
+		finish_timer.wait_time = 1
 		finish_timer.one_shot = true
 		finish_timer.timeout.connect(finish_ticket)
 		add_child(finish_timer)
 		finish_timer.start()
+	else: 
+		print("reach_goal() -- error happened here!")
 
 		
 # make sure the ticket is finished, ticket box will disappear 
