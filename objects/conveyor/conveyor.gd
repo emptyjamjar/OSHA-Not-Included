@@ -10,9 +10,14 @@ enum ItemDataList {
 	PINK_WATER_BOTTLE,
 }
 
+@export_category("Item Lists")
 ## Preloaded resources of item data
-var item_resources : Array[ItemData]
+@export var item_resources : Array[ItemData]
 
+##Story items to be spawned.
+@export var special_resources: Array[ItemData]
+
+@export_category("Other Variables")
 ## Affects how quickly items are moved/Animation speed
 ## (Default: 5)
 @export var conveyor_speed:int = 5
@@ -46,10 +51,11 @@ func _ready() -> void:
 	add_to_group("conveyor")
 	# Fill item_resources with needed item data
 	# Items should follow the order presented in the enums
-	item_resources.append(preload("res://objects/items/toilet_paper/toilet_paper.tres"))
-	item_resources.append(preload("res://objects/items/water_bottles/black_water_bottle.tres"))
-	item_resources.append(preload("res://objects/items/water_bottles/blue_water_bottle.tres"))
-	item_resources.append(preload("res://objects/items/water_bottles/pink_water_bottle.tres"))
+	if item_resources.is_empty():
+		item_resources.append(preload("res://objects/items/toilet_paper/toilet_paper.tres"))
+		item_resources.append(preload("res://objects/items/water_bottles/black_water_bottle.tres"))
+		item_resources.append(preload("res://objects/items/water_bottles/blue_water_bottle.tres"))
+		item_resources.append(preload("res://objects/items/water_bottles/pink_water_bottle.tres"))
 	
 	# Used to instantiate new children
 	item_scene = load("res://objects/items/item_base.tscn")
@@ -69,7 +75,8 @@ func _ready() -> void:
 	for i in _slots.size():
 		_slots[i] = null
 		
-	
+
+
 func _process(delta: float) -> void:
 	# Process queue and spawn items onto belt at output_speed rate
 	_output_timer += delta
@@ -85,14 +92,17 @@ func _process(delta: float) -> void:
 		# Attempt to spawn the item into the first available slot on the belt
 		_spawn_into_first_slot(item)
 
+
 ## Adds an item to the conveyor
 ## @param item: item to be added
 func input(item:ItemDataList)->void:
 	_queue.push_back(item)
 
+
 ## Returns the front-most item in the conveyor
 func output()->ItemDataList:
 	return self._queue.pop_front()
+
 
 ## Spawns an item into the first available slot on the conveyor belt.
 ## Creates a visual representation of the item at the slot position and stores
@@ -118,17 +128,19 @@ func _spawn_into_first_slot(item: ItemDataList) -> void:
 	# No free slots so add back to queue
 	_queue.push_front(item)
 
+
 ## Removes item from conveyor slots using index
 ## Then disconnects the function from item signal
 func _on_item_picked_up(item: ItemBase, index: int):
 	_slots[index] = null
 	item.picked_up.disconnect(_on_item_picked_up)
-	
+
 
 # functions to help return all the item in the conveyor array 
 func get_all_items() -> Array[ItemData]: 
 	return item_resources
-	
+
+
 func get_item_by_id(id: int) -> ItemData: 
 	for item in item_resources: 
 		if item.id == id: 

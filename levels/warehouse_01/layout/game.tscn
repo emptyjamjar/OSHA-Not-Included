@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://d0maw17r7yja7"]
+[gd_scene format=3 uid="uid://d0maw17r7yja7"]
 
 [ext_resource type="PackedScene" uid="uid://chidjbuid2cgd" path="res://levels/shared/World.tscn" id="1_7sc4i"]
 [ext_resource type="Script" uid="uid://cpt2knie07vvo" path="res://core/systems/needs/health_component.gd" id="2_e2o6t"]
@@ -90,31 +90,22 @@ position = Vector2(640, 192)
 
 [node name="Conveyor" parent="." unique_id=1135306595 groups=["conveyor"] instance=ExtResource("8_j5wjh")]
 
-[node name="Collision_Horizontal" parent="Conveyor/StaticBody2D" parent_id_path=PackedInt32Array(1135306595, 1976208908) index="0" unique_id=1512575671]
-position = Vector2(759.75977, 345.3452)
-
-[node name="Collision_Vertical" parent="Conveyor/StaticBody2D" parent_id_path=PackedInt32Array(1135306595, 1976208908) index="1" unique_id=509053654]
-position = Vector2(648.6486, 324.3243)
-
-[node name="Conveyor Belt TileMap" parent="Conveyor/StaticBody2D" parent_id_path=PackedInt32Array(1135306595, 1976208908) index="8" unique_id=1815729401]
-tile_map_data = PackedByteArray("AAANAAcAAQAAAAIAAAAOAAcAAQABAAIAAAAPAAcAAQABAAIAAAAQAAcAAQABAAIAAAANAAYAAQABAAMAAAARAAcAAQABAAIAAAA=")
-
-[node name="Marker_Start" parent="Conveyor" index="1" unique_id=2057746255]
+[node name="Marker_Start" parent="Conveyor" index="2" unique_id=2057746255]
 position = Vector2(431.99997, 208)
 
-[node name="Marker_Pos_01" parent="Conveyor" index="2" unique_id=507846563]
+[node name="Marker_Pos_01" parent="Conveyor" index="3" unique_id=507846563]
 position = Vector2(432, 236)
 
-[node name="Marker_Pos_02" parent="Conveyor" index="3" unique_id=1152789713]
+[node name="Marker_Pos_02" parent="Conveyor" index="4" unique_id=1152789713]
 position = Vector2(464, 236)
 
-[node name="Marker_Pos_03" parent="Conveyor" index="4" unique_id=1940192903]
+[node name="Marker_Pos_03" parent="Conveyor" index="5" unique_id=1940192903]
 position = Vector2(496, 236)
 
-[node name="Marker_Pos_04" parent="Conveyor" index="5" unique_id=1522233274]
+[node name="Marker_Pos_04" parent="Conveyor" index="6" unique_id=1522233274]
 position = Vector2(528, 236)
 
-[node name="Marker_End" parent="Conveyor" index="6" unique_id=1672538663]
+[node name="Marker_End" parent="Conveyor" index="7" unique_id=1672538663]
 position = Vector2(560, 236)
 
 [node name="TicketTerminal" parent="." unique_id=982348100 instance=ExtResource("6_ryrav")]
