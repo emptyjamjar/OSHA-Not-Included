@@ -132,10 +132,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="RequiredItemsContainer" type="VBoxContainer" parent="HBoxContainer/Slot1/AnimatedSprite2D" unique_id=1866141633]
 clip_contents = true
-offset_left = 5.408
-offset_top = 29.768
-offset_right = 58.908
-offset_bottom = 47.516
+offset_left = 3.0
+offset_top = 10.0
+offset_right = 61.0
+offset_bottom = 47.874
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot2" type="Control" parent="HBoxContainer" unique_id=680985875]
@@ -188,10 +188,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="RequiredItemsContainer" type="VBoxContainer" parent="HBoxContainer/Slot2/AnimatedSprite2D" unique_id=597350513]
 clip_contents = true
-offset_left = 5.408
-offset_top = 29.768
-offset_right = 58.908
-offset_bottom = 47.516
+offset_left = 3.0
+offset_top = 10.0
+offset_right = 61.0
+offset_bottom = 47.874
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot3" type="Control" parent="HBoxContainer" unique_id=432832531]
@@ -244,10 +244,10 @@ metadata/_edit_use_anchors_ = true
 
 [node name="RequiredItemsContainer" type="VBoxContainer" parent="HBoxContainer/Slot3/AnimatedSprite2D" unique_id=431354000]
 clip_contents = true
-offset_left = 5.408
-offset_top = 29.768
-offset_right = 58.908
-offset_bottom = 47.516
+offset_left = 3.0
+offset_top = 10.0
+offset_right = 61.0
+offset_bottom = 47.874
 metadata/_edit_use_anchors_ = true
 
 [node name="Slot4" type="Control" parent="HBoxContainer" unique_id=1700340132]
@@ -300,8 +300,8 @@ metadata/_edit_use_anchors_ = true
 
 [node name="RequiredItemsContainer" type="VBoxContainer" parent="HBoxContainer/Slot4/AnimatedSprite2D" unique_id=1773670303]
 clip_contents = true
-offset_left = 5.408
-offset_top = 29.768
-offset_right = 58.908
-offset_bottom = 47.516
+offset_left = 3.0
+offset_top = 10.0
+offset_right = 61.0
+offset_bottom = 47.874
 metadata/_edit_use_anchors_ = true
