@@ -149,6 +149,8 @@ func update_queue_ui():
 		# fix for the UI press to update the active ticket: 
 			slot.set_ticket(t) # runs every time the UI updates, every timer tick, seconds
 
+		slot.set_active(t == active_ticket)
+		
 		# Highlight active ticket
 		if t == active_ticket:
 			highlight.visible = true 
