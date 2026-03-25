@@ -143,6 +143,7 @@ func update_queue_ui():
 			continue
 		slot.visible = true 
 		var t = visible_queue[i]
+		var highlight = slot.get_node("Highlight")
 		# only update the slot's ticket if it changed
 		if slot.ticket != t:
 		# fix for the UI press to update the active ticket: 
@@ -150,9 +151,11 @@ func update_queue_ui():
 
 		# Highlight active ticket
 		if t == active_ticket:
-			slot.modulate = Color(1, 1, 1, 1) # bright
-		else:
-			slot.modulate = Color(0.7, 0.7, 0.7, 1) # dim
+			highlight.visible = true 
+			slot.modulate = Color(1, 1, 1, 1) #bright
+		else: 
+			highlight.visible = false
+			slot.modulate = Color(0.7, 0.7, 0.7, 1) #dim
 
 		var bar = slot.get_node("AnimatedSprite2D/TimeCountDownBar")
 		slot.get_node("AnimatedSprite2D/TicketTitle").text = t.ticket_name

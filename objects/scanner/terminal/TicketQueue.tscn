@@ -86,6 +86,14 @@ theme_override_constants/separation = 64
 layout_mode = 2
 script = ExtResource("1_dsuxn")
 
+[node name="Highlight" type="ColorRect" parent="HBoxContainer/Slot1" unique_id=1865432560]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+color = Color(1.0789914, 1.0789914, 0.7207181, 1)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/Slot1" unique_id=2884994]
 sprite_frames = SubResource("SpriteFrames_6b2ay")
 autoplay = "default"
@@ -141,6 +149,14 @@ metadata/_edit_use_anchors_ = true
 [node name="Slot2" type="Control" parent="HBoxContainer" unique_id=680985875]
 layout_mode = 2
 script = ExtResource("5_u133q")
+
+[node name="Highlight" type="ColorRect" parent="HBoxContainer/Slot2" unique_id=1056172396]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+color = Color(1.0789914, 1.0789914, 0.71910775, 1)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/Slot2" unique_id=1455227722]
 sprite_frames = SubResource("SpriteFrames_6b2ay")
@@ -198,6 +214,14 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 2
 script = ExtResource("6_0imhw")
 
+[node name="Highlight" type="ColorRect" parent="HBoxContainer/Slot3" unique_id=200160344]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+color = Color(1.0789914, 1.0789914, 0.71910775, 1)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/Slot3" unique_id=2106520008]
 sprite_frames = SubResource("SpriteFrames_6b2ay")
 autoplay = "default"
@@ -254,6 +278,14 @@ metadata/_edit_use_anchors_ = true
 layout_mode = 2
 script = ExtResource("7_2t5fm")
 
+[node name="Highlight" type="ColorRect" parent="HBoxContainer/Slot4" unique_id=2052719026]
+visible = false
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+color = Color(1.0789914, 1.0789914, 0.71910775, 1)
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="HBoxContainer/Slot4" unique_id=780171905]
 sprite_frames = SubResource("SpriteFrames_6b2ay")
 autoplay = "default"
@@ -305,3 +337,12 @@ offset_top = 10.0
 offset_right = 61.0
 offset_bottom = 47.874
 metadata/_edit_use_anchors_ = true
+
+[connection signal="mouse_entered" from="HBoxContainer/Slot1" to="HBoxContainer/Slot1" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/Slot1" to="HBoxContainer/Slot1" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="HBoxContainer/Slot2" to="HBoxContainer/Slot2" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/Slot2" to="HBoxContainer/Slot2" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="HBoxContainer/Slot3" to="HBoxContainer/Slot3" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/Slot3" to="HBoxContainer/Slot3" method="_on_mouse_exited"]
+[connection signal="mouse_entered" from="HBoxContainer/Slot4" to="HBoxContainer/Slot4" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/Slot4" to="HBoxContainer/Slot4" method="_on_mouse_exited"]
