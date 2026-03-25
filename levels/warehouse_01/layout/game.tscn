@@ -131,6 +131,7 @@ scale = Vector2(0.24458057, 0.24458057)
 [node name="Pause" parent="." unique_id=1566201169 instance=ExtResource("13_lc2xo")]
 visible = false
 top_level = true
+z_index = 30
 anchors_preset = 0
 anchor_left = 0.0
 anchor_top = 0.0
