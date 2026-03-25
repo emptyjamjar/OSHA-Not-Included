@@ -1,23 +1,20 @@
 class_name Conveyor extends Node2D
 ## The conveyor belt outputs items
 
-## All items that the conveyor can spawn are found here
-## Connected to a list of String paths to resources
-enum ItemDataList {
-	TOILET_PAPER,
-	BLACK_WATER_BOTTLE,
-	BLUE_WATER_BOTTLE,
-	PINK_WATER_BOTTLE,
-}
 
 @export_category("Item Lists")
-## Preloaded resources of item data
+## Preloaded resources of all possible ItemData that this conveyor can generate.
 @export var item_resources : Array[ItemData]
 
-##Story items to be spawned.
+##List of ItemData important to the story that this conveyor can generate.
 @export var special_resources: Array[ItemData]
 
 @export_category("Other Variables")
+##How many random items will be spawned in between items that are required by the current tickets.
+##Example: The current ticket needs a black bottle, the conveyor will queue up a black bottle with 
+## 3 random_items in between each guaranteed black bottle.
+@export var random_items: int = 3
+
 ## Affects how quickly items are moved/Animation speed
 ## (Default: 5)
 @export var conveyor_speed:int = 5
@@ -27,7 +24,7 @@ enum ItemDataList {
 @export var output_speed:int = 1
 
 ## Storage for the items yet to be put onto the conveyor belt
-var _queue:Array[ItemDataList] = []
+var _queue:Array[ItemData] = []
 
 ## Belt slots, each slot can hold at most one item
 var _belt_capacity:int = 5
@@ -91,17 +88,43 @@ func _process(delta: float) -> void:
 		var item = _queue.pop_front()
 		# Attempt to spawn the item into the first available slot on the belt
 		_spawn_into_first_slot(item)
+	
+	if _queue.is_empty() and !Ticket_Manager.visible_queue.is_empty():
+		_fill_queue()
 
 
 ## Adds an item to the conveyor
 ## @param item: item to be added
-func input(item:ItemDataList)->void:
+func input(item:ItemData)->void:
 	_queue.push_back(item)
 
 
 ## Returns the front-most item in the conveyor
-func output()->ItemDataList:
+func output()->ItemData:
 	return self._queue.pop_front()
+
+
+## Fills queue with items, some are random, some are items from the current ticket queue.
+func _fill_queue():
+	#Get current visible tickets.
+	var ticket_pool: Array[Ticket] = Ticket_Manager.visible_queue
+	var ticket_items: Array[ItemData] = []
+	
+	#This grabs all the visible active tickets, and gets all the ItemData.id that's stored in a dictionary
+	#within it. Then it takes those ids and converts them back into ItemData.
+	#Where did the tickets get the ItemData in the first place? Randomly. From this script. 
+	#We are ping-ponging an integer. God help us.
+	for ticket in ticket_pool:
+		var ticket_item_ids = ticket.required_items.keys()
+		#Yes it's two for loops. I am so sorry. This is the only way.
+		for id in ticket_item_ids:
+			ticket_items.append(get_item_by_id(id))
+	
+	#Puts a relevant item into the queue
+	input(ticket_items.pick_random())
+	#Puts random items into the queue
+	for i in range(random_items):
+		input(ticket_items.pick_random())
 
 
 ## Spawns an item into the first available slot on the conveyor belt.
@@ -109,7 +132,7 @@ func output()->ItemDataList:
 ## the reference in the slots array. If all slots are occupied, the item is not spawned.
 ## PLACEHOLDER: contains print statements for debug (remove later)
 ## @param item: The Item data to spawn onto the conveyor belt
-func _spawn_into_first_slot(item: ItemDataList) -> void:
+func _spawn_into_first_slot(item: ItemData) -> void:
 	for i in _slots.size():
 		if _slots[i] == null:
 			# Create sprite of texture
@@ -119,7 +142,8 @@ func _spawn_into_first_slot(item: ItemDataList) -> void:
 			
 			# Connect to function to remove from list on pickup
 			scene.picked_up.connect(_on_item_picked_up.bind(i))
-			scene.data = item_resources[item].duplicate(true)
+			
+			scene.data = item.duplicate(true)
 			add_child(scene)
 			scene.global_position = _slot_markers[i].global_position
 			_slots[i] = scene

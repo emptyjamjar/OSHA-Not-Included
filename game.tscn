@@ -26,18 +26,8 @@ class_name GameManager
 @onready var money := 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var conveyor := $Conveyor
 	Ticket_Manager.on_game_start()
-	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
-	conveyor.input(Conveyor.ItemDataList.PINK_WATER_BOTTLE)
-	conveyor.input(Conveyor.ItemDataList.BLACK_WATER_BOTTLE)
-	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
-	conveyor.input(Conveyor.ItemDataList.BLUE_WATER_BOTTLE)
-	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
-	conveyor.input(Conveyor.ItemDataList.PINK_WATER_BOTTLE)
-	conveyor.input(Conveyor.ItemDataList.BLACK_WATER_BOTTLE)
-	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
-	conveyor.input(Conveyor.ItemDataList.BLUE_WATER_BOTTLE)
+
 
 func _on_shipper_get_money() -> void:
 	money += 10
@@ -89,9 +79,6 @@ position = Vector2(640, 192)
 
 [node name="Conveyor" parent="." unique_id=1135306595 groups=["conveyor"] instance=ExtResource("8_j5wjh")]
 position = Vector2(101, 363)
-
-[node name="Collision_Vertical" parent="Conveyor/StaticBody2D" parent_id_path=PackedInt32Array(1135306595, 1976208908) index="1" unique_id=509053654]
-position = Vector2(207.2072, 67.56757)
 
 [node name="TicketTerminal" parent="." unique_id=982348100 instance=ExtResource("6_ryrav")]
 position = Vector2(368, 392)
