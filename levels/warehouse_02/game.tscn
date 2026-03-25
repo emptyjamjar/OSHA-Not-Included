@@ -27,18 +27,7 @@ class_name GameManager
 @onready var money := 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var conveyor := $Conveyor
 	Ticket_Manager.on_game_start()
-	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
-	conveyor.input(Conveyor.ItemDataList.PINK_WATER_BOTTLE)
-	conveyor.input(Conveyor.ItemDataList.BLACK_WATER_BOTTLE)
-	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
-	conveyor.input(Conveyor.ItemDataList.BLUE_WATER_BOTTLE)
-	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
-	conveyor.input(Conveyor.ItemDataList.PINK_WATER_BOTTLE)
-	conveyor.input(Conveyor.ItemDataList.BLACK_WATER_BOTTLE)
-	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
-	conveyor.input(Conveyor.ItemDataList.BLUE_WATER_BOTTLE)
 
 func _on_shipper_get_money() -> void:
 	money += 10
