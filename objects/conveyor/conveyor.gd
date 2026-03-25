@@ -5,49 +5,48 @@ class_name Conveyor extends Node2D
 @export_category("Item Lists")
 ## Preloaded resources of all possible ItemData that this conveyor can generate.
 @export var item_resources : Array[ItemData]
-
 ##List of ItemData important to the story that this conveyor can generate.
 @export var special_resources: Array[ItemData]
 
-@export_category("Other Variables")
+@export_category("Components")
+##The Belt Tile_map
+@export var tile_map: TileMapLayer
+##The item spawner/despawner Tile_map
+@export var spawn_despawn_map: TileMapLayer
+
+@export_category("Values")
 ##How many random items will be spawned in between items that are required by the current tickets.
 ##Example: The current ticket needs a black bottle, the conveyor will queue up a black bottle with 
 ## 3 random_items in between each guaranteed black bottle.
 @export var random_items: int = 3
-
 ## Affects how quickly items are moved/Animation speed
 ## (Default: 5)
 @export var conveyor_speed:int = 5
-
 ## Affects how quickly items are output onto the conveyor belt
 ## (Default: 1)
 @export var output_speed:int = 1
+## How many items can be on the conveyor max.
+@export var slots_max:int = 1
 
-## Storage for the items yet to be put onto the conveyor belt
-var _queue:Array[ItemData] = []
-
-## Belt slots, each slot can hold at most one item
-var _belt_capacity:int = 5
-
-## Belt slot positions
-var _slot_positions: Array[int]
-
-# PLACEHOLDER: slot markers and slots
-var _slot_markers: Array[Marker2D] = []
-# PLACEHOLDER: holds spawned item nodes
-var _slots: Array[ItemBase] = []
-
+@export_category("Spawning Variables")
 # Item Base scene
 @export var item_scene : PackedScene
 
+## The position where all items will be spawned from.
+var _spawn_tile_pos: Vector2
+## The position where items will be despawned from.
+var _despawn_tile_pos: Vector2
+## Cache of ItemData to be generated onto the conveyor.
+var _queue:Array[ItemData] = []
+## Collection of items spawned on the conveyor.
+var _slots: Array[ItemBase] = []
 ## Timer for output speed control
 var _output_timer: float = 0.0
 
 
 func _ready() -> void:
 	add_to_group("conveyor")
-	# Fill item_resources with needed item data
-	# Items should follow the order presented in the enums
+	# Fill item_resources with needed item data if it is somehow empty.
 	if item_resources.is_empty():
 		item_resources.append(preload("res://objects/items/toilet_paper/toilet_paper.tres"))
 		item_resources.append(preload("res://objects/items/water_bottles/black_water_bottle.tres"))
@@ -57,21 +56,23 @@ func _ready() -> void:
 	# Used to instantiate new children
 	item_scene = load("res://objects/items/item_base.tscn")
 	
-	# PLACEHOLDER: Build slot marker list in order
-	_slot_markers = [
-		$Marker_Pos_01,
-		$Marker_Pos_02,
-		$Marker_Pos_03,
-		$Marker_Pos_04,
-	]
+	_slots.resize(slots_max)
 	
-	# PLACEHOLDER: belt capacity controls how many are used
-	_slot_markers = _slot_markers.slice(0, min(_belt_capacity, _slot_markers.size()))
+	#Check all used cells in spawn_despawn_map
+	for tile in spawn_despawn_map.get_used_cells():
+		#If the tile is marked as a SpawnTile then set _spawn_tile_pos to that tile's global position.
+		if spawn_despawn_map.get_cell_tile_data(tile).get_custom_data("SpawnTile") == true:
+			_spawn_tile_pos = spawn_despawn_map.map_to_local(tile)
+			_spawn_tile_pos = to_global(_spawn_tile_pos)
+		#Does the same as above but for Despawn tile.
+		if spawn_despawn_map.get_cell_tile_data(tile).get_custom_data("DeSpawnTile") == true:
+			_despawn_tile_pos = spawn_despawn_map.map_to_local(tile)
+			_despawn_tile_pos = to_global(_despawn_tile_pos)
 	
-	_slots.resize(_slot_markers.size())
-	for i in _slots.size():
-		_slots[i] = null
-		
+	if(_spawn_tile_pos == null):
+		printerr("No conveyor spawn tile. Make sure to draw the tile in the right Tilemap (Spawn Despawn Tilemap)")
+	elif(_despawn_tile_pos == null):
+		printerr("No conveyor despawn tile. Make sure to draw the tile in the right Tilemap (Spawn Despawn Tilemap)")
 
 
 func _process(delta: float) -> void:
@@ -79,6 +80,7 @@ func _process(delta: float) -> void:
 	_output_timer += delta
 	var output_interval = 1.0 / output_speed
 	
+	#TODO: CHANGE THIS.
 	# PLACEHOLDER: Below will move into method later
 	# Continue processing while enough time has passed and items are waiting in queue
 	while _output_timer >= output_interval and _queue.size() > 0:
@@ -91,6 +93,9 @@ func _process(delta: float) -> void:
 	
 	if _queue.is_empty() and !Ticket_Manager.visible_queue.is_empty():
 		_fill_queue()
+	
+	if !_slots.is_empty():
+		_move_items()
 
 
 ## Adds an item to the conveyor
@@ -104,6 +109,12 @@ func output()->ItemData:
 	return self._queue.pop_front()
 
 
+func _move_items():
+	Path2D
+	for item in _slots:
+		pass
+
+
 ## Fills queue with items, some are random, some are items from the current ticket queue.
 func _fill_queue():
 	#Get current visible tickets.
@@ -112,8 +123,6 @@ func _fill_queue():
 	
 	#This grabs all the visible active tickets, and gets all the ItemData.id that's stored in a dictionary
 	#within it. Then it takes those ids and converts them back into ItemData.
-	#Where did the tickets get the ItemData in the first place? Randomly. From this script. 
-	#We are ping-ponging an integer. God help us.
 	for ticket in ticket_pool:
 		var ticket_item_ids = ticket.required_items.keys()
 		#Yes it's two for loops. I am so sorry. This is the only way.
@@ -145,7 +154,8 @@ func _spawn_into_first_slot(item: ItemData) -> void:
 			
 			scene.data = item.duplicate(true)
 			add_child(scene)
-			scene.global_position = _slot_markers[i].global_position
+			#Spawn onto the spawn tile
+			scene.global_position = _spawn_tile_pos
 			_slots[i] = scene
 			
 			return

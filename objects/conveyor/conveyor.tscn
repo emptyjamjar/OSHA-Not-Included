@@ -167,9 +167,13 @@ texture_region_size = Vector2i(32, 32)
 3:3/0/custom_data_0 = Vector2(-1, 0)
 3:3/0/custom_data_1 = true
 1:1/0 = 0
+1:1/0/custom_data_2 = true
 3:2/0 = 0
+3:2/0/custom_data_2 = true
 4:2/0 = 0
+4:2/0/custom_data_2 = true
 4:3/0 = 0
+4:3/0/custom_data_2 = true
 
 [sub_resource type="TileSet" id="TileSet_ywffn"]
 tile_size = Vector2i(32, 32)
@@ -178,45 +182,38 @@ custom_data_layer_0/name = "Direction"
 custom_data_layer_0/type = 5
 custom_data_layer_1/name = "SpawnTile"
 custom_data_layer_1/type = 1
+custom_data_layer_2/name = "DeSpawnTile"
+custom_data_layer_2/type = 1
 sources/1 = SubResource("TileSetAtlasSource_ncid3")
 
-[sub_resource type="Curve2D" id="Curve2D_ncid3"]
+[sub_resource type="Curve2D" id="Curve2D_323m6"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 8, 8, 0, 0, 0, 0, 144, 8, 0, 0, 0, 0, 144, 48)
+}
+point_count = 3
 
-[node name="Conveyor" type="Node2D" unique_id=1135306595]
+[node name="Conveyor" type="Node2D" unique_id=1135306595 node_paths=PackedStringArray("tile_map", "spawn_despawn_map")]
 script = ExtResource("1_ncid3")
 item_resources = Array[ExtResource("2_323m6")]([ExtResource("3_ivmdc"), ExtResource("4_dnyr5"), ExtResource("5_xwue2"), ExtResource("6_w0iay")])
+tile_map = NodePath("Belt TileMap")
+spawn_despawn_map = NodePath("Spawn Despawn TileMap")
 item_scene = SubResource("Resource_ncid3")
 
-[node name="Conveyor Belt TileMap" type="TileMapLayer" parent="." unique_id=1815729401]
-tile_map_data = PackedByteArray("AAAAAAAAAQAAAAMAAAABAAAAAQABAAIAAAACAAAAAQABAAIAAAADAAAAAQABAAIAAAAEAAAAAQAEAAEAAAAEAAEAAQAAAAEAAAA=")
+[node name="Belt TileMap" type="TileMapLayer" parent="." unique_id=1815729401]
+tile_map_data = PackedByteArray("AAAAAAAAAQABAAIAAAABAAAAAQABAAIAAAACAAAAAQABAAIAAAADAAAAAQABAAIAAAAEAAAAAQAEAAEAAAAEAAEAAQAAAAEAAAA=")
 tile_set = SubResource("TileSet_ywffn")
 
-[node name="Belt Path" type="Path2D" parent="." unique_id=172396226]
-curve = SubResource("Curve2D_ncid3")
+[node name="Spawn Despawn TileMap" type="TileMapLayer" parent="." unique_id=1601041665]
+tile_map_data = PackedByteArray("AAAAAAAAAQAAAAMAAAAEAAEAAQABAAEAAAA=")
+tile_set = SubResource("TileSet_ywffn")
 
-[node name="PathFollow2D" type="PathFollow2D" parent="Belt Path" unique_id=851876933]
-position = Vector2(24, 16)
+[node name="Path2D" type="Path2D" parent="." unique_id=758659625]
+curve = SubResource("Curve2D_323m6")
 
-[node name="Marker_Start" type="Marker2D" parent="." unique_id=2057746255]
-position = Vector2(26.64, 12.654)
-scale = Vector2(0.666, 0.666)
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D" unique_id=1050330344]
+position = Vector2(34.79067, 8)
+progress = 26.656
 
-[node name="Marker_Pos_01" type="Marker2D" parent="." unique_id=507846563]
-position = Vector2(53.28, 12.654)
-scale = Vector2(0.666, 0.666)
-
-[node name="Marker_Pos_02" type="Marker2D" parent="." unique_id=1152789713]
-position = Vector2(78.588, 12.654)
-scale = Vector2(0.666, 0.666)
-
-[node name="Marker_Pos_03" type="Marker2D" parent="." unique_id=1940192903]
-position = Vector2(111.888, 12.654)
-scale = Vector2(0.666, 0.666)
-
-[node name="Marker_Pos_04" type="Marker2D" parent="." unique_id=1522233274]
-position = Vector2(144, 31.968)
-scale = Vector2(0.666, 0.666)
-
-[node name="Marker_End" type="Marker2D" parent="." unique_id=1672538663]
-position = Vector2(144, 53.28)
-scale = Vector2(0.666, 0.666)
+[node name="PathFollow2D2" type="PathFollow2D" parent="Path2D" unique_id=16157549]
+position = Vector2(114.56685, 8)
+progress = 106.56
