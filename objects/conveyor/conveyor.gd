@@ -124,7 +124,7 @@ func _fill_queue():
 	input(ticket_items.pick_random())
 	#Puts random items into the queue
 	for i in range(random_items):
-		input(ticket_items.pick_random())
+		input(item_resources.pick_random())
 
 
 ## Spawns an item into the first available slot on the conveyor belt.
