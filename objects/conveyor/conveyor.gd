@@ -24,7 +24,7 @@ class_name Conveyor extends Node2D
 @export var conveyor_speed:int = 5
 ## Affects how quickly items are output onto the conveyor belt
 ## (Default: 1)
-@export var output_speed:int = 1
+@export var output_speed:float = 1
 ## How many items can be on the conveyor max.
 @export var slots_max:int = 1
 
@@ -109,10 +109,28 @@ func output()->ItemData:
 	return self._queue.pop_front()
 
 
+## Makes the items move along the conveyor.
 func _move_items():
-	Path2D
 	for item in _slots:
-		pass
+		if item == null:
+			continue
+		
+		var item_pos = item.global_position
+		
+		#Check if the item is in the despawn tile
+		if item_pos.round() == _despawn_tile_pos.round():
+			item.queue_free()
+		
+		else:
+			#Get the tile data of the cell the item is in right now.
+			var tile_data: TileData = tile_map.get_cell_tile_data(tile_map.local_to_map(to_local(item_pos)))
+			var dir = tile_data.get_custom_data("Direction").normalized() #Get the custom Direction variable of the tile.
+			
+			var next_tile = item_pos + dir * tile_map.tile_set.tile_size.x
+			
+			
+			item.global_position = item_pos.move_toward(next_tile, conveyor_speed * get_process_delta_time())
+			
 
 
 ## Fills queue with items, some are random, some are items from the current ticket queue.
