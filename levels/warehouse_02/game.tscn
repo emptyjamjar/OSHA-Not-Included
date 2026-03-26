@@ -81,6 +81,12 @@ scale = Vector2(0.40825486, 0.38389248)
 [node name="Conveyor" parent="." unique_id=1135306595 groups=["conveyor"] instance=ExtResource("11_2p8ph")]
 position = Vector2(620, 363)
 
+[node name="Belt TileMap" parent="Conveyor" index="0" unique_id=1815729401]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0, 2, 0, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0, 3, 0, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0, 4, 0, 0, 0, 1, 0, 1, 0, 2, 0, 0, 0)
+
+[node name="Spawn Despawn TileMap" parent="Conveyor" index="1" unique_id=1601041665]
+tile_map_data = PackedByteArray(0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0, 4, 0, 0, 0, 1, 0, 3, 0, 2, 0, 0, 0)
+
 [node name="TicketTerminal" parent="." unique_id=982348100 instance=ExtResource("12_3mx75")]
 position = Vector2(470, 403)
 
@@ -184,3 +190,5 @@ position = Vector2(455, 296)
 [connection signal="needs_change" from="Player/NeedsComponent" to="Camera2D/HUD" method="_on_needs_component_needs_change"]
 [connection signal="ticketsEmpty" from="TicketTerminal" to="Score" method="_on_ticket_terminal_tickets_empty"]
 [connection signal="washroom_used" from="Washroom" to="Score" method="_on_washroom_washroom_used"]
+
+[editable path="Conveyor"]

@@ -104,6 +104,7 @@ func input(item:ItemData)->void:
 	_queue.push_back(item)
 
 
+
 ## Returns the front-most item in the conveyor
 func output()->ItemData:
 	return self._queue.pop_front()

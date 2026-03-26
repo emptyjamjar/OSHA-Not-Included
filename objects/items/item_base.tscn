@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://bguhd83d36whj" path="res://objects/items/toilet_paper/toilet_paper.tres" id="2_oqai5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oqai5"]
-radius = 28.804203
+radius = 31.884832
 
 [node name="ItemBase" type="Node2D" unique_id=1912400498 node_paths=PackedStringArray("iArea", "sprite") groups=["Boxes"]]
 scale = Vector2(0.66, 0.66)
@@ -22,4 +22,4 @@ collision_layer = 4
 shape = SubResource("CircleShape2D_oqai5")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1270451069]
-position = Vector2(0, -12)
+position = Vector2(0, -9)
