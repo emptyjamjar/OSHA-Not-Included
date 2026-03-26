@@ -15,6 +15,9 @@ size = Vector2(62.000008, 40)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qrgxu"]
 size = Vector2(62, 44)
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hlauf"]
+polygon = PackedVector2Array(-24, -10, -24, 15, 23, 15, 23, -10)
+
 [node name="Packager" type="Area2D" unique_id=77134705 node_paths=PackedStringArray("iArea")]
 collision_layer = 0
 collision_mask = 5
@@ -43,3 +46,6 @@ debug_color = Color(0.99178, 0, 0.29680523, 0.41960785)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=817596253]
 shape = SubResource("RectangleShape2D_qrgxu")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=523008749]
+occluder = SubResource("OccluderPolygon2D_hlauf")

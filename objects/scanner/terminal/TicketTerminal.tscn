@@ -8,7 +8,7 @@
 [ext_resource type="TileSet" uid="uid://b62knjg567jhh" path="res://levels/shared/tile_set.tres" id="5_4wgmk"]
 [ext_resource type="PackedScene" uid="uid://bu8gpp7tljufp" path="res://objects/scanner/terminal/TicketQueue.tscn" id="6_4wgmk"]
 [ext_resource type="AudioStream" uid="uid://c4yu8mk26dj28" path="res://objects/scanner/terminal/Heart Monitor Beep Sound Effect.wav" id="8_q6qf8"]
-[ext_resource type="Script" path="res://objects/scanner/terminal/beep.gd" id="9_3e1dk"]
+[ext_resource type="Script" uid="uid://c7qhsjjsn78s6" path="res://objects/scanner/terminal/beep.gd" id="9_3e1dk"]
 
 [sub_resource type="Gradient" id="Gradient_q6qf8"]
 colors = PackedColorArray(0, 0, 0, 1, 0.83137256, 0.83137256, 0.8901961, 1)
@@ -33,6 +33,9 @@ size = Vector2(64, 10)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3twg7"]
 size = Vector2(101.875, 61)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_q6qf8"]
+polygon = PackedVector2Array(-32, 2, -32, 23, -31, 24, -29, 23, -29, 14, 29, 14, 29, 23, 30, 24, 32, 23, 32, 2, 12, 2, -15, 2)
 
 [node name="TicketTerminal" type="Area2D" unique_id=1035499252]
 script = ExtResource("1_3twg7")
@@ -92,7 +95,10 @@ layer = -1
 visible = false
 
 [node name="TicketQueueUI" parent="." unique_id=734139000 instance=ExtResource("6_4wgmk")]
-layer = -1
+layer = 15
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=270858713]
+occluder = SubResource("OccluderPolygon2D_q6qf8")
 
 [connection signal="activated" from="." to="Sprite2D/ReadyFlicker" method="_on_ticket_terminal_activated"]
 [connection signal="timeout" from="Sprite2D/Timer" to="Sprite2D/ReadyFlicker" method="_on_timer_timeout"]
