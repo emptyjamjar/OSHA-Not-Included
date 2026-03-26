@@ -39,6 +39,7 @@ func _ready() -> void:
 	conveyor.input(Conveyor.ItemDataList.BLACK_WATER_BOTTLE)
 	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
 	conveyor.input(Conveyor.ItemDataList.BLUE_WATER_BOTTLE)
+	
 
 func _on_shipper_get_money() -> void:
 	money += 10
@@ -186,13 +187,11 @@ position = Vector2(723.6078, 184)
 position = Vector2(-16, 80)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=2072761992]
+layer = 15
 
 [node name="Pause" parent="UI" unique_id=1566201169 instance=ExtResource("13_lc2xo")]
+visible = false
 top_level = true
-offset_left = 384.0
-offset_top = 216.0
-offset_right = 384.0
-offset_bottom = 216.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Score" parent="UI" unique_id=1161969462 instance=ExtResource("17_8onr1")]
