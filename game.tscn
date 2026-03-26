@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://cv4vrnpxs40bf" path="res://objects/restroom/washroom.tscn" id="12_iotsf"]
 [ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="13_lc2xo"]
 [ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="15_e8heu"]
-[ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
+[ext_resource type="PackedScene" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
 [ext_resource type="Texture2D" uid="uid://bmisxcq76lrat" path="res://icon.svg" id="18_boyg6"]
 [ext_resource type="Script" uid="uid://j63ga8s4bhlu" path="res://cutscene_path.gd" id="18_e36ub"]
 
@@ -191,6 +191,7 @@ loop = false
 texture = ExtResource("18_boyg6")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=837622460]
+layer = 15
 
 [node name="Pause" parent="UI" unique_id=1566201169 instance=ExtResource("13_lc2xo")]
 visible = false
