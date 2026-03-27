@@ -64,25 +64,25 @@ func _init(type: Type = Type.NONE, effect_name: String = "No_Name") -> void:
 # API Methods #
 
 ## Called when the effect starts (e.g., play sound, start particles)
-## @param delta: float - Time since last frame (for timing)
-func enter(delta: float) -> void:
-	started.emit()
+## @param delta: float - Time since last frame (for timing), timing can be omitted if not needed
+func enter(delta: float = 0.0) -> void:
+	started.emit() # be sure to use .super().enter(delta optional) if overriding to ensure signal is emitted
 	pass
 
 ## Called when the effect ends (e.g., stop sound, remove particles)
-## @param delta: float - Time since last frame
-func exit(delta: float) -> void:
-	ended.emit()
+## @param delta: float - Time since last frame, timing can be omitted if not needed
+func exit(delta: float = 0.0) -> void:
+	ended.emit() # be sure to use .super().exit(delta optional) if overriding to ensure signal is emitted
 	pass
 
 ## Called every frame while the effect is active (for visual/audio updates)
-## @param delta: float - Time since last frame
-func update(delta: float) -> void:
+## @param delta: float - Time since last frame, timing can be omitted if not needed
+func update(delta: float = 0.0) -> void:
 	pass
 
 ## Called every physics frame while the effect is active (for movement/collision)
-## @param delta: float - Time since last physics frame
-func physics_update(delta: float) -> void:
+## @param delta: float - Time since last physics frame, timing can be omitted if not needed
+func physics_update(delta: float = 0.0) -> void:
 	pass
 
 
