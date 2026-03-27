@@ -232,6 +232,19 @@ func set_cooldown_duration(new_duration: float) -> bool:
 func get_cooldown_duration() -> float:
 	return self._cooldown_duration
 
+## Sets the elapsed time in cooldown since the effect ended
+## @param new_time: float - Time in seconds since cooldown started
+## @return: bool - True if set successfully, false if invalid time
+func set_cooldown_elapsed(new_time: float) -> bool:
+	if new_time < 0:
+		return false
+	self._cooldown_elapsed = new_time
+	return true
+
+## Gets the elapsed time in cooldown since the effect ended
+## @return: float - Time in seconds since cooldown started
+func get_cooldown_elapsed() -> float:
+	return self._cooldown_elapsed
 
 # Reset methods #
 
