@@ -1,14 +1,14 @@
-[gd_scene format=4 uid="uid://rgnaipuerpmn"]
+[gd_scene format=3 uid="uid://rgnaipuerpmn"]
 
 [ext_resource type="Script" uid="uid://ctv5d2w42au35" path="res://objects/scanner/terminal/ticket_terminal.gd" id="1_3twg7"]
 [ext_resource type="Texture2D" uid="uid://dd8qyir30yfhp" path="res://objects/scanner/terminal/warehouse-computer.png" id="2_3twg7"]
+[ext_resource type="Texture2D" uid="uid://cmb8hhpdomgtt" path="res://objects/scanner/terminal/warehouse-table.png" id="2_q6qf8"]
 [ext_resource type="PackedScene" uid="uid://cdhb2euh28ies" path="res://core/components/interaction_area/interaction_area.tscn" id="3_3yids"]
-[ext_resource type="Script" uid="uid://d0emwvf7jtlx3" path="res://objects/scanner/terminal/ready_flicker.gd" id="4_wiggl"]
+[ext_resource type="Script" path="res://objects/scanner/terminal/ready_flicker.gd" id="4_wiggl"]
 [ext_resource type="PackedScene" uid="uid://c6mvf84775rmp" path="res://objects/scanner/terminal/ticket.tscn" id="5_2t2yn"]
-[ext_resource type="TileSet" uid="uid://b62knjg567jhh" path="res://levels/shared/tile_set.tres" id="5_4wgmk"]
 [ext_resource type="PackedScene" uid="uid://bu8gpp7tljufp" path="res://objects/scanner/terminal/TicketQueue.tscn" id="6_4wgmk"]
 [ext_resource type="AudioStream" uid="uid://c4yu8mk26dj28" path="res://objects/scanner/terminal/Heart Monitor Beep Sound Effect.wav" id="8_q6qf8"]
-[ext_resource type="Script" uid="uid://c7qhsjjsn78s6" path="res://objects/scanner/terminal/beep.gd" id="9_3e1dk"]
+[ext_resource type="Script" path="res://objects/scanner/terminal/beep.gd" id="9_3e1dk"]
 
 [sub_resource type="Gradient" id="Gradient_q6qf8"]
 colors = PackedColorArray(0, 0, 0, 1, 0.83137256, 0.83137256, 0.8901961, 1)
@@ -35,15 +35,15 @@ size = Vector2(64, 10)
 size = Vector2(101.875, 61)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_q6qf8"]
-polygon = PackedVector2Array(-32, 2, -32, 23, -31, 24, -29, 23, -29, 14, 29, 14, 29, 23, 30, 24, 32, 23, 32, 2, 12, 2, -15, 2)
+polygon = PackedVector2Array(-28.766006, 3.3869476, -28.766006, 21.96376, -21.296974, 22.155273, -21.296974, 17.941978, 21.027527, 17.750458, 21.027527, 22.346786, 28.879578, 22.346786, 28.879578, 3.7699738)
 
 [node name="TicketTerminal" type="Area2D" unique_id=1035499252]
 script = ExtResource("1_3twg7")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=550336581]
-position = Vector2(0, -8)
-tile_map_data = PackedByteArray("AAD+/wEAAQAJAAAAADD//wEAAQAHAAAAADAAAAEAAQAIAAAAADABAAEAAQAGAAAAADABAAAAAQAIAAAAAAAAAAAAAQAIAAAAAAD//wAAAQAIAAAAAAD+/wAAAQAIAAAAAAA=")
-tile_set = ExtResource("5_4wgmk")
+[node name="TableSprite" type="Sprite2D" parent="." unique_id=1924802076]
+position = Vector2(0, 8)
+scale = Vector2(2, 1)
+texture = ExtResource("2_q6qf8")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1972022688]
 position = Vector2(0, -4.404812)
@@ -96,8 +96,9 @@ visible = false
 
 [node name="TicketQueueUI" parent="." unique_id=734139000 instance=ExtResource("6_4wgmk")]
 layer = 15
+visible = false
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=270858713]
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=250726501]
 occluder = SubResource("OccluderPolygon2D_q6qf8")
 
 [connection signal="activated" from="." to="Sprite2D/ReadyFlicker" method="_on_ticket_terminal_activated"]
