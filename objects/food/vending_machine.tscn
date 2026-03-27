@@ -10,6 +10,19 @@ size = Vector2(90.5, 158)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h7hfa"]
 size = Vector2(94, 157)
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_h7hfa"]
+closed = false
+polygon = PackedVector2Array(-48.48474, -39.39386, -48.48474, 115.15161, 48.484985, 115.15161, 48.484985, -39.39386, -48.48474, -39.39386, 43, -22, 43, 65, -7, 65, -7, -24, 41, -24)
+
+[sub_resource type="Gradient" id="Gradient_wkw6b"]
+offsets = PackedFloat32Array(0, 0.83157897, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p5dhj"]
+gradient = SubResource("Gradient_wkw6b")
+fill_from = Vector2(0.5555556, 1)
+fill_to = Vector2(0.54273504, 0)
+
 [node name="VendingMachine" type="StaticBody2D" unique_id=1840311720 node_paths=PackedStringArray("interaction_area")]
 script = ExtResource("1_6bvun")
 interaction_area = NodePath("InteractionArea")
@@ -22,13 +35,24 @@ vframes = 2
 frame = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1724356584]
+visible = false
 position = Vector2(-3.25, 41)
 shape = SubResource("RectangleShape2D_p5dhj")
 debug_color = Color(0.3871518, 0.2810755, 0.7993455, 0.41960785)
 
 [node name="InteractionArea" parent="." unique_id=2104453103 instance=ExtResource("4_cjvpt")]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=372857546]
 position = Vector2(30, 42)
 scale = Vector2(1, 1.0070777)
 shape = SubResource("RectangleShape2D_h7hfa")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=2090019879]
+occluder = SubResource("OccluderPolygon2D_h7hfa")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=748862259]
+position = Vector2(18, 22)
+scale = Vector2(0.7575757, 1.399621)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_p5dhj")
