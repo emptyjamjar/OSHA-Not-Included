@@ -23,38 +23,45 @@ enum Type
 	HAZARD			# Dangerous effect (fire, poison, radiation, etc.)
 }
 # basic info
-var _type: Type = Type.NONE
-var _effect_name: String = ""
+@export_category("Information")
+## Effect type, used to help categorize what this effect does
+@export var _type: Type = Type.NONE
+## Name for effect (helpful for debugging)
+@export var _effect_name: String = ""
 
 # flags
+@export_category("Additional Properties")
 ## Only one of this effect may be active
-var _is_unique: bool = false
+@export var _is_unique: bool = false
 ## is this effect always on? (until manually turned off)
-var _is_persistent: bool = false
+@export var _is_persistent: bool = false
 
 # Timing
+@export_category("Duration")
 ## Enable effect timing/duration
-var _enable_timing:bool = false
+@export var _enable_timing:bool = false
 ## how long should this effect be active for (in seconds) or until next repeat
-var _duration: float = 0.0 
+@export var _duration: float = 0.0 
 ## Time elapsed so far
-var _elapsed_time: float = 0.0 # time active
+@export var _elapsed_time: float = 0.0 # time active
 
 # Repeating
+@export_category("Repeating")
 ## Enable effect repeating
-var _enable_repeat:bool = false
+@export var _enable_repeat:bool = false
 ## how many times to repeat this effect
-var _repeat_max: int = 0
+@export var _repeat_max: int = 0
 ## Repeats so far
-var _repeat_count: int = 0
+@export var _repeat_count: int = 0
 
 # cooldown
+@export_category("Cooldown")
 ## Enable cooldown after effect ends before it can be applied again
-var _enable_cooldown: bool = false
+@export var _enable_cooldown: bool = false
 ## Cooldown duration in seconds
-var _cooldown_duration: float = 0.0
+@export var _cooldown_duration: float = 0.0
 ## Time elapsed in cooldown
-var _cooldown_elapsed: float = 0.0
+@export var _cooldown_elapsed: float = 0.0
 
 # Basic constructor for Effect
 func _init(type: Type = Type.NONE, effect_name: String = "No_Name") -> void:
