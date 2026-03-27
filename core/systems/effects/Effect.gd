@@ -29,7 +29,6 @@ var _is_unique: bool = false
 var _is_persistent: bool = false # is this effect always on? (until manually turned off)
 var _duration: float = 0.0 # how long should this effect be active for (in seconds)
 var _repeat_count: int = 0 # how many times to repeat this effect
-var _repeat_limit: int = -1 # (-1 = infinite), acts as a ceiling cap
 var _elapsed_time: float = 0.0 # time active
 var _repeat_index: int = 0 # tracks current cycle (ex: 5th cycle)
 
@@ -121,16 +120,6 @@ func set_repeat_count(new_count: int) -> void:
 func get_repeat_count() -> int:
 	return _repeat_count
 
-## Sets the maximum number of times the effect can repeat
-## @param new_limit: int - Maximum repeats (-1 = infinite)
-func set_repeat_limit(new_limit: int) -> void:
-	_repeat_limit = new_limit
-
-## Gets the maximum number of repeats
-## @return: int - Maximum repeats (-1 = infinite)
-func get_repeat_limit() -> int:
-	return _repeat_limit
-
 ## Sets the elapsed time since the effect started
 ## @param new_time: float - Time in seconds since effect began
 func set_elapsed_time(new_time: float) -> void:
@@ -159,13 +148,6 @@ func reset(reset_elapsed: bool = true) -> void:
 	_elapsed_time = 0.0 if reset_elapsed else _elapsed_time
 	_repeat_index = 0 if reset_elapsed else _repeat_index
 	_repeat_count = 0  # Reset repeat counter (can be incremented on next cycle)
-
-## Checks if the effect should repeat again (based on repeat count and limit)
-## @return: bool - True if should repeat, false if max repeats reached
-func should_repeat() -> bool:
-	if _repeat_limit == -1:  # Infinite
-		return true
-	return _repeat_count < _repeat_limit
 
 ## Increments the repeat index and count (called after each cycle)
 func increment_repeat() -> void:
@@ -198,13 +180,6 @@ func is_finished() -> bool:
 ## @return: bool - True if first cycle, false otherwise
 func is_first_cycle() -> bool:
 	return _repeat_index == 0
-
-## Checks if the effect has reached its repeat limit
-## @return: bool - True if max repeats reached, false otherwise
-func has_reached_repeat_limit() -> bool:
-	if _repeat_limit == -1:
-		return false
-	return _repeat_count >= _repeat_limit
 
 ## Gets the percentage of duration completed (0.0 to 1.0)
 ## @return: float - Progress as percentage (0.0 = start, 1.0 = end)
