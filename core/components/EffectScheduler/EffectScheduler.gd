@@ -54,6 +54,8 @@ signal effect_removed(effect: Effect)
 
 ## A record class to hold information about scheduled effects, including the effect instance and timing details for tracking purposes.
 class ScheduleRecord:
+	# The unique ID assigned to the effect for tracking purposes.
+	var id: int = 0
 	# The effect instance being scheduled.
 	var effect:Effect
 	# The time when the effect was added to the scheduler, used for tracking total time in scheduler.
@@ -653,72 +655,205 @@ func resume_all_effects() -> void:
 func remove_effect_by_instance(effect: Effect) -> bool:
 	var record: ScheduleRecord = get_effect_record_by_instance(effect)
 	if record != null:
-		var effect_id = record.effect.get_instance_id()
-		_remove_from_waiting(effect_id)
-		_remove_from_entering(effect_id)
-		_remove_from_active(effect_id)
-		_remove_from_exiting(effect_id)
-		if debug_logging:
+		var effect_id = record.id
+		var result: bool = false
+		result = _remove_from_waiting(effect_id)
+		result = _remove_from_entering(effect_id)
+		result = _remove_from_active(effect_id)
+		result = _remove_from_exiting(effect_id)
+		if debug_logging and result:
 			_log_generic(_scheduler_identifer + " Removed effect by instance: " + _effect_info_basic(effect))
 		emit_signal("effect_removed", effect)
-		return true
+		return result
 	return false
 
 ## Manually removes an effect from the scheduler by its unique effect ID.
+## @param effect_id: the unique ID assigned to the effect for tracking purposes
+## @return: true if the effect was found and removed from the scheduler, false if the effect was not found in the scheduler or could not be removed.
 func remove_effect_by_id(effect_id: int) -> bool:
+	var record: ScheduleRecord = get_effect_record_by_id(effect_id)
+	if record != null:
+		var effect: Effect = record.effect
+		var result: bool = false
+		result = _remove_from_waiting(effect_id)
+		result = _remove_from_entering(effect_id)
+		result = _remove_from_active(effect_id)
+		result = _remove_from_exiting(effect_id)
+		if debug_logging and result:
+			_log_generic(_scheduler_identifer + " Removed effect by ID: " + _effect_info_basic(effect))
+		emit_signal("effect_removed", effect)
+		return result
 	return false
 
 ## Manually removes the first effect found in the scheduler that matches the specified type.
-func remove_effect_by_type(effect_type) -> bool:
+## @param effect_type: the type of effect to be removed from the scheduler
+## @return: true if an effect of the specified type was found and removed from the scheduler, false if no effect of the specified type was found in the scheduler or could be removed.
+func remove_effect_by_type(effect_type:Effect.Type) -> bool:
+	var record:ScheduleRecord = get_effect_record_by_instance(get_effect_by_type(effect_type))
+	if record != null:
+		# removes the first effect found of the specified type
+		var effect: Effect = record.effect
+		var effect_id = record.id
+		var result: bool = false
+		result = _remove_from_waiting(effect_id)
+		if not result:
+			result = _remove_from_entering(effect_id)
+		if not result:
+			result = _remove_from_active(effect_id)
+		if not result:
+			result = _remove_from_exiting(effect_id)
+		if debug_logging and result:
+			_log_generic(_scheduler_identifer + " Removed effect by type: " + _effect_info_basic(effect))
+		emit_signal("effect_removed", effect)
+		return result
 	return false
 
 ## Manually removes all effects from the scheduler that match the specified type.
-func remove_all_effects_of_type(effect_type) -> bool:
-	return false
+## @param effect_type: the type of effects to be removed from the scheduler
+## @return: true if at least one effect of the specified type was found and removed from the scheduler, false if no effects of the specified type were found in the scheduler or could be removed
+func remove_all_effects_of_type(effect_type:Effect.Type) -> bool:
+	var records:Array = get_all_records_by_type(effect_type)
+	var result: bool = false
+	for record in records:
+		var effect_id = record.id
+		result = remove_effect_by_id(effect_id)
+		if debug_logging and result:
+			_log_generic(_scheduler_identifer + " Removed effect by type: " + _effect_info_basic(record.effect))
+		emit_signal("effect_removed", record.effect)
+	return result
 
 ## Manually removes the first effect found in the scheduler that matches the specified name.
+## @param effect_name: the name of the effect to be removed from the scheduler
+## @return: true if an effect of the specified name was found and removed from the scheduler, false if no effect of the specified name was found in the scheduler or could be removed.
 func remove_effect_by_name(effect_name: String) -> bool:
+	var record:ScheduleRecord = get_effect_record_by_instance(get_effect_by_name(effect_name))
+	if record != null:	# removes the first effect found of the specified name
+		var effect: Effect = record.effect
+		var effect_id = record.id
+		var result: bool = false
+		result = remove_effect_by_id(effect_id)
+		if debug_logging and result:
+			_log_generic(_scheduler_identifer + " Removed effect by name: " + _effect_info_basic(effect))
+		emit_signal("effect_removed", effect)
+		return result
 	return false
 
 ## Manually removes all effects from the scheduler that match the specified name.
+## @param effect_name: the name of the effects to be removed from the scheduler
+## @return: true if at least one effect of the specified name was found and removed from
 func remove_all_effects_by_name(effect_name: String) -> bool:
-	return false
+	var records:Array = get_all_records_by_name(effect_name)
+	var result: bool = false
+	for record in records:
+		var effect_id = record.id
+		result = remove_effect_by_id(effect_id)
+		if debug_logging and result:
+			_log_generic(_scheduler_identifer + " Removed effect by name: " + _effect_info_basic(record.effect))
+		emit_signal("effect_removed", record.effect)
+	return result
 
 ## Manually removes all effects from the scheduler that match the specified type and name.
-func remove_all_persistent_effects() -> void:
-	pass
+## @return: true if at least one effect matching the specified type and name was found and removed from the scheduler, false if no effects matching the specified type and name were found in the scheduler
+func remove_all_persistent_effects() -> bool:
+	var records:Array = get_all_persistent_records()
+	var result: bool = false
+	for record in records:
+		var effect_id = record.id
+		result = remove_effect_by_id(effect_id)
+		if debug_logging and result:
+			_log_generic(_scheduler_identifer + " Removed persistent effect: " + _effect_info_basic(record.effect))
+		emit_signal("effect_removed", record.effect)
+	return result
 
 ## Manually removes all effects from the scheduler that are not marked as persistent.
-func remove_all_non_persistent_effects() -> void:
-	pass
+## @return: true if at least one non-persistent effect was found and removed from the scheduler, false if no non-persistent effects were found in the scheduler or could be removed.
+func remove_all_non_persistent_effects() -> bool:
+	var records:Array = get_all_records()
+	var result: bool = false
+	for record in records:
+		if not record.effect.is_persistent():
+			var effect_id = record.id
+			result = remove_effect_by_id(effect_id)
+			if debug_logging and result:
+				_log_generic(_scheduler_identifer + " Removed non-persistent effect: " + _effect_info_basic(record.effect))
+			emit_signal("effect_removed", record.effect)
+	return result
 
 ## Manually removes all effects from the scheduler that are marked as unique.
-func remove_all_unique_effects() -> void:
-	pass
+## @return: true if at least one unique effect was found and removed from the scheduler, false if no unique effects were found in the scheduler or could be removed.
+func remove_all_unique_effects() -> bool:
+	var records:Array = get_all_unique_records()
+	var result: bool = false
+	for record in records:
+		var effect_id = record.id
+		result = remove_effect_by_id(effect_id)
+		if debug_logging and result:
+			_log_generic(_scheduler_identifer + " Removed unique effect: " + _effect_info_basic(record.effect))
+		emit_signal("effect_removed", record.effect)
+	return result
 
 ## Manually removes all effects from the scheduler that are not marked as unique.
-func remove_all_non_unique_effects() -> void:
-	pass
+## @return: true if at least one non-unique effect was found and removed from the scheduler, false if no non-unique effects were found in the scheduler or could be removed.
+func remove_all_non_unique_effects() -> bool:
+	var records:Array = get_all_records()
+	var result: bool = false
+	for record in records:
+		if not record.effect.is_unique():
+			var effect_id = record.id
+			result = remove_effect_by_id(effect_id)
+			if debug_logging and result:
+				_log_generic(_scheduler_identifer + " Removed non-unique effect: " + _effect_info_basic(record.effect))
+			emit_signal("effect_removed", record.effect)
+	return result
 
 ## Manually removes all effects from the scheduler that have timing enabled, including both duration and cooldown timers.
-func remove_all_timed_effects() -> void:
-	pass
+func remove_all_timed_effects() -> bool:
+	return false
 
 ## Manually removes all effects from the scheduler that have no timing enabled.
-func remove_all_non_timed_effects() -> void:
-	pass
+func remove_all_non_timed_effects() -> bool:
+	return false
 
 ## Manually removes all effects from the scheduler that have repeating enabled
-func remove_all_repeating_effects() -> void:
-	pass
+## @return: true if at least one repeating effect was found and removed from the scheduler, false if no repeating effects were found in the scheduler or could be removed.
+func remove_all_repeating_effects() -> bool:
+	var records:Array = get_all_records()
+	var result: bool = false
+	for record in records:
+		if record.effect.is_repeating():
+			var effect_id = record.id
+			result = remove_effect_by_id(effect_id)
+			if debug_logging and result:
+				_log_generic(_scheduler_identifer + " Removed repeating effect: " + _effect_info_basic(record.effect))
+			emit_signal("effect_removed", record.effect)
+	return result
 
 ## Manually removes all effects from the scheduler that do not have repeating enabled
-func remove_all_non_repeating_effects() -> void:
-	pass
+## @return: true if at least one non-repeating effect was found and removed from the scheduler, false if no non-repeating effects were found in the scheduler or could be removed.
+func remove_all_non_repeating_effects() -> bool:
+	var records:Array = get_all_records()
+	var result: bool = false
+	for record in records:
+		if not record.effect.is_repeating():
+			var effect_id = record.id
+			result = remove_effect_by_id(effect_id)
+			if debug_logging and result:
+				_log_generic(_scheduler_identifer + " Removed non-repeating effect: " + _effect_info_basic(record.effect))
+			emit_signal("effect_removed", record.effect)
+	return result
 
 ## Manually removes all effects from the scheduler, regardless of type, name, or properties.
-func remove_all_effects() -> void:
-	pass
+## @return: true if at least one effect was found and removed from the scheduler, false if no effects were found in the scheduler or could be removed.
+func remove_all_effects() -> bool:
+	var records:Array = get_all_records()
+	var result: bool = false
+	for record in records:
+		var effect_id = record.id
+		result = remove_effect_by_id(effect_id)
+		if debug_logging and result:
+			_log_generic(_scheduler_identifer + " Removed effect: " + _effect_info_basic(record.effect))
+		emit_signal("effect_removed", record.effect)
+	return result
 
 
 ## Returns a shallow copy of the list of currently active effects.
@@ -1203,6 +1338,67 @@ func get_effect_record_by_name(effect_name: String) -> ScheduleRecord:
 			if record != null and record.effect != null and record.effect.get_effect_name() == effect_name:
 				return record
 	return null
+
+## Returns a list of scheduler record details for all effects found in the scheduler that match the specified type.
+## @param effect_type: the type of the effects for which to retrieve the scheduler record details
+## @return: an array of records containing the scheduler record details for all effects that match the specified type
+func get_all_records_by_type(effect_type:Effect.Type) -> Array[ScheduleRecord]:
+	var records: Array[ScheduleRecord] = []
+	for queue in [_waiting_effects, _entering_effects, _active_effects, _exiting_effects]:
+		for effect_id in queue.keys():
+			var record: ScheduleRecord = queue[effect_id]
+			if record == null or record.effect == null:
+				continue
+			if record.effect.get_type() == effect_type:
+				records.append(record)
+	return records
+
+## Returns a list of scheduler record details for all effects found in the scheduler that match the specified name.
+## @param effect_name: the name of the effects for which to retrieve the scheduler record details
+## @return: an array of records containing the scheduler record details for all effects that match the specified name
+func get_all_records_by_name(effect_name: String) -> Array[ScheduleRecord]:
+	var records: Array[ScheduleRecord] = []
+	for queue in [_waiting_effects, _entering_effects, _active_effects, _exiting_effects]:
+		for effect_id in queue.keys():
+			var record: ScheduleRecord = queue[effect_id]
+			if record == null or record.effect == null:
+				continue
+			if record.effect.get_name() == effect_name:
+				records.append(record)
+	return records
+
+## Returns a list of scheduler record details for all effects found in the scheduler that are marked as persistent.
+## @return: an array of records containing the scheduler record details for all effects that are marked as persistent
+func get_all_persistent_records() -> Array[ScheduleRecord]:
+	var records: Array[ScheduleRecord] = []
+	for queue in [_waiting_effects, _entering_effects, _active_effects, _exiting_effects]:
+		for effect_id in queue.keys():
+			var record: ScheduleRecord = queue[effect_id]
+			if record != null and record.effect != null and record.effect.is_persistent():
+				records.append(record)
+	return records
+
+## Returns a list of scheduler record details for all effects found in the scheduler that are marked as unique.
+## @return: an array of records containing the scheduler record details for all effects that are marked as unique
+func get_all_unique_records() -> Array[ScheduleRecord]:
+	var records: Array[ScheduleRecord] = []
+	for queue in [_waiting_effects, _entering_effects, _active_effects, _exiting_effects]:
+		for effect_id in queue.keys():
+			var record: ScheduleRecord = queue[effect_id]
+			if record != null and record.effect != null and record.effect.is_unique():
+				records.append(record)
+	return records
+
+## Returns a list of scheduler record details for all effects currently in the scheduler
+## @return: an array of records containing the scheduler record details for all effects currently in the scheduler
+func get_all_records() -> Array[ScheduleRecord]:
+	var records: Array[ScheduleRecord] = []
+	for queue in [_waiting_effects, _entering_effects, _active_effects, _exiting_effects]:
+		for effect_id in queue.keys():
+			var record: ScheduleRecord = queue[effect_id]
+			if record != null:
+				records.append(record)
+	return records
 
 # Utility Methods #
 
