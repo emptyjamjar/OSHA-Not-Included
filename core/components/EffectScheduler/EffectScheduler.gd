@@ -25,6 +25,8 @@ signal effect_added(effect: Effect)
 signal effect_removed(effect: Effect)
 
 # Export variables #
+## Master enable/disable switch for the entire EffectScheduler. When disabled, the scheduler will not process any effects, but they will remain in their queues and can be resumed when re-enabled.
+@export var is_enabled: bool = true
 
 @export_category("Queue and Safety Limits")
 
@@ -90,11 +92,10 @@ const _scheduler_identifer = "[EffectScheduler]"
 
 # Lifecycle #
 
-func _ready() -> void:
-	pass
-
-
 func _process(delta: float) -> void:
+	# Only process if scheduler is enabled
+	if not is_enabled:
+		return
 	_process_waiting_effects()
 	_process_entering_effects()
 	_process_active_effects(delta * time_scale, false)
@@ -102,8 +103,10 @@ func _process(delta: float) -> void:
 
 
 func _physics_process(delta: float) -> void:
+	# Only process if scheduler is enabled
+	if not is_enabled:
+		return
 	_process_active_effects(delta * time_scale, true)
-
 
 # Processing #
 
@@ -553,6 +556,14 @@ func _run_physics_update(effect: Effect, delta: float) -> void:
 
 # API Methods #
 
+## Enables the scheduler, allowing it to process effects in its queues. When enabled, the scheduler will continue processing effects as normal.
+func enable_scheduler() -> void:
+	is_enabled = true
+
+## Disables the scheduler, preventing any effects from being processed.
+func disable_scheduler() -> void:
+	is_enabled = false
+
 ## Queues an effect to be processed by the scheduler
 ## if the max queue size has been reached, the effect will be rejected and not added to the queue.
 ## @return: true if the effect was successfully added to the queue, false if the queue is full and the effect was rejected.
@@ -914,6 +925,15 @@ func is_effect_paused(effect: Effect) -> bool:
 		return record.is_paused
 	return false
 
+## Checks if the scheduler is currently enabled, allowing it to process effects in its queues.
+## @return: true if the scheduler is enabled, false otherwise
+func is_scheduler_enabled() -> bool:
+	return is_enabled
+
+## Checks if the scheduler is currently disabled, preventing it from processing any effects in its queues.
+## @return: true if the scheduler is disabled, false otherwise
+func is_scheduler_disabled() -> bool:
+	return not is_enabled
 
 # Retrieval Methods #
 
