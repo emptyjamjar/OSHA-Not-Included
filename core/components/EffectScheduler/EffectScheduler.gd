@@ -580,6 +580,7 @@ func add_effect(effect: Effect) -> bool:
 	var record = ScheduleRecord.new()
 	record.effect = effect
 	record.time_added = Time.get_ticks_msec() / 1000.0
+	record.id = effect_id
 	record.is_waiting = true
 	if not _add_to_waiting(effect_id, record):
 		# delete record to free memory since it won't be used
