@@ -316,10 +316,16 @@ func is_active() -> bool:
 	# if persistent, always active
 	if self._is_persistent:
 		return true
-	# if timing enabled and duration exceeded, not active
+	# if both timing and repeat are enabled:
+	# duration is a per-cycle timer — only inactive when all repeat cycles are exhausted
+	if self._enable_timing and self._enable_repeat:
+		if self._repeat_max > 0 and self._repeat_count >= self._repeat_max:
+			return false
+		return true
+	# if only timing enabled: inactive when duration is exceeded
 	if self._enable_timing and self._elapsed_time >= self._duration:
 		return false
-	# if repeating enabled and repeat count reached, not active
+	# if only repeating enabled: inactive when all repeat cycles are exhausted
 	if self._enable_repeat and self._repeat_max > 0 and self._repeat_count >= self._repeat_max:
 		return false
 	return true
