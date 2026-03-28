@@ -648,7 +648,20 @@ func resume_all_effects() -> void:
 		record.is_paused = false
 
 ## Manually removes an effect from the scheduler by its instance reference.
+## @param effect: the effect instance to be removed from the scheduler
+## @return: true if the effect was found and removed from the scheduler, false if the effect was not found in the scheduler or could not be removed.
 func remove_effect_by_instance(effect: Effect) -> bool:
+	var record: ScheduleRecord = get_effect_record_by_instance(effect)
+	if record != null:
+		var effect_id = record.effect.get_instance_id()
+		_remove_from_waiting(effect_id)
+		_remove_from_entering(effect_id)
+		_remove_from_active(effect_id)
+		_remove_from_exiting(effect_id)
+		if debug_logging:
+			_log_generic(_scheduler_identifer + " Removed effect by instance: " + _effect_info_basic(effect))
+		emit_signal("effect_removed", effect)
+		return true
 	return false
 
 ## Manually removes an effect from the scheduler by its unique effect ID.
@@ -1172,7 +1185,7 @@ func get_effect_record_by_id(effect_id: int) -> ScheduleRecord:
 ## Returns the scheduler record details for the first effect found in the scheduler that matches the specified type.
 ## @param effect_type: the type of the effect for which to retrieve the scheduler record details
 ## @return: a record containing the scheduler record details for the effect if found, or null if no effect of the specified type is found in the scheduler
-func get_effect_record_by_effect(effect: Effect) -> ScheduleRecord:
+func get_effect_record_by_instance(effect: Effect) -> ScheduleRecord:
 	if effect == null:
 		return null
 	for queue in [_waiting_effects, _entering_effects, _active_effects, _exiting_effects]:
