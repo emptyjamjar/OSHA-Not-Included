@@ -148,8 +148,12 @@ func is_timing_enabled() -> bool:
 
 ## Sets the duration of the effect (in seconds)
 ## @param new_duration: float - Duration in seconds (0 = instant)
-func set_duration(new_duration: float) -> void:
+## @return: bool - True if set successfully, false if invalid duration
+func set_duration(new_duration: float) -> bool:
+	if new_duration < 0:
+		return false
 	self._duration = new_duration
+	return true
 
 ## Gets the duration of the effect
 ## @return: float - Duration in seconds
@@ -250,11 +254,23 @@ func get_cooldown_elapsed() -> float:
 
 ## Resets the effect to its initial state
 func reset() -> void:
+	# reset basic info
+	self._type = Type.NONE
+	self._effect_name = ""
+	# reset flags
+	self._is_unique = false
+	self._is_persistent = false
 	# reset timing
+	self._enable_timing = false
+	self._duration = 0.0
 	self._elapsed_time = 0.0
 	# reset repeating
+	self._enable_repeat = false
+	self._repeat_max = 0
 	self._repeat_count = 0
 	# reset cooldown
+	self._enable_cooldown = false
+	self._cooldown_duration = 0.0
 	self._cooldown_elapsed = 0.0
 
 ## Resets only the timing (elapsed time) of the effect
