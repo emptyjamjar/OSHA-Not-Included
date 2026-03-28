@@ -67,6 +67,7 @@ class ScheduleRecord:
 	var is_entering:bool = false
 	var is_active:bool = false
 	var is_exiting:bool = false
+	var is_paused:bool = false
 
 ## A counter to assign unique IDs to effects for tracking purposes. Resets when _effect_id_max is reached
 var _effect_id_counter: int = 0
@@ -132,6 +133,10 @@ func _process_waiting_effects() -> void:
 			_remove_from_waiting(effect_id)
 			continue
 
+		# if the effect is paused, skip processing it but keep it in the waiting queue so it can be resumed later
+		if record.is_paused:
+			continue
+
 		if not _should_effect_start(record.effect):
 			continue
 
@@ -156,6 +161,10 @@ func _process_entering_effects() -> void:
 		var record: ScheduleRecord = _entering_effects[effect_id]
 		if record == null or record.effect == null:
 			_remove_from_entering(effect_id)
+			continue
+
+		# if the effect is paused, skip processing it but keep it in the entering queue so it can be resumed later
+		if record.is_paused:
 			continue
 
 		var effect: Effect = record.effect
@@ -191,6 +200,10 @@ func _process_active_effects(delta: float, is_physics_pass: bool) -> void:
 		var record: ScheduleRecord = _active_effects[effect_id]
 		if record == null or record.effect == null:
 			_remove_from_active(effect_id)
+			continue
+
+		# if the effect is paused, skip processing it but keep it in the active effects list so it can be resumed later
+		if record.is_paused:
 			continue
 
 		var effect: Effect = record.effect
@@ -231,6 +244,10 @@ func _process_exiting_effects() -> void:
 		# just in case, check for null record or effect instance, if either is null, remove from exiting queue and skip
 		if record == null or record.effect == null:
 			_remove_from_exiting(effect_id)
+			continue
+
+		# if the effect is paused, skip processing it but keep it in the exiting queue so it can be resumed later
+		if record.is_paused:
 			continue
 
 		_run_exit(record.effect)
@@ -542,7 +559,7 @@ func _run_physics_update(effect: Effect, delta: float) -> void:
 func add_effect(effect: Effect) -> bool:
 	if _unique_effect_exists_in_queues(effect):
 		if debug_logging:
-			_log_generic("Unique effect already exists. Cannot add duplicate effect: " + _effect_info_basic(effect))
+			_log_generic(_scheduler_identifer + " Unique effect already exists. Cannot add duplicate effect: " + _effect_info_basic(effect))
 		return false
 	
 	# generate id, create record, add to waiting queue, emit signal, return true if successful, false if queue is full
@@ -558,6 +575,66 @@ func add_effect(effect: Effect) -> bool:
 	emit_signal("effect_added", effect)
 	return true
 
+## Pauses an active effect by its unique effect ID. The effect will not be processed until it is resumed.
+## @param effect_id: the unique ID assigned to the effect
+## @return: true if the effect was found and paused, false if the effect was not found or could not be paused.
+func pause_effect(effect_id: int) -> bool:
+	var record: ScheduleRecord = get_effect_record_by_id(effect_id)
+	if record != null:
+		record.is_paused = true
+		if debug_logging:
+			_log_generic(_scheduler_identifer + " Paused effect: " + _effect_info_basic(record.effect))
+		return true
+
+	return false
+
+## Resumes a paused effect by its unique effect ID. The effect will continue to be processed by the scheduler.
+## @param effect_id: the unique ID assigned to the effect
+## @return: true if the effect was found and resumed, false if the effect was not found or could not be resumed.
+func resume_effect(effect_id: int) -> bool:
+	var record: ScheduleRecord = get_effect_record_by_id(effect_id)
+	if record != null:
+		record.is_paused = false
+		if debug_logging:
+			_log_generic(_scheduler_identifer + " Resumed effect: " + _effect_info_basic(record.effect))
+		return true
+
+	return false
+
+## Pauses all effects in the scheduler. Paused effects will remain in their current state until they are resumed.
+## NOTE: This only applies to effects already in the scheduler. If an effect is added while the scheduler is paused, it will be added in a normal state and will not be automatically paused.
+func pause_all_effects() -> void:
+	if debug_logging:
+		_log_generic(_scheduler_identifer + " Pausing all effects.")
+	# iterate over waiting
+	for record in _waiting_effects.values():
+		record.is_paused = true
+	# iterate over entering
+	for record in _entering_effects.values():
+		record.is_paused = true
+	# iterate over active
+	for record in _active_effects.values():
+		record.is_paused = true
+	# iterate over exiting
+	for record in _exiting_effects.values():
+		record.is_paused = true
+
+## Resumes all effects in the scheduler so they can continue being processed.
+func resume_all_effects() -> void:
+	if debug_logging:
+		_log_generic(_scheduler_identifer + " Resuming all effects.")
+	# iterate over waiting
+	for record in _waiting_effects.values():
+		record.is_paused = false
+	# iterate over entering
+	for record in _entering_effects.values():
+		record.is_paused = false
+	# iterate over active
+	for record in _active_effects.values():
+		record.is_paused = false
+	# iterate over exiting
+	for record in _exiting_effects.values():
+		record.is_paused = false
 
 ## Manually removes an effect from the scheduler by its instance reference.
 func remove_effect_by_instance(effect: Effect) -> bool:
@@ -823,6 +900,19 @@ func has_effect_with_id(effect_id: int) -> bool:
 		return true
 	return false
 
+## Checks if an effect is currently paused, this includes effects in any queue or active list.
+## @param effect: the effect instance to check for paused status
+## @return: true if the effect is paused, false otherwise
+func is_effect_paused(effect: Effect) -> bool:
+	if effect == null:
+		if debug_logging:
+			_log_generic(_scheduler_identifer + " Cannot check if null effect is paused.")
+		return false
+	# pull effect record and check
+	var record: ScheduleRecord = _get_effect_record(effect)
+	if record != null:
+		return record.is_paused
+	return false
 
 
 # Retrieval Methods #
