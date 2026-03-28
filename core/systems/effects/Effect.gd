@@ -346,15 +346,13 @@ func is_on_cooldown() -> bool:
 ## @return: float - Progress as percentage (0.0 = start, 1.0 = end)
 func get_progress() -> float:
 	if self._duration <= 0:
-		return 1.0
+		return 0.0
 	return min(self._elapsed_time / self._duration, 1.0)
 
 ## Gets the remaining time until effect ends (0 if persistent or expired)
 ## @return: float: Seconds left, or 0 if persistent/expired
 func get_remaining_time() -> float:
-	if self._is_persistent:
-		return 0.0
-	if self._elapsed_time >= self._duration:
+	if not self._enable_timing or self._is_persistent or self._elapsed_time >= self._duration:
 		return 0.0
 	return self._duration - self._elapsed_time
 
@@ -363,4 +361,7 @@ func get_remaining_time() -> float:
 ## Gets the effect’s type as a string ("BUFF", "HAZARD")
 ## @return: String - Type name without "Type." (honestly great to have)
 func get_type_as_string() -> String:
-	return str(self._type).replace("Type.", "")
+	var type_name: Variant = Type.find_key(self._type)
+	if type_name == null:
+		return ""
+	return str(type_name)
