@@ -136,7 +136,8 @@ func set_persistent(enable: bool) -> void:
 func is_persistent() -> bool:
 	return self._is_persistent
 
-## Enables or disables timing for the effect (if disabled, duration is ignored and effect must be manually stopped)
+## Enables or disables timing for the effect
+## NOTE: if disabled, duration is ignored and effect must be manually stopped
 ## @param enable: bool - True to enable timing, false to disable
 func set_enable_timing(enable: bool) -> void:
 	self._enable_timing = enable
@@ -160,7 +161,8 @@ func set_duration(new_duration: float) -> bool:
 func get_duration() -> float:
 	return self._duration
 
-## Enables or disables repeating for the effect (if disabled, repeat count is ignored and effect must be manually stopped)
+## Enables or disables repeating for the effect
+## NOTE: if disabled, repeat count is ignored and effect must be manually stopped
 ## @param enable: bool - True to enable repeating, false to disable
 func set_enable_repeat(enable: bool) -> void:
 	self._enable_repeat = enable
@@ -212,7 +214,8 @@ func set_repeat_count(new_count: int) -> bool:
 func get_repeat_count() -> int:
 	return self._repeat_count
 
-## Enables or disables cooldown for the effect (if enabled, effect cannot be applied again until cooldown expires)
+## Enables or disables cooldown for the effect
+## NOTE: if enabled, effect cannot be applied again until cooldown expires
 ## @param enable: bool - True to enable cooldown, false to disable
 func set_enable_cooldown(enable: bool) -> void:
 	self._enable_cooldown = enable
@@ -317,7 +320,7 @@ func is_active() -> bool:
 	if self._is_persistent:
 		return true
 	# if both timing and repeat are enabled:
-	# duration is a per-cycle timer — only inactive when all repeat cycles are exhausted
+	# duration is a per-cycle timer, it is only inactive when all repeat cycles are exhausted
 	if self._enable_timing and self._enable_repeat:
 		if self._repeat_max > 0 and self._repeat_count >= self._repeat_max:
 			return false
@@ -358,8 +361,8 @@ func get_remaining_time() -> float:
 
 # helper methods #
 
-## Gets the effect’s type as a string ("BUFF", "HAZARD")
-## @return: String - Type name without "Type." (honestly great to have)
+## Returns the effect's type as a readable text name (like "BUFF", "HAZARD", or "NONE")
+## @return: String - The type name
 func get_type_as_string() -> String:
 	var type_name: Variant = Type.find_key(self._type)
 	if type_name == null:
