@@ -48,16 +48,6 @@ func _on_shipper_get_money() -> void:
 
 [sub_resource type="Environment" id="Environment_halqj"]
 background_mode = 3
-glow_intensity = 5.45
-glow_bloom = 0.05
-glow_hdr_threshold = 1.43
-glow_hdr_scale = 3.49
-glow_hdr_luminance_cap = 76.94
-fog_light_energy = 6.82
-fog_sun_scatter = 0.5
-fog_density = 0.7269
-fog_height = 1024.0
-fog_height_density = 13.5294
 adjustment_enabled = true
 adjustment_saturation = 0.75
 
