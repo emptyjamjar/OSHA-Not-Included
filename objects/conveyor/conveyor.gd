@@ -13,6 +13,8 @@ class_name Conveyor extends Node2D
 @export var tile_map: TileMapLayer
 ##The item spawner/despawner Tile_map
 @export var spawn_despawn_map: TileMapLayer
+##Where the Item will be spawned into
+@export var items_node: Node2D
 
 @export_category("Values")
 ##How many random items will be spawned in between items that are required by the current tickets.
@@ -116,14 +118,14 @@ func _move_items():
 			continue
 		
 		var item_pos = item.global_position
+		#Get the tile data of the cell the item is in right now.
+		var tile_data: TileData = tile_map.get_cell_tile_data(tile_map.local_to_map(to_local(item_pos)))
 		
-		#Check if the item is in the despawn tile
-		if item_pos.round() == _despawn_tile_pos.round():
+		#Check if the item is in the despawn tile or if it somehow drifted away from the conveyor.
+		if (item_pos.round().distance_to(_despawn_tile_pos) <= 2) or (tile_data == null):
 			item.queue_free()
 		
 		else:
-			#Get the tile data of the cell the item is in right now.
-			var tile_data: TileData = tile_map.get_cell_tile_data(tile_map.local_to_map(to_local(item_pos)))
 			var dir = tile_data.get_custom_data("Direction").normalized() #Get the custom Direction variable of the tile.
 			
 			var next_tile = item_pos + dir * tile_map.tile_set.tile_size.x
@@ -171,7 +173,7 @@ func _spawn_into_first_slot(item: ItemData) -> void:
 			scene.picked_up.connect(_on_item_picked_up.bind(i))
 			
 			scene.data = item.duplicate(true)
-			add_child(scene)
+			items_node.add_child(scene)
 			#Spawn onto the spawn tile
 			scene.global_position = _spawn_tile_pos
 			_slots[i] = scene

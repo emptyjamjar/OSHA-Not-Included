@@ -186,11 +186,12 @@ custom_data_layer_2/name = "DeSpawnTile"
 custom_data_layer_2/type = 1
 sources/1 = SubResource("TileSetAtlasSource_ncid3")
 
-[node name="Conveyor" type="Node2D" unique_id=1135306595 node_paths=PackedStringArray("tile_map", "spawn_despawn_map")]
+[node name="Conveyor" type="Node2D" unique_id=1135306595 node_paths=PackedStringArray("tile_map", "spawn_despawn_map", "items_node")]
 script = ExtResource("1_ncid3")
 item_resources = Array[ExtResource("2_323m6")]([ExtResource("3_ivmdc"), ExtResource("4_dnyr5"), ExtResource("5_xwue2"), ExtResource("6_w0iay")])
 tile_map = NodePath("Belt TileMap")
 spawn_despawn_map = NodePath("Spawn Despawn TileMap")
+items_node = NodePath("Items")
 conveyor_speed = 24
 output_speed = 0.5
 slots_max = 5
@@ -200,7 +201,8 @@ item_scene = SubResource("Resource_ncid3")
 tile_map_data = PackedByteArray("AAAAAAAAAQABAAIAAAABAAAAAQABAAIAAAACAAAAAQABAAIAAAADAAAAAQABAAIAAAAEAAAAAQAEAAEAAAAEAAEAAQAAAAEAAAA=")
 tile_set = SubResource("TileSet_ywffn")
 
+[node name="Items" type="Node2D" parent="." unique_id=1281113363]
+
 [node name="Spawn Despawn TileMap" type="TileMapLayer" parent="." unique_id=1601041665]
-z_index = 1
 tile_map_data = PackedByteArray("AAAAAAAAAQAAAAMAAAAEAAEAAQABAAEAAAA=")
 tile_set = SubResource("TileSet_ywffn")
