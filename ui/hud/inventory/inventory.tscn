@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://bbpgpleuyuynu" path="res://ui/hud/inventory/InventoryHovered.png" id="2_tl8il"]
 [ext_resource type="Texture2D" uid="uid://crdlqucv2cper" path="res://ui/hud/inventory/InventorySelected.png" id="3_mw73s"]
 [ext_resource type="ButtonGroup" uid="uid://ds48bs0csj1px" path="res://ui/hud/inventory/inventory_btn_group.tres" id="5_2ggu6"]
+[ext_resource type="PackedScene" uid="uid://b8jecjbw3e3vj" path="res://ui/hud/inventory/receipt/item_recepit.tscn" id="6_4d4wv"]
 
 [sub_resource type="Animation" id="Animation_i7to8"]
 resource_name = "HUD_Shake"
@@ -67,7 +68,7 @@ _data = {
 &"RESET": SubResource("Animation_4d4wv")
 }
 
-[node name="Inventory" type="TextureRect" unique_id=988897325 node_paths=PackedStringArray("slot1", "slot1Btn", "boxedItem1", "slot2", "slot2Btn", "boxedItem2", "AnimPlayer")]
+[node name="Inventory" type="TextureRect" unique_id=988897325 node_paths=PackedStringArray("slot1", "slot1Btn", "receipt1", "slot2", "slot2Btn", "receipt2", "AnimPlayer")]
 z_index = -1
 offset_top = 240.0
 offset_right = 96.0
@@ -77,10 +78,10 @@ texture = ExtResource("1_5vcw3")
 script = ExtResource("2_mw73s")
 slot1 = NodePath("Slot1")
 slot1Btn = NodePath("Slot1/Slot1Button")
-boxedItem1 = NodePath("Slot1/BoxedItem")
+receipt1 = NodePath("Slot1/Receipt1")
 slot2 = NodePath("Slot2")
 slot2Btn = NodePath("Slot2/Slot2Button")
-boxedItem2 = NodePath("Slot2/BoxedItem")
+receipt2 = NodePath("Slot2/Receipt2")
 AnimPlayer = NodePath("AnimationPlayer")
 
 [node name="Slot1" type="TextureRect" parent="." unique_id=217589248]
@@ -104,13 +105,18 @@ button_group = ExtResource("5_2ggu6")
 texture_pressed = ExtResource("3_mw73s")
 texture_hover = ExtResource("2_tl8il")
 
-[node name="BoxedItem" type="TextureRect" parent="Slot1" unique_id=1998679944]
-modulate = Color(1, 1, 1, 0.44300002)
-layout_mode = 0
-offset_left = 7.0
-offset_top = 15.0
-offset_right = 40.0
-offset_bottom = 48.0
+[node name="Receipt1" parent="Slot1" unique_id=174428205 instance=ExtResource("6_4d4wv")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.54300004
+anchor_top = -0.28300002
+anchor_right = -0.54300004
+anchor_bottom = -0.28300002
+offset_left = -0.021997452
+offset_top = 0.018000603
+offset_right = 95.978004
+offset_bottom = 64.018
+stretch_mode = 2
 
 [node name="Slot2" type="TextureRect" parent="." unique_id=268453533]
 layout_mode = 0
@@ -132,13 +138,17 @@ button_group = ExtResource("5_2ggu6")
 texture_pressed = ExtResource("3_mw73s")
 texture_hover = ExtResource("2_tl8il")
 
-[node name="BoxedItem" type="TextureRect" parent="Slot2" unique_id=10729321]
-modulate = Color(1, 1, 1, 0.44300002)
-layout_mode = 0
-offset_left = 7.0
-offset_top = 15.0
-offset_right = 40.0
-offset_bottom = 48.0
+[node name="Receipt2" parent="Slot2" unique_id=327031380 instance=ExtResource("6_4d4wv")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.54300004
+anchor_top = -0.28300002
+anchor_right = -0.54300004
+anchor_bottom = -0.28300002
+offset_left = -0.021997452
+offset_top = 0.018000603
+offset_right = 95.978004
+offset_bottom = 64.018
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=286283002]
 libraries/ = SubResource("AnimationLibrary_h0hcm")
