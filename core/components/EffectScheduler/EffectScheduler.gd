@@ -824,12 +824,32 @@ func remove_all_non_unique_effects() -> bool:
 	return result
 
 ## Manually removes all effects from the scheduler that have timing enabled, including both duration and cooldown timers.
+## @return: true if at least one effect with timing enabled was found and removed from the scheduler, false if no effects with timing enabled were found in the scheduler or could be removed.
 func remove_all_timed_effects() -> bool:
-	return false
+	var records:Array = get_all_records()
+	var result: bool = false
+	for record in records:
+		if record.effect.is_timing_enabled():
+			var effect_id = record.id
+			result = remove_effect_by_id(effect_id)
+			if debug_logging and result:
+				_log_generic(_scheduler_identifer + " Removed timed effect: " + _effect_info_basic(record.effect))
+			emit_signal("effect_removed", record.effect)
+	return result
 
 ## Manually removes all effects from the scheduler that have no timing enabled.
+## @return: true if at least one effect with no timing enabled was found and removed from the scheduler, false if no effects with no timing enabled were found in the scheduler or could be removed.
 func remove_all_non_timed_effects() -> bool:
-	return false
+	var records:Array = get_all_records()
+	var result: bool = false
+	for record in records:
+		if not record.effect.is_timing_enabled():
+			var effect_id = record.id
+			result = remove_effect_by_id(effect_id)
+			if debug_logging and result:
+				_log_generic(_scheduler_identifer + " Removed non-timed effect: " + _effect_info_basic(record.effect))
+			emit_signal("effect_removed", record.effect)
+	return result
 
 ## Manually removes all effects from the scheduler that have repeating enabled
 ## @return: true if at least one repeating effect was found and removed from the scheduler, false if no repeating effects were found in the scheduler or could be removed.
