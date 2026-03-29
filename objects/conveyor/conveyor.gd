@@ -76,23 +76,22 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	# Process queue and spawn items onto belt at output_speed rate
-	_output_timer += delta
-	var output_interval = 1.0 / output_speed
-	
-	#TODO: CHANGE THIS.
-	# PLACEHOLDER: Below will move into method later
-	# Continue processing while enough time has passed and items are waiting in queue
-	while _output_timer >= output_interval and _queue.size() > 0:
-		# Subtract the output interval from the timer (allows multiple spawns per frame if needed)
-		_output_timer -= output_interval
-		# Remove the first item from the queue
-		var item = _queue.pop_front()
-		# Attempt to spawn the item into the first available slot on the belt
-		_spawn_into_first_slot(item)
-	
+	#Only start the timer and start spawning when there are items queued up.
 	if _queue.is_empty() and !Ticket_Manager.visible_queue.is_empty():
 		_fill_queue()
+	elif !_queue.is_empty():
+		# Process queue and spawn items onto belt at output_speed rate
+		_output_timer += delta
+		var output_interval = 1.0 / output_speed
+		
+		# Continue processing while enough time has passed and items are waiting in queue
+		while _output_timer >= output_interval:
+			# Subtract the output interval from the timer (allows multiple spawns per frame if needed)
+			_output_timer -= output_interval
+			# Remove the first item from the queue
+			var item = _queue.pop_front()
+			# Attempt to spawn the item into the first available slot on the belt
+			_spawn_into_first_slot(item)
 	
 	if !_slots.is_empty():
 		_move_items()
