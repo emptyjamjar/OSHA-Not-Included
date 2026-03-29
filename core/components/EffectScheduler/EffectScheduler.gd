@@ -530,6 +530,10 @@ func _should_repeat(effect: Effect) -> bool:
 
 ## Calls effect.enter() and performs scheduler-side setup.
 func _run_enter(effect: Effect) -> void:
+	if effect == null:
+		if debug_logging:
+			_log_generic(_scheduler_identifer + " Cannot enter null effect.")
+		return
 	if debug_logging:
 		_log_effect_entered(effect.get_instance_id(), effect)
 	effect.enter()
@@ -537,6 +541,10 @@ func _run_enter(effect: Effect) -> void:
 
 ## Calls effect.exit() and performs scheduler-side cleanup.
 func _run_exit(effect: Effect) -> void:
+	if effect == null:
+		if debug_logging:
+			_log_generic(_scheduler_identifer + " Cannot exit null effect.")
+		return
 	if debug_logging:
 		_log_effect_exited(effect.get_instance_id(), effect)
 	effect.exit()
@@ -544,6 +552,10 @@ func _run_exit(effect: Effect) -> void:
 
 ## Calls effect.update(delta) each frame.
 func _run_update(effect: Effect, delta: float) -> void:
+	if effect == null:
+		if debug_logging:
+			_log_generic(_scheduler_identifer + " Cannot update null effect.")
+		return
 	if debug_logging and debug_log_active_effects:
 		_log_effect_updated(effect.get_instance_id(), effect, delta)
 	effect.update(delta)
@@ -551,6 +563,10 @@ func _run_update(effect: Effect, delta: float) -> void:
 
 ## Calls effect.physics_update(delta) each physics frame.
 func _run_physics_update(effect: Effect, delta: float) -> void:
+	if effect == null:
+		if debug_logging:
+			_log_generic(_scheduler_identifer + " Cannot physics update null effect.")
+		return
 	if debug_logging and debug_log_active_effects:
 		_log_effect_updated(effect.get_instance_id(), effect, delta)
 	effect.physics_update(delta)
