@@ -18,6 +18,7 @@ var ticket_available: int
 # finished - this ticket is done, do not come back to it when you press E through
 # the terminal the next time
 var active_ticket: Ticket = null
+var active_ticket_index: int = 0
 
 var queue_UI: CanvasLayer 
 
@@ -30,6 +31,19 @@ func _init() -> void:
 # this ensure that object is created at run time and not returning null 
 func _ready():
 	add_to_group("ticket_manager")
+	
+	
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_RIGHT:
+			active_ticket_index = min(active_ticket_index + 1, visible_queue.size() - 1)
+		elif event.keycode == KEY_LEFT:
+			active_ticket_index = max(active_ticket_index - 1, 0)
+		else:
+			return
+		if visible_queue.size() > 0:
+			active_ticket = visible_queue[active_ticket_index]
+			update_queue_ui()
 	
 
 func load_templates_for_level(level: int): 
@@ -73,6 +87,7 @@ func fill_visible_queue():
 		visible_queue.append(next_ticket)
 	if !visible_queue.is_empty():
 		active_ticket = visible_queue[0]
+		active_ticket_index = 0
 	else:
 		tickets_done.emit()
 	print(visible_queue)
@@ -205,6 +220,7 @@ func update_queue_ui():
 		
 func _on_ticket_selected(ticket: Ticket):
 	active_ticket = ticket
+	active_ticket_index = visible_queue.find(ticket)
 	update_queue_ui()
 
 func register_queue_ui(ui: CanvasLayer): 
@@ -347,6 +363,7 @@ func finish_ticket():
 		# Set NEXT ticket as active
 		if visible_queue.size() > 0:
 			active_ticket = visible_queue[0]
+			active_ticket_index = 0
 		else:
 			active_ticket = null
 			print("All tickets completed!")
