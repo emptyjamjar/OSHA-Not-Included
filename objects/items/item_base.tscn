@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://bguhd83d36whj" path="res://objects/items/toilet_paper/toilet_paper.tres" id="2_oqai5"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oqai5"]
-radius = 20.0
+radius = 30.307938
 
 [sub_resource type="Gradient" id="Gradient_lt50k"]
 offsets = PackedFloat32Array(0, 0.18421052, 0.51578945, 1)
@@ -24,15 +24,11 @@ sprite = NodePath("Sprite2D")
 data = ExtResource("2_oqai5")
 
 [node name="InteractionArea" parent="." unique_id=2104453103 instance=ExtResource("2_lt50k")]
+position = Vector2(0, -4)
 collision_layer = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea" unique_id=1938878689]
 shape = SubResource("CircleShape2D_oqai5")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1270451069]
-
-[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1490835338]
-position = Vector2(1.4305115e-06, -4.7683716e-07)
-scale = Vector2(0.75757575, 0.75757575)
-energy = 0.46
-texture = SubResource("GradientTexture2D_oqai5")
+position = Vector2(0, -9)
