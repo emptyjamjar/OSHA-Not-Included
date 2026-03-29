@@ -296,6 +296,8 @@ func register_delivery(ticket_id: int) -> bool:
 	print("Current ticket: ", active_ticket);
 	if not active_ticket:
 		return false
+	if active_ticket.status == Ticket.TicketStatus.REACHED_GOAL:
+		return false
 	
 
 	var delivered := active_ticket.delivered_items
@@ -325,21 +327,22 @@ func _is_ticket_complete() -> bool:
 # guide to the next step
 func reach_goal():
 	if active_ticket:
-		active_ticket.reach_goal()
+		var ticket_to_finish = active_ticket
+		ticket_to_finish.reach_goal()
 		print("CHECKING 123")
 		#title_label.text = "COMPLETE!"
 		#desc_label.text = active_ticket.reached_goal_text
 		print(timers)
 		# Stop the timer for this ticket
-		if timers.has(active_ticket):
-			timers[active_ticket].stop()
+		if timers.has(ticket_to_finish):
+			timers[ticket_to_finish].stop()
 		
 		# this add extra time for the player to acknowledge that they have completed 
 		# the ticket 
 		var finish_timer := Timer.new()
 		finish_timer.wait_time = 1
 		finish_timer.one_shot = true
-		finish_timer.timeout.connect(finish_ticket)
+		finish_timer.timeout.connect(func(): finish_ticket(ticket_to_finish))
 		add_child(finish_timer)
 		finish_timer.start()
 	else: 
@@ -348,16 +351,16 @@ func reach_goal():
 		
 # make sure the ticket is finished, ticket box will disappear 
 # will work on this further 
-func finish_ticket():
-	if active_ticket and active_ticket.status == Ticket.TicketStatus.REACHED_GOAL:
-		active_ticket.finish()
+func finish_ticket(ticket: Ticket = active_ticket):
+	if ticket and ticket.status == Ticket.TicketStatus.REACHED_GOAL:
+		ticket.finish()
 		# Remove timer for this ticket
-		if timers.has(active_ticket):
-			timers[active_ticket].stop()
-			timers.erase(active_ticket)
+		if timers.has(ticket):
+			timers[ticket].stop()
+			timers.erase(ticket)
 
 		# Remove from visible queue
-		visible_queue.erase(active_ticket)
+		visible_queue.erase(ticket)
 
 		# Refill queue with next ticket(s)
 		fill_visible_queue()
