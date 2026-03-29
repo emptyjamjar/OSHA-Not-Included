@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://cv4vrnpxs40bf" path="res://objects/restroom/washroom.tscn" id="12_iotsf"]
 [ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="13_lc2xo"]
 [ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="15_e8heu"]
-[ext_resource type="PackedScene" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
+[ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
 [ext_resource type="Texture2D" uid="uid://bmisxcq76lrat" path="res://icon.svg" id="18_boyg6"]
 [ext_resource type="Script" uid="uid://j63ga8s4bhlu" path="res://cutscene_path.gd" id="18_e36ub"]
 
@@ -31,16 +31,6 @@ func _ready() -> void:
 	Dialogic.signal_event.connect(tut_cutscene)
 	var conveyor := $Conveyor
 	Ticket_Manager.on_game_start()
-	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
-	conveyor.input(Conveyor.ItemDataList.PINK_WATER_BOTTLE)
-	conveyor.input(Conveyor.ItemDataList.BLACK_WATER_BOTTLE)
-	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
-	conveyor.input(Conveyor.ItemDataList.BLUE_WATER_BOTTLE)
-	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
-	conveyor.input(Conveyor.ItemDataList.PINK_WATER_BOTTLE)
-	conveyor.input(Conveyor.ItemDataList.BLACK_WATER_BOTTLE)
-	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
-	conveyor.input(Conveyor.ItemDataList.BLUE_WATER_BOTTLE)
 	$Manager.hide()
 	Dialogic.start(\"timeline\")
 	
