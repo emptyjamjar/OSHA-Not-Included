@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b5kkxsvnf154u" path="res://objects/food/vending_machine_flipped.tscn" id="13_halqj"]
 [ext_resource type="PackedScene" uid="uid://dbvedjuvqmdpu" path="res://objects/restroom/washroom_flipped.tscn" id="14_dd2np"]
 [ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="15_ve8kv"]
-[ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="16_4qtht"]
+[ext_resource type="PackedScene" path="res://game/manager/ai/Manager.tscn" id="16_4qtht"]
 [ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="17_oadin"]
 [ext_resource type="PackedScene" uid="uid://cmysh8kqsje1j" path="res://objects/shelves/shelf.tscn" id="18_wkw6b"]
 
@@ -45,6 +45,33 @@ func _on_shipper_get_money() -> void:
 	hud.update_money(money)
 	
 "
+
+[sub_resource type="Gradient" id="Gradient_halqj"]
+offsets = PackedFloat32Array(0, 0.6263158, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.2842105, 0.2842105, 0.2842105, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dd2np"]
+gradient = SubResource("Gradient_halqj")
+fill = 1
+fill_from = Vector2(0.47008547, 0.4871795)
+fill_to = Vector2(0.8333333, 0.78205127)
+
+[sub_resource type="Gradient" id="Gradient_wkw6b"]
+offsets = PackedFloat32Array(0, 0.2736842, 0.6, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.41578948, 0.41578948, 0.41578948, 1, 0.02410373, 0.02410373, 0.02410373, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_55o4m"]
+gradient = SubResource("Gradient_wkw6b")
+fill = 1
+fill_from = Vector2(0.491453, 0.5)
+
+[sub_resource type="Gradient" id="Gradient_dd2np"]
+offsets = PackedFloat32Array(0.43157893, 1)
+colors = PackedColorArray(0.05072464, 0.05072464, 0.05072464, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wkw6b"]
+gradient = SubResource("Gradient_dd2np")
+fill_from = Vector2(0, 1)
 
 [node name="Game" type="Node2D" unique_id=645817684 groups=["game"]]
 y_sort_enabled = true
@@ -85,9 +112,16 @@ script = ExtResource("8_f71xe")
 [node name="SanityComponent" type="Node" parent="Player" unique_id=264741504]
 script = ExtResource("9_itvml")
 
+[node name="PointLight2D" type="PointLight2D" parent="Player" unique_id=694927071]
+position = Vector2(2.0000038, -2.0000012)
+scale = Vector2(1.7500001, 1.6249998)
+color = Color(0.72156864, 0.5803922, 0.40392157, 1)
+energy = 0.87
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_dd2np")
+
 [node name="Packager" parent="." unique_id=2093227932 instance=ExtResource("10_pqdvj")]
 position = Vector2(640, 192)
-scale = Vector2(0.40825486, 0.38389248)
 
 [node name="Conveyor" parent="." unique_id=1135306595 groups=["conveyor"] instance=ExtResource("11_2p8ph")]
 position = Vector2(620, 363)
@@ -103,21 +137,15 @@ scale = Vector2(0.33, 0.33)
 position = Vector2(117, 367.00003)
 scale = Vector2(0.245, 0.245)
 
-[node name="Pause" parent="." unique_id=1566201169 instance=ExtResource("15_ve8kv")]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1192117838]
+layer = 15
+
+[node name="Pause" parent="UI" unique_id=1566201169 instance=ExtResource("15_ve8kv")]
 visible = false
-top_level = true
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 384.0
-offset_top = 216.0
-offset_right = 384.0
-offset_bottom = 216.0
-grow_horizontal = 1
-grow_vertical = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="Score" parent="UI" unique_id=1161969462 instance=ExtResource("17_oadin")]
+visible = false
 
 [node name="Manager" parent="." unique_id=565657217 node_paths=PackedStringArray("patrol_paths_at_root", "out_bounds_area") instance=ExtResource("16_4qtht")]
 position = Vector2(339, 374)
@@ -125,8 +153,12 @@ collision_mask = 2
 patrol_paths_at_root = NodePath("../PatrolPaths")
 out_bounds_area = NodePath("../OutBoundsArea")
 
-[node name="Score" parent="." unique_id=1161969462 instance=ExtResource("17_oadin")]
-visible = false
+[node name="PointLight2D" type="PointLight2D" parent="Manager" unique_id=238068845]
+position = Vector2(-3.000002, -6.000001)
+scale = Vector2(1.671875, 1.671875)
+color = Color(0.4862745, 0.4862745, 0.5764706, 1)
+energy = 0.87
+texture = SubResource("GradientTexture2D_55o4m")
 
 [node name="PatrolPaths" type="Node2D" parent="." unique_id=351301721]
 
@@ -189,9 +221,19 @@ position = Vector2(524, 296)
 [node name="Shelf3" parent="." unique_id=1123887325 instance=ExtResource("18_wkw6b")]
 position = Vector2(455, 296)
 
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2024396508]
+color = Color(0.34233037, 0.3785334, 0.45536244, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=113270195]
+position = Vector2(680.8126, 122.281265)
+scale = Vector2(18.681644, 9.741211)
+color = Color(0.33276916, 0.46037263, 0.80294394, 1)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_wkw6b")
+
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
-[connection signal="get_money" from="Shipper" to="Score" method="_on_shipper_get_money"]
+[connection signal="get_money" from="Shipper" to="UI/Score" method="_on_shipper_get_money"]
 [connection signal="health_change" from="Player/HealthComponent" to="Camera2D/HUD" method="_on_health_component_health_change"]
 [connection signal="needs_change" from="Player/NeedsComponent" to="Camera2D/HUD" method="_on_needs_component_needs_change"]
-[connection signal="ticketsEmpty" from="TicketTerminal" to="Score" method="_on_ticket_terminal_tickets_empty"]
-[connection signal="washroom_used" from="Washroom" to="Score" method="_on_washroom_washroom_used"]
+[connection signal="ticketsEmpty" from="TicketTerminal" to="UI/Score" method="_on_ticket_terminal_tickets_empty"]
+[connection signal="washroom_used" from="Washroom" to="UI/Score" method="_on_washroom_washroom_used"]

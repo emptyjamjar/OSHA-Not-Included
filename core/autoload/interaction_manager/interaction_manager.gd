@@ -8,6 +8,9 @@ const base_text = "[E] to "
 var active_areas : Array[InteractionArea] = []
 var can_interact = false
 
+#Signal for invalid interaction.
+signal invalid_interact
+
 
 func register_area(area: InteractionArea):
 	active_areas.push_back(area)
@@ -17,6 +20,10 @@ func unregister_area(area: InteractionArea):
 	# The find method returns -1 if area is not in list
 	if index != -1:
 		active_areas.remove_at(index)
+
+func invalid_interaction():
+	#Mostly just for the inventory to know when to wiggle (that sounds weird).
+	invalid_interact.emit()
 
 func _process(_delta: float) -> void:
 	if active_areas.size() > 0 && can_interact:

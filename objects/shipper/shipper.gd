@@ -31,6 +31,7 @@ func _on_interact():
 		print("WARNING: TicketManager not found yet")
 		return
 	if ticket_manager.active_ticket == null: 
+		invalid_interaction()
 		print("No ticket yet!")
 		return 
 	
@@ -39,19 +40,31 @@ func _on_interact():
 	if item:
 		if item.type == ItemData.Type.PACKAGE:
 			if ticket_manager.active_ticket.required_items.has(item.id):
-				ticket_manager.register_delivery(item.id)
-				PlayerInventory.remove_at(item_index)
-				get_money.emit()
-				animated_sprite.play("close")
-				shipped = true
-				player_collision.disabled = true
+				if ticket_manager.register_delivery(item.id):
+					PlayerInventory.remove_at(item_index)
+					get_money.emit()
+					animated_sprite.play("close")
+					shipped = true
+					player_collision.disabled = true
 			else:
+				invalid_interaction()
 				# Wrong item shipped — ignore for now
 				# TODO: Add penalty or feedback later
 				pass
+		else:
+			# Item held is not a package.
+			invalid_interaction()
 	else:
+		invalid_interaction()
 		printerr("No item currently available")
 
+
+##What happens when an invalid (no ticket/ no package in hand) interaction happens.
+func invalid_interaction():
+	#Interaction manager calls the HUD to shake.
+	InteractionManager.invalid_interaction()
+	#Play a sound to indicate the interaction can't be done.
+	Audio.play_invalid_interaction()
 
 
 func _on_arrive_timer_timeout() -> void:

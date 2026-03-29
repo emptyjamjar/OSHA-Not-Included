@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://by0viewb4ct5f" path="res://ui/hud/StatBarFill.png" id="5_o2lis"]
 
 [node name="HUD" type="CanvasLayer" unique_id=830642951]
-layer = -1
+layer = 10
 script = ExtResource("1_4d6w6")
 
 [node name="Background" type="TextureRect" parent="." unique_id=2145073693]
