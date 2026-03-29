@@ -15,7 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://b5kkxsvnf154u" path="res://objects/food/vending_machine_flipped.tscn" id="13_halqj"]
 [ext_resource type="PackedScene" uid="uid://dbvedjuvqmdpu" path="res://objects/restroom/washroom_flipped.tscn" id="14_dd2np"]
 [ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="15_ve8kv"]
-[ext_resource type="PackedScene" path="res://game/manager/ai/Manager.tscn" id="16_4qtht"]
+[ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="16_4qtht"]
 [ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="17_oadin"]
 [ext_resource type="PackedScene" uid="uid://cmysh8kqsje1j" path="res://objects/shelves/shelf.tscn" id="18_wkw6b"]
 
@@ -27,18 +27,7 @@ class_name GameManager
 @onready var money := 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var conveyor := $Conveyor
 	Ticket_Manager.on_game_start()
-	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
-	conveyor.input(Conveyor.ItemDataList.PINK_WATER_BOTTLE)
-	conveyor.input(Conveyor.ItemDataList.BLACK_WATER_BOTTLE)
-	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
-	conveyor.input(Conveyor.ItemDataList.BLUE_WATER_BOTTLE)
-	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
-	conveyor.input(Conveyor.ItemDataList.PINK_WATER_BOTTLE)
-	conveyor.input(Conveyor.ItemDataList.BLACK_WATER_BOTTLE)
-	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
-	conveyor.input(Conveyor.ItemDataList.BLUE_WATER_BOTTLE)
 
 func _on_shipper_get_money() -> void:
 	money += 10
