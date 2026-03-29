@@ -7,6 +7,15 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_oqai5"]
 radius = 30.307938
 
+[sub_resource type="Gradient" id="Gradient_lt50k"]
+offsets = PackedFloat32Array(0, 0.18421052, 0.51578945, 1)
+colors = PackedColorArray(0.32544088, 0.3254409, 0.32544088, 1, 0.24210525, 0.24210525, 0.24210525, 1, 0.010933787, 0.010933787, 0.010933787, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_oqai5"]
+gradient = SubResource("Gradient_lt50k")
+fill = 1
+fill_from = Vector2(0.50427353, 0.4957265)
+
 [node name="ItemBase" type="Node2D" unique_id=1912400498 node_paths=PackedStringArray("iArea", "sprite") groups=["Boxes"]]
 scale = Vector2(0.66, 0.66)
 script = ExtResource("1_e5u0p")

@@ -10,6 +10,19 @@ size = Vector2(90.5, 158)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h7hfa"]
 size = Vector2(94, 157)
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_yj4n6"]
+closed = false
+polygon = PackedVector2Array(-48.48474, -39.39386, -48.48474, 115.15161, 48.484985, 115.15161, 48.484985, -39.39386, -48.48474, -39.39386, 6.060791, -21.212036, 6.060791, 63.636475, -42.424072, 63.636475, -42.424072, -24.24231, 6.060791, -24.24231)
+
+[sub_resource type="Gradient" id="Gradient_wkw6b"]
+offsets = PackedFloat32Array(0, 0.83157897, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.5, 0.5, 0.5, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ypon2"]
+gradient = SubResource("Gradient_wkw6b")
+fill_from = Vector2(0.5555556, 1)
+fill_to = Vector2(0.54273504, 0)
+
 [node name="VendingMachine" type="StaticBody2D" unique_id=1840311720 node_paths=PackedStringArray("interaction_area")]
 script = ExtResource("1_yj4n6")
 interaction_area = NodePath("InteractionArea")
@@ -33,3 +46,12 @@ debug_color = Color(0.3871518, 0.2810755, 0.7993455, 0.41960785)
 position = Vector2(-28, 42)
 scale = Vector2(1, 1.0070777)
 shape = SubResource("RectangleShape2D_h7hfa")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=516313201]
+occluder = SubResource("OccluderPolygon2D_yj4n6")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=147770355]
+position = Vector2(-18.18164, 21.878906)
+scale = Vector2(0.7575757, 1.399621)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_ypon2")

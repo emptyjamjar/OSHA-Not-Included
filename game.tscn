@@ -16,7 +16,9 @@
 [ext_resource type="PackedScene" uid="uid://cv4vrnpxs40bf" path="res://objects/restroom/washroom.tscn" id="12_iotsf"]
 [ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="13_lc2xo"]
 [ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="15_e8heu"]
-[ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
+[ext_resource type="PackedScene" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
+[ext_resource type="Texture2D" uid="uid://bmisxcq76lrat" path="res://icon.svg" id="18_boyg6"]
+[ext_resource type="Script" uid="uid://j63ga8s4bhlu" path="res://cutscene_path.gd" id="18_e36ub"]
 
 [sub_resource type="GDScript" id="GDScript_7sc4i"]
 script/source = "extends Node2D
@@ -26,14 +28,45 @@ class_name GameManager
 @onready var money := 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Dialogic.signal_event.connect(tut_cutscene)
+	var conveyor := $Conveyor
 	Ticket_Manager.on_game_start()
-
+	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
+	conveyor.input(Conveyor.ItemDataList.PINK_WATER_BOTTLE)
+	conveyor.input(Conveyor.ItemDataList.BLACK_WATER_BOTTLE)
+	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
+	conveyor.input(Conveyor.ItemDataList.BLUE_WATER_BOTTLE)
+	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
+	conveyor.input(Conveyor.ItemDataList.PINK_WATER_BOTTLE)
+	conveyor.input(Conveyor.ItemDataList.BLACK_WATER_BOTTLE)
+	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
+	conveyor.input(Conveyor.ItemDataList.BLUE_WATER_BOTTLE)
+	$Manager.hide()
+	Dialogic.start(\"timeline\")
+	
 
 func _on_shipper_get_money() -> void:
 	money += 10
 	hud.update_money(money)
 	
+func tut_cutscene(argument:String) -> void:
+	if argument == \"1\":
+		$CutscenePath.state = 1
+	elif argument == \"2\":
+		$CutscenePath.state = 2
+	elif argument == \"3\":
+		$CutscenePath.state = 3
+	elif argument == \"4\":
+		$CutscenePath.state = 4
+	elif argument == \"5\":
+		$CutscenePath.state = 5
 "
+
+[sub_resource type="Curve2D" id="Curve2D_hb5m1"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 619, 351, 0, 0, 0, 0, 384, 351, 0, 0, 0, 0, 197, 351, 0, 0, 0, 0, 197, 285, 0, 0, 0, 0, 621, 285, 0, 0, 0, 0, 621, 221, 0, 0, 0, 0, 245, 221, 0, 0, 0, 0, 245, 333, 0, 0, 0, 0, 385, 333, 0, 0, 0, 0, 657, 333, 0, 0, 0, 0, 657, 445)
+}
+point_count = 11
 
 [node name="Game" type="Node2D" unique_id=645817684 groups=["game"]]
 y_sort_enabled = true
@@ -91,27 +124,8 @@ scale = Vector2(0.3295734, 0.3295734)
 position = Vector2(744, 304)
 scale = Vector2(0.24458057, 0.24458057)
 
-[node name="Pause" parent="." unique_id=1566201169 instance=ExtResource("13_lc2xo")]
-visible = false
-top_level = true
-anchors_preset = 0
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 384.0
-offset_top = 216.0
-offset_right = 384.0
-offset_bottom = 216.0
-grow_horizontal = 1
-grow_vertical = 1
-metadata/_edit_use_anchors_ = true
-
-[node name="Score" parent="." unique_id=1161969462 instance=ExtResource("15_e8heu")]
-visible = false
-
 [node name="Manager" parent="." unique_id=565657217 node_paths=PackedStringArray("patrol_paths_at_root", "out_bounds_area") groups=["Manager"] instance=ExtResource("16_80cx4")]
-position = Vector2(601.6738, 425)
+position = Vector2(626, 420)
 collision_mask = 2
 patrol_paths_at_root = NodePath("../PatrolPaths")
 out_bounds_area = NodePath("../OutBoundsArea")
@@ -160,13 +174,48 @@ position = Vector2(416.77408, 193)
 [node name="p3_4" type="Marker2D" parent="PatrolPaths/Path3" unique_id=29843830]
 position = Vector2(723.6078, 184)
 
+[node name="CutscenePath" type="Path2D" parent="." unique_id=2042277849]
+curve = SubResource("Curve2D_hb5m1")
+script = ExtResource("18_e36ub")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="CutscenePath" unique_id=1602138425]
+position = Vector2(619, 351)
+rotation = 3.1415927
+rotates = false
+loop = false
+
+[node name="Sprite2D" type="Sprite2D" parent="CutscenePath/PathFollow2D" unique_id=1078777878]
+texture = ExtResource("18_boyg6")
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=837622460]
+layer = 15
+
+[node name="Pause" parent="UI" unique_id=1566201169 instance=ExtResource("13_lc2xo")]
+visible = false
+top_level = true
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 384.0
+offset_top = 216.0
+offset_right = 384.0
+offset_bottom = 216.0
+grow_horizontal = 1
+grow_vertical = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Score" parent="UI" unique_id=1161969462 instance=ExtResource("15_e8heu")]
+visible = false
+
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
-[connection signal="get_money" from="Shipper" to="Score" method="_on_shipper_get_money"]
+[connection signal="get_money" from="Shipper" to="UI/Score" method="_on_shipper_get_money"]
 [connection signal="health_change" from="Player/HealthComponent" to="Camera2D/HUD" method="_on_health_component_health_change"]
 [connection signal="energy_change" from="Player/EnergyComponent" to="Camera2D/HUD" method="_on_energy_component_energy_change"]
 [connection signal="needs_change" from="Player/NeedsComponent" to="Camera2D/HUD" method="_on_needs_component_needs_change"]
 [connection signal="sanity_changed" from="Player/SanityComponent" to="Camera2D/HUD" method="_on_sanity_component_sanity_changed"]
-[connection signal="ticketsEmpty" from="TicketTerminal" to="Score" method="_on_ticket_terminal_tickets_empty"]
-[connection signal="washroom_used" from="Washroom" to="Score" method="_on_washroom_washroom_used"]
+[connection signal="ticketsEmpty" from="TicketTerminal" to="UI/Score" method="_on_ticket_terminal_tickets_empty"]
+[connection signal="washroom_used" from="Washroom" to="UI/Score" method="_on_washroom_washroom_used"]
 
 [editable path="Conveyor"]

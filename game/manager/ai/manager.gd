@@ -5,10 +5,7 @@ var waiting := false
 var wait_time := 0.0
 var wait_timer := 0.0 
 
-# Called when the node enters the scene tree for the first time.
-#func _ready() -> void:
-	#pass # Replace with function body.
-	
+
 # game.tscn 
 # (0,0) is the top left of the current viewport or root node 
 # X increase to the right
@@ -22,6 +19,9 @@ var current_index := 0
 
 func _ready() -> void:
 	add_to_group("agents")
+	self.hide()
+	await get_tree().create_timer(5).timeout
+	self.show()
 	
 	if patrol_paths_at_root == null:
 		print("No path to begin with -- Break from here") 
