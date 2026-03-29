@@ -1543,6 +1543,10 @@ func is_effect_id_reserved(effect_id: int) -> bool:
 ## @param effect: the effect instance to check for uniqueness
 ## @return: true if the effect is unique and an instance of the same type already exists
 func _unique_effect_exists_in_queues(effect:Effect) -> bool:
+	if effect == null:
+		if debug_logging:
+			_log_generic(_scheduler_identifer + " Cannot check if null effect is unique in queues.")
+		return false
 	# Check if the effect is unique and if an instance of the same type already exists in any queue or active list
 	if effect.is_unique():
 		for queue in [_waiting_effects, _entering_effects, _active_effects, _exiting_effects]:
