@@ -1444,6 +1444,11 @@ func get_all_records() -> Array[ScheduleRecord]:
 ## NOTE: This method uses a simple counter that resets after reaching a maximum value to prevent overflow.
 ## @return: a unique integer ID for the effect
 func _generate_unique_effect_id() -> int:
+	# guard if all ids are taken, return -1 to indicate failure
+	if _effect_id_counter >= _effect_id_max:
+		if debug_logging:
+			_log_generic(_scheduler_identifer + " All effect IDs are currently in use. Cannot generate unique effect ID.")
+		return -1
 	var id = _effect_id_counter
 	_effect_id_counter += 1
 	# Reset the counter if it exceeds the maximum to prevent overflow, allows for reuse of IDs after a large number of effects have been processed.
