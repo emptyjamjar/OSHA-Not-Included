@@ -28,16 +28,6 @@ func get_item() -> ItemData:
 
 
 func _input(event: InputEvent) -> void:
-	# Sad, but had to do it this way because it wasn't
-	# working with input map key entry
-	if event is InputEventKey and event.pressed:
-		if event.keycode == KEY_UP:
-			scroll_inventory(-1)
-			return
-		if event.keycode == KEY_DOWN:
-			scroll_inventory(1)
-			return
-			
 	if event.is_action_pressed("inventory_up"):
 		scroll_inventory(-1)
 		return
