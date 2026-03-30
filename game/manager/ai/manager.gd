@@ -13,6 +13,8 @@ var wait_timer := 0.0
 @export var patrol_paths_at_root: Node2D
 @export var out_bounds_area: Area2D
 
+@onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+
 var path_container: Array = []
 var current_path: Array = []
 var current_index := 0 
