@@ -636,7 +636,6 @@ func add_effect(effect: Effect, reserved_id: int = -1) -> bool:
 		_recycle_effect_id(effect_id)
 		if consumed_reservation:
 			reserve_effect_id(effect_id)
-		record.free()
 		if debug_logging:
 			_log_generic(_scheduler_identifer + " Failed to add effect to waiting queue. Effect will be rejected: " + _effect_info_basic(effect))
 		return false
@@ -1634,7 +1633,6 @@ func get_used_ids() -> Array:
 func clear_reserved_ids() -> void:
 	_reserved_effect_ids.clear()
 
-
 ## Checks if an effect is unique and if an instance of the same type already exists in any queue or active list.
 ## NOTE: internally checks if effect is unique before iterating
 ## @param effect: the effect instance to check for uniqueness
@@ -1651,3 +1649,14 @@ func _unique_effect_exists_in_queues(effect:Effect) -> bool:
 				if existing_record.effect.get_type() == effect.get_type():
 					return true
 	return false
+
+## Clears all queues, active lists, and ID tracking in the scheduler. This effectively resets the scheduler to an empty state.
+func clear() -> void:
+	_waiting_effects.clear()
+	_entering_effects.clear()
+	_active_effects.clear()
+	_exiting_effects.clear()
+	_used_effect_ids.clear()
+	_free_effect_ids.clear()
+	_reserved_effect_ids.clear()
+	_next_effect_id = 0
