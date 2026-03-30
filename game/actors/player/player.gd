@@ -10,7 +10,7 @@ class_name Player extends CharacterBody2D
 @onready var sanity_area: Area2D = $SanityArea
 @onready var viewport_rect = get_viewport_rect()
 
-@export var move_speed := 150
+@export var move_speed := 175
 @export var slow_speed := 125
 @export var push_speed := 20
 @export var sprint_speed := 1.5
@@ -21,6 +21,7 @@ var last_direction = Vector2.DOWN
 # Used for the idle timer component attached to the player,
 # hopefully with minimal player gd changes
 var idle: bool = true
+var started: bool = false
 
 
 func _init() -> void:
@@ -38,6 +39,7 @@ func _physics_process(_delta: float) -> void:
 	
 	if direction != Vector2.ZERO:
 		idle = false
+		started = true
 		last_direction = direction
 		
 		if abs(direction.x) > abs(direction.y):

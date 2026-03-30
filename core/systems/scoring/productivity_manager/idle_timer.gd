@@ -10,7 +10,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if player.idle == true:
+	if player.idle == true and player.started == true:
 		if running == false:
 			start(2)
 			set_paused(false)
