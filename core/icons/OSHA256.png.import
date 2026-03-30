@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://pcl2nmgvdikv"
-path="res://.godot/imported/SCP.png-5de082fa98c3fbf2f89873588e043143.ctex"
+uid="uid://b7207siwv2tx7"
+path="res://.godot/imported/OSHA256.png-c28045b1a12f794bb18a12bbca0ee40d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://SCP.png"
-dest_files=["res://.godot/imported/SCP.png-5de082fa98c3fbf2f89873588e043143.ctex"]
+source_file="res://core/icons/OSHA256.png"
+dest_files=["res://.godot/imported/OSHA256.png-c28045b1a12f794bb18a12bbca0ee40d.ctex"]
 
 [params]
 

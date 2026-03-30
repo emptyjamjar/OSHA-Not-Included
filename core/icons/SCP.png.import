@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://codwqnm7eb4eu"
-path="res://.godot/imported/OSHA.svg-22bbd9d5ac33363907ff557767634121.ctex"
+uid="uid://pcl2nmgvdikv"
+path="res://.godot/imported/SCP.png-6f122481a831d8b134aa742697afc42b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://OSHA.svg"
-dest_files=["res://.godot/imported/OSHA.svg-22bbd9d5ac33363907ff557767634121.ctex"]
+source_file="res://core/icons/SCP.png"
+dest_files=["res://.godot/imported/SCP.png-6f122481a831d8b134aa742697afc42b.ctex"]
 
 [params]
 
@@ -38,6 +38,3 @@ process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
 detect_3d/compress_to=1
-svg/scale=1.0
-editor/scale_with_editor_scale=false
-editor/convert_colors_with_editor_theme=false

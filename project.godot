@@ -20,8 +20,8 @@ config/features=PackedStringArray("4.6", "Forward Plus")
 run/max_fps=60
 boot_splash/image="uid://pcl2nmgvdikv"
 config/icon="uid://codwqnm7eb4eu"
-config/macos_native_icon="res://OSHA.icns"
-config/windows_native_icon="res://OSHA.ico"
+config/macos_native_icon="res://core/icons/OSHA.icns"
+config/windows_native_icon="res://core/icons/OSHA.ico"
 boot_splash/minimum_display_time=4000
 
 [audio]

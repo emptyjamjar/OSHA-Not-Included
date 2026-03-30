@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cvc1uhlfqtjkp"
-path="res://.godot/imported/OSHA.png-2f1f04fce4793fc26f7a059062d22d74.ctex"
+uid="uid://ukdlxck1cfb8"
+path="res://.godot/imported/OSHA64.png-0772554585e8420d16b9c91e8a16b7de.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://OSHA.png"
-dest_files=["res://.godot/imported/OSHA.png-2f1f04fce4793fc26f7a059062d22d74.ctex"]
+source_file="res://core/icons/OSHA64.png"
+dest_files=["res://.godot/imported/OSHA64.png-0772554585e8420d16b9c91e8a16b7de.ctex"]
 
 [params]
 
