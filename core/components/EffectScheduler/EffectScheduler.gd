@@ -143,7 +143,7 @@ func _process_waiting_effects() -> void:
 		var record: ScheduleRecord = _waiting_effects[effect_id]
 		if record == null or record.effect == null:
 			_remove_from_waiting(effect_id)
-			_release_effect_id(effect_id)
+			_recycle_effect_id(effect_id)
 			continue
 
 		# if the effect is paused, skip processing it but keep it in the waiting queue so it can be resumed later
@@ -174,7 +174,7 @@ func _process_entering_effects() -> void:
 		var record: ScheduleRecord = _entering_effects[effect_id]
 		if record == null or record.effect == null:
 			_remove_from_entering(effect_id)
-			_release_effect_id(effect_id)
+			_recycle_effect_id(effect_id)
 			continue
 
 		# if the effect is paused, skip processing it but keep it in the entering queue so it can be resumed later
@@ -214,7 +214,7 @@ func _process_active_effects(delta: float, is_physics_pass: bool) -> void:
 		var record: ScheduleRecord = _active_effects[effect_id]
 		if record == null or record.effect == null:
 			_remove_from_active(effect_id)
-			_release_effect_id(effect_id)
+			_recycle_effect_id(effect_id)
 			continue
 
 		# if the effect is paused, skip processing it but keep it in the active effects list so it can be resumed later
@@ -259,7 +259,7 @@ func _process_exiting_effects() -> void:
 		# just in case, check for null record or effect instance, if either is null, remove from exiting queue and skip
 		if record == null or record.effect == null:
 			_remove_from_exiting(effect_id)
-			_release_effect_id(effect_id)
+			_recycle_effect_id(effect_id)
 			continue
 
 		# if the effect is paused, skip processing it but keep it in the exiting queue so it can be resumed later
@@ -268,7 +268,7 @@ func _process_exiting_effects() -> void:
 
 		_run_exit(record.effect)
 		_remove_from_exiting(effect_id)
-		_release_effect_id(effect_id)
+		_recycle_effect_id(effect_id)
 
 # Handling adding and removing to queues #
 
@@ -608,8 +608,20 @@ func add_effect(effect: Effect, reserved_id: int = -1) -> bool:
 	# generate id, create record, add to waiting queue, emit signal, return true if successful, false if queue is full
 	# attempts to generate id, if there isnt room, it will return -1 and the effect will be rejected to prevent infinite loop
 	var effect_id = reserved_id
+	var consumed_reservation := false
 	if effect_id == -1:
-		effect_id = _generate_unique_effect_id()
+		effect_id = _allocate_effect_id()
+	else:
+		# Reserved IDs must transition from reserved -> registered before queueing.
+		if is_effect_id_reserved(effect_id):
+			consumed_reservation = true
+			unreserve_effect_id(effect_id)
+		if not _register_effect_id(effect_id):
+			if consumed_reservation:
+				reserve_effect_id(effect_id)
+			if debug_logging:
+				_log_generic(_scheduler_identifer + " Failed to register provided effect ID. Effect will be rejected: " + _effect_info_basic(effect))
+			return false
 	if effect_id == -1:
 		if debug_logging:
 			_log_generic(_scheduler_identifer + " Failed to generate unique effect ID. Effect will be rejected: " + _effect_info_basic(effect))
@@ -621,7 +633,9 @@ func add_effect(effect: Effect, reserved_id: int = -1) -> bool:
 	record.is_waiting = true
 	if not _add_to_waiting(effect_id, record):
 		# delete record to free memory since it won't be used
-		_release_effect_id(effect_id)
+		_recycle_effect_id(effect_id)
+		if consumed_reservation:
+			reserve_effect_id(effect_id)
 		record.free()
 		if debug_logging:
 			_log_generic(_scheduler_identifer + " Failed to add effect to waiting queue. Effect will be rejected: " + _effect_info_basic(effect))
@@ -1133,23 +1147,29 @@ func get_effect_id(effect: Effect) -> int:
 	if effect == null:
 		if debug_logging:
 			_log_generic(_scheduler_identifer + " Cannot get effect ID for null effect.")
-			return -1
-		
-	# first check if the effect is in the waiting queue	for effect_id
+		return -1
+
+	# first check if the effect is in the waiting queue
 	var record: ScheduleRecord
 	for effect_id in _waiting_effects.keys():
 		record = _waiting_effects[effect_id]
 		if record != null and record.effect == effect:
 			return effect_id
-	# then check entering queue	for effect_id
+
+	# then check entering queue
+	for effect_id in _entering_effects.keys():
 		record = _entering_effects[effect_id]
 		if record != null and record.effect == effect:
 			return effect_id
-	# then check active effects	for effect_id
+
+	# then check active effects
+	for effect_id in _active_effects.keys():
 		record = _active_effects[effect_id]
 		if record != null and record.effect == effect:
 			return effect_id
-	# then check exiting queue	for effect_id
+
+	# then check exiting queue
+	for effect_id in _exiting_effects.keys():
 		record = _exiting_effects[effect_id]
 		if record != null and record.effect == effect:
 			return effect_id
@@ -1442,26 +1462,93 @@ func get_all_records() -> Array[ScheduleRecord]:
 # Utility Methods #
 
 
-## Generates a unique effect ID for tracking purposes.
-## NOTE: IDs are allocated from recycled IDs first, then from next sequential candidates.
-## @return: a unique integer ID for the effect
+## Allocates and registers the next usable effect ID.
+## NOTE: IDs are sourced from recycled IDs first, then sequential scan candidates.
+## @return: a registered effect ID, or -1 if allocation fails.
+func _allocate_effect_id() -> int:
+	var effect_id := get_next_available_effect_id()
+	if effect_id == -1:
+		if debug_logging:
+			_log_generic(_scheduler_identifer + " Unable to generate unique effect ID after full scan.")
+		return -1
+	if not _register_effect_id(effect_id):
+		if debug_logging:
+			_log_generic(_scheduler_identifer + " Failed to register generated effect ID: " + str(effect_id))
+		return -1
+	return effect_id
+
+## Backward-compatible alias for _allocate_effect_id().
 func _generate_unique_effect_id() -> int:
+	return _allocate_effect_id()
+
+## Recycles a registered ID by unregistering it.
+## NOTE: Unregistered IDs are pushed back to the free pool unless still reserved.
+## @param effect_id: the unique effect ID to recycle
+func _recycle_effect_id(effect_id: int) -> bool:
+	# if id is invalid or not currently registered, cannot recycle
+	if not _is_valid_effect_id(effect_id) or not _used_effect_ids.has(effect_id):
+		return false
+	unregister_effect_id(effect_id)
+	return true
+
+## Removes an effect from all scheduler states and recycles its ID.
+## @param effect_id: the unique effect ID of the effect to remove
+## @return: true if the effect was removed, false otherwise
+func _remove_effect_from_scheduler(effect_id: int) -> bool:
+	if _remove_from_waiting(effect_id) or _remove_from_entering(effect_id) or _remove_from_active(effect_id) or _remove_from_exiting(effect_id):
+		_recycle_effect_id(effect_id)
+		return true
+	return false
+
+## Reserves an ID so it cannot be returned by allocation queries.
+## @param effect_id: the unique effect ID to reserve
+## @return: true if reserved, false if invalid or currently in use.
+func reserve_effect_id(effect_id: int) -> bool:
+	if not _is_valid_effect_id(effect_id):
+		return false
+	if _reserved_effect_ids.has(effect_id):
+		return false
+	if _used_effect_ids.has(effect_id):
+		return false
+	_reserved_effect_ids[effect_id] = true
+	_free_effect_ids.erase(effect_id)
+	return true
+
+## Checks if an ID is currently reserved from allocation.
+## @param effect_id: the unique effect ID to check
+## @return: true if the ID is reserved, false otherwise
+func is_effect_id_reserved(effect_id: int) -> bool:
+	if not _is_valid_effect_id(effect_id):
+		return false
+	return _reserved_effect_ids.has(effect_id)
+
+## Checks if an ID is currently in use by the scheduler.
+## @param effect_id: the unique effect ID to check
+## @return: true if the ID is in use, false otherwise
+func is_effect_id_in_use(effect_id: int) -> bool:
+	if not _is_valid_effect_id(effect_id):
+		return false
+	return _used_effect_ids.has(effect_id)
+
+## Returns the next allocatable ID that is not currently in use or reserved.
+## NOTE: Returned ID is a candidate only and is not registered automatically.
+## @return: an allocatable effect ID, or -1 if none are available.
+func get_next_available_effect_id() -> int:
 	var max_allocatable_ids := _effect_id_max - _reserved_effect_ids.size()
 	if _used_effect_ids.size() >= max_allocatable_ids:
 		if debug_logging:
-			_log_generic(_scheduler_identifer + " All effect IDs are currently in use. Cannot generate unique effect ID.")
+			_log_generic(_scheduler_identifer + " All effect IDs are currently in use. No available ID to return.")
 		return -1
 
-	# Reuse IDs first for quick allocation and to avoid growing the next-ID scan.
+	# Check recycled IDs first for quick availability.
 	while not _free_effect_ids.is_empty():
-		var recycled_id: int = _free_effect_ids.pop_back()
+		var recycled_id: int = _free_effect_ids.back()
 		if recycled_id < 0 or recycled_id >= _effect_id_max:
+			_free_effect_ids.pop_back()
 			continue
-		if _reserved_effect_ids.has(recycled_id):
+		if _reserved_effect_ids.has(recycled_id) or _used_effect_ids.has(recycled_id):
+			_free_effect_ids.pop_back()
 			continue
-		if _used_effect_ids.has(recycled_id):
-			continue
-		_used_effect_ids[recycled_id] = true
 		return recycled_id
 
 	# Probe sequentially with wrap-around, skipping used and reserved IDs.
@@ -1476,67 +1563,77 @@ func _generate_unique_effect_id() -> int:
 		if _reserved_effect_ids.has(id) or _used_effect_ids.has(id):
 			continue
 
-		_used_effect_ids[id] = true
 		return id
 
 	if debug_logging:
-		_log_generic(_scheduler_identifer + " Unable to generate unique effect ID after full scan.")
+		_log_generic(_scheduler_identifer + " Unable to find available effect ID after full scan.")
 	return -1
 
-## Releases an ID back to the scheduler's reusable pool.
-## @param effect_id: the unique effect ID to release
-func _release_effect_id(effect_id: int) -> void:
-	if effect_id < 0:
-		return
-	if not _used_effect_ids.erase(effect_id):
-		return
+## Backward-compatible alias for get_next_available_effect_id().
+func get_available_id() -> int:
+	return get_next_available_effect_id()
+
+## Registers an ID as in-use by the scheduler.
+## @param effect_id: the unique effect ID to register
+## @return: true if the ID was successfully registered.
+func _register_effect_id(effect_id: int) -> bool:
+	if not _is_valid_effect_id(effect_id):
+		return false
 	if _reserved_effect_ids.has(effect_id):
-		return
-	_free_effect_ids.append(effect_id)
-
-## Removes an effect from all scheduler states and releases its ID.
-## @param effect_id: the unique effect ID of the effect to remove
-## @return: true if the effect was removed, false otherwise
-func _remove_effect_from_scheduler(effect_id: int) -> bool:
-	var removed: bool = false
-	removed = _remove_from_waiting(effect_id) or removed
-	removed = _remove_from_entering(effect_id) or removed
-	removed = _remove_from_active(effect_id) or removed
-	removed = _remove_from_exiting(effect_id) or removed
-	if removed:
-		_release_effect_id(effect_id)
-	return removed
-
-## Reserves an ID so it won't be allocated by the scheduler.
-## @param effect_id: the unique effect ID to reserve
-## @return: true if reserved, false if invalid or currently in use.
-func reserve_effect_id(effect_id: int) -> bool:
-	if effect_id < 0 or effect_id >= _effect_id_max:
 		return false
 	if _used_effect_ids.has(effect_id):
 		return false
-	_reserved_effect_ids[effect_id] = true
+	_used_effect_ids[effect_id] = true
 	_free_effect_ids.erase(effect_id)
 	return true
 
-## Removes a reservation for an ID.
+
+## Unregisters an in-use ID and returns it to the free pool when possible.
+## @param effect_id: the unique effect ID to unregister
+## @return: true if the ID was currently registered and is now unregistered.
+func unregister_effect_id(effect_id: int) -> bool:
+	if not _is_valid_effect_id(effect_id):
+		return false
+	if not _used_effect_ids.erase(effect_id):
+		return false
+	if _reserved_effect_ids.has(effect_id):
+		return true
+	if not _free_effect_ids.has(effect_id):
+		_free_effect_ids.append(effect_id)
+	return true
+
+## Removes a reservation from an ID.
 ## @param effect_id: the unique effect ID to unreserve
 ## @return: true if reservation existed and was removed.
 func unreserve_effect_id(effect_id: int) -> bool:
-	if effect_id < 0 or effect_id >= _effect_id_max:
+	if not _is_valid_effect_id(effect_id):
 		return false
 	if not _reserved_effect_ids.has(effect_id):
 		return false
 	_reserved_effect_ids.erase(effect_id)
 	return true
 
-## Checks if an ID is reserved from allocation.
-## @param effect_id: the unique effect ID to check
-## @return: true if the ID is reserved, false otherwise
-func is_effect_id_reserved(effect_id: int) -> bool:
-	if effect_id < 0 or effect_id >= _effect_id_max:
-		return false
-	return _reserved_effect_ids.has(effect_id)
+## Validates that an effect ID is within the scheduler allocation range.
+## @param effect_id: the unique effect ID to validate
+## @return: true if the ID is valid for allocation, false otherwise
+func _is_valid_effect_id(effect_id: int) -> bool:
+	return effect_id >= 0 and effect_id < _effect_id_max
+
+## Returns a deep copy of the list of currently reserved IDs.
+## @return: an array of reserved effect IDs.
+func get_reserved_ids() -> Array:
+	return _reserved_effect_ids.keys()
+
+## Returns a deep copy of the list of currently used IDs.
+## @return: an array of used effect IDs.
+func get_used_ids() -> Array:
+	return _used_effect_ids.keys()
+
+## Clears all reserved IDs
+## NOTE: This does not unregister any currently used IDs, but it does make all IDs available for allocation again.
+func clear_reserved_ids() -> void:
+	_reserved_effect_ids.clear()
+
 
 ## Checks if an effect is unique and if an instance of the same type already exists in any queue or active list.
 ## NOTE: internally checks if effect is unique before iterating
