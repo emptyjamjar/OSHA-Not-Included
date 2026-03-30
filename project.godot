@@ -18,6 +18,7 @@ config/name="osha_not_included"
 run/main_scene="uid://rwv23iayi48d"
 config/features=PackedStringArray("4.6", "Forward Plus")
 run/max_fps=60
+boot_splash/bg_color=Color(0.03529412, 0.039215688, 0.0627451, 1)
 boot_splash/image="uid://pcl2nmgvdikv"
 config/icon="uid://dos858kmgxgvu"
 config/macos_native_icon="res://core/icons/OSHA.icns"
