@@ -1071,19 +1071,19 @@ func has_effect_of_name(effect_name: String) -> bool:
 	# check waiting queue for effect_name
 	for effect_id in _waiting_effects.keys():
 		record = _waiting_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_name() == effect_name:
+		if record != null and record.effect != null and record.effect.get_effect_name() == effect_name:
 			return true
 	# check entering queue for effect_name
 		record = _entering_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_name() == effect_name:
+		if record != null and record.effect != null and record.effect.get_effect_name() == effect_name:
 			return true
 	# check active effects for effect_name
 		record = _active_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_name() == effect_name:
+		if record != null and record.effect != null and record.effect.get_effect_name() == effect_name:
 			return true
 	# check exiting queue for effect_name
 		record = _exiting_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_name() == effect_name:
+		if record != null and record.effect != null and record.effect.get_effect_name() == effect_name:
 			return true
 	return false
 
@@ -1207,19 +1207,19 @@ func get_effect_id_by_name(effect_name: String) -> int:
 	# check waiting queue for effect_id
 	for effect_id in _waiting_effects.keys():
 		record = _waiting_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_name() == effect_name:
+		if record != null and record.effect != null and record.effect.get_effect_name() == effect_name:
 			return effect_id
 	# check entering queue for effect_id
 		record = _entering_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_name() == effect_name:
+		if record != null and record.effect != null and record.effect.get_effect_name() == effect_name:
 			return effect_id
 	# check active effects for effect_id
 		record = _active_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_name() == effect_name:
+		if record != null and record.effect != null and record.effect.get_effect_name() == effect_name:
 			return effect_id
 	# check exiting queue for effect_id
 		record = _exiting_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_name() == effect_name:
+		if record != null and record.effect != null and record.effect.get_effect_name() == effect_name:
 			return effect_id
 
 	return -1
@@ -1255,24 +1255,12 @@ func get_effect_by_id(effect_id: int) -> Effect:
 ## @param effect_type: the type of the effect to retrieve
 ## @return: the effect instance if found, or null if no effect of the specified type is found in the scheduler
 func get_effect_by_type(effect_type:Effect.Type) -> Effect:
-	# check waiting queue for effect_type
 	var record: ScheduleRecord
-	for effect_id in _waiting_effects.keys():
-		record = _waiting_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_type() == effect_type:
-			return record.effect
-	# check entering queue for effect_type
-		record = _entering_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_type() == effect_type:
-			return record.effect
-	# check active effects for effect_type
-		record = _active_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_type() == effect_type:
-			return record.effect
-	# check exiting queue for effect_type
-		record = _exiting_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_type() == effect_type:
-			return record.effect
+	for queue in [_waiting_effects, _entering_effects, _active_effects, _exiting_effects]:
+		for effect_id in queue.keys():
+			record = queue[effect_id]
+			if record != null and record.effect != null and record.effect.get_type() == effect_type:
+				return record.effect
 	return null
 
 ## Retrieves all effect instances found in the scheduler that match the specified type. This includes effects in any queue or active list.
@@ -1281,47 +1269,23 @@ func get_effect_by_type(effect_type:Effect.Type) -> Effect:
 func get_effects_by_type(effect_type:Effect.Type) -> Array:
 	var effects: Array = []
 	var record: ScheduleRecord
-	# check waiting queue for effect_type
-	for effect_id in _waiting_effects.keys():
-		record = _waiting_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_type() == effect_type:
-			effects.append(record.effect)
-	# check entering queue for effect_type
-		record = _entering_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_type() == effect_type:
-			effects.append(record.effect)
-	# check active effects for effect_type
-		record = _active_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_type() == effect_type:
-			effects.append(record.effect)
-	# check exiting queue for effect_type
-		record = _exiting_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_type() == effect_type:
-			effects.append(record.effect)
+	for queue in [_waiting_effects, _entering_effects, _active_effects, _exiting_effects]:
+		for effect_id in queue.keys():
+			record = queue[effect_id]
+			if record != null and record.effect != null and record.effect.get_type() == effect_type:
+				effects.append(record.effect)
 	return effects
 
 ## Retrieves the first effect instance found in the scheduler that matches the specified name. This includes effects in any queue or active list.
 ## @param effect_name: the name of the effect to retrieve
 ## @return: the effect instance if found, or null if no effect of the specified name is found in the scheduler
 func get_effect_by_name(effect_name: String) -> Effect:
-	# check waiting queue for effect_name
 	var record: ScheduleRecord
-	for effect_id in _waiting_effects.keys():
-		record = _waiting_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_name() == effect_name:
-			return record.effect
-	# check entering queue for effect_name
-		record = _entering_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_name() == effect_name:
-			return record.effect
-	# check active effects for effect_name
-		record = _active_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_name() == effect_name:
-			return record.effect
-	# check exiting queue for effect_name
-		record = _exiting_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_name() == effect_name:
-			return record.effect
+	for queue in [_waiting_effects, _entering_effects, _active_effects, _exiting_effects]:
+		for effect_id in queue.keys():
+			record = queue[effect_id]
+			if record != null and record.effect != null and record.effect.get_effect_name() == effect_name:
+				return record.effect
 	return null
 
 ## Retrieves all effect instances found in the scheduler that match the specified name. This includes effects in any queue or active list.
@@ -1330,23 +1294,11 @@ func get_effect_by_name(effect_name: String) -> Effect:
 func get_effects_by_name(effect_name: String) -> Array:
 	var effects: Array = []
 	var record: ScheduleRecord
-	# check waiting queue for effect_name
-	for effect_id in _waiting_effects.keys():
-		record = _waiting_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_name() == effect_name:
-			effects.append(record.effect)
-	# check entering queue for effect_name
-		record = _entering_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_name() == effect_name:
-			effects.append(record.effect)
-	# check active effects for effect_name
-		record = _active_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_name() == effect_name:
-			effects.append(record.effect)
-	# check exiting queue for effect_name
-		record = _exiting_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_name() == effect_name:
-			effects.append(record.effect)
+	for queue in [_waiting_effects, _entering_effects, _active_effects, _exiting_effects]:
+		for effect_id in queue.keys():
+			record = queue[effect_id]
+			if record != null and record.effect != null and record.effect.get_effect_name() == effect_name:
+				effects.append(record.effect)
 	return effects
 
 ## Retrieves the scheduler record details for a given effect instance. This includes effects in any queue or active list.
@@ -1421,7 +1373,7 @@ func get_all_records_by_name(effect_name: String) -> Array[ScheduleRecord]:
 			var record: ScheduleRecord = queue[effect_id]
 			if record == null or record.effect == null:
 				continue
-			if record.effect.get_name() == effect_name:
+			if record.effect.get_effect_name() == effect_name:
 				records.append(record)
 	return records
 
