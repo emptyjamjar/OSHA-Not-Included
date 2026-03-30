@@ -63,6 +63,22 @@ enum Type
 ## Time elapsed in cooldown
 @export var _cooldown_elapsed: float = 0.0
 
+# Internal variables #
+
+## Manual completion override. When true, this effect is treated as inactive regardless of timing/repeat/persistent settings.
+var _is_marked_done: bool = false
+
+
+## Behavior notes:
+## - Persistent: effect is always active until manually removed.
+## - Timing only: effect is active while elapsed_time < duration.
+## - Repeat only: effect is active while repeat_count < repeat_max (when repeat_max > 0).
+## - Timing + Repeat: duration is per-cycle; when a cycle ends, scheduler increments repeat_count and resets elapsed_time.
+##   The effect stops when repeat_count reaches repeat_max.
+## - Cooldown: cooldown does not directly change active/finished state in this class.
+##   The scheduler uses cooldown to decide whether update/physics_update should run on a frame.
+##   In other words, an effect can remain active while its callbacks are temporarily gated by cooldown.
+
 # Basic constructor for Effect
 func _init(type: Type = Type.NONE, effect_name: String = "No_Name") -> void:
 	_type = type
@@ -135,6 +151,17 @@ func set_persistent(enable: bool) -> void:
 ## @return: bool - True if persistent, false otherwise
 func is_persistent() -> bool:
 	return self._is_persistent
+
+## Sets whether this effect should be treated as manually completed.
+## When true, is_active() returns false immediately.
+## @param is_done: bool - True to mark effect done, false to clear done state
+func set_marked_done(is_done: bool) -> void:
+	self._is_marked_done = is_done
+
+## Checks whether this effect is manually marked as done.
+## @return: bool - True if effect is manually marked done
+func is_marked_done() -> bool:
+	return self._is_marked_done
 
 ## Enables or disables timing for the effect
 ## NOTE: if disabled, duration is ignored and effect must be manually stopped
@@ -260,6 +287,7 @@ func reset() -> void:
 	# reset basic info
 	self._type = Type.NONE
 	self._effect_name = ""
+	self._is_marked_done = false
 	# reset flags
 	self._is_unique = false
 	self._is_persistent = false
@@ -314,8 +342,13 @@ func increment_cooldown_elapsed(delta: float) -> bool:
 # Query methods #
 
 ## Checks if the effect is still active (duration, repeating)
+## Note: cooldown does not participate in this check; cooldown gating is scheduler-side behavior.
 ## @return: bool- True if active, false if expired
 func is_active() -> bool:
+	# manual completion override always takes priority
+	if self._is_marked_done:
+		return false
+
 	# if persistent, always active
 	if self._is_persistent:
 		return true
@@ -338,7 +371,8 @@ func is_active() -> bool:
 func is_finished() -> bool:
 	return not is_active()
 
-## Checks if the effect is currently on cooldown (after finishing and before it can be applied again)
+## Checks if the effect is currently on cooldown (based only on cooldown timer values)
+## Note: this does not require the effect to be finished; scheduler code decides how cooldown state is used.
 ## @return: bool - True if on cooldown, false otherwise
 func is_on_cooldown() -> bool:
 	if not self._enable_cooldown:
