@@ -35,6 +35,24 @@ func _on_shipper_get_money() -> void:
 	
 "
 
+[sub_resource type="Gradient" id="Gradient_halqj"]
+offsets = PackedFloat32Array(0, 0.6263158, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.2842105, 0.2842105, 0.2842105, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kgoe6"]
+gradient = SubResource("Gradient_halqj")
+fill = 1
+fill_from = Vector2(0.47008547, 0.4871795)
+fill_to = Vector2(0.8333333, 0.78205127)
+
+[sub_resource type="Gradient" id="Gradient_dd2np"]
+offsets = PackedFloat32Array(0.43157893, 1)
+colors = PackedColorArray(0.05072464, 0.05072464, 0.05072464, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8onr1"]
+gradient = SubResource("Gradient_dd2np")
+fill_from = Vector2(0, 1)
+
 [node name="Game" type="Node2D" unique_id=645817684 groups=["game"]]
 y_sort_enabled = true
 script = SubResource("GDScript_7sc4i")
@@ -73,6 +91,14 @@ script = ExtResource("4_fc0e3")
 
 [node name="SanityComponent" type="Node" parent="Player" unique_id=264741504]
 script = ExtResource("8_7sc4i")
+
+[node name="PointLight2D" type="PointLight2D" parent="Player" unique_id=1967914655]
+position = Vector2(2.0000038, -2.0000012)
+scale = Vector2(1.7500001, 1.6249998)
+color = Color(0.72156864, 0.5803922, 0.40392157, 1)
+energy = 0.4
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_kgoe6")
 
 [node name="Packager" parent="." unique_id=2093227932 instance=ExtResource("12_hb5m1")]
 position = Vector2(640, 192)
@@ -159,6 +185,18 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Score" parent="UI" unique_id=1161969462 instance=ExtResource("17_8onr1")]
 visible = false
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=106612821]
+position = Vector2(680.8126, 122.281265)
+scale = Vector2(18.681644, 9.741211)
+color = Color(0.33276916, 0.46037263, 0.80294394, 1)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_8onr1")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=520613747]
+position = Vector2(680.8126, 122.281265)
+scale = Vector2(18.681644, 9.741211)
+color = Color(0.64803123, 0.68176806, 0.7610899, 1)
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
 [connection signal="get_money" from="Shipper" to="UI/Score" method="_on_shipper_get_money"]

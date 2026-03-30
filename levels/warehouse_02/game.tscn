@@ -35,12 +35,17 @@ func _on_shipper_get_money() -> void:
 	
 "
 
-[sub_resource type="Gradient" id="Gradient_halqj"]
+[sub_resource type="Environment" id="Environment_halqj"]
+background_mode = 3
+adjustment_enabled = true
+adjustment_saturation = 0.75
+
+[sub_resource type="Gradient" id="Gradient_dd2np"]
 offsets = PackedFloat32Array(0, 0.6263158, 1)
 colors = PackedColorArray(1, 1, 1, 1, 0.2842105, 0.2842105, 0.2842105, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_dd2np"]
-gradient = SubResource("Gradient_halqj")
+gradient = SubResource("Gradient_dd2np")
 fill = 1
 fill_from = Vector2(0.47008547, 0.4871795)
 fill_to = Vector2(0.8333333, 0.78205127)
@@ -54,12 +59,12 @@ gradient = SubResource("Gradient_wkw6b")
 fill = 1
 fill_from = Vector2(0.491453, 0.5)
 
-[sub_resource type="Gradient" id="Gradient_dd2np"]
+[sub_resource type="Gradient" id="Gradient_55o4m"]
 offsets = PackedFloat32Array(0.43157893, 1)
 colors = PackedColorArray(0.05072464, 0.05072464, 0.05072464, 1, 1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_wkw6b"]
-gradient = SubResource("Gradient_dd2np")
+gradient = SubResource("Gradient_55o4m")
 fill_from = Vector2(0, 1)
 
 [node name="Game" type="Node2D" unique_id=645817684 groups=["game"]]
@@ -67,6 +72,9 @@ y_sort_enabled = true
 script = SubResource("GDScript_7sc4i")
 
 [node name="World" parent="." unique_id=2107734680 instance=ExtResource("1_halqj")]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="World" unique_id=1435820696]
+environment = SubResource("Environment_halqj")
 
 [node name="OutBoundsArea" type="Area2D" parent="." unique_id=1864494632]
 visible = false
