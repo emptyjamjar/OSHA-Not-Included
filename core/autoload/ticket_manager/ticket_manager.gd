@@ -3,6 +3,7 @@ class_name TicketManager
 
 signal ticket_empty
 signal tickets_done
+signal tickets_generated
 var all_tickets: Array[Ticket] = [] # 12 tickets for the level - can update it later
 var visible_queue: Array[Ticket] = [] # max 4 tickets 
 var timers: Dictionary = {} # ticket --> Timer 
@@ -79,6 +80,9 @@ func generate_level_ticket(count: int):
 	fill_visible_queue()
 	start_timers_for_visible_queue()
 	update_queue_ui() 
+	
+	tickets_generated.emit() #Tell everything that cares that tickets have been made.
+
 
 func fill_visible_queue(): 
 	print("Fill tickets into visible queue")

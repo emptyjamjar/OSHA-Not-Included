@@ -10,6 +10,11 @@ extends CanvasLayer
 @onready var needscomp: NeedsComponent = $"../../Player/NeedsComponent"
 @onready var sanitycomp: SanityComponent = $"../../Player/SanityComponent"
 
+@export var clock: Label
+@export var clock_no_ticket: Label
+var clock_time:float = 0
+var clock_start:bool = false #If the timer should start.
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -22,16 +27,55 @@ func _ready() -> void:
 	sanitybar.value = sanitycomp.sanity_cap
 	needsbar.max_value = needscomp.MAX_NEEDS
 	needsbar.value = needscomp.needs
+	
+	Ticket_Manager.tickets_generated.connect(start_clock)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	energybar.value = energycomp.energy
 	if PlayerInventory.has_box():
 		energycomp.draining = true
 	else:
 		energycomp.draining = false
 	
+	update_clock(delta)
+
+
+func get_clock_time()->float:
+	var tickets: Array[Ticket] = Ticket_Manager.all_tickets
+	var sum_time: float = 0
+	
+	for ticket in tickets:
+		sum_time += ticket.max_time
+	
+	return sum_time
+
+
+func start_clock():
+	clock_start = true
+	clock_time = get_clock_time()
+
+
+func update_clock(delta: float):
+	if clock_start:
+		clock.visible = true
+		clock_no_ticket.visible = false
+		
+		clock_time -= delta
+		
+		var minutes: float = fmod(clock_time, 60.0)
+		var minutes_text: String = str(int(minutes))
+		
+		#Just makes sure that single digit seconds fit the clock
+		if minutes < 10:
+			minutes_text = "0" + str(int(minutes))
+		
+		clock.text = str(int(clock_time/60)) +  ":" + minutes_text
+	else:
+		clock.visible = false
+		clock_no_ticket.visible = true
+
 
 func update_money(money) -> void:
 	$Background/Money.text = str(money)
