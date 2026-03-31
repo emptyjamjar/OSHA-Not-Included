@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://ck5h6v6qnv6ak"]
+[gd_scene format=3 uid="uid://b5iphcv1rio5l"]
 
 [ext_resource type="Script" uid="uid://dd2h2ayjq7ofo" path="res://core/autoload/ticket_manager/ticket_manager.gd" id="1_jv05l"]
 
