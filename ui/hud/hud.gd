@@ -70,6 +70,8 @@ func update_clock(delta: float):
 		#Just makes sure that single digit seconds fit the clock
 		if minutes < 10:
 			minutes_text = "0" + str(int(minutes))
+		elif minutes < 0:
+			minutes_text = "00"
 		
 		clock.text = str(int(clock_time/60)) +  ":" + minutes_text
 	else:
