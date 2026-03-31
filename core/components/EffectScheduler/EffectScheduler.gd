@@ -48,6 +48,13 @@ signal effect_removed(effect: Effect)
 ## When enabled, the scheduler will print details of all active effects during each update cycle.
 ## (Warning: This can produce a large amount of log output if many effects are active, so use with caution!)
 @export var debug_log_active_effects:bool = false
+## Interval (seconds) for active-effect debug logs when debug_log_active_effects is enabled.
+@export_range(0.01, 60.0, 0.01) var debug_log_interval: float = 0.5
+## Filter for active effect logging.
+## If set, only effects with names (seperated by commas, space are allowed) that include this string will be logged in the active effects debug output.
+## (e.g. setting this to "fire" will only log active effects with "fire" in their name, such as "fireball")
+@export var debug_log_filter: String = ""
+
 
 
 # Internal state variables #
@@ -97,6 +104,8 @@ var _exiting_effects:Dictionary = {} # {Effect_ID: ScheduleRecord}
 
 ## Prefix for log messages to easily identify them in the console when debug_logging is enabled.
 const _scheduler_identifer = "[EffectScheduler]"
+## Accumulator used to throttle active-effect logging based on debug_log_interval.
+var _debug_active_log_elapsed: float = 0.0
 
 
 # Lifecycle #
@@ -216,6 +225,8 @@ func _process_active_effects(delta: float, is_physics_pass: bool) -> void:
 	if delta < min_delta:
 		return
 
+	var should_log_active_effects: bool = _consume_should_log_active_effects(delta, is_physics_pass)
+
 	# Iterate over a current list of active effects so we can safely move effects while iterating.
 	var now_sec := Time.get_ticks_msec() / 1000.0
 	var active_ids: Array = _active_effects.keys()
@@ -251,11 +262,11 @@ func _process_active_effects(delta: float, is_physics_pass: bool) -> void:
 		# check if we should run physics update or regular update
 		if is_physics_pass:
 			if _should_effect_physics_update(effect):
-				_run_physics_update(effect, delta)
+				_run_physics_update(effect, delta, should_log_active_effects)
 			continue
 
 		if _should_effect_update(effect):
-			_run_update(effect, delta)
+			_run_update(effect, delta, should_log_active_effects)
 
 		# Advance effect-managed counters once per frame update pass.
 		if not _update_effect(effect, delta):
@@ -564,7 +575,7 @@ func _run_enter(effect: Effect) -> void:
 			_log_generic(_scheduler_identifer + " Cannot enter null effect.")
 		return
 	if debug_logging:
-		_log_effect_entered(effect.get_instance_id(), effect)
+		_log_effect_entered(get_effect_id(effect), effect)
 	effect.enter()
 
 
@@ -575,30 +586,64 @@ func _run_exit(effect: Effect) -> void:
 			_log_generic(_scheduler_identifer + " Cannot exit null effect.")
 		return
 	if debug_logging:
-		_log_effect_exited(effect.get_instance_id(), effect)
+		_log_effect_exited(get_effect_id(effect), effect)
 	effect.exit()
 
 
 ## Calls effect.update(delta) each frame.
-func _run_update(effect: Effect, delta: float) -> void:
+func _run_update(effect: Effect, delta: float, should_log_active: bool = false) -> void:
 	if effect == null:
 		if debug_logging:
 			_log_generic(_scheduler_identifer + " Cannot update null effect.")
 		return
-	if debug_logging and debug_log_active_effects:
-		_log_effect_updated(effect.get_instance_id(), effect, delta)
+	if should_log_active and _passes_active_log_filter(effect):
+		_log_effect_updated(get_effect_id(effect), effect, delta)
 	effect.update(delta)
 
 
 ## Calls effect.physics_update(delta) each physics frame.
-func _run_physics_update(effect: Effect, delta: float) -> void:
+func _run_physics_update(effect: Effect, delta: float, should_log_active: bool = false) -> void:
 	if effect == null:
 		if debug_logging:
 			_log_generic(_scheduler_identifer + " Cannot physics update null effect.")
 		return
-	if debug_logging and debug_log_active_effects:
-		_log_effect_updated(effect.get_instance_id(), effect, delta)
+	if should_log_active and _passes_active_log_filter(effect):
+		_log_effect_updated(get_effect_id(effect), effect, delta)
 	effect.physics_update(delta)
+
+
+func _consume_should_log_active_effects(delta: float, is_physics_pass: bool) -> bool:
+	if not debug_logging or not debug_log_active_effects:
+		return false
+
+	# Keep logging cadence tied to regular _process to avoid double-counting with physics pass.
+	if is_physics_pass:
+		return false
+
+	var clamped_interval: float = clamp(debug_log_interval, 0.01, 60.0)
+	_debug_active_log_elapsed += max(delta, 0.0)
+	if _debug_active_log_elapsed < clamped_interval:
+		return false
+
+	_debug_active_log_elapsed = 0.0
+	return true
+
+## Returns true if the effect's name passes the active-log filter.
+## When debug_log_filter is empty, all effects pass.
+## Otherwise, the filter is treated as a comma-separated list of substrings (case-insensitive);
+## an effect passes if its name contains at least one of the listed terms.
+func _passes_active_log_filter(effect: Effect) -> bool:
+	if debug_log_filter.is_empty():
+		return true
+	var effect_name: String = effect.get_effect_name().to_lower()
+	var filters: PackedStringArray = debug_log_filter.split(",")
+	for filter_entry in filters:
+		var trimmed: String = filter_entry.strip_edges().to_lower()
+		if trimmed.is_empty():
+			continue
+		if effect_name.contains(trimmed):
+			return true
+	return false
 
 
 # API Methods #
@@ -996,7 +1041,8 @@ func _log_effect_updated(effect_id:int, effect:Effect, delta:float)->void:
 		# prints the effect id, type, name, and delta time
 		# newline, effect flags
 		# newline, effect timing details
-		print(_scheduler_identifer + " Effect Updated: ID=" + str(effect_id) + ", " + _effect_info_basic(effect) + ", Delta=" + str(delta))
+		print(_scheduler_identifer + " Effect Updated: ID=" + str(effect_id) + ", InstanceID=" + str(effect.get_instance_id()) + ", Delta=" + str(delta))
+		print("\t" + _effect_info_basic(effect))
 		print("\t" + _effect_info_flags(effect))
 		print("\t" + _effect_info_timing(effect))
 		print("\t" + _effect_info_cooldown(effect))
@@ -1004,20 +1050,20 @@ func _log_effect_updated(effect_id:int, effect:Effect, delta:float)->void:
 
 ## Returns a string representation of the effect
 func _effect_info(effect_id:int, effect:Effect)->String:
-	return "ID=" + str(effect_id) + ", " + _effect_info_basic(effect) + ", " + _effect_info_timing(effect) + ", " + _effect_info_flags(effect)
+	return "ID=" + str(effect_id) + ", InstanceID=" + str(effect.get_instance_id()) + ", " + _effect_info_basic(effect) + ", " + _effect_info_timing(effect) + ", " + _effect_info_flags(effect)
 
 ## Returns the basic details of effect as a string
 ## @return: a string representation of the effect's type and name
 func _effect_info_basic(effect:Effect)->String:
-	return "Type=" + str(effect.get_type()) + ", Name=" + effect.get_effect_name()
+	return "Type=" + effect.get_type_as_string() + ", Name=" + effect.get_effect_name()
 
 ## Returns the timing details of effect as a string
 ## @return: a string representation of the effect's duration, elapsed time, repeat count, and repeat index
 func _effect_info_timing(effect:Effect)->String:
-	return "Duration: " + str(effect.get_duration()) + ", Elapsed: " + str(effect.get_elapsed_time()) + ", Repeat Count: " + str(effect.get_repeat_count()) + ", Repeat Index: " + str(effect.get_repeat_index())
+	return "Duration: " + str(effect.get_duration()) + ", Elapsed: " + str(effect.get_elapsed_time()) + ", Repeat Count: " + str(effect.get_repeat_count()) + ", Repeat Index: " + str(effect.get_repeat_count())
 
 func _effect_info_cooldown(effect:Effect)->String:
-	return "Cooldown Duration: " + str(effect.get_cooldown_duration()) + ", Cooldown Elapsed: " + str(effect.get_cooldown_elapsed_time())
+	return "Cooldown Duration: " + str(effect.get_cooldown_duration()) + ", Cooldown Elapsed: " + str(effect.get_cooldown_elapsed())
 
 ## Returns the flag details of effect as a string
 ## @return: a string representation of the effect's unique and persistent flags
