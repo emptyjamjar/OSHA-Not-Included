@@ -1,4 +1,4 @@
-extends VBoxContainer
+class_name VideoSettingsMenu extends VBoxContainer
 
 @export var resolutionBtn : OptionButton
 @export var fullscreenBtn : CheckButton
