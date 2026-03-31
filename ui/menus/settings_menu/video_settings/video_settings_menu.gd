@@ -13,28 +13,21 @@ const _WINDOW_SIZES : Array[Vector2i] = [
 
 
 func _ready() -> void:
-	var windowSize = DisplayServer.window_get_size()
-	var index = _WINDOW_SIZES.find(windowSize)
-	resolutionBtn.select(index)
-	
 	var windowMode = DisplayServer.window_get_mode()
+	print(windowMode)
 	if windowMode == DisplayServer.WINDOW_MODE_FULLSCREEN:
-		fullscreenBtn.set_pressed_no_signal(true)
-	elif windowMode == DisplayServer.WINDOW_MODE_WINDOWED:
-		fullscreenBtn.set_pressed_no_signal(false)
-
-
-func _on_resolution_item_selected(index: int) -> void:
-	DisplayServer.window_set_size(_WINDOW_SIZES[index])
-	config.set_value("Video", "Resolution", index)
-	config.save("user://settings.cfg")
+		fullscreenBtn.button_pressed = true
+	else:
+		fullscreenBtn.button_pressed = false
 
 
 func _on_fullscreen_toggled(toggled_on: bool) -> void:
 	if toggled_on:
+		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
+		
 	config.set_value("Video", "Fullscreen", toggled_on)
 	config.save("user://settings.cfg")

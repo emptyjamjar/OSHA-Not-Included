@@ -57,18 +57,12 @@ func _load_audio(config: ConfigFile) -> void:
 func _load_video(config: ConfigFile) -> void:
 	# Default values
 	if not config.has_section("Video"):
-		config.set_value("Video", "Resolution", 0)
 		config.set_value("Video", "Fullscreen", true)
-	
-	# Load from config file
-	var index = config.get_value("Video", "Resolution", 0)
-	if index < 0 or index > VideoSettingsMenu._WINDOW_SIZES.size():
-		index = 0
-	DisplayServer.window_set_size(VideoSettingsMenu._WINDOW_SIZES[index])
 	
 	var windowMode = config.get_value("Video", "Fullscreen", true)
 	if windowMode:
+		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
 		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
 	else:
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
+		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
