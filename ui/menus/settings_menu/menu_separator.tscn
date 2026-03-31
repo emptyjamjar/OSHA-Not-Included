@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c1opu1sgasqxo"]
+
+[ext_resource type="StyleBox" uid="uid://cit1qyoh6bmus" path="res://ui/menus/separator_line.tres" id="1_l81y6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v65qg"]
+
+[node name="MenuSeparator" type="HBoxContainer" unique_id=1421722176]
+
+[node name="VSeparator" type="VSeparator" parent="." unique_id=599138323]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_v65qg")
+
+[node name="HSeparator" type="HSeparator" parent="." unique_id=445575511]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 0
+theme_override_styles/separator = ExtResource("1_l81y6")
+
+[node name="VSeparator2" type="VSeparator" parent="." unique_id=426879926]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxEmpty_v65qg")
