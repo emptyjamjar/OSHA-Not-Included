@@ -547,7 +547,10 @@ func _should_end_from_duration(effect: Effect, delta: float) -> bool:
 	if effect.get_duration() <= 0.0:
 		return true
 
-	return effect.get_elapsed_time() + delta >= effect.get_duration()
+	if effect.get_elapsed_time() + delta < effect.get_duration():
+		return false
+
+	return not _should_repeat(effect)
 
 ## Checks whether an effect should run another cycle (also includes persistent effects).
 ## @return: true if the effect should repeat, false otherwise.
@@ -1060,7 +1063,7 @@ func _effect_info_basic(effect:Effect)->String:
 ## Returns the timing details of effect as a string
 ## @return: a string representation of the effect's duration, elapsed time, repeat count, and repeat index
 func _effect_info_timing(effect:Effect)->String:
-	return "Duration: " + str(effect.get_duration()) + ", Elapsed: " + str(effect.get_elapsed_time()) + ", Repeat Count: " + str(effect.get_repeat_count()) + ", Repeat Index: " + str(effect.get_repeat_count())
+	return "Duration: " + str(effect.get_duration()) + ", Elapsed: " + str(effect.get_elapsed_time()) + ", Repeat Max: " + str(effect.get_repeat_max()) + ", Repeat Count: " + str(effect.get_repeat_count())
 
 func _effect_info_cooldown(effect:Effect)->String:
 	return "Cooldown Duration: " + str(effect.get_cooldown_duration()) + ", Cooldown Elapsed: " + str(effect.get_cooldown_elapsed())
