@@ -150,6 +150,12 @@ func _process_waiting_effects() -> void:
 		if record.is_paused:
 			continue
 
+		# Marked-done effects should not progress through any queues.
+		if record.effect.is_marked_done():
+			_remove_from_waiting(effect_id)
+			_recycle_effect_id(effect_id)
+			continue
+
 		if not _should_effect_start(record.effect):
 			continue
 
@@ -179,6 +185,12 @@ func _process_entering_effects() -> void:
 
 		# if the effect is paused, skip processing it but keep it in the entering queue so it can be resumed later
 		if record.is_paused:
+			continue
+
+		# Marked done effects should not run enter()
+		if record.effect.is_marked_done():
+			_remove_from_entering(effect_id)
+			_recycle_effect_id(effect_id)
 			continue
 
 		var effect: Effect = record.effect
@@ -222,6 +234,11 @@ func _process_active_effects(delta: float, is_physics_pass: bool) -> void:
 			continue
 
 		var effect: Effect = record.effect
+
+		# Marked-done effects are immediately advanced to exiting.
+		if effect.is_marked_done():
+			_move_active_to_exiting(effect_id)
+			continue
 
 		# Keep record timing info current for diagnostics and scheduler math (do not remove!)
 		record.last_update_time = now_sec
@@ -670,38 +687,42 @@ func resume_effect(effect_id: int) -> bool:
 
 ## Pauses all effects in the scheduler. Paused effects will remain in their current state until they are resumed.
 ## NOTE: This only applies to effects already in the scheduler. If an effect is added while the scheduler is paused, it will be added in a normal state and will not be automatically paused.
-func pause_all_effects() -> void:
+## @return: true if there were effects to pause and they were successfully paused, false if there were no effects to pause.
+func pause_all_effects() -> bool:
 	if debug_logging:
 		_log_generic(_scheduler_identifer + " Pausing all effects.")
-	# iterate over waiting
-	for record in _waiting_effects.values():
-		record.is_paused = true
-	# iterate over entering
-	for record in _entering_effects.values():
-		record.is_paused = true
-	# iterate over active
-	for record in _active_effects.values():
-		record.is_paused = true
-	# iterate over exiting
-	for record in _exiting_effects.values():
-		record.is_paused = true
+	if _waiting_effects.is_empty() and _entering_effects.is_empty() and _active_effects.is_empty() and _exiting_effects.is_empty():
+		return false
+
+	for effect_id in _waiting_effects.keys():
+		pause_effect(effect_id)
+	for effect_id in _entering_effects.keys():
+		pause_effect(effect_id)
+	for effect_id in _active_effects.keys():
+		pause_effect(effect_id)
+	for effect_id in _exiting_effects.keys():
+		pause_effect(effect_id)
+
+	return true
 
 ## Resumes all effects in the scheduler so they can continue being processed.
-func resume_all_effects() -> void:
+## @return: true if there were effects to resume, false if there were no effects in the scheduler.
+func resume_all_effects() -> bool:
 	if debug_logging:
 		_log_generic(_scheduler_identifer + " Resuming all effects.")
-	# iterate over waiting
-	for record in _waiting_effects.values():
-		record.is_paused = false
-	# iterate over entering
-	for record in _entering_effects.values():
-		record.is_paused = false
-	# iterate over active
-	for record in _active_effects.values():
-		record.is_paused = false
-	# iterate over exiting
-	for record in _exiting_effects.values():
-		record.is_paused = false
+	if _waiting_effects.is_empty() and _entering_effects.is_empty() and _active_effects.is_empty() and _exiting_effects.is_empty():
+		return false
+
+	for effect_id in _waiting_effects.keys():
+		resume_effect(effect_id)
+	for effect_id in _entering_effects.keys():
+		resume_effect(effect_id)
+	for effect_id in _active_effects.keys():
+		resume_effect(effect_id)
+	for effect_id in _exiting_effects.keys():
+		resume_effect(effect_id)
+
+	return true
 
 ## Manually removes an effect from the scheduler by its instance reference.
 ## @param effect: the effect instance to be removed from the scheduler
@@ -872,10 +893,12 @@ func remove_all_non_timed_effects() -> bool:
 ## Manually removes all effects from the scheduler that have repeating enabled
 ## @return: true if at least one repeating effect was found and removed from the scheduler, false if no repeating effects were found in the scheduler or could be removed.
 func remove_all_repeating_effects() -> bool:
-	var records:Array = get_all_records()
+	var records:Array[ScheduleRecord] = get_all_records()
+	if records.is_empty():
+		return false
 	var result: bool = false
 	for record in records:
-		if record.effect.is_repeating():
+		if record.effect.is_repeat_enabled():
 			var effect_id = record.id
 			result = remove_effect_by_id(effect_id)
 			if debug_logging and result:
@@ -886,10 +909,12 @@ func remove_all_repeating_effects() -> bool:
 ## Manually removes all effects from the scheduler that do not have repeating enabled
 ## @return: true if at least one non-repeating effect was found and removed from the scheduler, false if no non-repeating effects were found in the scheduler or could be removed.
 func remove_all_non_repeating_effects() -> bool:
-	var records:Array = get_all_records()
+	var records:Array[ScheduleRecord] = get_all_records()
+	if records.is_empty():
+		return false
 	var result: bool = false
 	for record in records:
-		if not record.effect.is_repeating():
+		if not record.effect.is_repeat_enabled():
 			var effect_id = record.id
 			result = remove_effect_by_id(effect_id)
 			if debug_logging and result:
@@ -900,7 +925,9 @@ func remove_all_non_repeating_effects() -> bool:
 ## Manually removes all effects from the scheduler, regardless of type, name, or properties.
 ## @return: true if at least one effect was found and removed from the scheduler, false if no effects were found in the scheduler or could be removed.
 func remove_all_effects() -> bool:
-	var records:Array = get_all_records()
+	var records:Array[ScheduleRecord] = get_all_records()
+	if records.is_empty():
+		return false
 	var result: bool = false
 	for record in records:
 		var effect_id = record.id
@@ -914,22 +941,38 @@ func remove_all_effects() -> bool:
 ## Returns a shallow copy of the list of currently active effects.
 ## @return: an array of active effect instances.
 func get_waiting_effects() -> Array:
-	return _waiting_effects.values()
+	var effects:Array = []
+	for record in _waiting_effects.values():
+		if record != null and record.effect != null:
+			effects.append(record.effect)
+	return effects
 
 ## Returns a shallow copy of the list of currently entering effects.
 ## @return: an array of entering effect instances.
 func get_entering_effects() -> Array:
-	return _entering_effects.values()
+	var effects:Array = []
+	for record in _entering_effects.values():
+		if record != null and record.effect != null:
+			effects.append(record.effect)
+	return effects
 
 ## Returns a shallow copy of the list of currently active effects.
 ## @return: an array of active effect instances.
 func get_active_effects() -> Array:
-	return _active_effects.values()
+	var effects:Array = []
+	for record in _active_effects.values():
+		if record != null and record.effect != null:
+			effects.append(record.effect)
+	return effects
 
 ## Returns a shallow copy of the list of currently exiting effects.
 ## @return: an array of exiting effect instances.
 func get_exiting_effects() -> Array:
-	return _exiting_effects.values()
+	var effects:Array = []
+	for record in _exiting_effects.values():
+		if record != null and record.effect != null:
+			effects.append(record.effect)
+	return effects
 
 
 # Debugging and Logging #
@@ -994,6 +1037,10 @@ func _update_effect(effect:Effect, delta:float) -> bool:
 	if effect == null:
 		return false
 
+	# only update effects currently tracked by this scheduler.
+	if _get_effect_record(effect) == null:
+		return false
+
 	if effect.is_finished():
 		return false
 
@@ -1015,6 +1062,7 @@ func _update_effect(effect:Effect, delta:float) -> bool:
 # Query Methods #
 
 ## Checks if an effect is currently queued in the waiting queue, this does not include effects that are entering, active, or exiting.
+## NOTE: A paused effect will still be considered waiting if it is in the waiting queue, since paused effects should still be processed by the scheduler to check for conditions to transition to entering.
 ## @param effect: the effect instance to check for in the waiting queue
 ## @return: true if the effect is found in the waiting queue, false otherwise
 func is_effect_waiting(effect:Effect) -> bool:
@@ -1031,11 +1079,14 @@ func is_effect_waiting(effect:Effect) -> bool:
 	return false
 
 ## Checks if an effect is currently active, this includes effects entering or exiting.
+## NOTE: A paused effect will not be considered active even if it is in the active queue, since paused effects should not be processed by the scheduler until they are resumed.
 ## @param effect: the effect instance to check for activity
 ## @return: true if the effect is active, false otherwise
 func is_effect_active(effect:Effect) -> bool:
 	var record: ScheduleRecord = _get_effect_record(effect)
-	if record != null and (record.is_entering or record.is_active or record.is_exiting):
+	if record == null or record.is_paused:
+		return false
+	if record.is_entering or record.is_active or record.is_exiting:
 		return true
 	return false
 
@@ -1044,23 +1095,11 @@ func is_effect_active(effect:Effect) -> bool:
 ## @return: true if an effect of the specified type is found in the scheduler, false otherwise
 func has_effect_of_type(effect_type) -> bool:
 	var record: ScheduleRecord
-	# check waiting queue for effect_type
-	for effect_id in _waiting_effects.keys():
-		record = _waiting_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_type() == effect_type:
-			return true
-	# check entering queue for effect_type
-		record = _entering_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_type() == effect_type:
-			return true
-	# check active effects for effect_type
-		record = _active_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_type() == effect_type:
-			return true
-	# check exiting queue for effect_type
-		record = _exiting_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_type() == effect_type:
-			return true
+	for queue in [_waiting_effects, _entering_effects, _active_effects, _exiting_effects]:
+		for effect_id in queue.keys():
+			record = queue[effect_id]
+			if record != null and record.effect != null and record.effect.get_type() == effect_type:
+				return true
 	return false
 
 ## Checks if an effect name exists in the scheduler by name, this includes effects in any queue or active list.
@@ -1068,23 +1107,11 @@ func has_effect_of_type(effect_type) -> bool:
 ## @return: true if an effect of the specified name is found in the scheduler, false otherwise
 func has_effect_of_name(effect_name: String) -> bool:
 	var record: ScheduleRecord
-	# check waiting queue for effect_name
-	for effect_id in _waiting_effects.keys():
-		record = _waiting_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_effect_name() == effect_name:
-			return true
-	# check entering queue for effect_name
-		record = _entering_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_effect_name() == effect_name:
-			return true
-	# check active effects for effect_name
-		record = _active_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_effect_name() == effect_name:
-			return true
-	# check exiting queue for effect_name
-		record = _exiting_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_effect_name() == effect_name:
-			return true
+	for queue in [_waiting_effects, _entering_effects, _active_effects, _exiting_effects]:
+		for effect_id in queue.keys():
+			record = queue[effect_id]
+			if record != null and record.effect != null and record.effect.get_effect_name() == effect_name:
+				return true
 	return false
 
 ## checks if an effect instance exists in the scheduler, this includes effects in any queue or active list.
@@ -1179,23 +1206,11 @@ func get_effect_id(effect: Effect) -> int:
 ## @return: the unique effect ID if found, or -1 if no effect of the specified type is found in the scheduler
 func get_effect_id_by_type(effect_type:Effect.Type) -> int:
 	var record: ScheduleRecord
-	# check waiting queue for effect_id
-	for effect_id in _waiting_effects.keys():
-		record = _waiting_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_type() == effect_type:
-			return effect_id
-	# check entering queue for effect_id
-		record = _entering_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_type() == effect_type:
-			return effect_id
-	# check active effects for effect_id
-		record = _active_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_type() == effect_type:
-			return effect_id
-	# check exiting queue for effect_id
-		record = _exiting_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_type() == effect_type:
-			return effect_id
+	for queue in [_waiting_effects, _entering_effects, _active_effects, _exiting_effects]:
+		for effect_id in queue.keys():
+			record = queue[effect_id]
+			if record != null and record.effect != null and record.effect.get_type() == effect_type:
+				return effect_id
 
 	return -1
 
@@ -1204,23 +1219,11 @@ func get_effect_id_by_type(effect_type:Effect.Type) -> int:
 ## @return: the unique effect ID if found, or -1 if no effect of the specified name is found in the scheduler
 func get_effect_id_by_name(effect_name: String) -> int:
 	var record: ScheduleRecord
-	# check waiting queue for effect_id
-	for effect_id in _waiting_effects.keys():
-		record = _waiting_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_effect_name() == effect_name:
-			return effect_id
-	# check entering queue for effect_id
-		record = _entering_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_effect_name() == effect_name:
-			return effect_id
-	# check active effects for effect_id
-		record = _active_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_effect_name() == effect_name:
-			return effect_id
-	# check exiting queue for effect_id
-		record = _exiting_effects[effect_id]
-		if record != null and record.effect != null and record.effect.get_effect_name() == effect_name:
-			return effect_id
+	for queue in [_waiting_effects, _entering_effects, _active_effects, _exiting_effects]:
+		for effect_id in queue.keys():
+			record = queue[effect_id]
+			if record != null and record.effect != null and record.effect.get_effect_name() == effect_name:
+				return effect_id
 
 	return -1
 
@@ -1417,7 +1420,7 @@ func get_all_records() -> Array[ScheduleRecord]:
 ## NOTE: IDs are sourced from recycled IDs first, then sequential scan candidates.
 ## @return: a registered effect ID, or -1 if allocation fails.
 func _allocate_effect_id() -> int:
-	var effect_id := get_next_available_effect_id()
+	var effect_id := get_id_next_available()
 	if effect_id == -1:
 		if debug_logging:
 			_log_generic(_scheduler_identifer + " Unable to generate unique effect ID after full scan.")
@@ -1484,7 +1487,7 @@ func is_effect_id_in_use(effect_id: int) -> bool:
 ## Returns the next allocatable ID that is not currently in use or reserved.
 ## NOTE: Returned ID is a candidate only and is not registered automatically.
 ## @return: an allocatable effect ID, or -1 if none are available.
-func get_next_available_effect_id() -> int:
+func get_id_next_available() -> int:
 	var max_allocatable_ids := _effect_id_max - _reserved_effect_ids.size()
 	if _used_effect_ids.size() >= max_allocatable_ids:
 		if debug_logging:
@@ -1520,9 +1523,9 @@ func get_next_available_effect_id() -> int:
 		_log_generic(_scheduler_identifer + " Unable to find available effect ID after full scan.")
 	return -1
 
-## Backward-compatible alias for get_next_available_effect_id().
+## Backward-compatible alias for get_id_next_available().
 func get_available_id() -> int:
-	return get_next_available_effect_id()
+	return get_id_next_available()
 
 ## Registers an ID as in-use by the scheduler.
 ## @param effect_id: the unique effect ID to register
