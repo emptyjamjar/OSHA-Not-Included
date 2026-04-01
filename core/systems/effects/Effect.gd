@@ -63,6 +63,22 @@ enum Type
 ## Time elapsed in cooldown
 @export var _cooldown_elapsed: float = 0.0
 
+# Logging/debugging
+@export_category("Debug & Logging")
+## Enable debug prints for this effect
+@export var _enable_debug: bool = false
+## Extra detail in debug prints (like timing, repeat, cooldown info), otherwise just the basic info is printed
+@export var _detail_debug: bool = false
+## Log when effect is entered
+@export var _track_enter: bool = true
+## Log when effect is updated (each frame while active)
+@export var _track_update: bool = false
+## Log when effect is physics updated (each physics frame while active)
+@export var _track_physics_update: bool = false
+## Log when effect is exited
+@export var _track_exit: bool = true
+
+
 # Internal variables #
 
 ## Manual completion override. When true, this effect is treated as inactive regardless of timing/repeat/persistent settings.
@@ -89,23 +105,35 @@ func _init(type: Type = Type.NONE, effect_name: String = "No_Name") -> void:
 ## Called when the effect starts (e.g., play sound, start particles)
 ## @param delta: float - Time since last frame (for timing), timing can be omitted if not needed
 func enter(delta: float = 0.0) -> void:
+	# debug logging
+	if _track_enter:
+		_log_enter()
 	started.emit() # be sure to use .super().enter(delta optional) if overriding to ensure signal is emitted
 	pass
 
 ## Called when the effect ends (e.g., stop sound, remove particles)
 ## @param delta: float - Time since last frame, timing can be omitted if not needed
 func exit(delta: float = 0.0) -> void:
+	# debug logging
+	if _track_exit:
+		_log_exit()
 	ended.emit() # be sure to use .super().exit(delta optional) if overriding to ensure signal is emitted
 	pass
 
 ## Called every frame while the effect is active (for visual/audio updates)
 ## @param delta: float - Time since last frame, timing can be omitted if not needed
 func update(delta: float = 0.0) -> void:
+	# debug logging
+	if _track_update:
+		_log_update()
 	pass
 
 ## Called every physics frame while the effect is active (for movement/collision)
 ## @param delta: float - Time since last physics frame, timing can be omitted if not needed
 func physics_update(delta: float = 0.0) -> void:
+	# debug logging
+	if _track_physics_update:
+		_log_physics_update()
 	pass
 
 
@@ -402,3 +430,122 @@ func get_type_as_string() -> String:
 	if type_name == null:
 		return ""
 	return str(type_name)
+
+
+## Logs a debug message with the effect's name as a prefix, if debug is enabled
+## @param message: String - The message to log
+func _log_generic(message: String) -> void:
+	if self._enable_debug:
+		print("[Effect Debug] " + self._effect_name + ": " + message)
+
+## Returns a string with the basic info of the effect (name and type)
+## @return: String - Basic info string
+func _to_string_basic() -> String:
+	return "Effect Name: " + self._effect_name + ", Type: " + get_type_as_string()
+
+## Returns a string with the flag info of the effect (unique, persistent)
+## @return: String - Flag info string
+func _to_string_flags() -> String:
+	return "Unique: " + str(self._is_unique) + ", Persistent: " + str(self._is_persistent)
+
+## Returns a string with the timing info of the effect (enabled, duration, elapsed)
+## @return: String - Timing info string
+func _to_string_timing() -> String:
+	return "Timing Enabled: " + str(self._enable_timing) + ", Duration: " + str(self._duration) + "s, Elapsed: " + str(self._elapsed_time) + "s"
+
+## Returns a string with the repeating info of the effect (enabled, repeat max, repeat count)
+## @return: String - Repeating info string
+func _to_string_repeating() -> String:
+	return "Repeat Enabled: " + str(self._enable_repeat) + ", Repeat Max: " + str(self._repeat_max) + ", Repeat Count: " + str(self._repeat_count)
+
+## Logs detailed information about the effect when it is entered, if tracking is enabled
+func _log_enter() -> void:
+	_log_generic("Entered effect.")
+	_log_generic(_to_string_basic())
+	if self._detail_debug:
+		_log_generic(_to_string_flags())
+		_log_generic(_to_string_timing())
+		_log_generic(_to_string_repeating())
+
+## Logs detailed information about the effect when it is updated, if tracking is enabled
+func _log_update() -> void:
+	_log_generic("Updating effect.")
+	if self._detail_debug:
+		_log_generic(_to_string_timing())
+		_log_generic(_to_string_repeating())
+
+## Logs detailed information about the effect when it is physics updated, if tracking is enabled
+func _log_physics_update() -> void:
+	_log_generic("Physics updating effect.")
+	if self._detail_debug:
+		_log_generic(_to_string_timing())
+		_log_generic(_to_string_repeating())
+
+## Logs detailed information about the effect when it is exited, if tracking is enabled
+func _log_exit() -> void:
+	_log_generic("Exited effect.")
+	_log_generic(_to_string_basic())
+	if self._detail_debug:
+		_log_generic(_to_string_flags())
+		_log_generic(_to_string_timing())
+		_log_generic(_to_string_repeating())
+
+## Enables or disables debug logging for this effect
+## @param enable: bool - True to enable debug logging, false to disable
+func set_debug(enable: bool) -> void:
+	self._enable_debug = enable
+
+## Checks if debug logging is enabled for this effect
+## @return: bool - True if debug logging enabled, false otherwise
+func is_debug_enabled() -> bool:
+	return self._enable_debug
+
+## Enables or disables extra detail in debug logs for this effect
+## @param enable: bool - True to enable extra detail, false for basic info only
+func is_debug_detail_enabled() -> bool:
+	return self._detail_debug
+
+## Enables or disables extra detail in debug logs for this effect
+## @param enable: bool - True to enable extra detail, false for basic info only
+func set_debug_detail(enable: bool) -> void:
+	self._detail_debug = enable
+
+## Checks if tracking of enter logs is enabled for this effect
+## @return: bool - True if enter tracking enabled, false otherwise
+func is_track_enter_enabled() -> bool:
+	return self._track_enter
+
+## Enables or disables tracking of enter logs for this effect
+## @param enable: bool - True to enable enter tracking, false to disable
+func set_track_enter(enable: bool) -> void:
+	self._track_enter = enable
+
+## Checks if tracking of update logs is enabled for this effect
+## @return: bool - True if update tracking enabled, false otherwise
+func is_track_update_enabled() -> bool:
+	return self._track_update
+
+## Enables or disables tracking of update logs for this effect
+## @param enable: bool - True to enable update tracking, false to disable
+func set_track_update(enable: bool) -> void:
+	self._track_update = enable
+
+## Checks if tracking of physics update logs is enabled for this effect
+## @return: bool - True if physics update tracking enabled, false otherwise
+func is_track_physics_update_enabled() -> bool:
+	return self._track_physics_update
+
+## Enables or disables tracking of physics update logs for this effect
+## @param enable: bool - True to enable physics update tracking, false to disable
+func set_track_physics_update(enable: bool) -> void:
+	self._track_physics_update = enable
+
+## Checks if tracking of exit logs is enabled for this effect
+## @return: bool - True if exit tracking enabled, false otherwise
+func is_track_exit_enabled() -> bool:
+	return self._track_exit
+
+## Enables or disables tracking of exit logs for this effect
+## @param enable: bool - True to enable exit tracking, false to disable
+func set_track_exit(enable: bool) -> void:
+	self._track_exit = enable
