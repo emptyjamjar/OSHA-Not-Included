@@ -16,9 +16,10 @@
 [ext_resource type="PackedScene" uid="uid://cv4vrnpxs40bf" path="res://objects/restroom/washroom.tscn" id="12_iotsf"]
 [ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="13_lc2xo"]
 [ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="15_e8heu"]
-[ext_resource type="PackedScene" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
+[ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
 [ext_resource type="Texture2D" uid="uid://bmisxcq76lrat" path="res://icon.svg" id="18_boyg6"]
 [ext_resource type="Script" uid="uid://j63ga8s4bhlu" path="res://cutscene_path.gd" id="18_e36ub"]
+[ext_resource type="PackedScene" uid="uid://dwdtpfj4n8pco" path="res://objects/trashcan/trashcan.tscn" id="20_e36ub"]
 
 [sub_resource type="GDScript" id="GDScript_7sc4i"]
 script/source = "extends Node2D
@@ -31,16 +32,6 @@ func _ready() -> void:
 	Dialogic.signal_event.connect(tut_cutscene)
 	var conveyor := $Conveyor
 	Ticket_Manager.on_game_start()
-	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
-	conveyor.input(Conveyor.ItemDataList.PINK_WATER_BOTTLE)
-	conveyor.input(Conveyor.ItemDataList.BLACK_WATER_BOTTLE)
-	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
-	conveyor.input(Conveyor.ItemDataList.BLUE_WATER_BOTTLE)
-	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
-	conveyor.input(Conveyor.ItemDataList.PINK_WATER_BOTTLE)
-	conveyor.input(Conveyor.ItemDataList.BLACK_WATER_BOTTLE)
-	conveyor.input(Conveyor.ItemDataList.TOILET_PAPER)
-	conveyor.input(Conveyor.ItemDataList.BLUE_WATER_BOTTLE)
 	$Manager.hide()
 	Dialogic.start(\"timeline\")
 	
@@ -62,11 +53,29 @@ func tut_cutscene(argument:String) -> void:
 		$CutscenePath.state = 5
 "
 
+[sub_resource type="Gradient" id="Gradient_halqj"]
+offsets = PackedFloat32Array(0, 0.6263158, 1)
+colors = PackedColorArray(1, 1, 1, 1, 0.2842105, 0.2842105, 0.2842105, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_e36ub"]
+gradient = SubResource("Gradient_halqj")
+fill = 1
+fill_from = Vector2(0.47008547, 0.4871795)
+fill_to = Vector2(0.8333333, 0.78205127)
+
 [sub_resource type="Curve2D" id="Curve2D_hb5m1"]
 _data = {
 "points": PackedVector2Array(0, 0, 0, 0, 619, 351, 0, 0, 0, 0, 384, 351, 0, 0, 0, 0, 197, 351, 0, 0, 0, 0, 197, 285, 0, 0, 0, 0, 621, 285, 0, 0, 0, 0, 621, 221, 0, 0, 0, 0, 245, 221, 0, 0, 0, 0, 245, 333, 0, 0, 0, 0, 385, 333, 0, 0, 0, 0, 657, 333, 0, 0, 0, 0, 657, 445)
 }
 point_count = 11
+
+[sub_resource type="Gradient" id="Gradient_boyg6"]
+offsets = PackedFloat32Array(0.43157893, 1)
+colors = PackedColorArray(0.05072464, 0.05072464, 0.05072464, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_boyg6"]
+gradient = SubResource("Gradient_boyg6")
+fill_from = Vector2(0, 1)
 
 [node name="Game" type="Node2D" unique_id=645817684 groups=["game"]]
 y_sort_enabled = true
@@ -107,14 +116,19 @@ script = ExtResource("4_fc0e3")
 [node name="SanityComponent" type="Node" parent="Player" unique_id=264741504]
 script = ExtResource("8_7sc4i")
 
+[node name="PointLight2D" type="PointLight2D" parent="Player" unique_id=1837317828]
+position = Vector2(2.0000038, -2.0000012)
+scale = Vector2(1.7500001, 1.6249998)
+color = Color(0.72156864, 0.5803922, 0.40392157, 1)
+energy = 0.12
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_e36ub")
+
 [node name="Packager" parent="." unique_id=2093227932 instance=ExtResource("12_hb5m1")]
 position = Vector2(640, 192)
 
 [node name="Conveyor" parent="." unique_id=1135306595 groups=["conveyor"] instance=ExtResource("8_j5wjh")]
 position = Vector2(101, 363)
-
-[node name="Collision_Vertical" parent="Conveyor/StaticBody2D" parent_id_path=PackedInt32Array(1135306595, 1976208908) index="1" unique_id=509053654]
-position = Vector2(207.2072, 67.56757)
 
 [node name="TicketTerminal" parent="." unique_id=982348100 instance=ExtResource("6_ryrav")]
 position = Vector2(368, 392)
@@ -211,6 +225,21 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Score" parent="UI" unique_id=1161969462 instance=ExtResource("15_e8heu")]
 visible = false
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=2074852728]
+position = Vector2(680.8126, 122.281265)
+scale = Vector2(18.681644, 9.741211)
+color = Color(0.33276916, 0.46037263, 0.80294394, 1)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_boyg6")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2107377821]
+position = Vector2(680.8126, 122.281265)
+scale = Vector2(18.681644, 9.741211)
+color = Color(0.77646405, 0.79886746, 0.85534906, 1)
+
+[node name="Trashcan" parent="." unique_id=1663879866 instance=ExtResource("20_e36ub")]
+position = Vector2(573, 205)
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
 [connection signal="get_money" from="Shipper" to="UI/Score" method="_on_shipper_get_money"]

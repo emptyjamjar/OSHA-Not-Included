@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://b8jecjbw3e3vj"]
+
+[ext_resource type="Texture2D" uid="uid://d3f2ohw2cn1vx" path="res://ui/hud/inventory/receipt/InventoryReceipt.png" id="1_tt8rm"]
+[ext_resource type="Script" uid="uid://wveff4iqyjmv" path="res://ui/hud/inventory/receipt/item_recepit.gd" id="2_nolnt"]
+
+[node name="Receipt" type="TextureRect" unique_id=174428205]
+visible = false
+z_index = 30
+offset_right = 96.0
+offset_bottom = 64.0
+texture = ExtResource("1_tt8rm")
+script = ExtResource("2_nolnt")
+
+[node name="Item" type="TextureRect" parent="." unique_id=1000831821]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 0
+offset_left = 52.0
+offset_top = 9.0
+offset_right = 68.0
+offset_bottom = 25.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="ReceiptShadow" type="TextureRect" parent="." unique_id=912037614]
+modulate = Color(0.13335153, 0.13335153, 0.13335153, 0.41900003)
+show_behind_parent = true
+layout_mode = 0
+offset_left = -2.0
+offset_top = 2.0
+offset_right = 94.0
+offset_bottom = 66.0
+texture = ExtResource("1_tt8rm")

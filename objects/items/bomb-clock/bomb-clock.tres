@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://ctf1howehvin1"]
+
+[ext_resource type="Script" uid="uid://c7i8xoc0ofw0m" path="res://objects/items/item_data.gd" id="1_tf82b"]
+[ext_resource type="Texture2D" uid="uid://c773vx0ry3ddj" path="res://objects/items/bomb-clock/warehouse-bomb-clock.png" id="2_d4jgw"]
+
+[resource]
+script = ExtResource("1_tf82b")
+name = "Bomb Clock"
+description = "Tick.. Tick.."
+texture = ExtResource("2_d4jgw")
+id = 4
+metadata/_custom_type_script = "uid://c7i8xoc0ofw0m"
