@@ -1,302 +1,187 @@
 extends GutTest
 
-## This test script is for the ticket_manager autoload. It tests the managers variables and
-## methods.
-## Note: Some tests below change slightly in how tests are performed, this is mainly due to my
-## own experimentation on test implmentation, but the tests themselves remain the same.
-
-# globals
-var tm:TicketManager
-
-## Test skips
-## Anything that would cause a run-time crash or what not (safeties!)
-## Anything that is put here generally means that such protections don't exist in the tested
-## script itself
-## NOTE: COMMENTED OUT BECAUSE IT WAS A PAIN IN THE ASS TO DEAL WITH THE LACK OF NO
-## NULL CHECK, AND GUT TEST ONLY HAS A SKIP BEFORE A TEST RUNS, NOT DURING
-#func should_skip_script():
-	#if tm.active_ticket == null:
-		#return "Skipped due to active_ticket = null"
-	#return
+## Description:
+## These tests check TicketManager behavior for ticking time, expiring tickets,
+## queue flow, timers, delivery registration, and finishing tickets.
+##
+## Changes:
+## 1. Updated tests to call _on_ticket_tick(ticket) with a ticket argument.
+## 2. Updated setup to use queue based state (visible_queue and active_ticket).
+## 3. Updated timer tests to use per-ticket timers in the timers dictionary.
+## 4. Updated expiration and finish tests to check queue removal and timer cleanup.
+## 5. Replaced UI override in test double with update_queue_ui()
+##
+## Notes:
+## The entire test needed major updates because TicketManager changed from older single-ticket logic to queue-based logic.
+##The tick method now requires a ticket argument, and timers are tracked per ticket, so many old test assumptions no longer matched the real behavior.
 
 
-## Minimal dummy ticket used for ticking tests
-func TicketDummy()->Ticket:
-	var new_ticket:Ticket = Ticket.new()
-	new_ticket.remaining_time = new_ticket.max_time
+
+## Test double for TicketManager to track UI updates without needing actual UI elements.
+class TestTicketManager extends TicketManager:
+	var update_ui_call_count: int = 0
+
+	func update_queue_ui():
+		update_ui_call_count += 1
+
+
+var tm: TestTicketManager
+
+## Helper function to create a dummy ticket with default values for testing.
+func ticket_dummy() -> Ticket:
+	var new_ticket: Ticket = Ticket.new()
+	new_ticket.status = Ticket.TicketStatus.STARTED
+	new_ticket.max_time = 30.0
+	new_ticket.remaining_time = 30.0
+	new_ticket.required_items = {}
+	new_ticket.delivered_items = {}
 	return new_ticket
 
-## run before each test
-## essentially _ready() for each new test
+## Helper function to add a timer for a ticket and track it in the test manager's timers dictionary.
+func add_running_timer_for(ticket: Ticket) -> Timer:
+	var timer := Timer.new()
+	timer.wait_time = 1.0
+	timer.one_shot = false
+	tm.add_child(timer)
+	tm.timers[ticket] = timer
+	timer.start()
+	return timer
+
+## Setup function to initialize a fresh TestTicketManager before each test.
 func before_each():
-	tm = TicketManager.new()
+	tm = TestTicketManager.new()
 	add_child_autofree(tm)
-	tm.ticket_timer = Timer.new()
-	tm.ticket_timer.timeout.connect(tm._on_ticket_tick)
-	tm.add_child(tm.ticket_timer)
-	tm.timer_label = RichTextLabel.new()
-	tm.desc_label = RichTextLabel.new()
-	tm.title_label = RichTextLabel.new()
-	tm.ticket_ui = CanvasLayer.new()
-	# create a dedicated timer for tests
-	tm.ticket_timer.wait_time = 1.0
-	tm.ticket_timer.one_shot = false
+	tm.max_visible = 4
 
-
-## run after each test
-## Frees all nodes from memory before the next test
-func after_each():
-	if tm.ticket_timer != null:
-		tm.ticket_timer.free()
-	if tm.timer_label != null:
-		tm.timer_label.free()
-	if tm.desc_label != null:
-		tm.desc_label.free()
-	if tm.title_label != null:
-		tm.title_label.free()
-	if tm.ticket_ui != null:
-		tm.ticket_ui.free()
-	tm.free()
-
-
-## Test _on_ticket_tick()
-func test_on_ticket_tick():
-	# case 1: no active ticket -> should do nothing
-	tm.active_ticket = null
-	tm.timer_label.text = "unchanged"
-	tm._on_ticket_tick()
-
-	assert_null(tm.active_ticket, "active_ticket should still be null when ticking with no ticket")
-	assert_eq(tm.timer_label.text, "unchanged", "timer label should not change when there is no active ticket")
-	
-	# case 2: active ticket with time remaining -> decrement and update UI
-	var ticket := Ticket.new()
-	ticket.remaining_time = 5
-	ticket.status = Ticket.TicketStatus.STARTED
-	tm.active_ticket = ticket
-	tm.ticket_ui.visible = true
-	tm.timer_label.text = "unchanged"
-
-	tm._on_ticket_tick()
-
-	assert_not_null(tm.active_ticket, "active_ticket should still exist after ticking")
-	assert_eq(tm.active_ticket.remaining_time, 4.0, "remaining_time should decrease by 1")
-	assert_eq(tm.timer_label.text, "4.0", "timer label should update to the new remaining time")
-	assert_eq(tm.active_ticket.status, Ticket.TicketStatus.STARTED, "ticket should still be STARTED")
-	assert_true(tm.ticket_ui.visible, "ticket UI should remain visible while time is still left")
-	
-	# case 3: active ticket reaches 0 -> should expire
-	var expiring_ticket := Ticket.new()
-	expiring_ticket.remaining_time = 1
-	expiring_ticket.status = Ticket.TicketStatus.STARTED
-	tm.active_ticket = expiring_ticket
-	tm.ticket_ui.visible = true
-	tm.desc_label.text = "before"
-
-	tm.ticket_timer.start()
-	tm._on_ticket_tick()
-
-	assert_eq(tm.active_ticket.remaining_time, 0.0, "remaining_time should reach 0 after ticking down from 1")
-	assert_eq(tm.active_ticket.status, Ticket.TicketStatus.FINISHED, "ticket should be marked FINISHED when time expires")
-	assert_eq(tm.desc_label.text, "Ticket expired!", "desc_label should show the expiration message")
-	assert_false(tm.ticket_ui.visible, "ticket UI should be hidden when the ticket expires")
-	assert_true(tm.ticket_timer.is_stopped(), "ticket timer should stop when the ticket expires")
-
-
-## Test _on_ticket_time_updated(time_left: float)
-func test_on_ticket_time_updated_sets_timer_label_text():
-	tm.timer_label.text = "old value"
-	tm._on_ticket_time_updated(25)
-	assert_eq(tm.timer_label.text, "25.0", "timer_label.text should be updated to the passed time value")
-func test_on_ticket_time_updated_handles_float_values():
-	tm.timer_label.text = "old value"
-	tm._on_ticket_time_updated(12.5)
-	assert_eq(tm.timer_label.text, "12.5", "timer_label.text should correctly display float time values")
-
-## Test _on_ticket_time_expired()
-func test_on_ticket_time_expired_marks_ticket_finished_and_updates_ui():
-	var ticket := Ticket.new()
-	ticket.status = Ticket.TicketStatus.STARTED
+## Test that ticking a ticket decrements its remaining time and updates the UI when it does not expire.
+func test_on_ticket_tick_decrements_time_and_updates_ui_once():
+	var ticket := ticket_dummy()
+	ticket.remaining_time = 5.0
+	tm.visible_queue = [ticket]
 	tm.active_ticket = ticket
 
-	tm.ticket_ui.visible = true
-	tm.desc_label.text = "before"
-	tm.ticket_timer.start()
+	tm._on_ticket_tick(ticket)
 
-	tm._on_ticket_time_expired()
+	assert_eq(ticket.remaining_time, 4.0, "remaining_time should decrease by 1 each tick")
+	assert_eq(ticket.status, Ticket.TicketStatus.STARTED, "ticket should remain STARTED while time is left")
+	assert_eq(tm.update_ui_call_count, 1, "update_queue_ui should be called once when ticket does not expire")
 
-	assert_eq(tm.active_ticket.status, Ticket.TicketStatus.FINISHED,
-		"ticket status should be set to FINISHED")
-	assert_eq(tm.desc_label.text, "Ticket expired!",
-		"description label should display expiration message")
-	assert_false(tm.ticket_ui.visible,
-		"ticket UI should be hidden after expiration")
-	assert_true(tm.ticket_timer.is_stopped(),
-		"ticket timer should stop when ticket expires")
-
-# NOTE: THIS IS COMMENTED OUT DUE TO NO NULL CATCH IN ORIGINAL SCRIPT
-#func test_on_ticket_time_expired_does_nothing_when_active_ticket_is_null():
-	#tm.active_ticket = null
-	#tm.desc_label.text = "before"
-	#tm.ticket_ui.visible = true
-	#tm.ticket_timer.start()
-	#
-	#tm._on_ticket_time_expired()
-#
-	#assert_null(tm.active_ticket, "active_ticket should remain null")
-	#assert_eq(tm.desc_label.text, "before", "desc_label should remain unchanged when there is no active ticket")
-	#assert_true(tm.ticket_ui.visible, "ticket UI should remain unchanged when there is no active ticket")
-	#assert_false(tm.ticket_timer.is_stopped(), "timer should remain unchanged when there is no active ticket")
-
-## Test register_ui(ui: CanvasLayer)
-func test_register_ui_assigns_ui_and_labels():
-	var ui := CanvasLayer.new()
-
-	var title := RichTextLabel.new()
-	title.name = "TicketTile"
-	ui.add_child(title)
-
-	var desc := RichTextLabel.new()
-	desc.name = "TicketDescription"
-	ui.add_child(desc)
-
-	var timer := RichTextLabel.new()
-	timer.name = "TimeCountdown"
-	ui.add_child(timer)
-	
-	# This is here to prevent orphan nodes
-	tm.title_label.free()
-	tm.desc_label.free()
-	tm.timer_label.free()
-	tm.ticket_ui.free()
-	tm.register_ui(ui)
-
-	assert_eq(tm.ticket_ui, ui, "ticket_ui should be assigned")
-	assert_eq(tm.title_label, title, "title_label should reference TicketTile node")
-	assert_eq(tm.desc_label, desc, "desc_label should reference TicketDescription node")
-	assert_eq(tm.timer_label, timer, "timer_label should reference TimeCountdown node")
-	
-## Test request_ticket() -> Ticket
-func test_request_ticket_returns_existing_active_ticket():
-	var ticket := TicketDummy()
-	ticket.status = Ticket.TicketStatus.STARTED
+## Test that ticking a ticket that expires it sets remaining time to 0, marks it as FINISHED, removes it from the queue, and stops its timer.
+func test_on_ticket_tick_expires_ticket_and_removes_it_from_tracking():
+	var ticket := ticket_dummy()
+	ticket.remaining_time = 1.0
+	tm.visible_queue = [ticket]
 	tm.active_ticket = ticket
+	var timer := add_running_timer_for(ticket)
 
-	var result := tm.request_ticket()
+	tm._on_ticket_tick(ticket)
 
-	assert_eq(result, ticket, "request_ticket should return the existing active ticket")
-	assert_eq(tm.active_ticket, ticket, "active_ticket should remain unchanged")
+	assert_eq(ticket.remaining_time, 0.0, "remaining_time should reach 0 on expiration tick")
+	assert_eq(ticket.status, Ticket.TicketStatus.FINISHED, "expired ticket should be marked FINISHED")
+	assert_false(tm.visible_queue.has(ticket), "expired ticket should be removed from visible_queue")
+	assert_false(tm.timers.has(ticket), "expired ticket timer should be removed from timers dictionary")
+	assert_true(timer.is_stopped(), "expired ticket timer should be stopped")
+	assert_eq(tm.update_ui_call_count, 2, "update_queue_ui should be called by tick and expire handling")
 
-# NOTE: THIS IS COMMENTED OUT DUE TO NO NULL CATCH IN ORIGINAL SCRIPT
-## Test generate_random_ticket() -> Ticket
-#func test_generate_random_ticket_returns_ticket():
-	#var ticket := tm.generate_random_ticket()
-#
-	#assert_not_null(ticket, "generate_random_ticket should return a Ticket")
-	#assert_true(ticket is Ticket, "returned object should be of type Ticket")
+## Test that fill_visible_queue promotes the first ticket to active and fills visible_queue up to max_visible.
+func test_fill_visible_queue_sets_first_ticket_as_active():
+	var t1 := ticket_dummy()
+	t1.ticket_name = "T1"
+	var t2 := ticket_dummy()
+	t2.ticket_name = "T2"
+	tm.max_visible = 1
+	tm.all_tickets = [t1, t2]
 
+	tm.fill_visible_queue()
 
-## Test update_ui()
-func test_update_ui_updates_labels_and_shows_ui():
-	var ui := CanvasLayer.new()
-	add_child_autofree(ui)
+	assert_eq(tm.visible_queue.size(), 1, "visible_queue should fill up to max_visible")
+	assert_eq(tm.visible_queue[0], t1, "first queued ticket should be visible")
+	assert_eq(tm.active_ticket, t1, "active_ticket should become first visible ticket")
+	assert_eq(tm.all_tickets.size(), 1, "remaining tickets should stay in all_tickets")
 
-	var title := RichTextLabel.new()
-	title.name = "TicketTile"
-	ui.add_child(title)
+## Test that start_timers_for_visible_queue creates one timer per visible ticket and starts them.
+func test_start_timers_for_visible_queue_creates_one_timer_per_ticket():
+	var t1 := ticket_dummy()
+	var t2 := ticket_dummy()
+	tm.visible_queue = [t1, t2]
 
-	var desc := RichTextLabel.new()
-	desc.name = "TicketDescription"
-	ui.add_child(desc)
+	tm.start_timers_for_visible_queue()
+	tm.start_timers_for_visible_queue()
 
-	var timer := RichTextLabel.new()
-	timer.name = "TimeCountdown"
-	ui.add_child(timer)
+	assert_eq(tm.timers.size(), 2, "each visible ticket should have exactly one timer")
+	assert_true(tm.timers[t1].is_stopped() == false, "timer for first ticket should be running")
+	assert_true(tm.timers[t2].is_stopped() == false, "timer for second ticket should be running")
 
-	var container := VBoxContainer.new()
-	container.name = "RequiredItemsContainer"
-	ui.add_child(container)
-	
-	# This is here to prevent orphan nodes
-	tm.title_label.free()
-	tm.desc_label.free()
-	tm.timer_label.free()
-	tm.ticket_ui.free()
-	
-	tm.register_ui(ui)
-	
-
-	var ticket := TicketDummy()
-	ticket.ticket_name = "Test Ticket"
-	ticket.ticket_description = "Test Description"
-	ticket.required_items = {}
+## Test that register_delivery increments the delivered item count for the active ticket and returns true, or returns false if there is no active ticket.
+func test_register_delivery_increments_delivered_count_and_returns_true():
+	var ticket := ticket_dummy()
+	ticket.required_items = {7: 2}
 	ticket.delivered_items = {}
-
 	tm.active_ticket = ticket
+	tm.visible_queue = [ticket]
 
-	tm.update_ui()
+	var ok := tm.register_delivery(7)
 
-	assert_true(tm.ticket_ui.visible, "ticket UI should be visible after update_ui")
-	assert_eq(tm.title_label.text, "Test Ticket", "title label should update with ticket name")
-	assert_eq(tm.desc_label.text, "Test Description", "description label should update with ticket description")
+	assert_true(ok, "register_delivery should return true when active_ticket exists")
+	assert_eq(ticket.delivered_items[7], 1, "register_delivery should increment delivered item count")
 
-# NOTE: THIS IS COMMENTED OUT DUE TO NO NULL CATCH IN ORIGINAL SCRIPT
-## Test register_delivery(ticket_id: int)
-#func test_register_delivery_increments_delivered_item_count():
-	#var ticket := TicketDummy()
-	#ticket.required_items = {}
-	#ticket.delivered_items = {}
-#
-	#tm.active_ticket = ticket
-#
-	#var item_id := 42
-	#tm.register_delivery(item_id)
-#
-	#assert_eq(ticket.delivered_items[item_id], 1,
-		#"register_delivery should increment the delivered item count")
+## Test that register_delivery returns false if there is no active ticket to register the delivery for.
+func test_register_delivery_returns_false_without_active_ticket():
+	tm.active_ticket = null
 
+	var ok := tm.register_delivery(7)
 
-## Test _is_ticket_complete() -> bool
+	assert_false(ok, "register_delivery should return false when there is no active ticket")
+
+## Test that _is_ticket_complete returns true when all required items have been delivered for the active ticket.
 func test_is_ticket_complete_returns_true_when_requirements_met():
-	var ticket := TicketDummy()
-	ticket.required_items = {1: 2}
-	ticket.delivered_items = {1: 2}
-
+	var ticket := ticket_dummy()
+	ticket.required_items = {1: 2, 2: 1}
+	ticket.delivered_items = {1: 2, 2: 1}
 	tm.active_ticket = ticket
 
 	var result := tm._is_ticket_complete()
 
-	assert_true(result, "_is_ticket_complete should return true when all required items are delivered")
+	assert_true(result, "_is_ticket_complete should return true when all requirements are met")
 
-
-## Test reach_goal()
-func test_reach_goal_updates_ui_and_stops_timer():
-	var ticket := TicketDummy()
-	ticket.status = Ticket.TicketStatus.STARTED
-	ticket.reached_goal_text = "Goal reached!"
-
+## Test that reach_goal sets the active ticket's status to REACHED_GOAL and stops its timer.
+func test_reach_goal_sets_status_and_stops_active_timer():
+	var ticket := ticket_dummy()
 	tm.active_ticket = ticket
-	tm.title_label.text = "before"
-	tm.desc_label.text = "before"
-
-	tm.ticket_timer.start()
+	var timer := add_running_timer_for(ticket)
 
 	tm.reach_goal()
 
-	assert_eq(tm.title_label.text, "COMPLETE!", "title label should change to COMPLETE!")
-	assert_eq(tm.desc_label.text, "Goal reached!", "description should show reached goal text")
-	assert_true(tm.ticket_timer.is_stopped(), "ticket timer should stop when goal is reached")
+	assert_eq(ticket.status, Ticket.TicketStatus.REACHED_GOAL, "reach_goal should set ticket status to REACHED_GOAL")
+	assert_true(timer.is_stopped(), "active ticket timer should be stopped when goal is reached")
 
-
-## Test finish_ticket()
-func test_finish_ticket_completes_and_clears_active_ticket():
-	var ticket := TicketDummy()
-	ticket.status = Ticket.TicketStatus.REACHED_GOAL
-
-	tm.active_ticket = ticket
-	tm.ticket_ui.visible = true
+## Test that finish_ticket finalizes a reached-goal ticket, removes it from the queue, stops its timer, and promotes the next ticket to active.
+func test_finish_ticket_removes_reached_goal_ticket_and_promotes_next():
+	var finished_ticket := ticket_dummy()
+	finished_ticket.status = Ticket.TicketStatus.REACHED_GOAL
+	var next_ticket := ticket_dummy()
+	next_ticket.status = Ticket.TicketStatus.STARTED
+	tm.active_ticket = finished_ticket
+	tm.visible_queue = [finished_ticket, next_ticket]
+	var finished_timer := add_running_timer_for(finished_ticket)
 
 	tm.finish_ticket()
 
-	assert_null(tm.active_ticket, "active_ticket should be cleared after finishing")
-	assert_false(tm.ticket_ui.visible, "ticket UI should be hidden after finishing")
+	assert_eq(finished_ticket.status, Ticket.TicketStatus.FINISHED, "finish_ticket should finalize reached-goal ticket")
+	assert_false(tm.visible_queue.has(finished_ticket), "finished ticket should be removed from visible_queue")
+	assert_false(tm.timers.has(finished_ticket), "finished ticket timer should be removed from timers dictionary")
+	assert_true(finished_timer.is_stopped(), "finished ticket timer should be stopped")
+	assert_eq(tm.active_ticket, next_ticket, "next visible ticket should become active")
+
+## Test that finish_ticket clears active_ticket and leaves visible_queue empty when the last ticket is finished.
+func test_finish_ticket_clears_active_ticket_when_queue_becomes_empty():
+	var ticket := ticket_dummy()
+	ticket.status = Ticket.TicketStatus.REACHED_GOAL
+	tm.active_ticket = ticket
+	tm.visible_queue = [ticket]
+	add_running_timer_for(ticket)
+
+	tm.finish_ticket()
+
+	assert_null(tm.active_ticket, "active_ticket should be cleared when no visible tickets remain")
+	assert_eq(tm.visible_queue.size(), 0, "visible_queue should be empty after finishing the last ticket")
