@@ -27,6 +27,11 @@ enum Type {
 @export var weight : float
 @export var id : int 
 @export var required_items : Dictionary #{ticket_id: quantity}
+## Consumable effects this item will do
+var _consumables:Array[Effect] = []
+## Anomolous effects this item will do
+var _anomolies:Array[Effect] = []
+
 
 
 func _init(p_type := Type.GENERIC, p_name := "Item", p_description := "Item data.",
@@ -43,3 +48,59 @@ func _init(p_type := Type.GENERIC, p_name := "Item", p_description := "Item data
 	
 func return_type():
 	return type
+
+## Adds a consumable effect to the item
+## @param an_effect: Effect class that does something when consumed
+## @return: true if successfully added to list of consumable effects, false otherwise
+func add_consumable_effect(an_effect:Effect) -> bool:
+	if an_effect != null:
+		self._consumables.append(an_effect)
+		return true
+	return false
+
+## Returns whether this item contains consumable effects or not
+## @return: true if there are consumable effects, false otherwise
+func has_consumables() -> bool:
+	return _consumables.size() > 0
+
+## Returns an array of all consumable effects
+## @return: Array containing consumable effects (if any)
+func get_all_consumables() -> Array:
+	return self._consumables
+
+## Returns the next consumable effect
+## @return: An effect if there is any consumable effects, returns null otherwise
+func next_consumable() -> Effect:
+	return self._consumables.pop_front()
+
+## Removes all consumable effects
+func clear_consumables() -> void:
+	self._consumables.clear()
+
+## Adds a anomolous effect to the item
+## @param an_effect: Effect class that does an anomolous thing
+## @return: true if successfully added to list of _anomolies, false otherwise
+func add_anomolous_effect(an_effect:Effect) -> bool:
+	if an_effect != null:
+		self._anomolies.append(an_effect)
+		return true
+	return false
+
+## Returns whether this item contains anomolous effects or not
+## @return: true if there are _anomolies in this item, false otherwise
+func has_anomolies() -> bool:
+	return _anomolies.size() > 0
+
+## Returns an array of all anomolous effects
+## @return: Array containing anomolous effects (if any)
+func get_all_anomolies() -> Array:
+	return self._anomolies
+
+## Returns the next anomolous effect
+## @return: An effect if there is any anomolous effects, returns null otherwise
+func next_anomoly() -> Effect:
+	return self._anomolies.pop_front()
+
+## Removes all anomolous effects
+func clear_anomolies() -> void:
+	self._anomolies.clear()
