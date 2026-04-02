@@ -18,6 +18,7 @@ var ticket_available: int
 # finished - this ticket is done, do not come back to it when you press E through
 # the terminal the next time
 var active_ticket: Ticket = null
+var active_ticket_index: int = 0
 
 var queue_UI: CanvasLayer 
 
@@ -30,6 +31,19 @@ func _init() -> void:
 # this ensure that object is created at run time and not returning null 
 func _ready():
 	add_to_group("ticket_manager")
+	
+	
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_RIGHT:
+			active_ticket_index = min(active_ticket_index + 1, visible_queue.size() - 1)
+		elif event.keycode == KEY_LEFT:
+			active_ticket_index = max(active_ticket_index - 1, 0)
+		else:
+			return
+		if visible_queue.size() > 0:
+			active_ticket = visible_queue[active_ticket_index]
+			update_queue_ui()
 	
 
 func load_templates_for_level(level: int): 
@@ -73,6 +87,7 @@ func fill_visible_queue():
 		visible_queue.append(next_ticket)
 	if !visible_queue.is_empty():
 		active_ticket = visible_queue[0]
+		active_ticket_index = 0
 	else:
 		tickets_done.emit()
 	print(visible_queue)
@@ -211,6 +226,7 @@ func update_queue_ui():
 		
 func _on_ticket_selected(ticket: Ticket):
 	active_ticket = ticket
+	active_ticket_index = visible_queue.find(ticket)
 	update_queue_ui()
 
 func register_queue_ui(ui: CanvasLayer): 
@@ -280,6 +296,8 @@ func register_delivery(ticket_id: int) -> bool:
 	print("Current ticket: ", active_ticket);
 	if not active_ticket:
 		return false
+	if active_ticket.status == Ticket.TicketStatus.REACHED_GOAL:
+		return false
 	
 
 	var delivered := active_ticket.delivered_items
@@ -316,21 +334,22 @@ func _is_ticket_complete() -> bool:
 # guide to the next step
 func reach_goal():
 	if active_ticket:
-		active_ticket.reach_goal()
+		var ticket_to_finish = active_ticket
+		ticket_to_finish.reach_goal()
 		print("CHECKING 123")
 		#title_label.text = "COMPLETE!"
 		#desc_label.text = active_ticket.reached_goal_text
 		print(timers)
 		# Stop the timer for this ticket
-		if timers.has(active_ticket):
-			timers[active_ticket].stop()
+		if timers.has(ticket_to_finish):
+			timers[ticket_to_finish].stop()
 		
 		# this add extra time for the player to acknowledge that they have completed 
 		# the ticket 
 		var finish_timer := Timer.new()
 		finish_timer.wait_time = 1
 		finish_timer.one_shot = true
-		finish_timer.timeout.connect(finish_ticket)
+		finish_timer.timeout.connect(func(): finish_ticket(ticket_to_finish))
 		add_child(finish_timer)
 		finish_timer.start()
 	else: 
@@ -339,16 +358,16 @@ func reach_goal():
 		
 # make sure the ticket is finished, ticket box will disappear 
 # will work on this further 
-func finish_ticket():
-	if active_ticket and active_ticket.status == Ticket.TicketStatus.REACHED_GOAL:
-		active_ticket.finish()
+func finish_ticket(ticket: Ticket = active_ticket):
+	if ticket and ticket.status == Ticket.TicketStatus.REACHED_GOAL:
+		ticket.finish()
 		# Remove timer for this ticket
-		if timers.has(active_ticket):
-			timers[active_ticket].stop()
-			timers.erase(active_ticket)
+		if timers.has(ticket):
+			timers[ticket].stop()
+			timers.erase(ticket)
 
 		# Remove from visible queue
-		visible_queue.erase(active_ticket)
+		visible_queue.erase(ticket)
 
 		# Refill queue with next ticket(s)
 		fill_visible_queue()
@@ -360,6 +379,7 @@ func finish_ticket():
 		# Set NEXT ticket as active
 		if visible_queue.size() > 0:
 			active_ticket = visible_queue[0]
+			active_ticket_index = 0
 		else:
 			active_ticket = null
 			print("All tickets completed!")
