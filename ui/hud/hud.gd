@@ -15,6 +15,10 @@ extends CanvasLayer
 var clock_time:float = 0
 var clock_start:bool = false #If the timer should start.
 
+@export var quota: Label
+var quota_size: int
+var old_quota_size: int
+
 
 
 # Called when the node enters the scene tree for the first time.
@@ -29,6 +33,9 @@ func _ready() -> void:
 	needsbar.value = needscomp.needs
 	
 	Ticket_Manager.tickets_generated.connect(start_clock)
+	
+	Ticket_Manager.ticket_timed_out.connect(_missed_quota)
+	Ticket_Manager.ticket_submitted.connect(_submitted_quota)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -40,6 +47,7 @@ func _process(delta: float) -> void:
 		energycomp.draining = false
 	
 	update_clock(delta)
+	_update_quota()
 
 
 func get_clock_time()->float:
@@ -77,6 +85,23 @@ func update_clock(delta: float):
 	else:
 		clock.visible = false
 		clock_no_ticket.visible = true
+
+
+func _update_quota():
+	if clock_start:
+		quota.text = str(Ticket_Manager.all_tickets.size() + Ticket_Manager.visible_queue.size())
+
+
+##TODO: Add animation.
+func _missed_quota():
+	print("MISSED")
+	#Play animation.
+
+
+##TODO: Add animation.
+func _submitted_quota():
+	print("SUBMITTED")
+	#Play animation.
 
 
 func update_money(money) -> void:

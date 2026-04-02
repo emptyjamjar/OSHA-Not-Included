@@ -7,12 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://bigtlykgcw4yo" path="res://ui/hud/StatBarBack.png" id="4_kwc50"]
 [ext_resource type="Texture2D" uid="uid://by0viewb4ct5f" path="res://ui/hud/StatBarFill.png" id="5_o2lis"]
 [ext_resource type="Texture2D" uid="uid://0enu3a8st0nl" path="res://ui/hud/ClockSprite.png" id="7_o2lis"]
+[ext_resource type="Texture2D" uid="uid://c6gbmvw8xt2af" path="res://ui/hud/QuotaSprite.png" id="8_gfles"]
 
-[node name="HUD" type="CanvasLayer" unique_id=830642951 node_paths=PackedStringArray("clock", "clock_no_ticket")]
+[node name="HUD" type="CanvasLayer" unique_id=830642951 node_paths=PackedStringArray("clock", "clock_no_ticket", "quota")]
 layer = 10
 script = ExtResource("1_4d6w6")
 clock = NodePath("Clock/Time")
 clock_no_ticket = NodePath("Clock/No Tickets")
+quota = NodePath("Quota/Body")
 
 [node name="Background" type="TextureRect" parent="." unique_id=2145073693]
 z_index = -4
@@ -105,6 +107,17 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 6
 text = "Warehouse Associate"
 
+[node name="BadgeShadow" type="TextureRect" parent="Badge" unique_id=1363656494]
+modulate = Color(0, 0, 0, 0.3137255)
+z_index = -1
+layout_mode = 0
+offset_left = -2.999999
+offset_top = -2.0
+offset_right = 93.0
+offset_bottom = 172.0
+scale = Vector2(1.02, 1.02)
+texture = ExtResource("3_imuuq")
+
 [node name="Clock" type="TextureRect" parent="." unique_id=67808259]
 offset_right = 40.0
 offset_bottom = 40.0
@@ -116,6 +129,9 @@ offset_left = 3.0
 offset_top = 3.0
 offset_right = 99.0
 offset_bottom = 68.0
+theme_override_colors/font_color = Color(0.9490196, 0.827451, 0.67058825, 1)
+theme_override_colors/font_shadow_color = Color(0.8666667, 0, 0, 0.3137255)
+theme_override_colors/font_outline_color = Color(0.15294118, 0.15294118, 0.26666668, 1)
 theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -126,8 +142,45 @@ layout_mode = 0
 offset_top = 3.0
 offset_right = 96.0
 offset_bottom = 68.0
+theme_override_colors/font_color = Color(0.9490196, 0.827451, 0.67058825, 1)
+theme_override_colors/font_shadow_color = Color(0.8666667, 0, 0, 0.3137255)
+theme_override_colors/font_outline_color = Color(0.15294118, 0.15294118, 0.26666668, 1)
 theme_override_font_sizes/font_size = 20
 text = "Log Into Terminal"
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3
+
+[node name="Quota" type="TextureRect" parent="." unique_id=305014651]
+offset_left = 640.0
+offset_right = 768.0
+offset_bottom = 64.0
+texture = ExtResource("8_gfles")
+
+[node name="Title" type="Label" parent="Quota" unique_id=846432962]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 6.0
+offset_right = 120.0
+offset_bottom = 27.0
+theme_override_colors/font_color = Color(0.9490196, 0.827451, 0.67058825, 1)
+theme_override_colors/font_shadow_color = Color(0.8666667, 0, 0, 0.3137255)
+theme_override_colors/font_outline_color = Color(0.15294118, 0.15294118, 0.26666668, 1)
+theme_override_font_sizes/font_size = 18
+text = "Orders Queued"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Body" type="Label" parent="Quota" unique_id=1868482707]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 32.0
+offset_right = 120.0
+offset_bottom = 63.0
+theme_override_colors/font_color = Color(0.9490196, 0.827451, 0.67058825, 1)
+theme_override_colors/font_shadow_color = Color(0.8666667, 0, 0, 0.3137255)
+theme_override_colors/font_outline_color = Color(0.15294118, 0.15294118, 0.26666668, 1)
+theme_override_font_sizes/font_size = 30
+text = "8"
+horizontal_alignment = 1
+vertical_alignment = 1
