@@ -29,8 +29,8 @@ enum Type {
 @export var required_items : Dictionary #{ticket_id: quantity}
 ## Consumable effects this item will do
 var _consumables:Array[Effect] = []
-## Anomolous effects this item will do
-var _anomolies:Array[Effect] = []
+## anomalous effects this item will do
+var _anomalies:Array[Effect] = []
 
 
 
@@ -77,30 +77,30 @@ func next_consumable() -> Effect:
 func clear_consumables() -> void:
 	self._consumables.clear()
 
-## Adds a anomolous effect to the item
-## @param an_effect: Effect class that does an anomolous thing
-## @return: true if successfully added to list of _anomolies, false otherwise
-func add_anomolous_effect(an_effect:Effect) -> bool:
+## Adds a anomalous effect to the item
+## @param an_effect: Effect class that does an anomalous thing
+## @return: true if successfully added to list of _anomalies, false otherwise
+func add_anomalous_effect(an_effect:Effect) -> bool:
 	if an_effect != null:
-		self._anomolies.append(an_effect)
+		self._anomalies.append(an_effect)
 		return true
 	return false
 
-## Returns whether this item contains anomolous effects or not
-## @return: true if there are _anomolies in this item, false otherwise
-func has_anomolies() -> bool:
-	return _anomolies.size() > 0
+## Returns whether this item contains anomalous effects or not
+## @return: true if there are _anomalies in this item, false otherwise
+func has_anomalies() -> bool:
+	return _anomalies.size() > 0
 
-## Returns an array of all anomolous effects
-## @return: Array containing anomolous effects (if any)
-func get_all_anomolies() -> Array:
-	return self._anomolies
+## Returns an array of all anomalous effects
+## @return: Array containing anomalous effects (if any)
+func get_all_anomalies() -> Array:
+	return self._anomalies
 
-## Returns the next anomolous effect
-## @return: An effect if there is any anomolous effects, returns null otherwise
+## Returns the next anomalous effect
+## @return: An effect if there is any anomalous effects, returns null otherwise
 func next_anomoly() -> Effect:
-	return self._anomolies.pop_front()
+	return self._anomalies.pop_front()
 
-## Removes all anomolous effects
-func clear_anomolies() -> void:
-	self._anomolies.clear()
+## Removes all anomalous effects
+func clear_anomalies() -> void:
+	self._anomalies.clear()
