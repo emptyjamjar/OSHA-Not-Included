@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bxlp6nx0jpvvv"]
+
+[ext_resource type="Script" uid="uid://dke13diibl1pj" path="res://game/manager/ai/vision_area.gd" id="1_l45lg"]
+[ext_resource type="Script" uid="uid://glc8mbhyn2jg" path="res://game/manager/vision_cone.gd" id="1_lxacq"]
+
+[node name="VisionCone" type="Area2D" unique_id=2046041614]
+script = ExtResource("1_l45lg")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1452907162]
+position = Vector2(-7.1054274e-15, 3.5527137e-15)
+scale = Vector2(0.6424006, 0.71875)
+polygon = PackedVector2Array(0, 0, 72, -48, 80, -32, 88, -16, 88, 0, 88, 16, 80, 32, 72, 48)
+script = ExtResource("1_lxacq")
+
+[node name="RayCast2D" type="RayCast2D" parent="CollisionPolygon2D" unique_id=1796937199]
+position = Vector2(-1.9073486e-06, -4.942906e-15)
+scale = Vector2(1.5566609, 1.3913043)
+target_position = Vector2(56, 0)
+
+[node name="RayCast2D2" type="RayCast2D" parent="CollisionPolygon2D" unique_id=1109189923]
+position = Vector2(1.9073486e-06, 9.536743e-07)
+scale = Vector2(1.5566609, 1.3913043)
+target_position = Vector2(56, -6.854534e-07)
+
+[node name="RayCast2D3" type="RayCast2D" parent="CollisionPolygon2D" unique_id=1095067146]
+position = Vector2(1.4210855e-14, -4.9429057e-15)
+scale = Vector2(1.5566609, 1.3913043)
+target_position = Vector2(56, -2.1175824e-22)

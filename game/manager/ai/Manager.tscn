@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://tihl0oqfxvbq" path="res://game/manager/ai/Walk.png" id="3_7gue4"]
 [ext_resource type="Script" uid="uid://dv8osrfd81nlg" path="res://game/manager/states/manager_follow.gd" id="5_st5h1"]
 [ext_resource type="Script" uid="uid://bfr4futc0fa0" path="res://game/manager/states/manager_patrol.gd" id="6_7plvi"]
+[ext_resource type="PackedScene" uid="uid://bxlp6nx0jpvvv" path="res://game/manager/ai/vision_cone.tscn" id="8_7gue4"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_iu308"]
 radius = 26.0
@@ -223,7 +224,7 @@ shape = SubResource("CapsuleShape2D_iu308")
 position = Vector2(0, 1.4210855e-14)
 scale = Vector2(1.25, 1.25)
 sprite_frames = SubResource("SpriteFrames_mht8l")
-animation = &"idle_down"
+animation = &"idle_right"
 
 [node name="StateMachine" type="Node" parent="." unique_id=2119156540 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_p482c")
@@ -241,3 +242,5 @@ metadata/_custom_type_script = "uid://dv8osrfd81nlg"
 script = ExtResource("6_7plvi")
 manager = NodePath("../..")
 metadata/_custom_type_script = "uid://bfr4futc0fa0"
+
+[node name="VisionCone" parent="." unique_id=2046041614 instance=ExtResource("8_7gue4")]

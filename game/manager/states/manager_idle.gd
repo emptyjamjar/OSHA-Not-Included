@@ -29,11 +29,11 @@ func Physics_Update(delta: float):
 	if manager: 
 		manager.velocity = move_direction * move_speed
 		update_animation()
-	else: 
-		print("NO MANAGER EXIST")
-	var direction = player.global_position - manager.global_position
-	if direction.length() < 30: 
-		transitioned.emit(self, "follow")
+	#else: 
+		#print("NO MANAGER EXIST")
+	#var direction = player.global_position - manager.global_position
+	#if direction.length() < 30: 
+		#transitioned.emit(self, "follow")
 
 func update_animation(): 
 	if move_direction == Vector2.ZERO: 

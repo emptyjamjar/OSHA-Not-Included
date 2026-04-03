@@ -14,6 +14,7 @@ var wait_timer := 0.0
 @export var out_bounds_area: Area2D
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
+@onready var vision_cone = $VisionCone/CollisionPolygon2D
 
 var path_container: Array = []
 var current_path: Array = []
@@ -21,6 +22,8 @@ var current_index := 0
 
 func _ready() -> void:
 	add_to_group("agents")
+	vision_cone.entity_entered_vision.connect(_on_entity_seen)
+	vision_cone.entity_exited_vision.connect(_on_entity_lost)
 	self.hide()
 	await get_tree().create_timer(5).timeout
 	self.show()
@@ -42,6 +45,14 @@ func _ready() -> void:
 		print("Entered")
 		out_bounds_area.connect("agent_entered", Callable(self, "_on_out_of_bounds"))
 		
+func _on_entity_seen(entity): 
+	if entity.is_in_group("player"): 
+		$StateMachine.on_child_transition($StateMachine.current_state, "follow")
+
+func _on_entity_lost(entity): 
+	if entity.is_in_group("player"): 
+		$StateMachine.on_child_transition($StateMachine.current_state, "idle")
+
 func _on_out_of_bounds(agent): 
 	print("Reaching this point")
 	if agent != self: 
@@ -85,6 +96,23 @@ func _physics_process(delta: float) -> void:
 		if wait_timer >= wait_time: 
 			choose_random_path()
 		return 
+	rotate_vision_cone()
 	move_and_slide()
-	
+
+func rotate_vision_cone(): 
+	var dir := velocity
+	# If not moving, don't rotate 
+	if dir.length() < 0.1: 
+		return 
+	# Horizontal movement
+	if abs(dir.x) > abs(dir.y): 
+		if dir.x > 0: 
+			$VisionCone.rotation = 0 # facing right 
+		else: 
+			$VisionCone.rotation = PI # facing left
+	else: 
+		if dir.y > 0: 
+			$VisionCone.rotation = PI / 2 # down 
+		else: 
+			$VisionCone.rotation = -PI / 2 # up 
 	
