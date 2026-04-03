@@ -7,13 +7,13 @@
 [ext_resource type="Texture2D" uid="uid://bigtlykgcw4yo" path="res://ui/hud/StatBarBack.png" id="4_kwc50"]
 [ext_resource type="Texture2D" uid="uid://by0viewb4ct5f" path="res://ui/hud/StatBarFill.png" id="5_o2lis"]
 [ext_resource type="Texture2D" uid="uid://0enu3a8st0nl" path="res://ui/hud/ClockSprite.png" id="7_o2lis"]
+[ext_resource type="Script" uid="uid://dok52jim2s26q" path="res://ui/hud/clock/clock.gd" id="8_aixkq"]
 [ext_resource type="Texture2D" uid="uid://c6gbmvw8xt2af" path="res://ui/hud/QuotaSprite.png" id="8_gfles"]
 
-[node name="HUD" type="CanvasLayer" unique_id=830642951 node_paths=PackedStringArray("clock", "clock_no_ticket", "quota")]
+[node name="HUD" type="CanvasLayer" unique_id=830642951 node_paths=PackedStringArray("clock", "quota")]
 layer = 10
 script = ExtResource("1_4d6w6")
-clock = NodePath("Clock/Time")
-clock_no_ticket = NodePath("Clock/No Tickets")
+clock = NodePath("Clock")
 quota = NodePath("Quota/Body")
 
 [node name="Background" type="TextureRect" parent="." unique_id=2145073693]
@@ -118,21 +118,25 @@ offset_bottom = 172.0
 scale = Vector2(1.02, 1.02)
 texture = ExtResource("3_imuuq")
 
-[node name="Clock" type="TextureRect" parent="." unique_id=67808259]
+[node name="Clock" type="TextureRect" parent="." unique_id=67808259 node_paths=PackedStringArray("clock", "clock_no_ticket")]
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("7_o2lis")
+script = ExtResource("8_aixkq")
+clock = NodePath("Time")
+clock_no_ticket = NodePath("No Tickets")
+level_time = 4.0
 
 [node name="Time" type="Label" parent="Clock" unique_id=803310361]
 layout_mode = 0
 offset_left = 3.0
 offset_top = 3.0
-offset_right = 99.0
+offset_right = 94.0
 offset_bottom = 68.0
 theme_override_colors/font_color = Color(0.9490196, 0.827451, 0.67058825, 1)
 theme_override_colors/font_shadow_color = Color(0.8666667, 0, 0, 0.3137255)
 theme_override_colors/font_outline_color = Color(0.15294118, 0.15294118, 0.26666668, 1)
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 33
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 3

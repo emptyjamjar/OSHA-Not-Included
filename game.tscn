@@ -98,7 +98,8 @@ position = Vector2(216, 176)
 [node name="Camera2D" type="Camera2D" parent="." unique_id=167263537]
 anchor_mode = 0
 
-[node name="HUD" parent="Camera2D" unique_id=830642951 instance=ExtResource("2_ryrav")]
+[node name="HUD" parent="Camera2D" unique_id=830642951 node_paths=PackedStringArray("productivity_manager") instance=ExtResource("2_ryrav")]
+productivity_manager = NodePath("../../UI/Score")
 
 [node name="Player" parent="." unique_id=2112891127 instance=ExtResource("5_rvswv")]
 position = Vector2(323, 263)
