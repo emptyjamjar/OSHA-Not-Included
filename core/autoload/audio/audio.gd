@@ -78,6 +78,18 @@ func play_vending_machine():
 func play_invalid_interaction():
 	var invalid = $InvalidInteraction
 	invalid.play()
+	
+func play_trash_open():
+	var trash = $TrashOpen
+	trash.play()
+	
+func play_trash_close():
+	var trash = $TrashClose
+	trash.play()
+	
+func play_trash_use():
+	var trash = $TrashUse
+	trash.play()
 
 ## Plays the background music of the game
 func play_music():

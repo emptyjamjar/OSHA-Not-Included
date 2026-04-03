@@ -94,6 +94,9 @@ position = Vector2(640, 192)
 [node name="Belt TileMap" parent="Conveyor" index="0" unique_id=1815729401]
 tile_map_data = PackedByteArray("AAANAAYAAQAAAAEAAAANAAcAAQAAAAIAAAAOAAcAAQABAAIAAAAPAAcAAQABAAIAAAAQAAcAAQABAAIAAAARAAcAAQABAAIAAAA=")
 
+[node name="Items" parent="Conveyor" index="1" unique_id=1281113363]
+y_sort_enabled = true
+
 [node name="Spawn Despawn TileMap" parent="Conveyor" index="2" unique_id=1601041665]
 tile_map_data = PackedByteArray("AAARAAcAAQADAAIAAAANAAYAAQABAAMAAAA=")
 
@@ -145,7 +148,6 @@ metadata/_edit_use_anchors_ = true
 visible = false
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=106612821]
-visible = false
 position = Vector2(680.8126, 122.281265)
 scale = Vector2(18.681644, 9.741211)
 color = Color(0.33276916, 0.46037263, 0.80294394, 1)

@@ -97,7 +97,6 @@ script = ExtResource("8_p7hm6")
 script = ExtResource("9_2ynx2")
 
 [node name="PointLight2D" type="PointLight2D" parent="Player" unique_id=694927071]
-visible = false
 position = Vector2(2.0000038, -2.0000012)
 scale = Vector2(1.7500001, 1.6249998)
 color = Color(0.72156864, 0.5803922, 0.40392157, 1)
@@ -140,7 +139,6 @@ patrol_paths_at_root = NodePath("../PatrolPaths")
 out_bounds_area = NodePath("../OutBoundsArea")
 
 [node name="PointLight2D" type="PointLight2D" parent="Manager" unique_id=238068845]
-visible = false
 position = Vector2(-3.000002, -6.000001)
 scale = Vector2(1.671875, 1.671875)
 color = Color(0.4862745, 0.4862745, 0.5764706, 1)
@@ -181,13 +179,13 @@ position = Vector2(269, 259)
 position = Vector2(142, 257)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2024396508]
-color = Color(0.34233037, 0.3785334, 0.45536244, 1)
+color = Color(0.19272241, 0.21904433, 0.2691276, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=113270195]
-visible = false
 position = Vector2(680.8126, 122.281265)
 scale = Vector2(18.681644, 9.741211)
 color = Color(0.33276916, 0.46037263, 0.80294394, 1)
+energy = 0.46
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_wkw6b")
 
@@ -195,16 +193,16 @@ texture = SubResource("GradientTexture2D_wkw6b")
 position = Vector2(376, 251)
 
 [node name="Trashcan2" parent="." unique_id=1861824691 instance=ExtResource("19_5qnna")]
-position = Vector2(376, 280)
+position = Vector2(376, 291)
 
 [node name="Trashcan3" parent="." unique_id=1274746878 instance=ExtResource("19_5qnna")]
-position = Vector2(375, 309)
+position = Vector2(376, 331)
 
 [node name="Packager2" parent="." unique_id=77134705 instance=ExtResource("10_y7tt4")]
-position = Vector2(418, 282)
+position = Vector2(418, 293)
 
 [node name="Packager3" parent="." unique_id=1824294752 instance=ExtResource("10_y7tt4")]
-position = Vector2(418, 312)
+position = Vector2(419, 334)
 
 [node name="VendingMachine2" parent="." unique_id=1621904634 instance=ExtResource("20_2cvmm")]
 position = Vector2(676, 247)
