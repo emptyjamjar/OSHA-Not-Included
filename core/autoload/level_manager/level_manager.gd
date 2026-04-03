@@ -4,10 +4,10 @@
 extends Node2D
 
 var levels : Array[NodePath] = [
-	"res://levels/warehouse_01/layout/game.tscn",
-	"res://levels/warehouse_01/layout/game_2.tscn",
-	"res://levels/warehouse_02/game.tscn",
-	"res://levels/warehouse_02/game_2.tscn"]
+	"res://levels/level_1/level_1.tscn",
+	"res://levels/level_2/level_2.tscn",
+	"res://levels/level_3/level_3.tscn",
+	"res://levels/level_4/level_4.tscn"]
 	
 var level = 0
 

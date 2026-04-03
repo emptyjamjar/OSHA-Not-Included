@@ -38,8 +38,9 @@ Audio="*uid://cpauy0iyhojqc"
 PlayerInventory="*uid://hx53g7dc4i10"
 ItemSpawner="*uid://biwgn8hxrtv3d"
 Dialogic="*uid://ds2q0uclmolvu"
-LoadKeybinds="*uid://df1nx734uoekf"
+LoadSettings="*uid://df1nx734uoekf"
 Level_Manager="*uid://bxgyur2ge8voh"
+LoadKeybinds="*uid://df1nx734uoekf"
 
 [dialogic]
 
@@ -55,6 +56,7 @@ layout/style_directory={}
 
 window/size/viewport_width=768
 window/size/viewport_height=432
+window/size/borderless=true
 window/size/always_on_top=true
 window/stretch/mode="canvas_items"
 window/stretch/aspect="ignore"
