@@ -42,6 +42,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_cj8xu")
 
 [node name="Button" type="Button" parent="HboxContainer" unique_id=663510788]
 layout_mode = 2
+theme_override_font_sizes/font_size = 11
 toggle_mode = true
 button_group = ExtResource("3_cj8xu")
 text = "ACTION_KEY"
