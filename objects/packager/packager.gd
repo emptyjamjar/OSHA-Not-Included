@@ -20,8 +20,8 @@ func _on_interact():
 		InteractionManager.invalid_interaction()
 		Audio.play_invalid_interaction()
 		return
+	data.uiTexture = data.texture
 	data.texture = load("res://objects/package/Temporary_Package.png")
-	data.uiTexture = null
 	data.type = ItemData.Type.PACKAGE
 	data.description = data.description + "\nPACKAGED"
 	PlayerInventory.drop_item()

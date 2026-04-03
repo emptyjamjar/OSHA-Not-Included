@@ -20,6 +20,11 @@ text = "Controls"
 label_settings = ExtResource("2_j0dxi")
 horizontal_alignment = 1
 
+[node name="ResetKeybindsButton" type="Button" parent="." unique_id=158883192]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "RESET KEYBINDS"
+
 [node name="MoveUpRebindButton" parent="." unique_id=1776112691 instance=ExtResource("3_x1638")]
 layout_mode = 2
 action_name = "move_up"
@@ -59,3 +64,5 @@ action_name = "inventory_1"
 [node name="Slot2RebindButton" parent="." unique_id=963551380 instance=ExtResource("3_x1638")]
 layout_mode = 2
 action_name = "inventory_2"
+
+[connection signal="pressed" from="ResetKeybindsButton" to="." method="_on_reset_keybinds_button_pressed"]
