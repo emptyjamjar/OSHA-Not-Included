@@ -6,7 +6,6 @@ extends Node
 func _ready() -> void:
 	var config = ConfigFile.new()
 	config.load("user://settings.cfg")
-	_load_video(config)
 	_load_audio(config)
 	_load_controls(config)
 	config.save("user://settings.cfg")
@@ -52,17 +51,3 @@ func _load_audio(config: ConfigFile) -> void:
 		AudioServer.set_bus_mute(bus, not state)
 		var value = config.get_value(sections[bus], "volume", 100.0)
 		AudioServer.set_bus_volume_db(bus, linear_to_db(value))
-
-
-func _load_video(config: ConfigFile) -> void:
-	# Default values
-	if not config.has_section("Video"):
-		config.set_value("Video", "Fullscreen", true)
-	
-	var windowMode = config.get_value("Video", "Fullscreen", true)
-	if windowMode:
-		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
-	else:
-		DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
-		DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_MAXIMIZED)
