@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://ci8cvgkc7sn2f"]
 
+[ext_resource type="Script" uid="uid://dj4bj80vc1x6h" path="res://levels/level_4/level_4.gd" id="1_8al0x"]
 [ext_resource type="PackedScene" uid="uid://chidjbuid2cgd" path="res://levels/shared/World.tscn" id="1_x2nkm"]
 [ext_resource type="Script" uid="uid://c8mj1grnlbspl" path="res://game/manager/ai/out_bounds_area.gd" id="2_8al0x"]
 [ext_resource type="PackedScene" uid="uid://bimhohbyv6s5d" path="res://objects/shipper/shipper.tscn" id="3_vron0"]
@@ -20,22 +21,6 @@
 [ext_resource type="PackedScene" uid="uid://cmysh8kqsje1j" path="res://objects/shelves/shelf.tscn" id="18_2xhx5"]
 [ext_resource type="PackedScene" uid="uid://dwdtpfj4n8pco" path="res://objects/trashcan/trashcan.tscn" id="19_5qnna"]
 [ext_resource type="PackedScene" uid="uid://coa2sufhyfblt" path="res://objects/food/vending_machine.tscn" id="20_2cvmm"]
-
-[sub_resource type="GDScript" id="GDScript_7sc4i"]
-script/source = "extends Node2D
-class_name GameManager
-
-@onready var hud: CanvasLayer = $Camera2D/HUD
-@onready var money := 0
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	Ticket_Manager.on_game_start()
-
-func _on_shipper_get_money() -> void:
-	money += 10
-	hud.update_money(money)
-	
-"
 
 [sub_resource type="Environment" id="Environment_halqj"]
 background_mode = 3
@@ -71,7 +56,7 @@ fill_from = Vector2(0, 1)
 
 [node name="Level4" type="Node2D" unique_id=645817684 groups=["game"]]
 y_sort_enabled = true
-script = SubResource("GDScript_7sc4i")
+script = ExtResource("1_8al0x")
 
 [node name="World" parent="." unique_id=2107734680 instance=ExtResource("1_x2nkm")]
 

@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cj5ikori0r3jt"]
 
 [ext_resource type="PackedScene" uid="uid://chidjbuid2cgd" path="res://levels/shared/World.tscn" id="1_eppev"]
+[ext_resource type="Script" uid="uid://dqvmp76mukxqq" path="res://levels/level_0/level_0.gd" id="1_j6sme"]
 [ext_resource type="Script" uid="uid://c8mj1grnlbspl" path="res://game/manager/ai/out_bounds_area.gd" id="2_j6sme"]
 [ext_resource type="PackedScene" uid="uid://bimhohbyv6s5d" path="res://objects/shipper/shipper.tscn" id="3_pxy07"]
 [ext_resource type="PackedScene" uid="uid://cxbnggs2xw8ne" path="res://ui/hud/hud.tscn" id="4_v3mv3"]
@@ -20,38 +21,6 @@
 [ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="18_j8vpj"]
 [ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="19_ar2qe"]
 [ext_resource type="PackedScene" uid="uid://dwdtpfj4n8pco" path="res://objects/trashcan/trashcan.tscn" id="20_lnyl4"]
-
-[sub_resource type="GDScript" id="GDScript_7sc4i"]
-script/source = "extends Node2D
-class_name GameManager
-
-@onready var hud: CanvasLayer = $Camera2D/HUD
-@onready var money := 0
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	Dialogic.signal_event.connect(tut_cutscene)
-	var conveyor := $Conveyor
-	Ticket_Manager.on_game_start()
-	$Manager.hide()
-	Dialogic.start(\"timeline\")
-	
-
-func _on_shipper_get_money() -> void:
-	money += 10
-	hud.update_money(money)
-	
-func tut_cutscene(argument:String) -> void:
-	if argument == \"1\":
-		$CutscenePath.state = 1
-	elif argument == \"2\":
-		$CutscenePath.state = 2
-	elif argument == \"3\":
-		$CutscenePath.state = 3
-	elif argument == \"4\":
-		$CutscenePath.state = 4
-	elif argument == \"5\":
-		$CutscenePath.state = 5
-"
 
 [sub_resource type="Gradient" id="Gradient_halqj"]
 offsets = PackedFloat32Array(0, 0.6263158, 1)
@@ -79,7 +48,7 @@ fill_from = Vector2(0, 1)
 
 [node name="Level0" type="Node2D" unique_id=645817684 groups=["game"]]
 y_sort_enabled = true
-script = SubResource("GDScript_7sc4i")
+script = ExtResource("1_j6sme")
 
 [node name="World" parent="." unique_id=2107734680 instance=ExtResource("1_eppev")]
 
