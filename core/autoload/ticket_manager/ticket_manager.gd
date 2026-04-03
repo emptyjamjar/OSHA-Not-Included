@@ -144,8 +144,7 @@ func _on_ticket_expired(ticket: Ticket):
 	start_timers_for_visible_queue()
 	update_queue_ui()
 
-func complete_ticket(ticket: Ticket): 
-	ticket_submitted.emit() #This is for UI animations.
+func complete_ticket(ticket: Ticket):
 	ticket.status = Ticket.TicketStatus.FINISHED
 	timers[ticket].stop()
 	timers.erase(ticket)
@@ -363,6 +362,8 @@ func reach_goal():
 # will work on this further 
 func finish_ticket(ticket: Ticket = active_ticket):
 	if ticket and ticket.status == Ticket.TicketStatus.REACHED_GOAL:
+		
+		ticket_submitted.emit() #This is for UI animations.
 		ticket.finish()
 		# Remove timer for this ticket
 		if timers.has(ticket):

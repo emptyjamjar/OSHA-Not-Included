@@ -10,6 +10,8 @@ extends CanvasLayer
 @onready var needscomp: NeedsComponent = $"../../Player/NeedsComponent"
 @onready var sanitycomp: SanityComponent = $"../../Player/SanityComponent"
 
+@export var anim_player: AnimationPlayer
+
 @export var clock: LevelClock
 
 @export var productivity_manager: ProductivityManager
@@ -58,14 +60,15 @@ func _update_quota():
 
 ##TODO: Add animation.
 func _missed_quota():
-	print("MISSED")
 	#Play animation.
+	print("FASDDDDDDDDDDDDDDDDDDDDdd")
+	anim_player.play("TicketMissed")
 
 
 ##TODO: Add animation.
 func _submitted_quota():
-	print("SUBMITTED")
 	#Play animation.
+	anim_player.play("TicketSubmitted")
 
 
 func update_money(money) -> void:

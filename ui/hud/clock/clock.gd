@@ -8,6 +8,7 @@ signal deduct_productivity(val: int) ## For changing productivity. Used in Hud.g
 @export var clock_no_ticket: Label ##Label to show when terminal has not been turned on.
 @export var level_time: float = 0
 @export var productivity_decay: int = 2 ##How many seconds you need to be in overtime until 1 point of productivity is deducted.
+@export var anim_player: AnimationPlayer
 
 var clock_time:float = 0
 var performance: float = 0 ## How much the player will be deducted for not doing their job fast enough.
@@ -37,6 +38,7 @@ func update_clock(delta: float):
 		
 		#If time has run out
 		if clock_time <= 0:
+			
 			performance -= delta / productivity_decay
 			#This is just because productivity is an int so small values just become 0 and nothing happen.
 			if performance <= -1:
@@ -45,6 +47,12 @@ func update_clock(delta: float):
 		
 		#If the time hasn't run out.
 		else:
+			#Special animation for low time.
+			if (clock_time <= 30):
+				anim_player.play("LowTime")
+			else:
+				anim_player.play("RESET")
+			
 			clock_time -= delta
 			
 			var minutes: float = fmod(clock_time, 60.0)
@@ -58,6 +66,7 @@ func update_clock(delta: float):
 			
 			clock.text = str(int(clock_time/60)) +  ":" + minutes_text
 	else:
+		anim_player.play("LogIntoTerminal")
 		clock.visible = false
 		clock_no_ticket.visible = true
 
