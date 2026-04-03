@@ -17,7 +17,13 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="osha_not_included"
 run/main_scene="uid://rwv23iayi48d"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+run/max_fps=60
+boot_splash/bg_color=Color(0.03529412, 0.039215688, 0.0627451, 1)
+boot_splash/image="uid://pcl2nmgvdikv"
+config/icon="uid://dos858kmgxgvu"
+config/macos_native_icon="res://core/icons/OSHA.icns"
+config/windows_native_icon="res://core/icons/OSHA.ico"
+boot_splash/minimum_display_time=4000
 
 [audio]
 
