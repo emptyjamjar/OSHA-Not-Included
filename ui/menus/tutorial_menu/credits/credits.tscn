@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://vivc0irvy08p"]
 
 [ext_resource type="LabelSettings" uid="uid://b8igq1w07t223" path="res://ui/menus/navy_blue.tres" id="1_1uxo4"]
+[ext_resource type="Script" uid="uid://dw1203obwk2dt" path="res://ui/menus/tutorial_menu/credits/credits.gd" id="1_v3t40"]
 
 [node name="AudioSettingsMenu" type="VBoxContainer" unique_id=598972902]
 anchors_preset = 15
@@ -9,6 +10,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
+script = ExtResource("1_v3t40")
 
 [node name="MasterLabel" type="Label" parent="." unique_id=1481161778]
 layout_mode = 2

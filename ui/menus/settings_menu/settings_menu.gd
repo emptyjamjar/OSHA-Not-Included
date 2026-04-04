@@ -26,7 +26,7 @@ enum {
 
 const scenes = [
 	"res://ui/menus/settings_menu/controls_settings/controls_settings_menu.tscn",
-	"res://ui/menus/settings_menu/video_settings/video_settings_menu.tscn",
+	"res://ui/menus/tutorial_menu/credits/credits.tscn",
 	"res://ui/menus/settings_menu/audio_settings/audio_settings_menu.tscn",
 ]
 
