@@ -1,6 +1,0 @@
-[gd_scene format=3 uid="uid://dd3ynoisq80gu"]
-
-[ext_resource type="Script" uid="uid://can47qcs63i68" path="res://core/components/EffectScheduler/EffectScheduler.gd" id="1_kswbc"]
-
-[node name="EffectScheduler" type="Node" unique_id=1998373327]
-script = ExtResource("1_kswbc")
