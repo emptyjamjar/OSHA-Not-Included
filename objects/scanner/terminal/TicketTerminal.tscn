@@ -4,11 +4,11 @@
 [ext_resource type="Texture2D" uid="uid://dd8qyir30yfhp" path="res://objects/scanner/terminal/warehouse-computer.png" id="2_3twg7"]
 [ext_resource type="Texture2D" uid="uid://cmb8hhpdomgtt" path="res://objects/scanner/terminal/warehouse-table.png" id="2_q6qf8"]
 [ext_resource type="PackedScene" uid="uid://cdhb2euh28ies" path="res://core/components/interaction_area/interaction_area.tscn" id="3_3yids"]
-[ext_resource type="Script" uid="uid://d0emwvf7jtlx3" path="res://objects/scanner/terminal/ready_flicker.gd" id="4_wiggl"]
+[ext_resource type="Script" path="res://objects/scanner/terminal/ready_flicker.gd" id="4_wiggl"]
 [ext_resource type="PackedScene" uid="uid://c6mvf84775rmp" path="res://objects/scanner/terminal/ticket.tscn" id="5_2t2yn"]
 [ext_resource type="PackedScene" uid="uid://bu8gpp7tljufp" path="res://objects/scanner/terminal/TicketQueue.tscn" id="6_4wgmk"]
 [ext_resource type="AudioStream" uid="uid://c4yu8mk26dj28" path="res://objects/scanner/terminal/Heart Monitor Beep Sound Effect.wav" id="8_q6qf8"]
-[ext_resource type="Script" uid="uid://c7qhsjjsn78s6" path="res://objects/scanner/terminal/beep.gd" id="9_3e1dk"]
+[ext_resource type="Script" path="res://objects/scanner/terminal/beep.gd" id="9_3e1dk"]
 
 [sub_resource type="Gradient" id="Gradient_q6qf8"]
 colors = PackedColorArray(0, 0, 0, 1, 0.83137256, 0.83137256, 0.8901961, 1)
