@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
 [ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="17_8onr1"]
 [ext_resource type="PackedScene" uid="uid://u3cnys6nkx03" path="res://levels/warehouse_01/layout/walls.tscn" id="18_kgoe6"]
+[ext_resource type="PackedScene" uid="uid://dwdtpfj4n8pco" path="res://objects/trashcan/trashcan.tscn" id="19_kgoe6"]
 
 [sub_resource type="GDScript" id="GDScript_7sc4i"]
 script/source = "extends Node2D
@@ -134,44 +135,16 @@ out_bounds_area = NodePath("../OutBoundsArea")
 [node name="Path1" type="Node2D" parent="PatrolPaths" unique_id=46041390]
 
 [node name="p1_1" type="Marker2D" parent="PatrolPaths/Path1" unique_id=2052612545]
-position = Vector2(575.688, 191)
+position = Vector2(567, 267)
 
 [node name="p1_2" type="Marker2D" parent="PatrolPaths/Path1" unique_id=2114138325]
-position = Vector2(416.7741, 320)
+position = Vector2(413, 373)
 
 [node name="p1_3" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1365977136]
 position = Vector2(415, 268)
 
 [node name="p1_4" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1875373551]
 position = Vector2(-76.95828, 226)
-
-[node name="Path2" type="Node2D" parent="PatrolPaths" unique_id=1780100022]
-
-[node name="p2_1" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1106255408]
-position = Vector2(447.75732, 322)
-
-[node name="p2_2" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1918256563]
-position = Vector2(704.61804, 325)
-
-[node name="p2_3" type="Marker2D" parent="PatrolPaths/Path2" unique_id=136453742]
-position = Vector2(478.7405, 290)
-
-[node name="p2_4" type="Marker2D" parent="PatrolPaths/Path2" unique_id=87527126]
-position = Vector2(509, 346)
-
-[node name="Path3" type="Node2D" parent="PatrolPaths" unique_id=1497011237]
-
-[node name="p3_1" type="Marker2D" parent="PatrolPaths/Path3" unique_id=475289346]
-position = Vector2(577.6868, 354)
-
-[node name="p3_2" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1576187183]
-position = Vector2(415.77463, 351)
-
-[node name="p3_3" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1656326002]
-position = Vector2(416.77408, 193)
-
-[node name="p3_4" type="Marker2D" parent="PatrolPaths/Path3" unique_id=29843830]
-position = Vector2(723.6078, 184)
 
 [node name="Walls" parent="." unique_id=897807902 instance=ExtResource("18_kgoe6")]
 position = Vector2(-16, 80)
@@ -188,6 +161,7 @@ metadata/_edit_use_anchors_ = true
 visible = false
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=106612821]
+visible = false
 position = Vector2(680.8126, 122.281265)
 scale = Vector2(18.681644, 9.741211)
 color = Color(0.33276916, 0.46037263, 0.80294394, 1)
@@ -195,9 +169,12 @@ shadow_enabled = true
 texture = SubResource("GradientTexture2D_8onr1")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=520613747]
-position = Vector2(680.8126, 122.281265)
+position = Vector2(563.00006, 375)
 scale = Vector2(18.681644, 9.741211)
 color = Color(0.64803123, 0.68176806, 0.7610899, 1)
+
+[node name="Trashcan" parent="." unique_id=1556839144 instance=ExtResource("19_kgoe6")]
+position = Vector2(386, 227)
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
 [connection signal="get_money" from="Shipper" to="UI/Score" method="_on_shipper_get_money"]

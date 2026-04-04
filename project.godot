@@ -17,7 +17,13 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="osha_not_included"
 run/main_scene="uid://rwv23iayi48d"
 config/features=PackedStringArray("4.6", "Forward Plus")
-config/icon="res://icon.svg"
+run/max_fps=60
+boot_splash/bg_color=Color(0.03529412, 0.039215688, 0.0627451, 1)
+boot_splash/image="uid://pcl2nmgvdikv"
+config/icon="uid://dos858kmgxgvu"
+config/macos_native_icon="res://core/icons/OSHA.icns"
+config/windows_native_icon="res://core/icons/OSHA.ico"
+boot_splash/minimum_display_time=4000
 
 [audio]
 
@@ -32,7 +38,7 @@ Audio="*uid://cpauy0iyhojqc"
 PlayerInventory="*uid://hx53g7dc4i10"
 ItemSpawner="*uid://biwgn8hxrtv3d"
 Dialogic="*uid://ds2q0uclmolvu"
-LoadKeybinds="*uid://df1nx734uoekf"
+LoadSettings="*uid://df1nx734uoekf"
 Level_Manager="*uid://bxgyur2ge8voh"
 
 [dialogic]
@@ -49,13 +55,13 @@ layout/style_directory={}
 
 window/size/viewport_width=768
 window/size/viewport_height=432
-window/size/always_on_top=true
+window/size/mode=3
+window/size/borderless=true
 window/stretch/mode="canvas_items"
-window/stretch/aspect="ignore"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/dialogic/plugin.cfg")
+enabled=PackedStringArray("res://addons/dialogic/plugin.cfg", "res://addons/gut/plugin.cfg")
 
 [global_group]
 

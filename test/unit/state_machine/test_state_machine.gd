@@ -20,7 +20,7 @@ class TestState:
 
 ## test No initial state
 func test_ready_with_no_initial_state_does_not_set_current_state():
-	var sm = preload("res://game/actors/states/state_machine.gd").new()
+	var sm = preload("res://game/manager/states/state_machine.gd").new()
 	add_child_autofree(sm)
 
 	var state_a = TestState.new()
@@ -35,7 +35,7 @@ func test_ready_with_no_initial_state_does_not_set_current_state():
 
 ## Test after _ready()
 func test_ready_calls_initial_state_enter_once():
-	var sm = preload("res://game/actors/states/state_machine.gd").new()
+	var sm = preload("res://game/manager/states/state_machine.gd").new()
 	add_child_autofree(sm)
 
 	var idle = TestState.new()
@@ -55,7 +55,7 @@ func test_ready_calls_initial_state_enter_once():
 
 ## Test transitioning between states
 func test_on_child_transition_switches_to_new_state():
-	var sm = preload("res://game/actors/states/state_machine.gd").new()
+	var sm = preload("res://game/manager/states/state_machine.gd").new()
 	add_child_autofree(sm)
 
 	var idle = TestState.new()
@@ -77,7 +77,7 @@ func test_on_child_transition_switches_to_new_state():
 
 ## Test ignoring transitions
 func test_on_child_transition_ignores_transition_from_non_current_state():
-	var sm = preload("res://game/actors/states/state_machine.gd").new()
+	var sm = preload("res://game/manager/states/state_machine.gd").new()
 	add_child_autofree(sm)
 
 	var idle = TestState.new()
@@ -101,7 +101,7 @@ func test_on_child_transition_ignores_transition_from_non_current_state():
 
 ## Test for process update on current state
 func test_process_calls_update_on_current_state():
-	var sm = preload("res://game/actors/states/state_machine.gd").new()
+	var sm = preload("res://game/manager/states/state_machine.gd").new()
 	add_child_autofree(sm)
 
 	var idle = TestState.new()
@@ -117,7 +117,7 @@ func test_process_calls_update_on_current_state():
 
 ## Test transition does nothing when target state does not exist
 func test_on_child_transition_does_nothing_when_target_state_does_not_exist():
-	var sm = preload("res://game/actors/states/state_machine.gd").new()
+	var sm = preload("res://game/manager/states/state_machine.gd").new()
 	add_child_autofree(sm)
 	var idle = TestState.new()
 	idle.name = "Idle"
@@ -133,7 +133,7 @@ func test_on_child_transition_does_nothing_when_target_state_does_not_exist():
 
 ## Test if _process does nothing when there is no current state
 func test_process_does_nothing_when_current_state_is_null():
-	var sm = preload("res://game/actors/states/state_machine.gd").new()
+	var sm = preload("res://game/manager/states/state_machine.gd").new()
 	add_child_autofree(sm)
 	sm.current_state = null
 	sm._process(0.16)
@@ -143,7 +143,7 @@ func test_process_does_nothing_when_current_state_is_null():
 
 ## Test lowercase key usage
 func test_ready_stores_state_names_as_lowercase_keys():
-	var sm = preload("res://game/actors/states/state_machine.gd").new()
+	var sm = preload("res://game/manager/states/state_machine.gd").new()
 	add_child_autofree(sm)
 	var idle = TestState.new()
 	idle.name = "IDLE"
@@ -156,7 +156,7 @@ func test_ready_stores_state_names_as_lowercase_keys():
 
 ## Test duplicate state names overiting the previous state
 func test_ready_duplicate_state_names_overwrite_previous_state():
-	var sm = preload("res://game/actors/states/state_machine.gd").new()
+	var sm = preload("res://game/manager/states/state_machine.gd").new()
 	add_child_autofree(sm)
 	var first_idle = TestState.new()
 	first_idle.name = "Idle"
