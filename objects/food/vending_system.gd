@@ -19,7 +19,7 @@
 extends Control
 
 signal vending_closed
-signal item_bought(item: ItemData)
+signal vending_bought(item: ItemData)
 
 @export var ui : CanvasLayer
 @export var currency_label : Label
@@ -98,7 +98,7 @@ func buy_item(item: ItemData) -> bool:
 	currency -= item.price
 	print("Bought item: ", item.name)
 	Audio.play_vending_machine()
-	item_bought.emit(item)
+	vending_bought.emit(item)
 	# Drop item on ground if no inventory space
 	if not PlayerInventory.add(item):
 		var spawned_item = ItemSpawner.spawn_with_data(item)
