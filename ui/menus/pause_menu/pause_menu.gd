@@ -17,9 +17,11 @@ func _input(event: InputEvent) -> void:
 		get_tree().paused = not get_tree().paused
 		visible = not visible
 		if visible:
+			Dialogic.Text.hide_textbox()
 			Audio.play_open_menu()
 			Audio.lower_music()
 		else:
+			Dialogic.Text.show_textbox()
 			Audio.play_close_menu()
 			Audio.reset_music_volume()
 
