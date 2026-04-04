@@ -172,6 +172,10 @@ _data = {
 &"TicketSubmitted": SubResource("Animation_cxhb7")
 }
 
+[sub_resource type="LabelSettings" id="LabelSettings_aixkq"]
+font_size = 11
+font_color = Color(0, 0, 0, 1)
+
 [sub_resource type="Animation" id="Animation_p3vm3"]
 resource_name = "LogIntoTerminal"
 length = 2.0
@@ -336,8 +340,10 @@ _data = {
 &"RESET": SubResource("Animation_gv4gi")
 }
 
-[node name="HUD" type="CanvasLayer" unique_id=830642951 node_paths=PackedStringArray("anim_player", "clock", "quota")]
-layer = 10
+[node name="HUD" type="Control" unique_id=518774078 node_paths=PackedStringArray("anim_player", "clock", "quota")]
+z_index = 10
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_4d6w6")
 anim_player = NodePath("AnimationPlayer")
 clock = NodePath("Clock")
@@ -349,6 +355,7 @@ libraries/ = SubResource("AnimationLibrary_5uuaq")
 
 [node name="Background" type="TextureRect" parent="." unique_id=2145073693]
 z_index = -4
+layout_mode = 0
 offset_right = 640.0
 offset_bottom = 360.0
 mouse_filter = 2
@@ -367,9 +374,11 @@ grow_horizontal = 2
 text = "0"
 
 [node name="Inventory" parent="." unique_id=988897325 instance=ExtResource("3_kwc50")]
+layout_mode = 0
 
 [node name="Badge" type="TextureRect" parent="." unique_id=676530222]
 z_index = -1
+layout_mode = 0
 offset_top = 64.0
 offset_right = 96.0
 offset_bottom = 238.0
@@ -425,6 +434,7 @@ offset_bottom = 99.0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 9
 text = "Tal"
+label_settings = SubResource("LabelSettings_aixkq")
 
 [node name="PlayerJobTitle" type="Label" parent="Badge" unique_id=943494846]
 layout_mode = 0
@@ -450,6 +460,7 @@ scale = Vector2(1.02, 1.02)
 texture = ExtResource("3_imuuq")
 
 [node name="Clock" type="TextureRect" parent="." unique_id=67808259 node_paths=PackedStringArray("clock", "clock_no_ticket", "anim_player")]
+layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("7_o2lis")
@@ -493,6 +504,7 @@ autowrap_mode = 3
 libraries/ = SubResource("AnimationLibrary_5mn0o")
 
 [node name="Quota" type="TextureRect" parent="." unique_id=305014651]
+layout_mode = 0
 offset_left = 640.0
 offset_right = 768.0
 offset_bottom = 64.0

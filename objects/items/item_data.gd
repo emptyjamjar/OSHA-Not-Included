@@ -28,9 +28,9 @@ enum Type {
 @export var id : int 
 @export var required_items : Dictionary #{ticket_id: quantity}
 ## Consumable effects this item will do
-var _consumables:Array[Effect] = []
+var consumables:Array[Effect] = []
 ## anomalous effects this item will do
-var _anomalies:Array[Effect] = []
+var anomalies:Array[Effect] = []
 
 
 
@@ -61,7 +61,7 @@ func add_consumable_effect(an_effect:Effect) -> bool:
 ## Returns whether this item contains consumable effects or not
 ## @return: true if there are consumable effects, false otherwise
 func has_consumables() -> bool:
-	return _consumables.size() > 0
+	return consumables.size() > 0
 
 ## Returns an array of all consumable effects
 ## @return: Array containing consumable effects (if any)
@@ -89,7 +89,7 @@ func add_anomalous_effect(an_effect:Effect) -> bool:
 ## Returns whether this item contains anomalous effects or not
 ## @return: true if there are _anomalies in this item, false otherwise
 func has_anomalies() -> bool:
-	return _anomalies.size() > 0
+	return anomalies.size() > 0
 
 ## Returns an array of all anomalous effects
 ## @return: Array containing anomalous effects (if any)
