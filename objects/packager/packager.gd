@@ -20,7 +20,6 @@ func _on_interact():
 		InteractionManager.invalid_interaction()
 		Audio.play_invalid_interaction()
 		return
-	Audio.play_tape_box()
 	data.uiTexture = data.texture
 	data.texture = load("res://objects/package/Temporary_Package.png")
 	data.type = ItemData.Type.PACKAGE

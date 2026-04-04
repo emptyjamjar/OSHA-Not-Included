@@ -127,10 +127,9 @@ func _move_items():
 		
 		else:
 			var dir = tile_data.get_custom_data("Direction").normalized() #Get the custom Direction variable of the tile.
-			var rot = self.rotation
-			var rotated_dir = dir.rotated(rot)
 			
-			var next_tile = item_pos + rotated_dir * tile_map.tile_set.tile_size.x
+			var next_tile = item_pos + dir * tile_map.tile_set.tile_size.x
+			
 			
 			item.global_position = item_pos.move_toward(next_tile, conveyor_speed * get_process_delta_time())
 			
@@ -167,7 +166,9 @@ func _spawn_into_first_slot(item: ItemData) -> void:
 		if _slots[i] == null:
 			# Create sprite of texture
 			var scene := item_scene.instantiate() as ItemBase
-						
+			
+			scene.rotation = self.rotation # for levels where conveyor is rotated
+			
 			# Connect to function to remove from list on pickup
 			scene.picked_up.connect(_on_item_picked_up.bind(i))
 			

@@ -1,26 +1,57 @@
 [gd_scene format=3 uid="uid://cj5ikori0r3jt"]
 
-[ext_resource type="PackedScene" uid="uid://chidjbuid2cgd" path="res://levels/shared/World.tscn" id="1_eppev"]
-[ext_resource type="Script" uid="uid://dqvmp76mukxqq" path="res://levels/level_0/level_0.gd" id="1_j6sme"]
-[ext_resource type="Script" uid="uid://c8mj1grnlbspl" path="res://game/manager/ai/out_bounds_area.gd" id="2_j6sme"]
-[ext_resource type="PackedScene" uid="uid://bimhohbyv6s5d" path="res://objects/shipper/shipper.tscn" id="3_pxy07"]
-[ext_resource type="PackedScene" uid="uid://cxbnggs2xw8ne" path="res://ui/hud/hud.tscn" id="4_v3mv3"]
-[ext_resource type="PackedScene" uid="uid://c7e7f64igaa5j" path="res://game/actors/player/player.tscn" id="5_3slpx"]
-[ext_resource type="Script" uid="uid://cpt2knie07vvo" path="res://core/systems/needs/health_component.gd" id="6_l7xvt"]
-[ext_resource type="Script" uid="uid://ck4p7gga13e5e" path="res://core/systems/needs/energy_component.gd" id="7_qiv53"]
-[ext_resource type="Script" uid="uid://b0ovv20hjaxi3" path="res://core/systems/needs/needs_component.gd" id="8_3e5dw"]
-[ext_resource type="Script" uid="uid://dka4wuamclaju" path="res://core/systems/sanity/sanity_component.gd" id="9_ti4gw"]
-[ext_resource type="PackedScene" uid="uid://sxf3e0qydlfv" path="res://objects/packager/packager.tscn" id="10_0gdxf"]
-[ext_resource type="PackedScene" uid="uid://cnumkt0ntauyy" path="res://objects/conveyor/conveyor.tscn" id="11_ssg5x"]
-[ext_resource type="PackedScene" uid="uid://rgnaipuerpmn" path="res://objects/scanner/terminal/TicketTerminal.tscn" id="12_s6rvk"]
-[ext_resource type="PackedScene" uid="uid://coa2sufhyfblt" path="res://objects/food/vending_machine.tscn" id="13_oxxmn"]
-[ext_resource type="PackedScene" uid="uid://cv4vrnpxs40bf" path="res://objects/restroom/washroom.tscn" id="14_u460r"]
-[ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="15_6h1n3"]
-[ext_resource type="Script" uid="uid://j63ga8s4bhlu" path="res://cutscene_path.gd" id="16_2dnbt"]
-[ext_resource type="Texture2D" uid="uid://bmisxcq76lrat" path="res://icon.svg" id="17_dp5o0"]
-[ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="18_j8vpj"]
-[ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="19_ar2qe"]
-[ext_resource type="PackedScene" uid="uid://dwdtpfj4n8pco" path="res://objects/trashcan/trashcan.tscn" id="20_lnyl4"]
+[ext_resource type="PackedScene" uid="uid://chidjbuid2cgd" path="res://levels/shared/World.tscn" id="1_7sc4i"]
+[ext_resource type="Script" uid="uid://cpt2knie07vvo" path="res://core/systems/needs/health_component.gd" id="2_e2o6t"]
+[ext_resource type="Script" uid="uid://c8mj1grnlbspl" path="res://game/manager/ai/out_bounds_area.gd" id="2_e8heu"]
+[ext_resource type="PackedScene" uid="uid://cxbnggs2xw8ne" path="res://ui/hud/hud.tscn" id="2_ryrav"]
+[ext_resource type="PackedScene" uid="uid://bimhohbyv6s5d" path="res://objects/shipper/shipper.tscn" id="3_e8heu"]
+[ext_resource type="Script" uid="uid://ck4p7gga13e5e" path="res://core/systems/needs/energy_component.gd" id="3_feb5d"]
+[ext_resource type="Script" uid="uid://b0ovv20hjaxi3" path="res://core/systems/needs/needs_component.gd" id="4_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://c7e7f64igaa5j" path="res://game/actors/player/player.tscn" id="5_rvswv"]
+[ext_resource type="PackedScene" uid="uid://rgnaipuerpmn" path="res://objects/scanner/terminal/TicketTerminal.tscn" id="6_ryrav"]
+[ext_resource type="Script" uid="uid://dka4wuamclaju" path="res://core/systems/sanity/sanity_component.gd" id="8_7sc4i"]
+[ext_resource type="PackedScene" uid="uid://cnumkt0ntauyy" path="res://objects/conveyor/conveyor.tscn" id="8_j5wjh"]
+[ext_resource type="PackedScene" uid="uid://coa2sufhyfblt" path="res://objects/food/vending_machine.tscn" id="11_mfdv2"]
+[ext_resource type="PackedScene" uid="uid://sxf3e0qydlfv" path="res://objects/packager/packager.tscn" id="12_hb5m1"]
+[ext_resource type="PackedScene" uid="uid://cv4vrnpxs40bf" path="res://objects/restroom/washroom.tscn" id="12_iotsf"]
+[ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="13_lc2xo"]
+[ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="15_e8heu"]
+[ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
+[ext_resource type="Texture2D" uid="uid://bmisxcq76lrat" path="res://icon.svg" id="18_boyg6"]
+[ext_resource type="Script" uid="uid://j63ga8s4bhlu" path="res://cutscene_path.gd" id="18_e36ub"]
+[ext_resource type="PackedScene" uid="uid://dwdtpfj4n8pco" path="res://objects/trashcan/trashcan.tscn" id="20_e36ub"]
+
+[sub_resource type="GDScript" id="GDScript_7sc4i"]
+script/source = "extends Node2D
+class_name GameManager
+
+@onready var hud: CanvasLayer = $Camera2D/HUD
+@onready var money := 0
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	Dialogic.signal_event.connect(tut_cutscene)
+	var conveyor := $Conveyor
+	Ticket_Manager.on_game_start()
+	$Manager.hide()
+	Dialogic.start(\"timeline\")
+	
+
+func _on_shipper_get_money() -> void:
+	money += 10
+	hud.update_money(money)
+	
+func tut_cutscene(argument:String) -> void:
+	if argument == \"1\":
+		$CutscenePath.state = 1
+	elif argument == \"2\":
+		$CutscenePath.state = 2
+	elif argument == \"3\":
+		$CutscenePath.state = 3
+	elif argument == \"4\":
+		$CutscenePath.state = 4
+	elif argument == \"5\":
+		$CutscenePath.state = 5
+"
 
 [sub_resource type="Gradient" id="Gradient_halqj"]
 offsets = PackedFloat32Array(0, 0.6263158, 1)
@@ -46,44 +77,44 @@ colors = PackedColorArray(0.05072464, 0.05072464, 0.05072464, 1, 1, 1, 1, 1)
 gradient = SubResource("Gradient_boyg6")
 fill_from = Vector2(0, 1)
 
-[node name="Level0" type="Node2D" unique_id=645817684 groups=["game"]]
+[node name="Game" type="Node2D" unique_id=645817684 groups=["game"]]
 y_sort_enabled = true
-script = ExtResource("1_j6sme")
+script = SubResource("GDScript_7sc4i")
 
-[node name="World" parent="." unique_id=2107734680 instance=ExtResource("1_eppev")]
+[node name="World" parent="." unique_id=2107734680 instance=ExtResource("1_7sc4i")]
 
 [node name="OutBoundsArea" type="Area2D" parent="." unique_id=1864494632]
 visible = false
 collision_layer = 2
-script = ExtResource("2_j6sme")
+script = ExtResource("2_e8heu")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="OutBoundsArea" unique_id=995408817]
 position = Vector2(121.18235, 73.46653)
 scale = Vector2(0.6230469, 0.6540301)
 polygon = PackedVector2Array(-0.99945825, -1, 636.4481, 0.8156662, 637.65436, 365, 1.9989165, 365)
 
-[node name="Shipper" parent="." unique_id=441417436 instance=ExtResource("3_pxy07")]
+[node name="Shipper" parent="." unique_id=441417436 instance=ExtResource("3_e8heu")]
 position = Vector2(216, 176)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=167263537]
 anchor_mode = 0
 
-[node name="HUD" parent="Camera2D" unique_id=830642951 instance=ExtResource("4_v3mv3")]
+[node name="HUD" parent="Camera2D" unique_id=830642951 instance=ExtResource("2_ryrav")]
 
-[node name="Player" parent="." unique_id=2112891127 instance=ExtResource("5_3slpx")]
+[node name="Player" parent="." unique_id=2112891127 instance=ExtResource("5_rvswv")]
 position = Vector2(323, 263)
 
 [node name="HealthComponent" type="Node" parent="Player" unique_id=1337526708]
-script = ExtResource("6_l7xvt")
+script = ExtResource("2_e2o6t")
 
 [node name="EnergyComponent" type="Node" parent="Player" unique_id=1556776905]
-script = ExtResource("7_qiv53")
+script = ExtResource("3_feb5d")
 
 [node name="NeedsComponent" type="Node" parent="Player" unique_id=1834835802]
-script = ExtResource("8_3e5dw")
+script = ExtResource("4_fc0e3")
 
 [node name="SanityComponent" type="Node" parent="Player" unique_id=264741504]
-script = ExtResource("9_ti4gw")
+script = ExtResource("8_7sc4i")
 
 [node name="PointLight2D" type="PointLight2D" parent="Player" unique_id=1837317828]
 position = Vector2(2.0000038, -2.0000012)
@@ -93,24 +124,24 @@ energy = 0.12
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_e36ub")
 
-[node name="Packager" parent="." unique_id=2093227932 instance=ExtResource("10_0gdxf")]
+[node name="Packager" parent="." unique_id=2093227932 instance=ExtResource("12_hb5m1")]
 position = Vector2(640, 192)
 
-[node name="Conveyor" parent="." unique_id=1135306595 groups=["conveyor"] instance=ExtResource("11_ssg5x")]
+[node name="Conveyor" parent="." unique_id=1135306595 groups=["conveyor"] instance=ExtResource("8_j5wjh")]
 position = Vector2(101, 363)
 
-[node name="TicketTerminal" parent="." unique_id=982348100 instance=ExtResource("12_s6rvk")]
+[node name="TicketTerminal" parent="." unique_id=982348100 instance=ExtResource("6_ryrav")]
 position = Vector2(368, 392)
 
-[node name="VendingMachine" parent="." unique_id=1840311720 instance=ExtResource("13_oxxmn")]
+[node name="VendingMachine" parent="." unique_id=1840311720 instance=ExtResource("11_mfdv2")]
 position = Vector2(117, 248)
 scale = Vector2(0.3295734, 0.3295734)
 
-[node name="Washroom" parent="." unique_id=585966862 instance=ExtResource("14_u460r")]
+[node name="Washroom" parent="." unique_id=585966862 instance=ExtResource("12_iotsf")]
 position = Vector2(744, 304)
 scale = Vector2(0.24458057, 0.24458057)
 
-[node name="Manager" parent="." unique_id=565657217 node_paths=PackedStringArray("patrol_paths_at_root", "out_bounds_area") groups=["Manager"] instance=ExtResource("15_6h1n3")]
+[node name="Manager" parent="." unique_id=565657217 node_paths=PackedStringArray("patrol_paths_at_root", "out_bounds_area") groups=["Manager"] instance=ExtResource("16_80cx4")]
 position = Vector2(626, 420)
 collision_mask = 2
 patrol_paths_at_root = NodePath("../PatrolPaths")
@@ -162,7 +193,7 @@ position = Vector2(723.6078, 184)
 
 [node name="CutscenePath" type="Path2D" parent="." unique_id=2042277849]
 curve = SubResource("Curve2D_hb5m1")
-script = ExtResource("16_2dnbt")
+script = ExtResource("18_e36ub")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="CutscenePath" unique_id=1602138425]
 position = Vector2(619, 351)
@@ -171,12 +202,12 @@ rotates = false
 loop = false
 
 [node name="Sprite2D" type="Sprite2D" parent="CutscenePath/PathFollow2D" unique_id=1078777878]
-texture = ExtResource("17_dp5o0")
+texture = ExtResource("18_boyg6")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=837622460]
 layer = 15
 
-[node name="Pause" parent="UI" unique_id=1566201169 instance=ExtResource("18_j8vpj")]
+[node name="Pause" parent="UI" unique_id=1566201169 instance=ExtResource("13_lc2xo")]
 visible = false
 top_level = true
 anchors_preset = 0
@@ -192,7 +223,7 @@ grow_horizontal = 1
 grow_vertical = 1
 metadata/_edit_use_anchors_ = true
 
-[node name="Score" parent="UI" unique_id=1161969462 instance=ExtResource("19_ar2qe")]
+[node name="Score" parent="UI" unique_id=1161969462 instance=ExtResource("15_e8heu")]
 visible = false
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=2074852728]
@@ -207,8 +238,8 @@ position = Vector2(680.8126, 122.281265)
 scale = Vector2(18.681644, 9.741211)
 color = Color(0.77646405, 0.79886746, 0.85534906, 1)
 
-[node name="Trashcan" parent="." unique_id=1663879866 instance=ExtResource("20_lnyl4")]
-position = Vector2(573, 197)
+[node name="Trashcan" parent="." unique_id=1663879866 instance=ExtResource("20_e36ub")]
+position = Vector2(573, 205)
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
 [connection signal="get_money" from="Shipper" to="UI/Score" method="_on_shipper_get_money"]
