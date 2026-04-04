@@ -134,6 +134,7 @@ func _on_code_entered(code: String):
 	code = code.strip_edges().to_upper()
 	if not slot_map.has(code):
 		print("Invalid slot: ", code)
+		Audio.play_invalid_interaction()
 		return
 	var item := slot_map[code]
 	if buy_item(item):
