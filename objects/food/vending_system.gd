@@ -27,6 +27,7 @@ signal vending_closed
 @export var vending_container : GridContainer
 @export var slot_input : LineEdit
 
+var _slot_text : String = ""
 var is_loaded = false
 var slot_map: Dictionary[String, ItemData] = {}
 var _currency: float = 0.0
@@ -132,6 +133,7 @@ func index_to_code(index: int) -> String:
 
 func _on_code_entered(code: String):
 	code = code.strip_edges().to_upper()
+	slot_input.text = ""
 	if not slot_map.has(code):
 		print("Invalid slot: ", code)
 		Audio.play_invalid_interaction()
@@ -140,9 +142,59 @@ func _on_code_entered(code: String):
 	if buy_item(item):
 		print("BOUGHT FROM SLOT ", code)
 		mode = MODE.OFF # turn off
-	slot_input.text = ""
 
 func set_shop_inventory(list : Array[ItemData]):
 	free_previous_slots()
 	vending_items = list
 	load_shop_inventory()
+
+
+func _btn_to_text(text: String):
+	slot_input.text += text.to_upper()
+	slot_input.text_changed.emit(slot_input.text)
+
+
+func _on_button_a_pressed() -> void:
+	_btn_to_text("A")
+
+
+func _on_button_b_pressed() -> void:
+	_btn_to_text("B")
+
+
+func _on_button_c_pressed() -> void:
+	_btn_to_text("C")
+
+
+func _on_button_1_pressed() -> void:
+	_btn_to_text("1")
+
+
+func _on_button_2_pressed() -> void:
+	_btn_to_text("2")
+
+
+func _on_button_3_pressed() -> void:
+	_btn_to_text("3")
+
+
+func _on_button_delete_pressed() -> void:
+	var slotLen = slot_input.text.length() - 1
+	if slotLen < 0:
+		return
+	slot_input.text = slot_input.text.erase(slotLen)
+	slot_input.text_changed.emit(slot_input.text)
+
+
+func _on_button_enter_pressed() -> void:
+	_on_code_entered(slot_input.text)
+
+
+func _on_line_edit_text_changed(new_text: String) -> void:
+	if _slot_text.length() > new_text.length():
+		Audio.play_exit_click()
+	elif _slot_text.length() < new_text.length():
+		Audio.play_click()
+	else:
+		Audio.play_invalid_interaction()
+	_slot_text = new_text

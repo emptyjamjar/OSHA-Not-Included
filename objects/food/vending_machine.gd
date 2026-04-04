@@ -47,8 +47,12 @@ func _on_interact():
 	
 	_open_vending_menu()
 	await VendingSystem.vending_closed
+	print("VENDING CLOSED")
+	Audio.play_close_menu()
 
 func _open_vending_menu():
+	print("VENDING OPENED")
+	Audio.play_open_menu()
 	is_menu_open = true
 	
 	# Load items into VendingSystem if we have custom items
