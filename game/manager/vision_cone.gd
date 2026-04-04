@@ -50,7 +50,7 @@ func _scan_for_entities():
 	for body in bodies: 
 		if not body is Node2D: 
 			continue 
-		if _is_in_cone(body.global_position): 
+		if _is_in_cone(body): 
 			new_detected.append(body)
 			if body not in detected_nodes: 
 				detected_nodes.append(body)
@@ -62,12 +62,13 @@ func _scan_for_entities():
 			emit_signal("entity_exited_vision", old)
 
 #cone math: distance + angle + LOS
-func _is_in_cone(target_pos: Vector2) -> bool: 
+func _is_in_cone(entity: Node2D) -> bool: 
 	var origin = global_position
+	var target_pos = entity.global_position
 	var to_target = target_pos - origin
 	
 	# 1. Distance check 
-	if to_target.length() > vision_angle: 
+	if to_target.length() > vision_range: 
 		return false 
 		
 	# 2. Angle check 
@@ -83,7 +84,8 @@ func _is_in_cone(target_pos: Vector2) -> bool:
 	var result = space.intersect_ray(query)
 	
 	if result.size() > 0 and result["collider"] != null: 
-		if result["collider"] != target_pos: 
+		# If we hit something that is not the target entity, LOS is blocked
+		if result["collider"] != entity: 
 			return false 
 	return true 
 	
