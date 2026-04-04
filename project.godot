@@ -71,7 +71,6 @@ Shippable=""
 Boxes=""
 conveyor=""
 Manager=""
-UI=""
 
 [gui]
 
