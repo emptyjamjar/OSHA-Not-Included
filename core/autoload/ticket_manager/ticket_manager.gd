@@ -11,6 +11,9 @@ var level: int = 1
 var ticket_templates : Array = []
 var ticket_available: int 
 
+#The icon and the lable indicating what items are needed for the ticket.
+var item_ticket_display = preload("res://objects/scanner/terminal/item_ticket_display.tscn")
+
 # each ticket will have different status
 # available - ticket is ready to deploy through ticket_terminal 
 # started - player pressed E to interact with the terminal and now starts a ticket 
@@ -175,8 +178,8 @@ func update_queue_ui():
 			slot.modulate = Color(0.7, 0.7, 0.7, 1) #dim
 
 		var bar = slot.get_node("AnimatedSprite2D/TimeCountDownBar")
-		slot.get_node("AnimatedSprite2D/TicketTitle").text = t.ticket_name
-		slot.get_node("AnimatedSprite2D/TicketDescription").text = t.ticket_description
+		#slot.get_node("AnimatedSprite2D/TicketTitle").text = t.ticket_name
+		#slot.get_node("AnimatedSprite2D/TicketDescription").text = t.ticket_description
 		bar.max_value = t.max_time
 		bar.value = t.remaining_time
 		# color change based on time left
@@ -199,27 +202,33 @@ func update_queue_ui():
 			var needed = t.required_items[id]
 			var delivered = t.delivered_items.get(id, 0)
 			var item_data = item_db.get_item_by_id(id)
-			var hbox = HBoxContainer.new()
-			hbox.custom_minimum_size = Vector2(-5, 55)
-
-			var icon = TextureRect.new()
-			icon.texture = item_data.texture
-			icon.custom_minimum_size = Vector2(16, 16)
-			icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-			icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-			# Prevent container from overriding size
-			icon.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-			icon.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+			#var hbox = HBoxContainer.new()
+			#hbox.custom_minimum_size = Vector2(-5, 55)
 			
-			
-			var label = Label.new()
-			label.text = "%d / %d" % [delivered, needed]
-			label.add_theme_color_override("font_color", Color.DIM_GRAY)
-			label.add_theme_font_size_override("font_size", 8)
+			#This is the actual icon on the ticket. It has the sprite and a label.
+			var ticket_icon = item_ticket_display.instantiate()
 
-			hbox.add_child(icon)
-			hbox.add_child(label)
-			req_container.add_child(hbox)
+			#var icon = TextureRect.new()
+			#icon.texture = item_data.texture
+			#icon.custom_minimum_size = Vector2(16, 16)
+			#icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+			#icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+			## Prevent container from overriding size
+			#icon.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
+			#icon.size_flags_vertical = Control.SIZE_SHRINK_CENTER
+			
+			#This is for the label next to the item.
+			ticket_icon.item_label.text = "%d/%d" % [delivered, needed]
+			ticket_icon.item_icon.texture = item_data.uiTexture
+			
+			#var label = Label.new()
+			#label.text = "%d / %d" % [delivered, needed]
+			#label.add_theme_color_override("font_color", Color.DIM_GRAY)
+			#label.add_theme_font_size_override("font_size", 8)
+
+			#hbox.add_child(icon)
+			#hbox.add_child(label)
+			req_container.add_child(ticket_icon)
 	
 
 			

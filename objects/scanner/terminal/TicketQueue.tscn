@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://brjl03whlgukn" path="res://objects/scanner/terminal/Ticket_SpriteSheet-PNG.png" id="1_vlja4"]
 [ext_resource type="Texture2D" uid="uid://btfptaejf4dhs" path="res://objects/scanner/terminal/TicketTimeBackPNG.png" id="2_dsuxn"]
 [ext_resource type="Texture2D" uid="uid://c0854h1cw2cb" path="res://objects/scanner/terminal/TicketTimeBarPNG.png" id="3_v8ihf"]
+[ext_resource type="PackedScene" uid="uid://7cuqmw2ok8dg" path="res://objects/scanner/terminal/item_ticket_display.tscn" id="5_0imhw"]
 [ext_resource type="Script" uid="uid://0n1wwwmlkbx7" path="res://objects/scanner/terminal/slot_2.gd" id="5_u133q"]
 [ext_resource type="Script" uid="uid://dhgisybrihjmm" path="res://objects/scanner/terminal/slot_3.gd" id="6_0imhw"]
 [ext_resource type="Script" uid="uid://bbjyh7x7epkrg" path="res://objects/scanner/terminal/slot_4.gd" id="7_2t5fm"]
@@ -122,10 +123,8 @@ offset_left = 3.2
 offset_top = 12.0
 offset_right = 60.000004
 offset_bottom = 18.492752
-theme_override_font_sizes/normal_font_size = 5
-text = "Title"
+theme_override_font_sizes/normal_font_size = 11
 fit_content = true
-metadata/_edit_use_anchors_ = true
 
 [node name="TicketDescription" type="RichTextLabel" parent="HBoxContainer/Slot1/AnimatedSprite2D" unique_id=266063604]
 self_modulate = Color(0.1428582, 0.14285824, 0.1428582, 1)
@@ -134,17 +133,17 @@ offset_top = 18.0
 offset_right = 56.135994
 offset_bottom = 27.275364
 theme_override_font_sizes/normal_font_size = 4
-text = "Description"
 fit_content = true
-metadata/_edit_use_anchors_ = true
 
-[node name="RequiredItemsContainer" type="VBoxContainer" parent="HBoxContainer/Slot1/AnimatedSprite2D" unique_id=1866141633]
-clip_contents = true
+[node name="RequiredItemsContainer" type="GridContainer" parent="HBoxContainer/Slot1/AnimatedSprite2D" unique_id=1987801779]
 offset_left = 3.0
-offset_top = 10.0
+offset_top = 9.0
 offset_right = 61.0
-offset_bottom = 47.874
-metadata/_edit_use_anchors_ = true
+offset_bottom = 46.874
+columns = 3
+
+[node name="ItemTicketDisplay" parent="HBoxContainer/Slot1/AnimatedSprite2D/RequiredItemsContainer" unique_id=611193045 instance=ExtResource("5_0imhw")]
+layout_mode = 2
 
 [node name="Slot2" type="Control" parent="HBoxContainer" unique_id=680985875]
 layout_mode = 2
@@ -170,7 +169,6 @@ offset_top = 52.0
 offset_right = 61.0
 offset_bottom = 60.0
 texture_under = ExtResource("2_dsuxn")
-metadata/_edit_use_anchors_ = true
 
 [node name="TimeCountDownBar" type="TextureProgressBar" parent="HBoxContainer/Slot2/AnimatedSprite2D" unique_id=1391774862]
 offset_left = 14.0
@@ -178,7 +176,6 @@ offset_top = 52.0
 offset_right = 61.0
 offset_bottom = 60.0
 texture_progress = ExtResource("3_v8ihf")
-metadata/_edit_use_anchors_ = true
 
 [node name="TicketTitle" type="RichTextLabel" parent="HBoxContainer/Slot2/AnimatedSprite2D" unique_id=1465408278]
 self_modulate = Color(0.096204735, 0.09620475, 0.096204735, 1)
@@ -187,9 +184,7 @@ offset_top = 12.0
 offset_right = 60.000004
 offset_bottom = 18.492752
 theme_override_font_sizes/normal_font_size = 5
-text = "Title"
 fit_content = true
-metadata/_edit_use_anchors_ = true
 
 [node name="TicketDescription" type="RichTextLabel" parent="HBoxContainer/Slot2/AnimatedSprite2D" unique_id=1587925023]
 self_modulate = Color(0.1428582, 0.14285824, 0.1428582, 1)
@@ -198,9 +193,7 @@ offset_top = 18.0
 offset_right = 56.135994
 offset_bottom = 27.275364
 theme_override_font_sizes/normal_font_size = 4
-text = "Description"
 fit_content = true
-metadata/_edit_use_anchors_ = true
 
 [node name="RequiredItemsContainer" type="VBoxContainer" parent="HBoxContainer/Slot2/AnimatedSprite2D" unique_id=597350513]
 clip_contents = true
@@ -208,7 +201,6 @@ offset_left = 3.0
 offset_top = 10.0
 offset_right = 61.0
 offset_bottom = 47.874
-metadata/_edit_use_anchors_ = true
 
 [node name="Slot3" type="Control" parent="HBoxContainer" unique_id=432832531]
 layout_mode = 2
@@ -234,7 +226,6 @@ offset_top = 52.0
 offset_right = 61.0
 offset_bottom = 60.0
 texture_under = ExtResource("2_dsuxn")
-metadata/_edit_use_anchors_ = true
 
 [node name="TimeCountDownBar" type="TextureProgressBar" parent="HBoxContainer/Slot3/AnimatedSprite2D" unique_id=1987564752]
 offset_left = 14.0
@@ -242,7 +233,6 @@ offset_top = 52.0
 offset_right = 61.0
 offset_bottom = 60.0
 texture_progress = ExtResource("3_v8ihf")
-metadata/_edit_use_anchors_ = true
 
 [node name="TicketTitle" type="RichTextLabel" parent="HBoxContainer/Slot3/AnimatedSprite2D" unique_id=2014716421]
 self_modulate = Color(0.096204735, 0.09620475, 0.096204735, 1)
@@ -251,9 +241,7 @@ offset_top = 12.0
 offset_right = 60.000004
 offset_bottom = 18.492752
 theme_override_font_sizes/normal_font_size = 5
-text = "Title"
 fit_content = true
-metadata/_edit_use_anchors_ = true
 
 [node name="TicketDescription" type="RichTextLabel" parent="HBoxContainer/Slot3/AnimatedSprite2D" unique_id=1862155246]
 self_modulate = Color(0.1428582, 0.14285824, 0.1428582, 1)
@@ -262,9 +250,7 @@ offset_top = 18.0
 offset_right = 56.135994
 offset_bottom = 27.275364
 theme_override_font_sizes/normal_font_size = 4
-text = "Description"
 fit_content = true
-metadata/_edit_use_anchors_ = true
 
 [node name="RequiredItemsContainer" type="VBoxContainer" parent="HBoxContainer/Slot3/AnimatedSprite2D" unique_id=431354000]
 clip_contents = true
@@ -272,7 +258,6 @@ offset_left = 3.0
 offset_top = 10.0
 offset_right = 61.0
 offset_bottom = 47.874
-metadata/_edit_use_anchors_ = true
 
 [node name="Slot4" type="Control" parent="HBoxContainer" unique_id=1700340132]
 layout_mode = 2
@@ -298,7 +283,6 @@ offset_top = 52.0
 offset_right = 61.0
 offset_bottom = 60.0
 texture_under = ExtResource("2_dsuxn")
-metadata/_edit_use_anchors_ = true
 
 [node name="TimeCountDownBar" type="TextureProgressBar" parent="HBoxContainer/Slot4/AnimatedSprite2D" unique_id=1631605592]
 offset_left = 14.0
@@ -306,7 +290,6 @@ offset_top = 52.0
 offset_right = 61.0
 offset_bottom = 60.0
 texture_progress = ExtResource("3_v8ihf")
-metadata/_edit_use_anchors_ = true
 
 [node name="TicketTitle" type="RichTextLabel" parent="HBoxContainer/Slot4/AnimatedSprite2D" unique_id=699266893]
 self_modulate = Color(0.096204735, 0.09620475, 0.096204735, 1)
@@ -315,9 +298,7 @@ offset_top = 12.0
 offset_right = 60.000004
 offset_bottom = 18.492752
 theme_override_font_sizes/normal_font_size = 5
-text = "Title"
 fit_content = true
-metadata/_edit_use_anchors_ = true
 
 [node name="TicketDescription" type="RichTextLabel" parent="HBoxContainer/Slot4/AnimatedSprite2D" unique_id=1068020634]
 self_modulate = Color(0.1428582, 0.14285824, 0.1428582, 1)
@@ -326,9 +307,7 @@ offset_top = 18.0
 offset_right = 56.135994
 offset_bottom = 27.275364
 theme_override_font_sizes/normal_font_size = 4
-text = "Description"
 fit_content = true
-metadata/_edit_use_anchors_ = true
 
 [node name="RequiredItemsContainer" type="VBoxContainer" parent="HBoxContainer/Slot4/AnimatedSprite2D" unique_id=1773670303]
 clip_contents = true

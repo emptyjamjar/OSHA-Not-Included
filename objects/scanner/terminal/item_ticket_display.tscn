@@ -1,0 +1,45 @@
+[gd_scene format=3 uid="uid://7cuqmw2ok8dg"]
+
+[ext_resource type="Script" uid="uid://bvgt4wk6hnf3r" path="res://objects/scanner/terminal/item_ticket_display.gd" id="1_fl1d5"]
+[ext_resource type="Texture2D" uid="uid://btjy75lc4a2jw" path="res://objects/items/water_bottles/warehouse-black-water.png" id="1_qwevs"]
+
+[node name="ItemTicketDisplay" type="Control" unique_id=611193045 node_paths=PackedStringArray("item_icon", "item_label")]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_fl1d5")
+item_icon = NodePath("TextureRect")
+item_label = NodePath("ItemCountLabel/Label")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=238617242]
+layout_mode = 0
+texture = ExtResource("1_qwevs")
+stretch_mode = 2
+
+[node name="ItemCountLabel" type="Control" parent="." unique_id=531238830]
+anchors_preset = 0
+offset_top = 10.0
+offset_right = 40.0
+offset_bottom = 50.0
+
+[node name="ColorRect" type="ColorRect" parent="ItemCountLabel" unique_id=1252284988]
+layout_mode = 0
+offset_right = 18.0
+offset_bottom = 9.0
+color = Color(0, 0, 0, 0.39215687)
+
+[node name="Label" type="Label" parent="ItemCountLabel" unique_id=1061127646]
+layout_mode = 1
+offset_left = 1.0
+offset_right = 17.0
+offset_bottom = 12.0
+theme_override_colors/font_color = Color(0.97320193, 0.90634763, 0.8214788, 1)
+theme_override_colors/font_outline_color = Color(0.12098106, 0.1290074, 0.2334584, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 11
+text = "3/4"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
