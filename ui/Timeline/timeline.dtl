@@ -4,12 +4,15 @@ Let me show you around the warehouse!
 First things first\: Orders. You'll get your orders from this thing right here!
 Just come over and press E, and you'll get some orders right away!
 But don't dawdle, or the order will expire.
+Come interact with the terminal and then follow me.
 [signal arg="2"]
 Next up is the conveyor. This is where all of our premium products come through!
 You'll be grabbing items from here and bringing them over to our next station.
+Speaking of our next station, grab the item on your currently highlighted ticket and follow me.
 [signal arg="3"]
 Speaking of our next station, this is the packaging station!
 Just toss the package in and watch it pop right out all boxed up!
+Be sure to pick it up off the ground, and bring it along.
 [signal arg="4"]
 And here's our delivery truck!
 This'll take it our package where it needs to go!
