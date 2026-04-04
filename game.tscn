@@ -239,7 +239,7 @@ scale = Vector2(18.681644, 9.741211)
 color = Color(0.77646405, 0.79886746, 0.85534906, 1)
 
 [node name="Trashcan" parent="." unique_id=1663879866 instance=ExtResource("20_e36ub")]
-position = Vector2(573, 205)
+position = Vector2(573, 197)
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
 [connection signal="get_money" from="Shipper" to="UI/Score" method="_on_shipper_get_money"]
