@@ -16,7 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://coa2sufhyfblt" path="res://objects/food/vending_machine.tscn" id="13_g8qib"]
 [ext_resource type="PackedScene" uid="uid://cv4vrnpxs40bf" path="res://objects/restroom/washroom.tscn" id="14_wa3ku"]
 [ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="15_vhlys"]
-[ext_resource type="PackedScene" uid="uid://u3cnys6nkx03" path="res://levels/shared/walls.tscn" id="16_ta3uh"]
+[ext_resource type="PackedScene" path="res://levels/shared/walls.tscn" id="16_ta3uh"]
 [ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="17_mnfdo"]
 [ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="18_xjrjs"]
 [ext_resource type="PackedScene" uid="uid://dwdtpfj4n8pco" path="res://objects/trashcan/trashcan.tscn" id="19_ya87f"]
