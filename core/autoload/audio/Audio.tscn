@@ -8,11 +8,6 @@
 [ext_resource type="AudioStream" uid="uid://cwy7p50xkkj2q" path="res://core/autoload/audio/audio_assets/world_sounds/vending_machine.ogg" id="6_j5bvv"]
 [ext_resource type="AudioStream" uid="uid://dt5l1qgpgqfj4" path="res://core/autoload/audio/audio_assets/music/level1_loop.wav" id="7_nxjot"]
 [ext_resource type="AudioStream" uid="uid://beb70xikxwref" path="res://core/autoload/audio/audio_assets/interface_sounds/Invalid.wav" id="8_dbsto"]
-[ext_resource type="AudioStream" uid="uid://wwx85g4xvu" path="res://core/autoload/audio/audio_assets/world_sounds/trash_open.wav" id="9_3i6ne"]
-[ext_resource type="AudioStream" uid="uid://d04h6nuetfsih" path="res://core/autoload/audio/audio_assets/world_sounds/trash_close.wav" id="10_prbqn"]
-[ext_resource type="AudioStream" uid="uid://dqxurt1yykpun" path="res://core/autoload/audio/audio_assets/world_sounds/trash_use.wav" id="11_prbqn"]
-[ext_resource type="AudioStream" uid="uid://bx3fqd8r4a86" path="res://core/autoload/audio/audio_assets/interface_sounds/shipped.wav" id="12_qvoy8"]
-[ext_resource type="AudioStream" uid="uid://cg0tjusaly00b" path="res://core/autoload/audio/audio_assets/world_sounds/tape_box.wav" id="13_wylq0"]
 
 [node name="Audio" type="Node2D" unique_id=343061640]
 script = ExtResource("1_k1vdp")
@@ -53,28 +48,4 @@ bus = &"Music"
 
 [node name="InvalidInteraction" type="AudioStreamPlayer" parent="." unique_id=1997185625]
 stream = ExtResource("8_dbsto")
-bus = &"SFX"
-
-[node name="TrashOpen" type="AudioStreamPlayer" parent="." unique_id=830537609]
-stream = ExtResource("9_3i6ne")
-volume_db = -3.296
-bus = &"SFX"
-
-[node name="TrashClose" type="AudioStreamPlayer" parent="." unique_id=1130923895]
-stream = ExtResource("10_prbqn")
-volume_db = -3.296
-bus = &"SFX"
-
-[node name="TrashUse" type="AudioStreamPlayer" parent="." unique_id=1389406620]
-stream = ExtResource("11_prbqn")
-volume_db = -9.521
-bus = &"SFX"
-
-[node name="ShippedSuccess" type="AudioStreamPlayer" parent="." unique_id=2037878527]
-stream = ExtResource("12_qvoy8")
-bus = &"SFX"
-
-[node name="TapeBox" type="AudioStreamPlayer" parent="." unique_id=301628472]
-stream = ExtResource("13_wylq0")
-volume_db = -5.821
 bus = &"SFX"

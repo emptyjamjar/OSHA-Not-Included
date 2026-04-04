@@ -41,7 +41,6 @@ func _on_interact():
 		if item.type == ItemData.Type.PACKAGE:
 			if ticket_manager.active_ticket.required_items.has(item.id):
 				if ticket_manager.register_delivery(item.id):
-					Audio.play_shipped()
 					PlayerInventory.remove_at(item_index)
 					get_money.emit()
 					animated_sprite.play("close")

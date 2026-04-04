@@ -186,9 +186,6 @@ custom_data_layer_2/name = "DeSpawnTile"
 custom_data_layer_2/type = 1
 sources/1 = SubResource("TileSetAtlasSource_ncid3")
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_323m6"]
-polygon = PackedVector2Array(0, 22, 0, 29, 17, 29, 17, 27, 22, 27, 22, 30, 25, 30, 25, 28, 30, 28, 30, 26, 39, 26, 39, 30, 42, 30, 42, 27, 54, 27, 54, 30, 58, 30, 58, 26, 70, 26, 70, 29, 74, 29, 74, 27, 86, 27, 86, 30, 90, 30, 90, 27, 103, 27, 103, 30, 106, 30, 106, 27, 118, 27, 118, 30, 122, 30, 122, 27, 127, 27, 127, 25, 17, 25, 17, 21)
-
 [node name="Conveyor" type="Node2D" unique_id=1135306595 node_paths=PackedStringArray("tile_map", "spawn_despawn_map", "items_node")]
 script = ExtResource("1_ncid3")
 item_resources = Array[ExtResource("2_323m6")]([ExtResource("3_ivmdc"), ExtResource("4_dnyr5"), ExtResource("5_xwue2"), ExtResource("6_w0iay")])
@@ -209,6 +206,3 @@ tile_set = SubResource("TileSet_ywffn")
 [node name="Spawn Despawn TileMap" type="TileMapLayer" parent="." unique_id=1601041665]
 tile_map_data = PackedByteArray("AAAAAAAAAQAAAAMAAAAEAAEAAQABAAEAAAA=")
 tile_set = SubResource("TileSet_ywffn")
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Spawn Despawn TileMap" unique_id=1541918927]
-occluder = SubResource("OccluderPolygon2D_323m6")
