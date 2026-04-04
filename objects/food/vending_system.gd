@@ -19,6 +19,7 @@
 extends Control
 
 signal vending_closed
+signal item_bought(item: ItemData)
 
 @export var ui : CanvasLayer
 @export var currency_label : Label
@@ -97,6 +98,8 @@ func buy_item(item: ItemData) -> bool:
 	currency -= item.price
 	print("Bought item: ", item.name)
 	Audio.play_vending_machine()
+	item_bought.emit(item)
+	# Drop item on ground if no inventory space
 	if not PlayerInventory.add(item):
 		var spawned_item = ItemSpawner.spawn_with_data(item)
 		spawned_item.global_position = InteractionManager.player.global_position
@@ -144,6 +147,7 @@ func _on_code_entered(code: String):
 		print("Invalid slot: ", code)
 		Audio.play_invalid_interaction()
 		return
+	
 	var item := slot_map[code]
 	if buy_item(item):
 		print("BOUGHT FROM SLOT ", code)
