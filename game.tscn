@@ -143,7 +143,7 @@ position = Vector2(744, 304)
 scale = Vector2(0.24458057, 0.24458057)
 
 [node name="Manager" parent="." unique_id=565657217 node_paths=PackedStringArray("patrol_paths_at_root", "out_bounds_area") groups=["Manager"] instance=ExtResource("16_80cx4")]
-position = Vector2(626, 420)
+position = Vector2(507, 290)
 collision_mask = 2
 patrol_paths_at_root = NodePath("../PatrolPaths")
 out_bounds_area = NodePath("../OutBoundsArea")

@@ -1,6 +1,7 @@
 extends Node
 # COLLECTION OF STATES
 @export var initial_state: State 
+var manager: CharacterBody2D
 var current_state: State 
 var states : Dictionary = {} # holds all the State nodes 
 
@@ -12,11 +13,13 @@ var states : Dictionary = {} # holds all the State nodes
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	manager = get_parent()
 	print("StateMachine here!")
 	for child in get_children(): 
 		if child is State: 
 			states[child.name.to_lower()] = child 
 			child.transitioned.connect(on_child_transition)
+			child.manager = manager
 	if initial_state:
 		print(initial_state)
 		initial_state.Enter()
