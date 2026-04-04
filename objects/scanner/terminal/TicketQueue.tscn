@@ -76,12 +76,11 @@ animations = [{
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1292286621]
 layout_direction = 2
-offset_right = 672.0
-offset_bottom = 114.88
+offset_right = 1378.5657
+offset_bottom = 114.88048
 size_flags_horizontal = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 64
-alignment = 1
 
 [node name="Slot1" type="Control" parent="HBoxContainer" unique_id=2047756636]
 layout_mode = 2

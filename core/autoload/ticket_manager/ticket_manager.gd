@@ -3,9 +3,6 @@ class_name TicketManager
 
 signal ticket_empty
 signal tickets_done
-signal ticket_timed_out
-signal ticket_submitted
-signal tickets_generated ##Used by components that care about the tickets being made.
 var all_tickets: Array[Ticket] = [] # 12 tickets for the level - can update it later
 var visible_queue: Array[Ticket] = [] # max 4 tickets 
 var timers: Dictionary = {} # ticket --> Timer 
@@ -82,9 +79,6 @@ func generate_level_ticket(count: int):
 	fill_visible_queue()
 	start_timers_for_visible_queue()
 	update_queue_ui() 
-	
-	tickets_generated.emit() #Tell everything that cares that tickets have been made.
-
 
 func fill_visible_queue(): 
 	print("Fill tickets into visible queue")
@@ -127,9 +121,6 @@ func _on_ticket_tick(ticket: Ticket):
 # ticket is expired, turn off the ticket box, mark the ticket as FINISHED 
 func _on_ticket_expired(ticket: Ticket):
 	print("Ticket expired!")
-	
-	ticket_timed_out.emit() #mostly for UI animations.
-	
 	ticket.status = Ticket.TicketStatus.FINISHED
 	#desc_label.text = "Ticket expired!"
 	# stops and remove timer
@@ -144,7 +135,7 @@ func _on_ticket_expired(ticket: Ticket):
 	start_timers_for_visible_queue()
 	update_queue_ui()
 
-func complete_ticket(ticket: Ticket):
+func complete_ticket(ticket: Ticket): 
 	ticket.status = Ticket.TicketStatus.FINISHED
 	timers[ticket].stop()
 	timers.erase(ticket)
@@ -362,8 +353,6 @@ func reach_goal():
 # will work on this further 
 func finish_ticket(ticket: Ticket = active_ticket):
 	if ticket and ticket.status == Ticket.TicketStatus.REACHED_GOAL:
-		
-		ticket_submitted.emit() #This is for UI animations.
 		ticket.finish()
 		# Remove timer for this ticket
 		if timers.has(ticket):
