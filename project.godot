@@ -40,6 +40,7 @@ ItemSpawner="*uid://biwgn8hxrtv3d"
 Dialogic="*uid://ds2q0uclmolvu"
 LoadSettings="*uid://df1nx734uoekf"
 Level_Manager="*uid://bxgyur2ge8voh"
+LoadKeybinds="*uid://df1nx734uoekf"
 
 [dialogic]
 
