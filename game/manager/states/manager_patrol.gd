@@ -16,11 +16,6 @@ func Enter():
 	wait_timer = 0.0
 	
 func Physics_Update(delta: float) -> void:
-	# If player is visible, stop patrolling
-	if manager.vision_cone.is_entity_visible(player):
-		transitioned.emit(self, "follow")
-		return
-		
 	if manager.waiting: 
 		return
 	var path = manager.current_path

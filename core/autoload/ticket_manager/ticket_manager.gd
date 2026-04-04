@@ -310,22 +310,15 @@ func register_delivery(ticket_id: int) -> bool:
 	
 
 	var delivered := active_ticket.delivered_items
-	# fixed issue: extra number updated in the delivery 
-	# the player will lose two packages for the required item if player tries to 
-	# deliver more than needed quantity
+	
+	delivered[ticket_id] = delivered.get(ticket_id, 0) + 1
+	
+	# Refresh UI so the player sees the updated counts
+	update_queue_ui()
 	if _is_ticket_complete():
 		reach_goal()
 		print("Completed:")
 		print(ticket_id)
-	else: 
-		delivered[ticket_id] = delivered.get(ticket_id, 0) + 1
-		
-		# Refresh UI so the player sees the updated counts
-		update_queue_ui()
-		if _is_ticket_complete():
-			reach_goal()
-			print("Completed:")
-			print(ticket_id)
 	return true
 
 # related to register_delivery() 
