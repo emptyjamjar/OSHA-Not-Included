@@ -1,14 +1,17 @@
 [gd_scene format=3 uid="uid://bb2mtfafbuatt"]
 
-[ext_resource type="Script" path="res://objects/food/shop_slot.gd" id="1_hf6s4"]
+[ext_resource type="Script" uid="uid://bl5rpdm6xw3cw" path="res://objects/food/shop_slot.gd" id="1_hf6s4"]
 [ext_resource type="Texture2D" uid="uid://6rqgyi2qxpuw" path="res://objects/food/food_assets/soda_coke.png" id="3_7wafy"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hf6s4"]
+
 [node name="ShopSlot" type="Panel" unique_id=1253106311]
-self_modulate = Color(1, 1, 1, 0.039215688)
 custom_minimum_size = Vector2(64, 64)
 offset_top = 2.0
 offset_right = 65.0
 offset_bottom = 75.71429
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_hf6s4")
 script = ExtResource("1_hf6s4")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=326759199]
@@ -47,3 +50,7 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "A1"
 horizontal_alignment = 1
+
+[connection signal="gui_input" from="." to="." method="_on_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

@@ -25,29 +25,12 @@ layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_xggib")
 ui = NodePath("UI")
-currency_label = NodePath("UI/Currency")
+currency_label = NodePath("")
 vending_items = Array[ExtResource("2_s7a41")]([ExtResource("4_yguo5"), ExtResource("4_kal06"), ExtResource("3_q2db4"), ExtResource("4_yguo5"), ExtResource("4_yguo5"), ExtResource("3_q2db4"), ExtResource("4_kal06"), ExtResource("3_q2db4"), ExtResource("4_kal06")])
 vending_container = NodePath("UI/Panel/MarginContainer/VendingInventory")
 slot_input = NodePath("UI/Panel/LineEdit")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=715410091]
-
-[node name="Currency" type="Label" parent="UI" unique_id=1919819601]
-visible = false
-anchors_preset = -1
-anchor_left = -0.0328125
-anchor_top = -0.019444445
-anchor_right = -0.0328125
-anchor_bottom = -0.019444445
-offset_left = 391.0
-offset_top = 29.0
-offset_right = 508.0
-offset_bottom = 68.0
-theme_override_font_sizes/font_size = 10
-text = "Currency: 0"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="Panel" parent="UI" unique_id=964781237]
 anchors_preset = 8

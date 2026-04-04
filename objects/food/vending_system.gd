@@ -72,8 +72,6 @@ func _input(event):
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	
-	currency = 100
-	
 	if ui:
 		ui.hide()
 	if not is_loaded and vending_items.size() > 0:
@@ -88,22 +86,30 @@ func _ready():
 
 func buy_item(item: ItemData) -> bool:
 	if item == null:
+		Audio.play_invalid_interaction()
 		return false
 	
 	if item.price > currency:
 		print("Not enough money")
+		Audio.play_invalid_interaction()
 		return false
 	
 	currency -= item.price
 	print("Bought item: ", item.name)
 	Audio.play_vending_machine()
+	if not PlayerInventory.add(item):
+		var spawned_item = ItemSpawner.spawn_with_data(item)
+		spawned_item.global_position = InteractionManager.player.global_position
+		var game := get_tree().get_first_node_in_group("game")
+		game.add_child(spawned_item)
 	return true
 
 
 func free_previous_slots():
 	for slot in vending_container.get_children():
 		slot.free()
-	
+
+
 func load_shop_inventory():
 	slot_map.clear()
 	
@@ -142,6 +148,7 @@ func _on_code_entered(code: String):
 	if buy_item(item):
 		print("BOUGHT FROM SLOT ", code)
 		mode = MODE.OFF # turn off
+
 
 func set_shop_inventory(list : Array[ItemData]):
 	free_previous_slots()
