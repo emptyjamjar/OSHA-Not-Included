@@ -111,8 +111,9 @@ position = Vector2(216, 176)
 [node name="HUD" parent="CanvasLayer" unique_id=830642951 node_paths=PackedStringArray("productivity_manager") instance=ExtResource("2_ryrav")]
 productivity_manager = NodePath("../../UI/Score")
 
-[node name="SanityChecker" parent="." unique_id=464636574 node_paths=PackedStringArray("sanity", "eyeballs") instance=ExtResource("5_hb5m1")]
+[node name="SanityChecker" parent="." unique_id=464636574 node_paths=PackedStringArray("sanity", "player", "eyeballs") instance=ExtResource("5_hb5m1")]
 sanity = NodePath("../Player/SanityComponent")
+player = NodePath("../Player")
 eyeballs = [NodePath("../SanityEyeball")]
 
 [node name="Player" parent="." unique_id=2112891127 instance=ExtResource("5_rvswv")]
@@ -255,9 +256,8 @@ color = Color(0.77646405, 0.79886746, 0.85534906, 1)
 [node name="Trashcan" parent="." unique_id=1663879866 instance=ExtResource("20_e36ub")]
 position = Vector2(573, 197)
 
-[node name="SanityEyeball" parent="." unique_id=1605012371 node_paths=PackedStringArray("player") instance=ExtResource("22_x5p1p")]
+[node name="SanityEyeball" parent="." unique_id=1605012371 instance=ExtResource("22_x5p1p")]
 position = Vector2(456, 256)
-player = NodePath("../Player")
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
 [connection signal="get_money" from="Shipper" to="UI/Score" method="_on_shipper_get_money"]

@@ -15,15 +15,22 @@ enum Effects {
 	SPAWN_EYE_BALL,
 }
 
+## Sanity level at which the eyeball should spawn
+@export var spawn_thresholds : Array[int] = [
+	50
+]
+
 ## Calls spawn_eyeball function when milestone is reached
-@export var milestones : Dictionary[int, bool] = {
-	50: false,
-}
+var milestones : Dictionary[int, bool] = {}
 
 
 func _ready() -> void:
 	sanity.sanity_changed.connect(_on_sanity_changed)
 	PlayerInventory.storage_updated.connect(_on_inventory_updated)
+	
+	# Convert spawn_thresholds to milestones
+	for key in spawn_thresholds:
+		milestones[key] = false
 	
 	# Hide all eyeballs
 	for eyeball in eyeballs:
