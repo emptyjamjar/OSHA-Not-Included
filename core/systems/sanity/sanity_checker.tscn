@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://benkbh7e5rv0k"]
+
+[ext_resource type="Script" uid="uid://bvyoqnhx6qdi" path="res://core/systems/sanity/sanity_checker.gd" id="1_ac8da"]
+
+[node name="SanityChecker" type="Node" unique_id=464636574]
+script = ExtResource("1_ac8da")

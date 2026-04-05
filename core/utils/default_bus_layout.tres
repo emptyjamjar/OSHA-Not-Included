@@ -1,7 +1,12 @@
 [gd_resource type="AudioBusLayout" format=3 uid="uid://c1uql1fcd7q2k"]
 
+[sub_resource type="AudioEffectPanner" id="AudioEffectPanner_jdfbw"]
+resource_name = "Panner"
+
 [resource]
 bus/0/bypass_fx = true
+bus/0/effect/0/effect = SubResource("AudioEffectPanner_jdfbw")
+bus/0/effect/0/enabled = false
 bus/1/name = &"SFX"
 bus/1/solo = false
 bus/1/mute = false

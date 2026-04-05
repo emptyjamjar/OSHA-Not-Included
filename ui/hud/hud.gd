@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 @onready var healthbar: TextureProgressBar = $Badge/HealthBar
 @onready var energybar: TextureProgressBar = $Badge/StaminaBar
