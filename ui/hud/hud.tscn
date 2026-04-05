@@ -375,6 +375,8 @@ text = "0"
 
 [node name="Inventory" parent="." unique_id=988897325 instance=ExtResource("3_kwc50")]
 layout_mode = 0
+offset_top = 238.0
+offset_bottom = 430.0
 
 [node name="Badge" type="TextureRect" parent="." unique_id=676530222]
 z_index = -1
@@ -529,7 +531,7 @@ layout_mode = 0
 offset_left = 8.0
 offset_top = 32.0
 offset_right = 120.0
-offset_bottom = 66.0
+offset_bottom = 78.0
 theme_override_colors/font_color = Color(0.9490196, 0.827451, 0.67058825, 1)
 theme_override_colors/font_shadow_color = Color(0.8666667, 0, 0, 0.3137255)
 theme_override_colors/font_outline_color = Color(0.15294118, 0.15294118, 0.26666668, 1)

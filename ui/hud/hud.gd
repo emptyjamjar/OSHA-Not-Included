@@ -20,8 +20,6 @@ extends Control
 var quota_size: int
 var old_quota_size: int
 
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	energybar.max_value = energycomp.MAX_ENERGY
