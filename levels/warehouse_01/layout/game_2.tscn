@@ -80,10 +80,9 @@ polygon = PackedVector2Array(-0.99945825, -1, 636.4481, 0.8156662, 637.65436, 36
 [node name="Shipper" parent="." unique_id=441417436 instance=ExtResource("3_5dj75")]
 position = Vector2(216, 176)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=167263537]
-anchor_mode = 0
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1031705252]
 
-[node name="HUD" parent="Camera2D" unique_id=830642951 node_paths=PackedStringArray("productivity_manager") instance=ExtResource("4_gd6qc")]
+[node name="HUD" parent="CanvasLayer" unique_id=830642951 node_paths=PackedStringArray("productivity_manager") instance=ExtResource("4_gd6qc")]
 productivity_manager = NodePath("../../UI/Score")
 
 [node name="Player" parent="." unique_id=2112891127 instance=ExtResource("5_xx1od")]
@@ -174,7 +173,7 @@ texture = SubResource("GradientTexture2D_8onr1")
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=520613747]
 position = Vector2(316.00006, 394.99997)
 scale = Vector2(18.681644, 9.741211)
-color = Color(0.64803123, 0.68176806, 0.7610899, 1)
+color = Color(0.5195836, 0.5615552, 0.65431774, 1)
 
 [node name="Trashcan" parent="." unique_id=1556839144 instance=ExtResource("18_x2hlw")]
 position = Vector2(338, 217)
@@ -185,8 +184,8 @@ scale = Vector2(0.245, 0.245)
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
 [connection signal="get_money" from="Shipper" to="UI/Score" method="_on_shipper_get_money"]
-[connection signal="health_change" from="Player/HealthComponent" to="Camera2D/HUD" method="_on_health_component_health_change"]
-[connection signal="needs_change" from="Player/NeedsComponent" to="Camera2D/HUD" method="_on_needs_component_needs_change"]
+[connection signal="health_change" from="Player/HealthComponent" to="CanvasLayer/HUD" method="_on_health_component_health_change"]
+[connection signal="needs_change" from="Player/NeedsComponent" to="CanvasLayer/HUD" method="_on_needs_component_needs_change"]
 [connection signal="ticketsEmpty" from="TicketTerminal" to="UI/Score" method="_on_ticket_terminal_tickets_empty"]
 [connection signal="washroom_used" from="Washroom" to="UI/Score" method="_on_washroom_washroom_used"]
 

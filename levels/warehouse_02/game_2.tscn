@@ -91,10 +91,9 @@ polygon = PackedVector2Array(-0.99945825, -1, 636.4481, 0.8156662, 637.65436, 36
 [node name="Shipper" parent="." unique_id=441417436 instance=ExtResource("3_bsom8")]
 position = Vector2(216, 176)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=167263537]
-anchor_mode = 0
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=539415569]
 
-[node name="HUD" parent="Camera2D" unique_id=830642951 node_paths=PackedStringArray("productivity_manager") instance=ExtResource("4_6405i")]
+[node name="HUD" parent="CanvasLayer" unique_id=830642951 node_paths=PackedStringArray("productivity_manager") instance=ExtResource("4_6405i")]
 productivity_manager = NodePath("../../UI/Score")
 
 [node name="Player" parent="." unique_id=2112891127 instance=ExtResource("5_scbi8")]
@@ -197,13 +196,13 @@ position = Vector2(269, 259)
 position = Vector2(142, 257)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2024396508]
-color = Color(0.34233037, 0.3785334, 0.45536244, 1)
+color = Color(0.25123212, 0.2831364, 0.34381628, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=113270195]
-visible = false
 position = Vector2(680.8126, 122.281265)
 scale = Vector2(18.681644, 9.741211)
 color = Color(0.33276916, 0.46037263, 0.80294394, 1)
+energy = 0.58
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_wkw6b")
 
@@ -236,7 +235,7 @@ rotation = 1.5707964
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
 [connection signal="get_money" from="Shipper" to="UI/Score" method="_on_shipper_get_money"]
-[connection signal="health_change" from="Player/HealthComponent" to="Camera2D/HUD" method="_on_health_component_health_change"]
-[connection signal="needs_change" from="Player/NeedsComponent" to="Camera2D/HUD" method="_on_needs_component_needs_change"]
+[connection signal="health_change" from="Player/HealthComponent" to="CanvasLayer/HUD" method="_on_health_component_health_change"]
+[connection signal="needs_change" from="Player/NeedsComponent" to="CanvasLayer/HUD" method="_on_needs_component_needs_change"]
 [connection signal="ticketsEmpty" from="TicketTerminal" to="UI/Score" method="_on_ticket_terminal_tickets_empty"]
 [connection signal="washroom_used" from="Washroom" to="UI/Score" method="_on_washroom_washroom_used"]
