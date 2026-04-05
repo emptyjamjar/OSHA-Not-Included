@@ -15,10 +15,9 @@ enum Effects {
 	SPAWN_EYE_BALL,
 }
 
-## Calls given function when key is reached
-## milestone_val: [effect_function, bool]
-var milestones : Dictionary[int, Array] = {
-	50: [_spawn_eye_ball, false],
+## Calls spawn_eyeball function when milestone is reached
+@export var milestones : Dictionary[int, bool] = {
+	50: false,
 }
 
 
@@ -37,10 +36,25 @@ func _ready() -> void:
 func _on_sanity_changed(val: int):
 	for key in milestones.keys():
 		if val <= key:
-			if not milestones[key][1]:
-				milestones[key][0].call(true)
+			if not milestones[key]:
+				_spawn_eye_ball(true)
 		else:
-			milestones[key][0].call(false)
+			_spawn_eye_ball(false)
+
+
+func _spawn_eye_ball(is_on: bool = false):
+	if is_on and _activated_eyeballs < eyeballs.size():
+		var eyeball = eyeballs[_activated_eyeballs]
+		eyeball.visible = true
+		eyeball.enabled = true
+		eyeball.hitbox.call_deferred("set_disabled", false)
+		_activated_eyeballs += 1
+	elif not is_on and _activated_eyeballs >= eyeballs.size():
+		_activated_eyeballs -= 1
+		var eyeball = eyeballs[_activated_eyeballs]
+		eyeball.visible = false
+		eyeball.enabled = false
+		eyeball.hitbox.call_deferred("set_disabled", true)
 
 
 func _on_inventory_updated():
@@ -55,16 +69,3 @@ func _on_anomalous_timeout(index: int):
 		sanity.decrease(5)
 		var timer = get_tree().create_timer(1)
 		timer.timeout.connect(_on_anomalous_timeout.bind(index))
-
-
-func _spawn_eye_ball(is_on: bool = false):
-	if is_on and _activated_eyeballs < eyeballs.size():
-		eyeballs[_activated_eyeballs].visible = true
-		eyeballs[_activated_eyeballs].enabled = true
-		eyeballs[_activated_eyeballs].hitbox.call_deferred("set_disabled", false)
-		_activated_eyeballs += 1
-	elif not is_on and _activated_eyeballs >= eyeballs.size():
-		_activated_eyeballs -= 1
-		eyeballs[_activated_eyeballs].visible = false
-		eyeballs[_activated_eyeballs].enabled = false
-		eyeballs[_activated_eyeballs].hitbox.call_deferred("set_disabled", true)
