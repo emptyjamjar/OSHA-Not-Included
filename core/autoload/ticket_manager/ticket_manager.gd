@@ -49,8 +49,8 @@ func _input(event: InputEvent) -> void:
 			update_queue_ui()
 	
 
-func load_templates_for_level(level: int): 
-	var path := "res://objects/scanner/terminal/level%d_tickets.gd" % level
+func load_templates_for_level(_level: int): 
+	var path := "res://objects/scanner/terminal/level%d_tickets.gd" % _level
 	var script = load(path)
 	if script == null: 
 		print("Cannot find path to the ticket files")
@@ -58,7 +58,7 @@ func load_templates_for_level(level: int):
 	var instance = script.new()
 	ticket_templates = instance.get_templates()
 	ticket_available = ticket_templates.size()
-	print("Loaded", ticket_available, "ticket templates for level", level)
+	print("Loaded", ticket_available, "ticket templates for level", _level)
 	
 
 
