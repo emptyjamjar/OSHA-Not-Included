@@ -81,7 +81,7 @@ offset_right = 1378.5657
 offset_bottom = 114.88048
 size_flags_horizontal = 2
 size_flags_vertical = 3
-theme_override_constants/separation = 64
+theme_override_constants/separation = 66
 
 [node name="Slot1" type="Control" parent="HBoxContainer" unique_id=2047756636]
 layout_mode = 2
@@ -107,7 +107,6 @@ offset_top = 52.0
 offset_right = 61.0
 offset_bottom = 60.0
 texture_under = ExtResource("2_dsuxn")
-metadata/_edit_use_anchors_ = true
 
 [node name="TimeCountDownBar" type="TextureProgressBar" parent="HBoxContainer/Slot1/AnimatedSprite2D" unique_id=836871361]
 offset_left = 14.0
@@ -115,7 +114,6 @@ offset_top = 52.0
 offset_right = 61.0
 offset_bottom = 60.0
 texture_progress = ExtResource("3_v8ihf")
-metadata/_edit_use_anchors_ = true
 
 [node name="TicketTitle" type="RichTextLabel" parent="HBoxContainer/Slot1/AnimatedSprite2D" unique_id=1825323335]
 self_modulate = Color(0.096204735, 0.09620475, 0.096204735, 1)
@@ -123,6 +121,7 @@ offset_left = 3.2
 offset_top = 12.0
 offset_right = 60.000004
 offset_bottom = 18.492752
+mouse_filter = 1
 theme_override_font_sizes/normal_font_size = 11
 fit_content = true
 
@@ -132,6 +131,7 @@ offset_left = 4.136
 offset_top = 18.0
 offset_right = 56.135994
 offset_bottom = 27.275364
+mouse_filter = 1
 theme_override_font_sizes/normal_font_size = 4
 fit_content = true
 
@@ -140,6 +140,8 @@ offset_left = 3.0
 offset_top = 9.0
 offset_right = 61.0
 offset_bottom = 46.874
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 2
 columns = 3
 
 [node name="ItemTicketDisplay" parent="HBoxContainer/Slot1/AnimatedSprite2D/RequiredItemsContainer" unique_id=611193045 instance=ExtResource("5_0imhw")]
@@ -195,12 +197,14 @@ offset_bottom = 27.275364
 theme_override_font_sizes/normal_font_size = 4
 fit_content = true
 
-[node name="RequiredItemsContainer" type="VBoxContainer" parent="HBoxContainer/Slot2/AnimatedSprite2D" unique_id=597350513]
+[node name="RequiredItemsContainer" type="GridContainer" parent="HBoxContainer/Slot2/AnimatedSprite2D" unique_id=1507423579]
 clip_contents = true
 offset_left = 3.0
-offset_top = 10.0
+offset_top = 9.0
 offset_right = 61.0
-offset_bottom = 47.874
+offset_bottom = 46.874
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 2
 
 [node name="Slot3" type="Control" parent="HBoxContainer" unique_id=432832531]
 layout_mode = 2
@@ -252,12 +256,14 @@ offset_bottom = 27.275364
 theme_override_font_sizes/normal_font_size = 4
 fit_content = true
 
-[node name="RequiredItemsContainer" type="VBoxContainer" parent="HBoxContainer/Slot3/AnimatedSprite2D" unique_id=431354000]
+[node name="RequiredItemsContainer" type="GridContainer" parent="HBoxContainer/Slot3/AnimatedSprite2D" unique_id=80344080]
 clip_contents = true
 offset_left = 3.0
-offset_top = 10.0
+offset_top = 9.0
 offset_right = 61.0
-offset_bottom = 47.874
+offset_bottom = 46.874
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 2
 
 [node name="Slot4" type="Control" parent="HBoxContainer" unique_id=1700340132]
 layout_mode = 2
@@ -309,12 +315,14 @@ offset_bottom = 27.275364
 theme_override_font_sizes/normal_font_size = 4
 fit_content = true
 
-[node name="RequiredItemsContainer" type="VBoxContainer" parent="HBoxContainer/Slot4/AnimatedSprite2D" unique_id=1773670303]
+[node name="RequiredItemsContainer" type="GridContainer" parent="HBoxContainer/Slot4/AnimatedSprite2D" unique_id=1673034719]
 clip_contents = true
 offset_left = 3.0
-offset_top = 10.0
+offset_top = 9.0
 offset_right = 61.0
-offset_bottom = 47.874
+offset_bottom = 46.874
+theme_override_constants/h_separation = 4
+theme_override_constants/v_separation = 2
 metadata/_edit_use_anchors_ = true
 
 [connection signal="mouse_entered" from="HBoxContainer/Slot1" to="HBoxContainer/Slot1" method="_on_mouse_entered"]
