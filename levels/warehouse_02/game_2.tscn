@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://ci8cvgkc7sn2f"]
+[gd_scene format=4 uid="uid://ci8cvgkc7sn2f"]
 
 [ext_resource type="PackedScene" uid="uid://chidjbuid2cgd" path="res://levels/shared/World.tscn" id="1_nqsnb"]
 [ext_resource type="Script" uid="uid://c8mj1grnlbspl" path="res://game/manager/ai/out_bounds_area.gd" id="2_8hs76"]
@@ -126,7 +126,12 @@ position = Vector2(416, 251)
 
 [node name="Conveyor" parent="." unique_id=1135306595 groups=["conveyor"] instance=ExtResource("11_qqi37")]
 position = Vector2(557, 239)
-rotation = 1.5707964
+
+[node name="Belt TileMap" parent="Conveyor" index="0" unique_id=1815729401]
+tile_map_data = PackedByteArray("AAD+/wAAAQAAAAEAAAD+/wEAAQAAAAEAAAD+/wIAAQAAAAEAAAD+/wMAAQAAAAIAAAD//wMAAQABAAIAAAAAAAMAAQABAAIAAAD+////AQAAAAEAAAA=")
+
+[node name="Spawn Despawn TileMap" parent="Conveyor" index="2" unique_id=1601041665]
+tile_map_data = PackedByteArray("AAAAAAMAAQADAAMAAAD+////AQABAAMAAAA=")
 
 [node name="TicketTerminal" parent="." unique_id=982348100 instance=ExtResource("12_3ldla")]
 position = Vector2(311, 399)
@@ -240,3 +245,5 @@ rotation = 1.5707964
 [connection signal="needs_change" from="Player/NeedsComponent" to="Camera2D/HUD" method="_on_needs_component_needs_change"]
 [connection signal="ticketsEmpty" from="TicketTerminal" to="UI/Score" method="_on_ticket_terminal_tickets_empty"]
 [connection signal="washroom_used" from="Washroom" to="UI/Score" method="_on_washroom_washroom_used"]
+
+[editable path="Conveyor"]
