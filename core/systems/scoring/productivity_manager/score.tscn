@@ -83,7 +83,7 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Next2" type="TextureButton" parent="." unique_id=358489466]
+[node name="Quit" type="TextureButton" parent="." unique_id=358489466]
 offset_left = 236.0
 offset_top = 327.0
 offset_right = 364.0
@@ -95,7 +95,7 @@ texture_hover = ExtResource("6_hl4pr")
 script = ExtResource("10_i2fq5")
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="Next2" unique_id=259373545]
+[node name="Label" type="Label" parent="Quit" unique_id=259373545]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -112,4 +112,4 @@ metadata/_edit_use_anchors_ = true
 [connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="IdleTimer" to="IdleTimer" method="_on_timeout"]
 [connection signal="pressed" from="Next" to="Next" method="_on_pressed"]
-[connection signal="pressed" from="Next2" to="Next2" method="_on_pressed"]
+[connection signal="pressed" from="Quit" to="Quit" method="_on_pressed"]
