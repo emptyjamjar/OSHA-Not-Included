@@ -1,4 +1,4 @@
-extends CanvasLayer
+extends Control
 
 @onready var healthbar: TextureProgressBar = $Badge/HealthBar
 @onready var energybar: TextureProgressBar = $Badge/StaminaBar
@@ -19,8 +19,6 @@ extends CanvasLayer
 @export var quota: Label
 var quota_size: int
 var old_quota_size: int
-
-
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
