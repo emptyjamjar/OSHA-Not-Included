@@ -14,7 +14,8 @@
 [ext_resource type="AudioStream" uid="uid://bx3fqd8r4a86" path="res://core/autoload/audio/audio_assets/interface_sounds/shipped.wav" id="12_qvoy8"]
 [ext_resource type="AudioStream" uid="uid://cg0tjusaly00b" path="res://core/autoload/audio/audio_assets/world_sounds/tape_box.wav" id="13_wylq0"]
 
-[node name="Audio" type="Node2D" unique_id=343061640]
+[node name="Audio" type="Node" unique_id=310970815]
+process_mode = 3
 script = ExtResource("1_k1vdp")
 
 [node name="Click" type="AudioStreamPlayer" parent="." unique_id=253182636]
