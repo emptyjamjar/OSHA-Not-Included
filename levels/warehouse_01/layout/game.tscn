@@ -24,7 +24,7 @@
 script/source = "extends Node2D
 class_name GameManager
 
-@onready var hud: Control = $Camera2D/HUD
+@onready var hud: Control = $CanvasLayer/HUD
 @onready var money := 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -60,7 +60,7 @@ colors = PackedColorArray(0.05072464, 0.05072464, 0.05072464, 1, 1, 1, 1, 1)
 gradient = SubResource("Gradient_dd2np")
 fill_from = Vector2(0, 1)
 
-[node name="Game" type="Node2D" unique_id=645817684 groups=["game"]]
+[node name="Game2" type="Node2D" unique_id=645817684 groups=["game"]]
 y_sort_enabled = true
 script = SubResource("GDScript_7sc4i")
 
