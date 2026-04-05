@@ -79,6 +79,9 @@ func get_clock_time()->float:
 		for ticket in tickets:
 			sum_time += ticket.max_time
 		
+		print("____________________")
+		print(sum_time)
+		print("--------------------")
 		return sum_time * .75
 	#This is case we decide to have a customized time limit for the level instead of automatically generating it.
 	#If we decide to have a cuztomized time per level just set level_time

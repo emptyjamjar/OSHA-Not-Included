@@ -206,6 +206,7 @@ offset_right = 61.0
 offset_bottom = 46.874
 theme_override_constants/h_separation = 4
 theme_override_constants/v_separation = 2
+columns = 3
 
 [node name="Slot3" type="Control" parent="HBoxContainer" unique_id=432832531]
 layout_mode = 2
@@ -265,6 +266,7 @@ offset_right = 61.0
 offset_bottom = 46.874
 theme_override_constants/h_separation = 4
 theme_override_constants/v_separation = 2
+columns = 3
 
 [node name="Slot4" type="Control" parent="HBoxContainer" unique_id=1700340132]
 layout_mode = 2
@@ -324,6 +326,7 @@ offset_right = 61.0
 offset_bottom = 46.874
 theme_override_constants/h_separation = 4
 theme_override_constants/v_separation = 2
+columns = 3
 metadata/_edit_use_anchors_ = true
 
 [connection signal="mouse_entered" from="HBoxContainer/Slot1" to="HBoxContainer/Slot1" method="_on_mouse_entered"]
