@@ -35,6 +35,8 @@ var queue_UI: CanvasLayer
 # this ensure that object is created at run time and not returning null 
 func _ready():
 	add_to_group("ticket_manager")
+	
+	##Probably want to comment out.
 	#load_templates_for_level(level)
 	#print("TicketManager READY, templates loaded:", ticket_templates.size())
 	#ticket_available = ticket_templates.size()
@@ -405,6 +407,9 @@ func reset() -> void:
 	all_tickets.clear()
 	visible_queue.clear()
 	active_ticket = null
+	
+	##Probably want to remove
+	##tick_up_level()
 
 	load_templates_for_level(level)
 	ticket_available = ticket_templates.size()
@@ -414,7 +419,7 @@ func reset() -> void:
 
 
 ##Ticks up the level counter.
-func next_level():
+func tick_up_level():
 	if level < 5: 
 		level += 1
 	else: 
