@@ -25,7 +25,7 @@
 script/source = "extends Node2D
 class_name GameManager
 
-@onready var hud: CanvasLayer = $Camera2D/HUD
+@onready var hud: Control = $CanvasLayer/HUD
 @onready var money := 0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -34,12 +34,20 @@ func _ready() -> void:
 	Ticket_Manager.on_game_start()
 	$Manager.hide()
 	Dialogic.start(\"timeline\")
+	VendingSystem.vending_bought.connect(_on_vending_bought)
 	
 
 func _on_shipper_get_money() -> void:
 	money += 10
+	VendingSystem.currency += 10
 	hud.update_money(money)
-	
+
+
+func _on_vending_bought(item: ItemData):
+	money -= item.price
+	hud.update_money(money)
+
+
 func tut_cutscene(argument:String) -> void:
 	if argument == \"1\":
 		$CutscenePath.state = 1
@@ -77,7 +85,7 @@ colors = PackedColorArray(0.05072464, 0.05072464, 0.05072464, 1, 1, 1, 1, 1)
 gradient = SubResource("Gradient_boyg6")
 fill_from = Vector2(0, 1)
 
-[node name="Game" type="Node2D" unique_id=645817684 groups=["game"]]
+[node name="Game2" type="Node2D" unique_id=645817684 groups=["game"]]
 y_sort_enabled = true
 script = SubResource("GDScript_7sc4i")
 
@@ -96,10 +104,10 @@ polygon = PackedVector2Array(-0.99945825, -1, 636.4481, 0.8156662, 637.65436, 36
 [node name="Shipper" parent="." unique_id=441417436 instance=ExtResource("3_e8heu")]
 position = Vector2(216, 176)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=167263537]
-anchor_mode = 0
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=2021959113]
 
-[node name="HUD" parent="Camera2D" unique_id=830642951 instance=ExtResource("2_ryrav")]
+[node name="HUD" parent="CanvasLayer" unique_id=830642951 node_paths=PackedStringArray("productivity_manager") instance=ExtResource("2_ryrav")]
+productivity_manager = NodePath("../../UI/Score")
 
 [node name="Player" parent="." unique_id=2112891127 instance=ExtResource("5_rvswv")]
 position = Vector2(323, 263)
@@ -239,14 +247,14 @@ scale = Vector2(18.681644, 9.741211)
 color = Color(0.77646405, 0.79886746, 0.85534906, 1)
 
 [node name="Trashcan" parent="." unique_id=1663879866 instance=ExtResource("20_e36ub")]
-position = Vector2(573, 205)
+position = Vector2(573, 197)
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
 [connection signal="get_money" from="Shipper" to="UI/Score" method="_on_shipper_get_money"]
-[connection signal="health_change" from="Player/HealthComponent" to="Camera2D/HUD" method="_on_health_component_health_change"]
-[connection signal="energy_change" from="Player/EnergyComponent" to="Camera2D/HUD" method="_on_energy_component_energy_change"]
-[connection signal="needs_change" from="Player/NeedsComponent" to="Camera2D/HUD" method="_on_needs_component_needs_change"]
-[connection signal="sanity_changed" from="Player/SanityComponent" to="Camera2D/HUD" method="_on_sanity_component_sanity_changed"]
+[connection signal="health_change" from="Player/HealthComponent" to="CanvasLayer/HUD" method="_on_health_component_health_change"]
+[connection signal="energy_change" from="Player/EnergyComponent" to="CanvasLayer/HUD" method="_on_energy_component_energy_change"]
+[connection signal="needs_change" from="Player/NeedsComponent" to="CanvasLayer/HUD" method="_on_needs_component_needs_change"]
+[connection signal="sanity_changed" from="Player/SanityComponent" to="CanvasLayer/HUD" method="_on_sanity_component_sanity_changed"]
 [connection signal="ticketsEmpty" from="TicketTerminal" to="UI/Score" method="_on_ticket_terminal_tickets_empty"]
 [connection signal="washroom_used" from="Washroom" to="UI/Score" method="_on_washroom_washroom_used"]
 

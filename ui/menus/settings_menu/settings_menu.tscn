@@ -20,7 +20,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_n83iv")
 controlsBtn = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Controls")
-videoBtn = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Video")
+videoBtn = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Credits")
 audioBtn = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Audio")
 exitBtn = NodePath("MarginContainer/HBoxContainer/VBoxContainer/Exit")
 scrollContainer = NodePath("MarginContainer/HBoxContainer/MarginContainer/ScrollContainer")
@@ -81,27 +81,6 @@ label_settings = ExtResource("7_ycfya")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Video" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=608403964]
-custom_minimum_size = Vector2(94, 26)
-layout_mode = 2
-toggle_mode = true
-button_group = ExtResource("3_23gqq")
-texture_normal = ExtResource("3_pfuhs")
-texture_pressed = ExtResource("4_pfuhs")
-texture_hover = ExtResource("5_pfuhs")
-
-[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Video" unique_id=194395249]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 7.0
-offset_bottom = 30.0
-grow_horizontal = 2
-text = "Video"
-label_settings = ExtResource("7_ycfya")
-horizontal_alignment = 1
-vertical_alignment = 1
-
 [node name="Audio" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=81907948]
 custom_minimum_size = Vector2(94, 26)
 layout_mode = 2
@@ -119,6 +98,27 @@ offset_top = 7.0
 offset_bottom = 30.0
 grow_horizontal = 2
 text = "Audio"
+label_settings = ExtResource("7_ycfya")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Credits" type="TextureButton" parent="MarginContainer/HBoxContainer/VBoxContainer" unique_id=608403964]
+custom_minimum_size = Vector2(94, 26)
+layout_mode = 2
+toggle_mode = true
+button_group = ExtResource("3_23gqq")
+texture_normal = ExtResource("3_pfuhs")
+texture_pressed = ExtResource("4_pfuhs")
+texture_hover = ExtResource("5_pfuhs")
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/VBoxContainer/Credits" unique_id=194395249]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 7.0
+offset_bottom = 30.0
+grow_horizontal = 2
+text = "Credits"
 label_settings = ExtResource("7_ycfya")
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -158,6 +158,6 @@ layout_mode = 2
 horizontal_scroll_mode = 0
 
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Controls" to="." method="_on_controls_pressed"]
-[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Video" to="." method="_on_video_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Audio" to="." method="_on_audio_pressed"]
+[connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Credits" to="." method="_on_video_pressed"]
 [connection signal="pressed" from="MarginContainer/HBoxContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

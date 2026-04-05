@@ -1,4 +1,4 @@
-extends Resource
+class_name Item extends Resource
 
 ## This is a basic “data card” for any object in the game, like a tool, snack, 
 ## or weird artifact. It holds info like name, type, price, size, etc, but can also

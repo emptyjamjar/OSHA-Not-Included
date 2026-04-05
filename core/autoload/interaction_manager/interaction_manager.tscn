@@ -9,13 +9,16 @@ outline_color = Color(0, 0, 0, 1)
 [node name="InteractionManager" type="Node2D" unique_id=938102348]
 script = ExtResource("1_wx1dt")
 
-[node name="Label" type="Label" parent="." unique_id=308802333]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1793614372]
+layer = 10
+
+[node name="Label" type="Label" parent="CanvasLayer" unique_id=308802333]
 z_index = 20
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -48.0
-offset_right = 48.0
+offset_left = -432.0
+offset_right = -336.0
 offset_bottom = 23.0
 grow_horizontal = 2
 text = "[E] to pickup"

@@ -22,7 +22,7 @@ class_name EF_Movement_Debuff
 
 # Export Variables #
 ## Player node to apply movement debuff to. If not given, it will attempt to look for one in the scene tree.
-@export var player: Player
+var player: Player
 ## Speed multiplier while debuff is active (0.5 = 50% speed).
 @export_range(0.0, 1.0, 0.01) var speed_multiplier: float = 0.7
 

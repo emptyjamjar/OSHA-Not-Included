@@ -21,7 +21,7 @@ class_name EF_Movement_Buff
 
 # Export Variables #
 ## Player node to apply movement buff to. If not given, it will attempt to look for one in the scene tree.
-@export var player: Player
+var player: Player
 ## Speed multiplier while buff is active (1.5 = 150% speed).
 @export_range(1.0, 5.0, 0.01) var speed_multiplier: float = 1.3
 

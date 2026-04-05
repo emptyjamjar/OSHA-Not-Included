@@ -23,6 +23,7 @@ horizontal_alignment = 1
 [node name="ResetKeybindsButton" type="Button" parent="." unique_id=158883192]
 layout_mode = 2
 size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 11
 text = "RESET KEYBINDS"
 
 [node name="MoveUpRebindButton" parent="." unique_id=1776112691 instance=ExtResource("3_x1638")]
@@ -44,6 +45,10 @@ action_name = "move_right"
 [node name="InteractRebindButton" parent="." unique_id=321818579 instance=ExtResource("3_x1638")]
 layout_mode = 2
 action_name = "interact"
+
+[node name="UseItemRebindButton" parent="." unique_id=1544566693 instance=ExtResource("3_x1638")]
+layout_mode = 2
+action_name = "use_item"
 
 [node name="DropRebindButton" parent="." unique_id=226969851 instance=ExtResource("3_x1638")]
 layout_mode = 2

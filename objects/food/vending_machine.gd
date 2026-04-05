@@ -23,8 +23,6 @@ class_name VendingMachine
 @export var interaction_area: InteractionArea
 @export var manager_interrupt_distance: float = 150.0
 
-signal item_purchased(item: ItemData)
-
 var is_menu_open: bool = false
 
 func _ready():
@@ -32,7 +30,7 @@ func _ready():
 	
 	# Set up interaction area
 	if interaction_area:
-		interaction_area.action_name = "use vending machine"
+		interaction_area.action_name = "interact"
 		interaction_area.interact = Callable(self, "_on_interact")
 	
 	# Connect to VendingSystem's close signal
@@ -49,8 +47,12 @@ func _on_interact():
 	
 	_open_vending_menu()
 	await VendingSystem.vending_closed
+	print("VENDING CLOSED")
+	Audio.play_close_menu()
 
 func _open_vending_menu():
+	print("VENDING OPENED")
+	Audio.play_open_menu()
 	is_menu_open = true
 	
 	# Load items into VendingSystem if we have custom items
