@@ -19,6 +19,7 @@ func _on_interact():
 	var item_index = PlayerInventory.selectedIndex
 	if item:
 		PlayerInventory.remove_at(item_index)
+		Audio.play_trash_use()
 	else:
 		invalid_interaction()
 		printerr("No item currently available")
