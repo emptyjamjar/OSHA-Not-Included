@@ -24,6 +24,7 @@ var milestones : Dictionary[int, Array] = {
 
 func _ready() -> void:
 	sanity.sanity_changed.connect(_on_sanity_changed)
+	PlayerInventory.storage_updated.connect(_on_inventory_updated)
 	
 	# Hide all eyeballs
 	for eyeball in eyeballs:
@@ -40,6 +41,20 @@ func _on_sanity_changed(val: int):
 				milestones[key][0].call(true)
 		else:
 			milestones[key][0].call(false)
+
+
+func _on_inventory_updated():
+	# Check for anomalous items and start a timer to decrease sanity
+	for idx in range(PlayerInventory.max_capacity):
+		var timer = get_tree().create_timer(1)
+		timer.timeout.connect(_on_anomalous_timeout.bind(idx))
+
+
+func _on_anomalous_timeout(index: int):
+	if PlayerInventory.contents[index].type == ItemData.Type.ANOMALOUS:
+		sanity.decrease(5)
+		var timer = get_tree().create_timer(1)
+		timer.timeout.connect(_on_anomalous_timeout.bind(index))
 
 
 func _spawn_eye_ball(is_on: bool = false):
