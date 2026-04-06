@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_j62ya")
 name = "Gunpowder"
-description = "It smells like fireworks"
+description = "This smells like fireworks..."
 texture = ExtResource("2_cus52")
 id = 8
 metadata/_custom_type_script = "uid://c7i8xoc0ofw0m"

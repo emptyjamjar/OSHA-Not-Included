@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://chidjbuid2cgd" path="res://levels/shared/World.tscn" id="1_7sc4i"]
 [ext_resource type="Script" uid="uid://cpt2knie07vvo" path="res://core/systems/needs/health_component.gd" id="2_e2o6t"]
 [ext_resource type="Script" uid="uid://c8mj1grnlbspl" path="res://game/manager/ai/out_bounds_area.gd" id="2_e8heu"]
+[ext_resource type="PackedScene" uid="uid://b5iphcv1rio5l" path="res://core/autoload/ticket_manager/ticket_manager.tscn" id="2_qi1hw"]
 [ext_resource type="PackedScene" uid="uid://cxbnggs2xw8ne" path="res://ui/hud/hud.tscn" id="2_ryrav"]
 [ext_resource type="PackedScene" uid="uid://bimhohbyv6s5d" path="res://objects/shipper/shipper.tscn" id="3_e8heu"]
 [ext_resource type="Script" uid="uid://ck4p7gga13e5e" path="res://core/systems/needs/energy_component.gd" id="3_feb5d"]
@@ -26,8 +27,11 @@ class_name GameManager
 
 @onready var hud: Control = $CanvasLayer/HUD
 @onready var money := 0
+var Ticket_Manager: TicketManager
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Ticket_Manager = get_tree().get_first_node_in_group(\"Ticket Manager\")
 	Ticket_Manager.on_game_start()
 	VendingSystem.vending_bought.connect(_on_vending_bought)
 
@@ -65,6 +69,9 @@ y_sort_enabled = true
 script = SubResource("GDScript_7sc4i")
 
 [node name="World" parent="." unique_id=2107734680 instance=ExtResource("1_7sc4i")]
+
+[node name="TicketManager" parent="." unique_id=257549508 instance=ExtResource("2_qi1hw")]
+level = 2
 
 [node name="OutBoundsArea" type="Area2D" parent="." unique_id=1864494632]
 visible = false

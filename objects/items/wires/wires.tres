@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_h6pqy")
 name = "Wires"
-description = "A spool of electrical wire"
+description = "Are these for a project of some kind?"
 texture = ExtResource("2_dq3nk")
 id = 10
 metadata/_custom_type_script = "uid://c7i8xoc0ofw0m"

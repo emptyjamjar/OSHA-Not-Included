@@ -6,13 +6,15 @@ signal tickets_done
 signal ticket_timed_out
 signal ticket_submitted
 signal tickets_generated ##Used by components that care about the tickets being made.
-var all_tickets: Array[Ticket] = [] # 12 tickets for the level - can update it later
-var visible_queue: Array[Ticket] = [] # max 4 tickets 
+
+@export_category("Setup")
+@export var level: int = 1
+
+var all_tickets: Array[Ticket] = [] ## All tickets for the level.
+var visible_queue: Array[Ticket] = [] ## Tickets shown in the HUD.
 var timers: Dictionary = {} # ticket --> Timer 
 var max_visible: int = 4
-var level: int = 1
-var ticket_templates : Array = []
-var ticket_available: int 
+var ticket_templates : Array = [] ##Ticket time, ticket title, description, etc.
 
 #The icon and the lable indicating what items are needed for the ticket.
 var item_ticket_display = preload("res://objects/scanner/terminal/item_ticket_display.tscn")
@@ -35,38 +37,40 @@ var queue_UI: CanvasLayer
 # this ensure that object is created at run time and not returning null 
 func _ready():
 	add_to_group("ticket_manager")
-	
-	##Probably want to comment out.
-	#load_templates_for_level(level)
-	#print("TicketManager READY, templates loaded:", ticket_templates.size())
-	#ticket_available = ticket_templates.size()
-	
+
+
+## This is for changing which ticket is highlighted.
 func _input(event: InputEvent) -> void:
 	if event is InputEventKey and event.pressed:
+		
 		if event.keycode == KEY_RIGHT:
 			active_ticket_index = min(active_ticket_index + 1, visible_queue.size() - 1)
 		elif event.keycode == KEY_LEFT:
 			active_ticket_index = max(active_ticket_index - 1, 0)
 		else:
 			return
+		
 		if visible_queue.size() > 0:
 			active_ticket = visible_queue[active_ticket_index]
 			update_queue_ui()
-	
 
+
+##This gets the ticket_template for this level.
 func load_templates_for_level(_level: int): 
 	var path := "res://objects/scanner/terminal/level%d_tickets.gd" % _level
 	var script = load(path)
+	
 	if script == null: 
 		print("Cannot find path to the ticket files")
 		return 
-	var instance = script.new()
-	ticket_templates = instance.get_templates()
-	ticket_available = ticket_templates.size()
-	print("Loaded", ticket_available, "ticket templates for level", _level)
 	
+	var instance = script.new()
+	
+	ticket_templates = instance.get_templates()
 
 
+##This only checks if there is a conveyor in the tree. MIGHT HAVE TO DELETE
+##TODO: Delete
 func on_game_start():
 	var item_db = get_tree().get_first_node_in_group("conveyor")
 	if item_db == null:
@@ -74,16 +78,31 @@ func on_game_start():
 		return
 
 
+##Generates x amount of tickets where is count.
 func generate_level_ticket(count: int): 
-	print("Generate Tickets")
+	#Get the conveyor and get the dictionary of all story items and where they're supposed to spawn in the queue.
+	var item_db = get_tree().get_first_node_in_group("conveyor")
+	var story_dict: Dictionary[int, ItemData] = item_db.get_all_story_items()
+	
+	#Generate count amount of tickets.
 	for numb in range(count): 
-		var ticket = generate_random_ticket()
-		print(ticket)
+		var ticket: Ticket
+		
+		#Get teh story item at the current numb.
+		var story_item: ItemData = story_dict.get(numb)
+		
+		#Generate normal ticket.
+		if story_item == null:
+			ticket = generate_random_ticket()
+		#Generate story ticket. If there is a story item at current numb.
+		else:
+			ticket = generate_story_ticket(story_item)
+		
 		if ticket != null: 
 			all_tickets.append(ticket)
 		else: 
 			print("No more available!")
-	print(all_tickets)
+	
 	fill_visible_queue()
 	start_timers_for_visible_queue()
 	update_queue_ui() 
@@ -91,18 +110,23 @@ func generate_level_ticket(count: int):
 	tickets_generated.emit() #Tell everything that cares that tickets have been made.
 
 
+##Pops the all_tickets and puts them into visible_queue until visible_queue is full.
 func fill_visible_queue(): 
 	print("Fill tickets into visible queue")
 	while visible_queue.size() < max_visible and all_tickets.size() > 0: 
 		var next_ticket = all_tickets.pop_front()
 		visible_queue.append(next_ticket)
+	
+	#Just sets the active ticket to the first in the queue.
 	if !visible_queue.is_empty():
 		active_ticket = visible_queue[0]
 		active_ticket_index = 0
+	#Signal emitted when there are no tickets left.
 	else:
 		tickets_done.emit()
-	#print(visible_queue)
-		
+
+
+##Start timers for all tickets in the visible queue.
 func start_timers_for_visible_queue(): 
 	for t in visible_queue: 
 		if timers.has(t): 
@@ -114,17 +138,18 @@ func start_timers_for_visible_queue():
 		add_child(timer)
 		timers[t] = timer 
 		timer.start()
-		
+
+
 # func that keep track of the availability of the ticket 
 # when ticket is still available, subtract the remaining time by 1 
 # when ticket is expired --> deducts the player's performance (EXPAND FROM THIS LOGIC) 
-
 func _on_ticket_tick(ticket: Ticket):
 	ticket.remaining_time -= 1
 	update_queue_ui()
 	if ticket.remaining_time <= 0:
 		_on_ticket_expired(ticket)
-		return	
+		return
+
 
 # This is where you expand the logic --> further development 
 # PERFORMANCE LOGIC 
@@ -149,6 +174,7 @@ func _on_ticket_expired(ticket: Ticket):
 	start_timers_for_visible_queue()
 	update_queue_ui()
 
+
 func complete_ticket(ticket: Ticket):
 	ticket.status = Ticket.TicketStatus.FINISHED
 	timers[ticket].stop()
@@ -157,6 +183,7 @@ func complete_ticket(ticket: Ticket):
 	fill_visible_queue()
 	start_timers_for_visible_queue()
 	update_queue_ui()
+
 
 func update_queue_ui(): 
 	#var queue_ui = get_node("TicketQueueUI")
@@ -240,14 +267,13 @@ func update_queue_ui():
 			#hbox.add_child(icon)
 			#hbox.add_child(label)
 			req_container.add_child(ticket_icon)
-	
 
-			
-		
+
 func _on_ticket_selected(ticket: Ticket):
 	active_ticket = ticket
 	active_ticket_index = visible_queue.find(ticket)
 	update_queue_ui()
+
 
 func register_queue_ui(ui: CanvasLayer): 
 	queue_UI = ui 
@@ -275,8 +301,6 @@ func generate_random_ticket() -> Ticket:
 	# truly unique 
 	var index := randi() % ticket_templates.size()
 	var data = ticket_templates[index]
-	ticket_templates.remove_at(index)
-	ticket_available = ticket_templates.size()
 	
 	
 	# assign ticket ui with the given title, description, request, time, etc.
@@ -308,7 +332,24 @@ func generate_random_ticket() -> Ticket:
 		
 	return t
 
+
+func generate_story_ticket(ticket_data: ItemData) -> Ticket:
+	var ticket: Ticket = Ticket.new()
 	
+	# assign ticket ui with the given title, description, request, time, etc.
+	ticket.reward_money_amount = 30
+	ticket.performance_increase = 1
+	
+	# Random time for each ticket 
+	ticket.max_time = 600
+	ticket.remaining_time = ticket.max_time
+	
+	var id = ticket_data.id
+	ticket.required_items[id] = 1
+	
+	return ticket
+
+
 # function to track the delivered items 
 # this will check if the required items are shipped or not, does it match 
 # check shipper.gd --> on_interact() 
@@ -368,7 +409,7 @@ func reach_goal():
 	else: 
 		print("reach_goal() -- error happened here!")
 
-		
+
 # make sure the ticket is finished, ticket box will disappear 
 # will work on this further 
 func finish_ticket(ticket: Ticket = active_ticket):
@@ -401,21 +442,19 @@ func finish_ticket(ticket: Ticket = active_ticket):
 			# fallback option in case the fill visible queue
 			# signaller fails
 			tickets_done.emit()
-			
+
+
 ##Resets all necessary parts and prepares for the next level. Is called by ticket_terminal.
 func reset() -> void:
 	all_tickets.clear()
 	visible_queue.clear()
 	active_ticket = null
 	
-	##Probably want to remove
-	##tick_up_level()
-
+	#Sets ticket_templates
 	load_templates_for_level(level)
-	ticket_available = ticket_templates.size()
-
+	
 	# Regenerate
-	generate_level_ticket(ticket_available)
+	generate_level_ticket(ticket_templates.size())
 
 
 ##Ticks up the level counter.

@@ -15,6 +15,7 @@ extends Control
 @export var clock: LevelClock
 
 @export var productivity_manager: ProductivityManager
+var ticket_manager: TicketManager
 
 @export var quota: Label
 var quota_size: int
@@ -37,8 +38,10 @@ func _ready() -> void:
 	print(productivity_manager)
 	clock.deduct_productivity.connect(productivity_manager.add_productivity)
 	
-	Ticket_Manager.ticket_timed_out.connect(_missed_quota)
-	Ticket_Manager.ticket_submitted.connect(_submitted_quota)
+	ticket_manager = get_tree().get_first_node_in_group("Ticket Manager")
+	
+	ticket_manager.ticket_timed_out.connect(_missed_quota)
+	ticket_manager.ticket_submitted.connect(_submitted_quota)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -53,7 +56,7 @@ func _process(delta: float) -> void:
 
 
 func _update_quota():
-	quota.text = str(Ticket_Manager.all_tickets.size() + Ticket_Manager.visible_queue.size())
+	quota.text = str(ticket_manager.all_tickets.size() + ticket_manager.visible_queue.size())
 
 
 ##TODO: Add animation.

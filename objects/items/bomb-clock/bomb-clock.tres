@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_tf82b")
 name = "Bomb Clock"
-description = "Tick.. Tick.."
+description = "Who would need this?"
 texture = ExtResource("2_d4jgw")
 id = 4
 metadata/_custom_type_script = "uid://c7i8xoc0ofw0m"

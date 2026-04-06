@@ -2,11 +2,13 @@
 
 extends PointLight2D
 @onready var timer = $"../Timer"
-@onready var tickets = Ticket_Manager
+var ticket_manager: TicketManager
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	tickets.tickets_done.connect(_on_tickets_done)
+	ticket_manager = get_tree().get_first_node_in_group("Ticket Manager")
+	
+	ticket_manager.tickets_done.connect(_on_tickets_done)
 
 
 func _process(delta: float) -> void:

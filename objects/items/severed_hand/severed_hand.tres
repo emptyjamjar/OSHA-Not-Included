@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_d8vt2")
 name = "Severed Hand"
-description = "Many hands make for light work"
+description = "... I was just doing my job"
 texture = ExtResource("2_h7wdt")
 id = 9
 metadata/_custom_type_script = "uid://c7i8xoc0ofw0m"

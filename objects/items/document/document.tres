@@ -6,7 +6,7 @@
 [resource]
 script = ExtResource("1_l2qrj")
 name = "Document"
-description = "I don't have time to read all of this"
+description = "\"Classified\"? Should I be packaging this?"
 texture = ExtResource("2_1lp75")
 id = 6
 metadata/_custom_type_script = "uid://c7i8xoc0ofw0m"
