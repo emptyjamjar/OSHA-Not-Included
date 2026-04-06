@@ -57,7 +57,9 @@ func _on_ticket_terminal_tickets_empty() -> void:
 	if productivity >= Level_Manager.quota:
 		$EndOfDayPayReport/LetterOfTermination.visible = false
 		$Next.visible = true
+		$TryAgain.visible = false
 	else:
 		$EndOfDayPayReport/LetterOfTermination.visible = true
-		$Next.visible = false
+		$Next.visible = true
+		$TryAgain.visible = true
 	get_tree().paused = true
