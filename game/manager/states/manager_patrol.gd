@@ -43,12 +43,16 @@ func Physics_Update(delta: float) -> void:
 	var path = manager.current_path
 	if path.is_empty(): 
 		print("WARNING: current_path is empty")
+		manager.choose_random_path()
 		return 
+	# ensure index is valid
 	if manager.current_index >= path.size(): 
 		# print("WARNING: index out of range")
 		manager.wait_after_finished_a_path()
 		manager.choose_random_path()
 		return 
+		
+	# move toward the current waypoint
 	var target = path[manager.current_index].global_position 
 	var direction = (target - manager.global_position).normalized() 
 	manager.velocity = direction * move_speed
@@ -58,12 +62,21 @@ func Physics_Update(delta: float) -> void:
 		wait_timer += delta
 		manager.velocity = Vector2()
 		manager.current_index += 1 
-		#if manager.current_index >= path.size(): 
-			#manager.choose_random_path()
-		#else: 
-			## wait time logic here
-			#pass 
-			
+		if randf() < check_chance: 
+			_start_checking()
+			return 
+		# Finish path 
+		if manager.current_index >= path.size(): 
+			manager.wait_after_finished_a_path()
+			manager.choose_random_path()
+			return
+	
+func _start_checking():
+	checking = true
+	check_timer = randf_range(check_min_time, check_max_time)
+	manager.vision_cone.disable()
+	animated_sprite.play("check_board")
+	
 func update_animation(): 
 	if move_direction == Vector2.ZERO: 
 		return # no movement, keep current animation 
