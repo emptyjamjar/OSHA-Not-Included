@@ -192,6 +192,8 @@ func _on_item_picked_up(item: ItemBase, index: int):
 
 # functions to help return all the item in the conveyor array 
 func get_all_items() -> Array[ItemData]: 
+	if item_resources == null: 
+		pass 
 	return item_resources
 
 

@@ -284,6 +284,11 @@ func generate_random_ticket() -> Ticket:
 	var item_db = get_tree().get_first_node_in_group("conveyor")
 	if item_db == null: 
 		print("Return null on item database")
+		
+	# This created error during gameplay, if tickets are not spawned and you click main menu --> instance null
+	#if item_db.get_all_items() == null: 
+		#return 
+		
 	var all_items = item_db.get_all_items() # conveyor.gd to return the array
 	
 	# random number of the items required to complete the ticket
