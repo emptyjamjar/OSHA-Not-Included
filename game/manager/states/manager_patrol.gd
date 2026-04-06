@@ -42,8 +42,8 @@ func Physics_Update(delta: float) -> void:
 		return
 	var path = manager.current_path
 	if path.is_empty(): 
-		print("WARNING: current_path is empty")
-		manager.choose_random_path()
+		#print("WARNING: current_path is empty")
+		#manager.choose_random_path()
 		return 
 	# ensure index is valid
 	if manager.current_index >= path.size(): 

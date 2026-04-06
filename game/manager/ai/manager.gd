@@ -90,6 +90,7 @@ func choose_random_path():
 		print("Has no path in the path_container") 
 		return 
 	current_path = path_container[randi() % path_container.size()]
+	print("Chose: \n", current_path)
 	current_index = 0
 	waiting = false 
 	wait_timer = 0.0
