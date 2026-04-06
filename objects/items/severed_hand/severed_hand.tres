@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_d8vt2")
+type = 1
 name = "Severed Hand"
 description = "... I was just doing my job"
 texture = ExtResource("2_h7wdt")

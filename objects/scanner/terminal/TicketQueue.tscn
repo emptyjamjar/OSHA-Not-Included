@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://45cqga2rjbih" path="res://objects/scanner/terminal/slot_1.gd" id="1_dsuxn"]
 [ext_resource type="Texture2D" uid="uid://brjl03whlgukn" path="res://objects/scanner/terminal/Ticket_SpriteSheet-PNG.png" id="1_vlja4"]
 [ext_resource type="Texture2D" uid="uid://btfptaejf4dhs" path="res://objects/scanner/terminal/TicketTimeBackPNG.png" id="2_dsuxn"]
+[ext_resource type="Texture2D" uid="uid://disrfwsm0sl4t" path="res://objects/scanner/terminal/Ticket_SpriteSheet_Story.png" id="3_2t5fm"]
 [ext_resource type="Texture2D" uid="uid://c0854h1cw2cb" path="res://objects/scanner/terminal/TicketTimeBarPNG.png" id="3_v8ihf"]
 [ext_resource type="PackedScene" uid="uid://7cuqmw2ok8dg" path="res://objects/scanner/terminal/item_ticket_display.tscn" id="5_0imhw"]
 [ext_resource type="Script" uid="uid://0n1wwwmlkbx7" path="res://objects/scanner/terminal/slot_2.gd" id="5_u133q"]
@@ -73,6 +74,107 @@ animations = [{
 "speed": 8.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_000l6"]
+atlas = ExtResource("3_2t5fm")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5hj6c"]
+atlas = ExtResource("3_2t5fm")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mnu3c"]
+atlas = ExtResource("3_2t5fm")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_n4wfq"]
+atlas = ExtResource("3_2t5fm")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ttvee"]
+atlas = ExtResource("3_2t5fm")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aoota"]
+atlas = ExtResource("3_2t5fm")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fuchi"]
+atlas = ExtResource("3_2t5fm")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8rpvq"]
+atlas = ExtResource("3_2t5fm")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x6g6p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_000l6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5hj6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mnu3c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_n4wfq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ttvee")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aoota")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fuchi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8rpvq")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="Animation" id="Animation_2t5fm"]
+resource_name = "Flashing"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.19607843), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_000l6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Body:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5hj6c"]
+_data = {
+&"Flashing": SubResource("Animation_2t5fm"),
+&"RESET": SubResource("Animation_000l6")
+}
+
 [node name="TicketQueueUI" type="CanvasLayer" unique_id=1534765680]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1292286621]
@@ -101,6 +203,28 @@ sprite_frames = SubResource("SpriteFrames_6b2ay")
 autoplay = "default"
 frame_progress = 0.5686139
 centered = false
+
+[node name="StoryTicket" type="AnimatedSprite2D" parent="HBoxContainer/Slot1/AnimatedSprite2D" unique_id=1890266864]
+visible = false
+position = Vector2(32, 32)
+sprite_frames = SubResource("SpriteFrames_x6g6p")
+autoplay = "default"
+frame_progress = 0.29226592
+
+[node name="Body" type="Label" parent="HBoxContainer/Slot1/AnimatedSprite2D/StoryTicket" unique_id=1708986301]
+offset_left = -29.0
+offset_top = 5.0
+offset_right = 31.0
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0.9490196, 0.827451, 0.67058825, 1)
+theme_override_colors/font_shadow_color = Color(0.8666667, 0, 0, 0.3137255)
+theme_override_colors/font_outline_color = Color(0.15294118, 0.15294118, 0.26666668, 1)
+theme_override_font_sizes/font_size = 11
+text = "IMPORTANT"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HBoxContainer/Slot1/AnimatedSprite2D/StoryTicket" unique_id=2011195301]
+libraries/ = SubResource("AnimationLibrary_5hj6c")
 
 [node name="TimeCountDownBarBackSprite" type="TextureProgressBar" parent="HBoxContainer/Slot1/AnimatedSprite2D" unique_id=388964652]
 offset_left = 14.0
@@ -166,6 +290,28 @@ autoplay = "default"
 frame_progress = 0.5686139
 centered = false
 
+[node name="StoryTicket" type="AnimatedSprite2D" parent="HBoxContainer/Slot2/AnimatedSprite2D" unique_id=1552370776]
+visible = false
+position = Vector2(32, 32)
+sprite_frames = SubResource("SpriteFrames_x6g6p")
+autoplay = "default"
+frame_progress = 0.32013482
+
+[node name="Body" type="Label" parent="HBoxContainer/Slot2/AnimatedSprite2D/StoryTicket" unique_id=10472365]
+offset_left = -29.0
+offset_top = 5.0
+offset_right = 31.0
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0.9490196, 0.827451, 0.67058825, 1)
+theme_override_colors/font_shadow_color = Color(0.8666667, 0, 0, 0.3137255)
+theme_override_colors/font_outline_color = Color(0.15294118, 0.15294118, 0.26666668, 1)
+theme_override_font_sizes/font_size = 11
+text = "IMPORTANT"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HBoxContainer/Slot2/AnimatedSprite2D/StoryTicket" unique_id=168765644]
+libraries/ = SubResource("AnimationLibrary_5hj6c")
+
 [node name="TimeCountDownBarBackSprite" type="TextureProgressBar" parent="HBoxContainer/Slot2/AnimatedSprite2D" unique_id=1342371323]
 offset_left = 14.0
 offset_top = 52.0
@@ -226,6 +372,28 @@ autoplay = "default"
 frame_progress = 0.5686139
 centered = false
 
+[node name="StoryTicket" type="AnimatedSprite2D" parent="HBoxContainer/Slot3/AnimatedSprite2D" unique_id=226193972]
+visible = false
+position = Vector2(32, 32)
+sprite_frames = SubResource("SpriteFrames_x6g6p")
+autoplay = "default"
+frame_progress = 0.32013482
+
+[node name="Body" type="Label" parent="HBoxContainer/Slot3/AnimatedSprite2D/StoryTicket" unique_id=1817962424]
+offset_left = -29.0
+offset_top = 5.0
+offset_right = 31.0
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0.9490196, 0.827451, 0.67058825, 1)
+theme_override_colors/font_shadow_color = Color(0.8666667, 0, 0, 0.3137255)
+theme_override_colors/font_outline_color = Color(0.15294118, 0.15294118, 0.26666668, 1)
+theme_override_font_sizes/font_size = 11
+text = "IMPORTANT"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HBoxContainer/Slot3/AnimatedSprite2D/StoryTicket" unique_id=1444825421]
+libraries/ = SubResource("AnimationLibrary_5hj6c")
+
 [node name="TimeCountDownBarBackSprite" type="TextureProgressBar" parent="HBoxContainer/Slot3/AnimatedSprite2D" unique_id=1609744569]
 offset_left = 14.0
 offset_top = 52.0
@@ -285,6 +453,28 @@ sprite_frames = SubResource("SpriteFrames_6b2ay")
 autoplay = "default"
 frame_progress = 0.5686139
 centered = false
+
+[node name="StoryTicket" type="AnimatedSprite2D" parent="HBoxContainer/Slot4/AnimatedSprite2D" unique_id=175462716]
+visible = false
+position = Vector2(32, 32)
+sprite_frames = SubResource("SpriteFrames_x6g6p")
+autoplay = "default"
+frame_progress = 0.32013482
+
+[node name="Body" type="Label" parent="HBoxContainer/Slot4/AnimatedSprite2D/StoryTicket" unique_id=1487868885]
+offset_left = -29.0
+offset_top = 5.0
+offset_right = 31.0
+offset_bottom = 18.0
+theme_override_colors/font_color = Color(0.9490196, 0.827451, 0.67058825, 1)
+theme_override_colors/font_shadow_color = Color(0.8666667, 0, 0, 0.3137255)
+theme_override_colors/font_outline_color = Color(0.15294118, 0.15294118, 0.26666668, 1)
+theme_override_font_sizes/font_size = 11
+text = "IMPORTANT"
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HBoxContainer/Slot4/AnimatedSprite2D/StoryTicket" unique_id=719846668]
+libraries/ = SubResource("AnimationLibrary_5hj6c")
 
 [node name="TimeCountDownBarBackSprite" type="TextureProgressBar" parent="HBoxContainer/Slot4/AnimatedSprite2D" unique_id=1942080217]
 offset_left = 14.0

@@ -82,7 +82,11 @@ func get_clock_time()->float:
 		var sum_time: float = 0
 		
 		for ticket in tickets:
-			sum_time += ticket.max_time
+			#Story items have 10 minute timers so don't want the formula to get screwed here.
+			if ticket.max_time > 300:
+				sum_time += 30
+			else:
+				sum_time += ticket.max_time
 		
 		return sum_time * .75
 	#This is case we decide to have a customized time limit for the level instead of automatically generating it.

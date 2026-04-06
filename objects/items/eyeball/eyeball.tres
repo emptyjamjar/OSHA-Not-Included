@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_d07q7")
+type = 1
 name = "Eyeball"
 description = "Don't look at me..."
 texture = ExtResource("2_kpfc8")

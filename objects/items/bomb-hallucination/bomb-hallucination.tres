@@ -5,6 +5,7 @@
 
 [resource]
 script = ExtResource("1_es0dh")
+type = 1
 name = "Bomb Hallucination"
 description = "It's ticking down... Oh god..."
 texture = ExtResource("2_kf6nb")

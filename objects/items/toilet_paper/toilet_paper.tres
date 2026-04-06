@@ -6,7 +6,6 @@
 
 [resource]
 script = ExtResource("2_i0v6g")
-type = 1
 name = "Toilet Paper"
 description = "It’s a bare necessity."
 texture = ExtResource("1_48707")

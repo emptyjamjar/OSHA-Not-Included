@@ -147,7 +147,7 @@ position = Vector2(640, 192)
 [node name="Conveyor" parent="." unique_id=1135306595 groups=["conveyor"] instance=ExtResource("8_j5wjh")]
 position = Vector2(101, 363)
 story_resources = Dictionary[int, ExtResource("12_x5p1p")]({
-0: ExtResource("13_qhcbd")
+7: ExtResource("13_qhcbd")
 })
 
 [node name="TicketTerminal" parent="." unique_id=982348100 instance=ExtResource("6_ryrav")]

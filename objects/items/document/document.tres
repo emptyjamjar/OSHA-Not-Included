@@ -2,11 +2,14 @@
 
 [ext_resource type="Script" uid="uid://c7i8xoc0ofw0m" path="res://objects/items/item_data.gd" id="1_l2qrj"]
 [ext_resource type="Texture2D" uid="uid://dpa15tlgwdm4l" path="res://objects/items/document/warehouse-weird-doc.png" id="2_1lp75"]
+[ext_resource type="Texture2D" uid="uid://doi8xxvwlsjeg" path="res://objects/items/document/warehouse-weird-doc-small.png" id="3_vdf1m"]
 
 [resource]
 script = ExtResource("1_l2qrj")
+type = 1
 name = "Document"
 description = "\"Classified\"? Should I be packaging this?"
 texture = ExtResource("2_1lp75")
+uiTexture = ExtResource("3_vdf1m")
 id = 6
 metadata/_custom_type_script = "uid://c7i8xoc0ofw0m"

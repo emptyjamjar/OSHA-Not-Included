@@ -232,40 +232,30 @@ func update_queue_ui():
 	
 		# Required items
 		var req_container = slot.get_node("AnimatedSprite2D/RequiredItemsContainer")
+		var story_ticket_sprite: Node2D = slot.get_node("AnimatedSprite2D/StoryTicket")
 		
 		for icon in req_container.get_children(): 
 			icon.queue_free()
 		var item_db = get_tree().get_first_node_in_group("conveyor")
+		
 		for id in t.required_items.keys(): 
 			var needed = t.required_items[id]
 			var delivered = t.delivered_items.get(id, 0)
 			var item_data = item_db.get_item_by_id(id)
-			#var hbox = HBoxContainer.new()
-			#hbox.custom_minimum_size = Vector2(-5, 55)
+			
+			#If it's a story item then set up the specific sprite for that.
+			if item_data is ItemData:
+				if item_data.type == ItemData.Type.ANOMALOUS:
+					story_ticket_sprite.visible = true
+				else:
+					story_ticket_sprite.visible = false
 			
 			#This is the actual icon on the ticket. It has the sprite and a label.
 			var ticket_icon = item_ticket_display.instantiate()
-
-			#var icon = TextureRect.new()
-			#icon.texture = item_data.texture
-			#icon.custom_minimum_size = Vector2(16, 16)
-			#icon.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-			#icon.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-			## Prevent container from overriding size
-			#icon.size_flags_horizontal = Control.SIZE_SHRINK_CENTER
-			#icon.size_flags_vertical = Control.SIZE_SHRINK_CENTER
 			
-			#This is for the label next to the item.
 			ticket_icon.item_label.text = "%d/%d" % [delivered, needed]
 			ticket_icon.item_icon.texture = item_data.uiTexture
 			
-			#var label = Label.new()
-			#label.text = "%d / %d" % [delivered, needed]
-			#label.add_theme_color_override("font_color", Color.DIM_GRAY)
-			#label.add_theme_font_size_override("font_size", 8)
-
-			#hbox.add_child(icon)
-			#hbox.add_child(label)
 			req_container.add_child(ticket_icon)
 
 

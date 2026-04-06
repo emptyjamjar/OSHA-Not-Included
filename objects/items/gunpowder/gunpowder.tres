@@ -2,11 +2,14 @@
 
 [ext_resource type="Script" uid="uid://c7i8xoc0ofw0m" path="res://objects/items/item_data.gd" id="1_j62ya"]
 [ext_resource type="Texture2D" uid="uid://bgs1ykeoy6vy5" path="res://objects/items/gunpowder/warehouse-gunpowder.png" id="2_cus52"]
+[ext_resource type="Texture2D" uid="uid://dgyj8u7g55p0e" path="res://objects/items/gunpowder/warehouse-gunpowder-small.png" id="3_tespu"]
 
 [resource]
 script = ExtResource("1_j62ya")
+type = 1
 name = "Gunpowder"
 description = "This smells like fireworks..."
 texture = ExtResource("2_cus52")
+uiTexture = ExtResource("3_tespu")
 id = 8
 metadata/_custom_type_script = "uid://c7i8xoc0ofw0m"
