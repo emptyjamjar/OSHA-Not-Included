@@ -8,6 +8,8 @@
 [ext_resource type="Texture2D" uid="uid://cm0to3pv0uikr" path="res://ui/widgets/buttons/ButtonPressed.png" id="5_mubud"]
 [ext_resource type="Texture2D" uid="uid://btey00488kkp5" path="res://ui/widgets/buttons/ButtonHover.png" id="6_hl4pr"]
 [ext_resource type="Script" uid="uid://c56k0cmxwtgjb" path="res://core/systems/scoring/productivity_manager/next.gd" id="7_mubud"]
+[ext_resource type="Texture2D" uid="uid://btfnjyo3qe11r" path="res://core/systems/scoring/productivity_manager/LetterOfTermination.png" id="9_j6npo"]
+[ext_resource type="Script" uid="uid://jjgec5jiwt0n" path="res://core/systems/scoring/productivity_manager/back.gd" id="10_i2fq5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_j6npo"]
 font_size = 22
@@ -20,6 +22,11 @@ script = ExtResource("1_s7su0")
 [node name="EndOfDayPayReport" type="Sprite2D" parent="." unique_id=164273407]
 position = Vector2(385, 215)
 texture = ExtResource("2_ip3r8")
+
+[node name="LetterOfTermination" type="Sprite2D" parent="EndOfDayPayReport" unique_id=244152287]
+position = Vector2(0, -15.5)
+scale = Vector2(1.3463542, 1.1041666)
+texture = ExtResource("9_j6npo")
 
 [node name="IdleTimer" type="Timer" parent="." unique_id=1571918475]
 wait_time = 5.0
@@ -47,6 +54,9 @@ label_settings = ExtResource("4_hl4pr")
 layout_mode = 2
 label_settings = ExtResource("4_hl4pr")
 
+[node name="Requirement" type="Label" parent="VBoxContainer" unique_id=820790054]
+layout_mode = 2
+
 [node name="Next" type="TextureButton" parent="." unique_id=1589968990]
 offset_left = 407.0
 offset_top = 327.0
@@ -73,6 +83,33 @@ vertical_alignment = 1
 uppercase = true
 metadata/_edit_use_anchors_ = true
 
+[node name="Quit" type="TextureButton" parent="." unique_id=358489466]
+offset_left = 236.0
+offset_top = 327.0
+offset_right = 364.0
+offset_bottom = 359.0
+size_flags_vertical = 0
+texture_normal = ExtResource("4_nsn5p")
+texture_pressed = ExtResource("5_mubud")
+texture_hover = ExtResource("6_hl4pr")
+script = ExtResource("10_i2fq5")
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="Quit" unique_id=259373545]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 7.0
+offset_bottom = 30.0
+grow_horizontal = 2
+text = "Main Menu"
+label_settings = SubResource("LabelSettings_j6npo")
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+metadata/_edit_use_anchors_ = true
+
 [connection signal="timeout" from="IdleTimer" to="." method="_on_idle_timer_timeout"]
 [connection signal="timeout" from="IdleTimer" to="IdleTimer" method="_on_timeout"]
 [connection signal="pressed" from="Next" to="Next" method="_on_pressed"]
+[connection signal="pressed" from="Quit" to="Quit" method="_on_pressed"]
