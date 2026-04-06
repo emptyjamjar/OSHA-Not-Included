@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://b7ooaa868w4lg"]
+
+[ext_resource type="Texture2D" uid="uid://db6v3u5tv0es4" path="res://objects/sanity_eye_ball/HorrorEyeballSpriteSheet.png" id="1_byvwf"]
+[ext_resource type="Script" uid="uid://dyok6360hrrk4" path="res://objects/sanity_eye_ball/sanity_eyeball.gd" id="2_llxp0"]
+[ext_resource type="Texture2D" uid="uid://n1jla77rw07h" path="res://objects/sanity_eye_ball/Iris.png" id="2_q6f6h"]
+
+[sub_resource type="Animation" id="Animation_llxp0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_pmwl7"]
+resource_name = "idle"
+length = 4.5
+loop_mode = 1
+step = 0.005
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.005, 0.015, 0.025, 0.035, 0.055, 0.065, 0.075, 0.085),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fw3wa"]
+_data = {
+&"RESET": SubResource("Animation_llxp0"),
+&"idle": SubResource("Animation_pmwl7")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mquho"]
+radius = 29.0
+height = 58.0
+
+[node name="SanityEyeball" type="Sprite2D" unique_id=1605012371 node_paths=PackedStringArray("irisSprite", "iris", "hitbox")]
+clip_children = 2
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_byvwf")
+hframes = 9
+script = ExtResource("2_llxp0")
+irisSprite = NodePath("CharacterBody2D/Iris")
+iris = NodePath("CharacterBody2D")
+hitbox = NodePath("StaticBody2D/CollisionPolygon2D")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1666140013]
+libraries/ = SubResource("AnimationLibrary_fw3wa")
+autoplay = &"idle"
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=1327572654]
+collision_layer = 4
+collision_mask = 4
+motion_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=1642030355]
+shape = SubResource("CapsuleShape2D_mquho")
+
+[node name="Iris" type="Sprite2D" parent="CharacterBody2D" unique_id=826849175]
+texture = ExtResource("2_q6f6h")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=707172427]
+collision_layer = 5
+collision_mask = 7
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D" unique_id=1811469292]
+scale = Vector2(6.2, 4.4)
+build_mode = 1
+polygon = PackedVector2Array(0, 9.090908, 1.2903225, 9.090908, 2.580645, 9.090908, 4.193548, 8.181817, 5.8064513, 7.2727265, 7.096774, 5.9090905, 8.387096, 4.545454, 8.709677, 3.1818178, 8.709677, 1.3636363, 8.709677, 0, 8.064516, -1.8181816, 7.096774, -3.6363633, 6.129032, -4.9999995, 4.8387094, -6.3636355, 3.2258062, -7.727272, 0.6451613, -8.636363, -1.6129031, -8.636363, -3.548387, -8.181817, -5.16129, -6.818181, -6.4516125, -5.454545, -7.7419353, -3.1818178, -8.709677, -0.9090908, -8.709677, 2.272727, -7.096774, 5.454545, -5.483871, 7.2727265, -3.2258062, 8.636363, -1.6129031, 9.090908)

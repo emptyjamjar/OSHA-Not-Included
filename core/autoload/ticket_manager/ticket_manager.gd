@@ -458,6 +458,15 @@ func reset() -> void:
 ##Ticks up the level counter.
 func tick_up_level():
 	if level < 5: 
-		level += 1
+		level = Level_Manager.level + 1
 	else: 
 		level = 1 # RESET point (infinite levels)
+	
+func replay() -> void:
+	all_tickets.clear()
+	visible_queue.clear()
+	timers.clear()
+	active_ticket = null
+	level = Level_Manager.level + 1
+	load_templates_for_level(level)
+	#ticket_available = ticket_templates.size()
