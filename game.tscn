@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bimhohbyv6s5d" path="res://objects/shipper/shipper.tscn" id="3_e8heu"]
 [ext_resource type="Script" uid="uid://ck4p7gga13e5e" path="res://core/systems/needs/energy_component.gd" id="3_feb5d"]
 [ext_resource type="Script" uid="uid://b0ovv20hjaxi3" path="res://core/systems/needs/needs_component.gd" id="4_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://benkbh7e5rv0k" path="res://core/systems/sanity/sanity_checker.tscn" id="5_hb5m1"]
 [ext_resource type="PackedScene" uid="uid://c7e7f64igaa5j" path="res://game/actors/player/player.tscn" id="5_rvswv"]
 [ext_resource type="PackedScene" uid="uid://rgnaipuerpmn" path="res://objects/scanner/terminal/TicketTerminal.tscn" id="6_ryrav"]
 [ext_resource type="Script" uid="uid://dka4wuamclaju" path="res://core/systems/sanity/sanity_component.gd" id="8_7sc4i"]
@@ -20,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://bmisxcq76lrat" path="res://icon.svg" id="18_boyg6"]
 [ext_resource type="Script" uid="uid://j63ga8s4bhlu" path="res://cutscene_path.gd" id="18_e36ub"]
 [ext_resource type="PackedScene" uid="uid://dwdtpfj4n8pco" path="res://objects/trashcan/trashcan.tscn" id="20_e36ub"]
+[ext_resource type="PackedScene" uid="uid://b7ooaa868w4lg" path="res://objects/sanity_eye_ball/sanity_eyeball.tscn" id="22_x5p1p"]
 
 [sub_resource type="GDScript" id="GDScript_7sc4i"]
 script/source = "extends Node2D
@@ -108,6 +110,11 @@ position = Vector2(216, 176)
 
 [node name="HUD" parent="CanvasLayer" unique_id=830642951 node_paths=PackedStringArray("productivity_manager") instance=ExtResource("2_ryrav")]
 productivity_manager = NodePath("../../UI/Score")
+
+[node name="SanityChecker" parent="." unique_id=464636574 node_paths=PackedStringArray("sanity", "player", "eyeballs") instance=ExtResource("5_hb5m1")]
+sanity = NodePath("../Player/SanityComponent")
+player = NodePath("../Player")
+eyeballs = [NodePath("../SanityEyeball")]
 
 [node name="Player" parent="." unique_id=2112891127 instance=ExtResource("5_rvswv")]
 position = Vector2(323, 263)
@@ -248,6 +255,9 @@ color = Color(0.77646405, 0.79886746, 0.85534906, 1)
 
 [node name="Trashcan" parent="." unique_id=1663879866 instance=ExtResource("20_e36ub")]
 position = Vector2(573, 197)
+
+[node name="SanityEyeball" parent="." unique_id=1605012371 instance=ExtResource("22_x5p1p")]
+position = Vector2(456, 256)
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
 [connection signal="get_money" from="Shipper" to="UI/Score" method="_on_shipper_get_money"]
