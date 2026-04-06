@@ -2,10 +2,11 @@
 
 [ext_resource type="Texture2D" uid="uid://dtivco36dr1yn" path="res://objects/items/toilet_paper/warehouse-large-toilet-paper.png" id="1_48707"]
 [ext_resource type="Script" uid="uid://c7i8xoc0ofw0m" path="res://objects/items/item_data.gd" id="2_i0v6g"]
+[ext_resource type="Texture2D" uid="uid://c3xl3vf4gc2bi" path="res://objects/items/toilet_paper/warehouse-toilet.png" id="3_i0v6g"]
 
 [resource]
 script = ExtResource("2_i0v6g")
-type = 1
 name = "Toilet Paper"
 description = "It’s a bare necessity."
 texture = ExtResource("1_48707")
+uiTexture = ExtResource("3_i0v6g")
