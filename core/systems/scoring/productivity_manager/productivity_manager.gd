@@ -60,6 +60,6 @@ func _on_ticket_terminal_tickets_empty() -> void:
 		$TryAgain.visible = false
 	else:
 		$EndOfDayPayReport/LetterOfTermination.visible = true
-		$Next.visible = true
+		$Next.visible = false
 		$TryAgain.visible = true
 	get_tree().paused = true
