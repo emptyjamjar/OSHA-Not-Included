@@ -36,7 +36,15 @@ var queue_UI: CanvasLayer
 # when game scene is played, add this class to the group 
 # this ensure that object is created at run time and not returning null 
 func _ready():
+	autoload_check()
 	add_to_group("ticket_manager")
+
+
+##Just in case you still have TicketManager as an autoload. Git forgets that it's supposed to be deleted now so yeah...
+func autoload_check():
+	for autoload in get_tree().root.get_children():
+		if autoload.name == "TicketManager":
+			assert(false, "Go to project settings -> Globals and delete TicketManager autoload (not just disabling it, deleting it from that menu too)")
 
 
 ## This is for changing which ticket is highlighted.
