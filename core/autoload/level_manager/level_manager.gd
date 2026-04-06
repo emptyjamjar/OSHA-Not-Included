@@ -4,6 +4,7 @@
 extends Node2D
 
 var levels : Array[NodePath] = [
+	"res://game.tscn",
 	"res://levels/warehouse_01/layout/game.tscn",
 	"res://levels/warehouse_01/layout/game_2.tscn",
 	"res://levels/warehouse_02/game.tscn",
@@ -16,12 +17,18 @@ func next_level():
 	var max_levels = levels.size()
 	PlayerInventory.reset()
 	quota += 15
+	level += 1
 	if level == max_levels:
 		level = 0
 		get_tree().change_scene_to_file(levels[0])
 	else:
 		get_tree().change_scene_to_file(levels[level])
-		level += 1
+		
+
+func replay_level() -> void:
+	PlayerInventory.reset()
+	get_tree().change_scene_to_file(levels[level])
+
 	
 
 func reset():
