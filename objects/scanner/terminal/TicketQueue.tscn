@@ -225,6 +225,7 @@ horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HBoxContainer/Slot1/AnimatedSprite2D/StoryTicket" unique_id=2011195301]
 libraries/ = SubResource("AnimationLibrary_5hj6c")
+autoplay = &"Flashing"
 
 [node name="TimeCountDownBarBackSprite" type="TextureProgressBar" parent="HBoxContainer/Slot1/AnimatedSprite2D" unique_id=388964652]
 offset_left = 14.0
@@ -311,6 +312,7 @@ horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HBoxContainer/Slot2/AnimatedSprite2D/StoryTicket" unique_id=168765644]
 libraries/ = SubResource("AnimationLibrary_5hj6c")
+autoplay = &"Flashing"
 
 [node name="TimeCountDownBarBackSprite" type="TextureProgressBar" parent="HBoxContainer/Slot2/AnimatedSprite2D" unique_id=1342371323]
 offset_left = 14.0
@@ -393,6 +395,7 @@ horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HBoxContainer/Slot3/AnimatedSprite2D/StoryTicket" unique_id=1444825421]
 libraries/ = SubResource("AnimationLibrary_5hj6c")
+autoplay = &"Flashing"
 
 [node name="TimeCountDownBarBackSprite" type="TextureProgressBar" parent="HBoxContainer/Slot3/AnimatedSprite2D" unique_id=1609744569]
 offset_left = 14.0
@@ -475,6 +478,7 @@ horizontal_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HBoxContainer/Slot4/AnimatedSprite2D/StoryTicket" unique_id=719846668]
 libraries/ = SubResource("AnimationLibrary_5hj6c")
+autoplay = &"Flashing"
 
 [node name="TimeCountDownBarBackSprite" type="TextureProgressBar" parent="HBoxContainer/Slot4/AnimatedSprite2D" unique_id=1942080217]
 offset_left = 14.0
