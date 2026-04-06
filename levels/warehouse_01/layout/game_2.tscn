@@ -138,16 +138,59 @@ out_bounds_area = NodePath("../OutBoundsArea")
 [node name="Path1" type="Node2D" parent="PatrolPaths" unique_id=46041390]
 
 [node name="p1_1" type="Marker2D" parent="PatrolPaths/Path1" unique_id=2052612545]
-position = Vector2(142, 253)
+position = Vector2(101, 271)
 
 [node name="p1_2" type="Marker2D" parent="PatrolPaths/Path1" unique_id=2114138325]
-position = Vector2(152, 388)
+position = Vector2(459, 271)
 
 [node name="p1_3" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1365977136]
-position = Vector2(340, 271)
+position = Vector2(459, 307)
 
 [node name="p1_4" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1875373551]
-position = Vector2(-76.95828, 226)
+position = Vector2(651, 307)
+
+[node name="p1_5" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1831874092]
+position = Vector2(651, 387)
+
+[node name="p1_6" type="Marker2D" parent="PatrolPaths/Path1" unique_id=848492553]
+position = Vector2(414, 387)
+
+[node name="p1_7" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1812712211]
+position = Vector2(415, 444)
+
+[node name="Path2" type="Node2D" parent="PatrolPaths" unique_id=1986710743]
+
+[node name="p2_1" type="Marker2D" parent="PatrolPaths/Path2" unique_id=261010147]
+position = Vector2(101, 271)
+
+[node name="p2_2" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1936918131]
+position = Vector2(176, 271)
+
+[node name="p2_3" type="Marker2D" parent="PatrolPaths/Path2" unique_id=92176543]
+position = Vector2(176, 440)
+
+[node name="Path3" type="Node2D" parent="PatrolPaths" unique_id=1638610493]
+
+[node name="p3_1" type="Marker2D" parent="PatrolPaths/Path3" unique_id=691874971]
+position = Vector2(100, 354)
+
+[node name="p3_2" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1842583583]
+position = Vector2(207, 354)
+
+[node name="p3_3" type="Marker2D" parent="PatrolPaths/Path3" unique_id=640919641]
+position = Vector2(207, 219)
+
+[node name="p3_4" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1990390427]
+position = Vector2(296, 219)
+
+[node name="p3_5" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1337445879]
+position = Vector2(296, 366)
+
+[node name="p3_6" type="Marker2D" parent="PatrolPaths/Path3" unique_id=2074199614]
+position = Vector2(494, 366)
+
+[node name="p3_7" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1214615763]
+position = Vector2(495, 444)
 
 [node name="Walls" parent="." unique_id=897807902 instance=ExtResource("15_rfkxv")]
 position = Vector2(423, 131)
@@ -164,7 +207,7 @@ metadata/_edit_use_anchors_ = true
 visible = false
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=106612821]
-position = Vector2(680.8126, 122.281265)
+position = Vector2(680.813, 122.281)
 scale = Vector2(18.681644, 9.741211)
 color = Color(0.33276916, 0.46037263, 0.80294394, 1)
 shadow_enabled = true
