@@ -10,7 +10,7 @@ var levels : Array[NodePath] = [
 	"res://levels/warehouse_02/game.tscn",
 	"res://levels/warehouse_02/game_2.tscn"]
 
-var quota = 15
+var quota = 0
 var level = 0
 
 func next_level():
