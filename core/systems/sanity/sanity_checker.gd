@@ -67,12 +67,14 @@ func _spawn_eye_ball(is_on: bool = false):
 func _on_inventory_updated():
 	# Check for anomalous items and start a timer to decrease sanity
 	for idx in range(PlayerInventory.max_capacity):
-		var timer = get_tree().create_timer(1)
+		var timer = get_tree().create_timer(1, false)
 		timer.timeout.connect(_on_anomalous_timeout.bind(idx))
 
 
 func _on_anomalous_timeout(index: int):
+	if PlayerInventory.contents[index] == null:
+		return
 	if PlayerInventory.contents[index].type == ItemData.Type.ANOMALOUS:
 		sanity.decrease(5)
-		var timer = get_tree().create_timer(1)
+		var timer = get_tree().create_timer(1, false)
 		timer.timeout.connect(_on_anomalous_timeout.bind(index))

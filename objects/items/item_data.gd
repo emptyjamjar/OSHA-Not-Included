@@ -3,8 +3,8 @@ extends Resource
 class_name ItemData
 
 enum Type {
-	ANOMALOUS,
 	GENERIC,
+	ANOMALOUS,
 	CONSUMABLE,
 	PACKAGE,
 }
