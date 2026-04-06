@@ -47,6 +47,7 @@ func Physics_Update(delta: float) -> void:
 	if manager.current_index >= path.size(): 
 		# print("WARNING: index out of range")
 		manager.wait_after_finished_a_path()
+		manager.choose_random_path()
 		return 
 	var target = path[manager.current_index].global_position 
 	var direction = (target - manager.global_position).normalized() 
