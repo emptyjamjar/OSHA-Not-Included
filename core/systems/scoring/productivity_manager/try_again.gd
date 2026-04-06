@@ -1,3 +1,5 @@
+## Try again button for fail state of score report
+
 extends TextureButton
 
 
@@ -8,5 +10,5 @@ func _ready() -> void:
 func _on_pressed() -> void:
 	get_tree().paused = false
 	Audio.play_click()
-	Ticket_Manager.reset()
+	Ticket_Manager.replay()
 	Level_Manager.replay_level()

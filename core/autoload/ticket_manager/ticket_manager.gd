@@ -405,3 +405,12 @@ func reset() -> void:
 
 	# Regenerate
 	generate_level_ticket(ticket_available)
+	
+func replay() -> void:
+	all_tickets.clear()
+	visible_queue.clear()
+	timers.clear()
+	active_ticket = null
+	level = Level_Manager.level + 1
+	load_templates_for_level(level)
+	ticket_available = ticket_templates.size()

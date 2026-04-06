@@ -17,11 +17,11 @@ func next_level():
 	var max_levels = levels.size()
 	PlayerInventory.reset()
 	quota += 15
+	level += 1
 	if level == max_levels:
 		level = 0
 		get_tree().change_scene_to_file(levels[0])
 	else:
-		level += 1
 		get_tree().change_scene_to_file(levels[level])
 		
 
