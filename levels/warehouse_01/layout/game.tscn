@@ -38,6 +38,7 @@ func _ready() -> void:
 	Ticket_Manager = get_tree().get_first_node_in_group(\"Ticket Manager\")
 	Ticket_Manager.on_game_start()
 	VendingSystem.vending_bought.connect(_on_vending_bought)
+	
 
 func _on_shipper_get_money() -> void:
 	money += 10

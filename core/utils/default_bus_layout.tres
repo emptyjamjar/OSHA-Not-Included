@@ -1,5 +1,17 @@
 [gd_resource type="AudioBusLayout" format=3 uid="uid://c1uql1fcd7q2k"]
 
+[sub_resource type="AudioEffectPitchShift" id="AudioEffectPitchShift_jdfbw"]
+resource_name = "PitchShift"
+oversampling = 25
+
+[sub_resource type="AudioEffectDistortion" id="AudioEffectDistortion_jdfbw"]
+resource_name = "Distortion"
+mode = 2
+pre_gain = 4.22
+keep_hf_hz = 13907.0
+drive = 0.24
+post_gain = 3.3
+
 [resource]
 bus/0/bypass_fx = true
 bus/1/name = &"SFX"
@@ -14,3 +26,7 @@ bus/2/mute = false
 bus/2/bypass_fx = false
 bus/2/volume_db = 0.0
 bus/2/send = &"Master"
+bus/2/effect/0/effect = SubResource("AudioEffectPitchShift_jdfbw")
+bus/2/effect/0/enabled = true
+bus/2/effect/1/effect = SubResource("AudioEffectDistortion_jdfbw")
+bus/2/effect/1/enabled = true
