@@ -334,11 +334,12 @@ radius = 32.0
 height = 80.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xgoh0"]
-radius = 32.0
-height = 80.0
+radius = 34.0
+height = 84.0
 
-[node name="Manager" type="CharacterBody2D" unique_id=565657217]
+[node name="Manager" type="CharacterBody2D" unique_id=565657217 node_paths=PackedStringArray("manager_collision")]
 script = ExtResource("1_6j6oq")
+manager_collision = NodePath("CollisionShape2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=353236697]
 position = Vector2(0, 1.9073486e-06)
@@ -375,6 +376,7 @@ metadata/_custom_type_script = "uid://bfr4futc0fa0"
 [node name="VisionCone" parent="." unique_id=2046041614 instance=ExtResource("9_xncq1")]
 
 [node name="TouchZone" type="Area2D" parent="." unique_id=581405695]
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TouchZone" unique_id=1788862835]
 shape = SubResource("CapsuleShape2D_xgoh0")

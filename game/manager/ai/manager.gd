@@ -15,9 +15,16 @@ var lost_player_grace := 0.3
 @export var patrol_paths_at_root: Node2D
 @export var out_bounds_area: Area2D
 
+##How many seconds to wait before manager shows itself.
+@export var spawn_time: float = 5
+#Just so the manager's collision can be controlled in it's spawning delay.
+@export var manager_collision: CollisionShape2D
+
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var vision_cone = $VisionCone/CollisionPolygon2D
 @onready var touch_zone = $TouchZone #  for recovery state
+
+var bump_tolerance = 5
 
 var path_container: Array = []
 var current_path: Array = []
@@ -35,9 +42,6 @@ func _ready() -> void:
 	add_to_group("agents")
 	vision_cone.entity_entered_vision.connect(_on_entity_seen)
 	vision_cone.entity_exited_vision.connect(_on_entity_lost)
-	self.hide()
-	await get_tree().create_timer(5).timeout
-	self.show()
 	
 	#Get productivity_manager
 	var UI = get_tree().get_first_node_in_group("UI")
@@ -65,6 +69,12 @@ func _ready() -> void:
 	if out_bounds_area: 
 		print("Entered")
 		out_bounds_area.connect("agent_entered", Callable(self, "_on_out_of_bounds"))
+	
+	self.hide()
+	manager_collision.disabled = true
+	await get_tree().create_timer(spawn_time).timeout
+	manager_collision.disabled = false
+	self.show()
 
 
 func _on_entity_seen(entity): 
@@ -186,7 +196,11 @@ func check_dropped_item():
 
 
 func check_bumped_into(body: Node2D):
-	pass
+	bump_tolerance -= 1
+	
+	if bump_tolerance <= 0:
+		bump_tolerance = 5
+		productivity_manager.add_productivity(-10)
 
 
 ##Shows a little frustrated thing to indicate to the player that their productivity has gone down.
