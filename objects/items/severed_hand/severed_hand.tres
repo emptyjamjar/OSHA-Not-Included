@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c7i8xoc0ofw0m" path="res://objects/items/item_data.gd" id="1_d8vt2"]
 [ext_resource type="Texture2D" uid="uid://0wuqh7msbsqn" path="res://objects/items/severed_hand/warehouse-severed-hand.png" id="2_h7wdt"]
+[ext_resource type="Texture2D" uid="uid://b6eddqn801mfg" path="res://objects/items/severed_hand/warehouse-severed-hand-small.png" id="3_qm7s6"]
 
 [resource]
 script = ExtResource("1_d8vt2")
@@ -9,5 +10,6 @@ type = 1
 name = "Severed Hand"
 description = "... I was just doing my job"
 texture = ExtResource("2_h7wdt")
+uiTexture = ExtResource("3_qm7s6")
 id = 9
 metadata/_custom_type_script = "uid://c7i8xoc0ofw0m"
