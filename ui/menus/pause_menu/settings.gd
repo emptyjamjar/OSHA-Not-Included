@@ -3,7 +3,9 @@ extends TextureButton
 
 signal settings_closed
 
-
+func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	
 func _on_pressed() -> void:
 	var scene = preload("res://ui/menus/settings_menu/settings_menu.tscn")
 	var instance = scene.instantiate() as SettingsMenu

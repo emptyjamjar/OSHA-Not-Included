@@ -46,6 +46,10 @@ action_name = "move_right"
 layout_mode = 2
 action_name = "interact"
 
+[node name="UseItemRebindButton" parent="." unique_id=1544566693 instance=ExtResource("3_x1638")]
+layout_mode = 2
+action_name = "use_item"
+
 [node name="DropRebindButton" parent="." unique_id=226969851 instance=ExtResource("3_x1638")]
 layout_mode = 2
 action_name = "drop"

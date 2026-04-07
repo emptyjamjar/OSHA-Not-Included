@@ -17,19 +17,20 @@
 ## - Works with ItemData resources
 
 extends Control
+
+signal vending_closed
+signal vending_bought(item: ItemData)
+
 @export var ui : CanvasLayer
 @export var currency_label : Label
 @export var vending_slot_node : PackedScene = preload("res://objects/food/shop_slot.tscn")
 @export var vending_items : Array[ItemData]
 @export var vending_container : GridContainer
 @export var slot_input : LineEdit
-signal vending_closed
+
+var _slot_text : String = ""
 var is_loaded = false
 var slot_map: Dictionary[String, ItemData] = {}
-enum MODE {
-	ON,
-	OFF
-}
 var _currency: float = 0.0
 var currency: float:
 	set(value):
@@ -43,6 +44,7 @@ var mode: MODE:
 	set(value):
 		var old_mode = _mode
 		_mode = value
+		slot_input.text = ""
 		if value == MODE.OFF:
 			if ui:
 				ui.hide()
@@ -56,15 +58,20 @@ var mode: MODE:
 	get:
 		return _mode
 
+enum MODE {
+	ON,
+	OFF
+}
+
+
 func _input(event):
 	if mode == MODE.ON and event.is_action_pressed("pause"):
 		mode = MODE.OFF
 		print("VENDING MACHINE IS OFF: ", mode)
 
+
 func _ready():
 	process_mode = Node.PROCESS_MODE_ALWAYS
-	
-	currency = 100
 	
 	if ui:
 		ui.hide()
@@ -76,24 +83,36 @@ func _ready():
 	
 	if slot_input:
 		slot_input.text_submitted.connect(_on_code_entered)
-	
+
+
 func buy_item(item: ItemData) -> bool:
 	if item == null:
+		Audio.play_invalid_interaction()
 		return false
 	
 	if item.price > currency:
 		print("Not enough money")
+		Audio.play_invalid_interaction()
 		return false
 	
 	currency -= item.price
 	print("Bought item: ", item.name)
 	Audio.play_vending_machine()
+	vending_bought.emit(item)
+	# Drop item on ground if no inventory space
+	if not PlayerInventory.add(item):
+		var spawned_item = ItemSpawner.spawn_with_data(item)
+		spawned_item.global_position = InteractionManager.player.global_position
+		var game := get_tree().get_first_node_in_group("game")
+		game.add_child(spawned_item)
 	return true
+
 
 func free_previous_slots():
 	for slot in vending_container.get_children():
 		slot.free()
-	
+
+
 func load_shop_inventory():
 	slot_map.clear()
 	
@@ -108,6 +127,7 @@ func load_shop_inventory():
 		vending_slot.slot_code = code
 		vending_slot.item = item
 
+
 func index_to_code(index: int) -> String:
 	var cols := vending_container.columns
 	@warning_ignore("integer_division")
@@ -119,17 +139,73 @@ func index_to_code(index: int) -> String:
 	
 	return row_letter + str(col_number)
 
+
 func _on_code_entered(code: String):
 	code = code.strip_edges().to_upper()
+	slot_input.text = ""
 	if not slot_map.has(code):
 		print("Invalid slot: ", code)
+		Audio.play_invalid_interaction()
 		return
+	
 	var item := slot_map[code]
 	if buy_item(item):
 		print("BOUGHT FROM SLOT ", code)
 		mode = MODE.OFF # turn off
 
+
 func set_shop_inventory(list : Array[ItemData]):
 	free_previous_slots()
 	vending_items = list
 	load_shop_inventory()
+
+
+func _btn_to_text(text: String):
+	slot_input.text += text.to_upper()
+	slot_input.text_changed.emit(slot_input.text)
+
+
+func _on_button_a_pressed() -> void:
+	_btn_to_text("A")
+
+
+func _on_button_b_pressed() -> void:
+	_btn_to_text("B")
+
+
+func _on_button_c_pressed() -> void:
+	_btn_to_text("C")
+
+
+func _on_button_1_pressed() -> void:
+	_btn_to_text("1")
+
+
+func _on_button_2_pressed() -> void:
+	_btn_to_text("2")
+
+
+func _on_button_3_pressed() -> void:
+	_btn_to_text("3")
+
+
+func _on_button_delete_pressed() -> void:
+	var slotLen = slot_input.text.length() - 1
+	if slotLen < 0:
+		return
+	slot_input.text = slot_input.text.erase(slotLen)
+	slot_input.text_changed.emit(slot_input.text)
+
+
+func _on_button_enter_pressed() -> void:
+	_on_code_entered(slot_input.text)
+
+
+func _on_line_edit_text_changed(new_text: String) -> void:
+	if _slot_text.length() > new_text.length():
+		Audio.play_exit_click()
+	elif _slot_text.length() < new_text.length():
+		Audio.play_click()
+	else:
+		Audio.play_invalid_interaction()
+	_slot_text = new_text

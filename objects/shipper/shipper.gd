@@ -54,6 +54,7 @@ func _on_interact():
 					animated_sprite.play("close")
 					shipped = true
 					player_collision.disabled = true
+					Audio.play_shipped()
 			else:
 				invalid_interaction()
 				# Wrong item shipped — ignore for now

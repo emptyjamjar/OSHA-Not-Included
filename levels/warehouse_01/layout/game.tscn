@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://chidjbuid2cgd" path="res://levels/shared/World.tscn" id="1_7sc4i"]
 [ext_resource type="Script" uid="uid://cpt2knie07vvo" path="res://core/systems/needs/health_component.gd" id="2_e2o6t"]
 [ext_resource type="Script" uid="uid://c8mj1grnlbspl" path="res://game/manager/ai/out_bounds_area.gd" id="2_e8heu"]
+[ext_resource type="PackedScene" uid="uid://b5iphcv1rio5l" path="res://core/autoload/ticket_manager/ticket_manager.tscn" id="2_qi1hw"]
 [ext_resource type="PackedScene" uid="uid://cxbnggs2xw8ne" path="res://ui/hud/hud.tscn" id="2_ryrav"]
 [ext_resource type="PackedScene" uid="uid://bimhohbyv6s5d" path="res://objects/shipper/shipper.tscn" id="3_e8heu"]
 [ext_resource type="Script" uid="uid://ck4p7gga13e5e" path="res://core/systems/needs/energy_component.gd" id="3_feb5d"]
@@ -15,7 +16,11 @@
 [ext_resource type="PackedScene" uid="uid://sxf3e0qydlfv" path="res://objects/packager/packager.tscn" id="12_hb5m1"]
 [ext_resource type="PackedScene" uid="uid://cv4vrnpxs40bf" path="res://objects/restroom/washroom.tscn" id="12_iotsf"]
 [ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="13_lc2xo"]
+[ext_resource type="Script" uid="uid://c7i8xoc0ofw0m" path="res://objects/items/item_data.gd" id="13_txl5l"]
+[ext_resource type="Resource" uid="uid://ctf1howehvin1" path="res://objects/items/bomb-clock/bomb-clock.tres" id="14_32hdq"]
+[ext_resource type="Resource" uid="uid://br4aav6cf5e1q" path="res://objects/items/gunpowder/gunpowder.tres" id="15_t4b4w"]
 [ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
+[ext_resource type="Resource" uid="uid://uve4tfgfh0ov" path="res://objects/items/wires/wires.tres" id="16_ypk20"]
 [ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="17_8onr1"]
 [ext_resource type="PackedScene" uid="uid://u3cnys6nkx03" path="res://levels/warehouse_01/layout/walls.tscn" id="18_kgoe6"]
 
@@ -23,16 +28,25 @@
 script/source = "extends Node2D
 class_name GameManager
 
-@onready var hud: CanvasLayer = $Camera2D/HUD
+@onready var hud: Control = $CanvasLayer/HUD
 @onready var money := 0
+var Ticket_Manager: TicketManager
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Ticket_Manager = get_tree().get_first_node_in_group(\"Ticket Manager\")
 	Ticket_Manager.on_game_start()
+	VendingSystem.vending_bought.connect(_on_vending_bought)
 
 func _on_shipper_get_money() -> void:
 	money += 10
+	VendingSystem.currency += 10
 	hud.update_money(money)
-	
+
+
+func _on_vending_bought(item: ItemData):
+	money -= item.price
+	hud.update_money(money)
 "
 
 [sub_resource type="Gradient" id="Gradient_halqj"]
@@ -53,11 +67,14 @@ colors = PackedColorArray(0.05072464, 0.05072464, 0.05072464, 1, 1, 1, 1, 1)
 gradient = SubResource("Gradient_dd2np")
 fill_from = Vector2(0, 1)
 
-[node name="Game" type="Node2D" unique_id=645817684 groups=["game"]]
+[node name="Game2" type="Node2D" unique_id=645817684 groups=["game"]]
 y_sort_enabled = true
 script = SubResource("GDScript_7sc4i")
 
 [node name="World" parent="." unique_id=2107734680 instance=ExtResource("1_7sc4i")]
+
+[node name="TicketManager" parent="." unique_id=257549508 instance=ExtResource("2_qi1hw")]
+level = 2
 
 [node name="OutBoundsArea" type="Area2D" parent="." unique_id=1864494632]
 visible = false
@@ -72,10 +89,10 @@ polygon = PackedVector2Array(-0.99945825, -1, 636.4481, 0.8156662, 637.65436, 36
 [node name="Shipper" parent="." unique_id=441417436 instance=ExtResource("3_e8heu")]
 position = Vector2(216, 176)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=167263537]
-anchor_mode = 0
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1621126040]
 
-[node name="HUD" parent="Camera2D" unique_id=830642951 instance=ExtResource("2_ryrav")]
+[node name="HUD" parent="CanvasLayer" unique_id=830642951 node_paths=PackedStringArray("productivity_manager") instance=ExtResource("2_ryrav")]
+productivity_manager = NodePath("../../UI/Score")
 
 [node name="Player" parent="." unique_id=2112891127 instance=ExtResource("5_rvswv")]
 position = Vector2(612, 282)
@@ -104,6 +121,11 @@ texture = SubResource("GradientTexture2D_kgoe6")
 position = Vector2(640, 192)
 
 [node name="Conveyor" parent="." unique_id=1135306595 groups=["conveyor"] instance=ExtResource("8_j5wjh")]
+story_resources = Dictionary[int, ExtResource("13_txl5l")]({
+3: ExtResource("14_32hdq"),
+6: ExtResource("15_t4b4w"),
+9: ExtResource("16_ypk20")
+})
 
 [node name="Belt TileMap" parent="Conveyor" index="0" unique_id=1815729401]
 tile_map_data = PackedByteArray("AAANAAYAAQAAAAEAAAANAAcAAQAAAAIAAAAOAAcAAQABAAIAAAAPAAcAAQABAAIAAAAQAAcAAQABAAIAAAARAAcAAQABAAIAAAA=")
@@ -123,7 +145,7 @@ position = Vector2(744, 304)
 scale = Vector2(0.24458057, 0.24458057)
 
 [node name="Manager" parent="." unique_id=565657217 node_paths=PackedStringArray("patrol_paths_at_root", "out_bounds_area") instance=ExtResource("16_80cx4")]
-position = Vector2(601.6738, 425)
+position = Vector2(221, 96)
 collision_mask = 2
 patrol_paths_at_root = NodePath("../PatrolPaths")
 out_bounds_area = NodePath("../OutBoundsArea")
@@ -133,16 +155,56 @@ out_bounds_area = NodePath("../OutBoundsArea")
 [node name="Path1" type="Node2D" parent="PatrolPaths" unique_id=46041390]
 
 [node name="p1_1" type="Marker2D" parent="PatrolPaths/Path1" unique_id=2052612545]
-position = Vector2(575.688, 191)
+position = Vector2(766, 240)
 
 [node name="p1_2" type="Marker2D" parent="PatrolPaths/Path1" unique_id=2114138325]
-position = Vector2(416.7741, 320)
+position = Vector2(603, 240)
 
 [node name="p1_3" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1365977136]
-position = Vector2(415, 268)
+position = Vector2(603, 354)
 
 [node name="p1_4" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1875373551]
-position = Vector2(-76.95828, 226)
+position = Vector2(603, 434)
+
+[node name="Path2" type="Node2D" parent="PatrolPaths" unique_id=1914193741]
+
+[node name="p2_1" type="Marker2D" parent="PatrolPaths/Path2" unique_id=2144638790]
+position = Vector2(766, 240)
+
+[node name="p2_2" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1333995760]
+position = Vector2(603, 240)
+
+[node name="p2_3" type="Marker2D" parent="PatrolPaths/Path2" unique_id=144597422]
+position = Vector2(603, 354)
+
+[node name="p2_4" type="Marker2D" parent="PatrolPaths/Path2" unique_id=238432829]
+position = Vector2(416, 354)
+
+[node name="p2_5" type="Marker2D" parent="PatrolPaths/Path2" unique_id=296238851]
+position = Vector2(215, 354)
+
+[node name="p2_6" type="Marker2D" parent="PatrolPaths/Path2" unique_id=371442593]
+position = Vector2(215, 257)
+
+[node name="p2_7" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1540385415]
+position = Vector2(100, 259)
+
+[node name="Path3" type="Node2D" parent="PatrolPaths" unique_id=1013101742]
+
+[node name="p3_1" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1936452682]
+position = Vector2(766, 240)
+
+[node name="p3_2" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1902950288]
+position = Vector2(603, 240)
+
+[node name="p3_3" type="Marker2D" parent="PatrolPaths/Path3" unique_id=976590283]
+position = Vector2(603, 354)
+
+[node name="p4_4" type="Marker2D" parent="PatrolPaths/Path3" unique_id=855546052]
+position = Vector2(416, 354)
+
+[node name="p4_5" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1597500460]
+position = Vector2(416, 436)
 
 [node name="Path2" type="Node2D" parent="PatrolPaths" unique_id=1780100022]
 
@@ -187,7 +249,7 @@ metadata/_edit_use_anchors_ = true
 visible = false
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=106612821]
-position = Vector2(680.8126, 122.281265)
+position = Vector2(680, 122.281)
 scale = Vector2(18.681644, 9.741211)
 color = Color(0.33276916, 0.46037263, 0.80294394, 1)
 shadow_enabled = true
@@ -200,8 +262,8 @@ color = Color(0.64803123, 0.68176806, 0.7610899, 1)
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
 [connection signal="get_money" from="Shipper" to="UI/Score" method="_on_shipper_get_money"]
-[connection signal="health_change" from="Player/HealthComponent" to="Camera2D/HUD" method="_on_health_component_health_change"]
-[connection signal="needs_change" from="Player/NeedsComponent" to="Camera2D/HUD" method="_on_needs_component_needs_change"]
+[connection signal="health_change" from="Player/HealthComponent" to="CanvasLayer/HUD" method="_on_health_component_health_change"]
+[connection signal="needs_change" from="Player/NeedsComponent" to="CanvasLayer/HUD" method="_on_needs_component_needs_change"]
 [connection signal="ticketsEmpty" from="TicketTerminal" to="UI/Score" method="_on_ticket_terminal_tickets_empty"]
 [connection signal="washroom_used" from="Washroom" to="UI/Score" method="_on_washroom_washroom_used"]
 

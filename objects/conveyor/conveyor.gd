@@ -12,7 +12,9 @@ var first_pickup := false
 ## Preloaded resources of all possible ItemData that this conveyor can generate.
 @export var item_resources : Array[ItemData]
 ##List of ItemData important to the story that this conveyor can generate.
-@export var special_resources: Array[ItemData]
+##The Keys are ints which will be the position in the queue the story item will spawn in. 
+##The value is the story item to be spawned.
+@export var story_resources: Dictionary[int, ItemData] = {}
 
 @export_category("Components")
 ##The Belt Tile_map
@@ -21,6 +23,7 @@ var first_pickup := false
 @export var spawn_despawn_map: TileMapLayer
 ##Where the Item will be spawned into
 @export var items_node: Node2D
+var ticket_manager: TicketManager
 
 @export_category("Values")
 ##How many random items will be spawned in between items that are required by the current tickets.
@@ -53,6 +56,8 @@ var _output_timer: float = 0.0
 
 
 func _ready() -> void:
+	ticket_manager = get_tree().get_first_node_in_group("Ticket Manager")
+	
 	add_to_group("conveyor")
 	# Fill item_resources with needed item data if it is somehow empty.
 	if item_resources.is_empty():
@@ -85,7 +90,7 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	#Only start the timer and start spawning when there are items queued up.
-	if _queue.is_empty() and !Ticket_Manager.visible_queue.is_empty():
+	if _queue.is_empty() and !ticket_manager.visible_queue.is_empty():
 		_fill_queue()
 	elif !_queue.is_empty():
 		# Process queue and spawn items onto belt at output_speed rate
@@ -144,7 +149,7 @@ func _move_items():
 ## Fills queue with items, some are random, some are items from the current ticket queue.
 func _fill_queue():
 	#Get current visible tickets.
-	var ticket_pool: Array[Ticket] = Ticket_Manager.visible_queue
+	var ticket_pool: Array[Ticket] = ticket_manager.visible_queue
 	var ticket_items: Array[ItemData] = []
 	
 	#This grabs all the visible active tickets, and gets all the ItemData.id that's stored in a dictionary
@@ -201,11 +206,24 @@ func _on_item_picked_up(item: ItemBase, index: int):
 
 # functions to help return all the item in the conveyor array 
 func get_all_items() -> Array[ItemData]: 
+	if item_resources == null: 
+		pass 
 	return item_resources
+
+
+# function to help return the story items to be spawned.
+func get_all_story_items() -> Dictionary[int, ItemData]:
+	print(story_resources)
+	return story_resources
 
 
 func get_item_by_id(id: int) -> ItemData: 
 	for item in item_resources: 
 		if item.id == id: 
 			return item
+	
+	for item in story_resources.values(): 
+		if item.id == id: 
+			return item
+	
 	return null 
