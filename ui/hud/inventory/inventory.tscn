@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b8jecjbw3e3vj" path="res://ui/hud/inventory/receipt/item_recepit.tscn" id="6_4d4wv"]
 [ext_resource type="Texture2D" uid="uid://bfi48dbgdwbte" path="res://ui/hud/inventory/UpDownArrowKeyControl.png" id="7_h0hcm"]
 [ext_resource type="Texture2D" uid="uid://bcfubndu5kcwc" path="res://ui/hud/inventory/MouseControl.png" id="8_1bsph"]
+[ext_resource type="Texture2D" uid="uid://dcrv58r6bb1og" path="res://ui/hud/inventory/QKey.png" id="9_54k0y"]
 
 [sub_resource type="Animation" id="Animation_i7to8"]
 resource_name = "HUD_Shake"
@@ -186,6 +187,21 @@ offset_top = 84.0
 offset_right = 19.0
 offset_bottom = 113.0
 texture = ExtResource("8_1bsph")
+
+[node name="QKey" type="TextureRect" parent="." unique_id=1347358289]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 160.0
+offset_right = 29.0
+offset_bottom = 174.0
+texture = ExtResource("9_54k0y")
+
+[node name="Label" type="Label" parent="QKey" unique_id=1097051497]
+layout_mode = 0
+offset_left = 17.0
+offset_right = 64.0
+offset_bottom = 17.0
+text = "to drop"
 
 [connection signal="pressed" from="Slot1/Slot1Button" to="." method="_on_slot_1_button_pressed"]
 [connection signal="pressed" from="Slot2/Slot2Button" to="." method="_on_slot_2_button_pressed"]
