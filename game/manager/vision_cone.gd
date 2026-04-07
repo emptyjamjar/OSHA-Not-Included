@@ -8,6 +8,7 @@ signal entity_exited_vision(entity)
 @export var vision_range: float = 250.0 # how far the cone extends 
 @export var vision_angle: float = 120.0 # cone width in degrees
 @export var vision_layers: int = 1 # which collision layers to detect (must) 
+var area : Area2D
 
 @export var update_interval: float = 0.1 # how often does it check? This is primarily for performance reason?
 var detected_nodes: Array = [] # current visible entities/nodes 
@@ -116,9 +117,14 @@ func set_vision_parameters(range: float, angle: float) -> void:
 # Config 
 func enable() -> void: # turn detection on 
 	show_vision = true
+	area = get_parent() as Area2D
+	area.visible = true 
+	
 	
 func disable() -> void: # turn detection off 
 	show_vision = false 
+	area = get_parent() as Area2D
+	area.visible = false 
 
 func _draw() -> void: 
 	if not show_vision: return  

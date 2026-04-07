@@ -71,11 +71,9 @@ _data = {
 }
 
 [node name="Inventory" type="TextureRect" unique_id=988897325 node_paths=PackedStringArray("slot1", "slot1Btn", "receipt1", "slot2", "slot2Btn", "receipt2", "AnimPlayer")]
-z_index = -1
 offset_top = 240.0
 offset_right = 96.0
 offset_bottom = 432.0
-mouse_filter = 2
 texture = ExtResource("1_5vcw3")
 script = ExtResource("2_mw73s")
 slot1 = NodePath("Slot1")
@@ -92,7 +90,6 @@ offset_left = 25.0
 offset_top = 45.0
 offset_right = 71.0
 offset_bottom = 91.0
-mouse_filter = 2
 
 [node name="Slot1Button" type="TextureButton" parent="Slot1" unique_id=1187112447]
 layout_mode = 0
@@ -136,7 +133,6 @@ offset_left = 25.0
 offset_top = 102.0
 offset_right = 71.0
 offset_bottom = 148.0
-mouse_filter = 2
 
 [node name="Slot2Button" type="TextureButton" parent="Slot2" unique_id=2144614125]
 layout_mode = 0
