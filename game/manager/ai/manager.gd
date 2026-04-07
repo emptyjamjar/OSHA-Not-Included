@@ -196,11 +196,12 @@ func check_dropped_item():
 
 
 func check_bumped_into(body: Node2D):
-	bump_tolerance -= 1
-	
-	if bump_tolerance <= 0:
-		bump_tolerance = 5
-		productivity_manager.add_productivity(-10)
+	if body is Player:
+		bump_tolerance -= 1
+		
+		if bump_tolerance <= 0:
+			bump_tolerance = 5
+			productivity_manager.add_productivity(-10)
 
 
 ##Shows a little frustrated thing to indicate to the player that their productivity has gone down.
