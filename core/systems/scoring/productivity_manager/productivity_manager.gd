@@ -34,7 +34,7 @@ func add_productivity(value : int) -> int:
 
 func _on_shipper_get_money() -> void:
 	quota += 1
-	add_productivity(15)
+	add_productivity(20)
 	
 func _on_washroom_washroom_used() -> void:
 	breaks += 1

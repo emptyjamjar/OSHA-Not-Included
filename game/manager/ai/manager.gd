@@ -72,8 +72,10 @@ func _ready() -> void:
 	
 	self.hide()
 	manager_collision.disabled = true
+	vision_cone.disable()
 	await get_tree().create_timer(spawn_time).timeout
 	manager_collision.disabled = false
+	vision_cone.enable()
 	self.show()
 
 
@@ -187,12 +189,14 @@ func rotate_vision_cone():
 
 ##The Behaviour functions
 func check_not_moving():
-	#This turns on the idle function already in the productivity manager.
-	productivity_manager.is_watched = true
+	if(productivity_manager):
+		#This turns on the idle function already in the productivity manager.
+		productivity_manager.is_watched = true
 
 
 func check_dropped_item():
-	productivity_manager.add_productivity(-3)
+	if(productivity_manager):
+		productivity_manager.add_productivity(-3)
 
 
 func check_bumped_into(body: Node2D):

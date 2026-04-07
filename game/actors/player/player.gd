@@ -105,13 +105,22 @@ func get_animated_sprite_dimensions() -> Vector2i:
 	return animated_sprite.sprite_frames.get_frame_texture(animated_sprite.animation, animated_sprite.frame).get_size()
 
 
-##Starts sanity drain
+##Starts sanity drain. DEPRECATED
 func _on_sanity_area_area_entered(_area: Area2D) -> void:
+	pass
+	#for overlapped_body in sanity_area.get_overlapping_bodies():
+		#if overlapped_body.is_in_group("Manager"):
+			#print("BO")
+			#is_manager_near = true
+
+##Ends sanity drain.
+func _on_sanity_area_body_exited(body: Node2D) -> void:
 	for overlapped_body in sanity_area.get_overlapping_bodies():
 		if overlapped_body.is_in_group("Manager"):
+			print("amang")
 			is_manager_near = true
 
-
-func _on_sanity_area_body_exited(body: Node2D) -> void:
+##Starts sanity drain.
+func _on_sanity_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Manager"):
-		is_manager_near = false
+		is_manager_near = true

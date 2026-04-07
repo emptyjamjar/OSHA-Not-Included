@@ -295,4 +295,5 @@ autoplay = "idle_down"
 shape = SubResource("CircleShape2D_em52k")
 
 [connection signal="area_entered" from="SanityArea" to="." method="_on_sanity_area_area_entered"]
+[connection signal="body_entered" from="SanityArea" to="." method="_on_sanity_area_body_entered"]
 [connection signal="body_exited" from="SanityArea" to="." method="_on_sanity_area_body_exited"]

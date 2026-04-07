@@ -337,7 +337,8 @@ height = 80.0
 radius = 34.0
 height = 84.0
 
-[node name="Manager" type="CharacterBody2D" unique_id=565657217 node_paths=PackedStringArray("manager_collision")]
+[node name="Manager" type="CharacterBody2D" unique_id=565657217 node_paths=PackedStringArray("manager_collision") groups=["Manager"]]
+collision_mask = 0
 script = ExtResource("1_6j6oq")
 manager_collision = NodePath("CollisionShape2D")
 
