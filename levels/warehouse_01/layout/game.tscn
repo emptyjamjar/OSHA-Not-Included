@@ -193,6 +193,18 @@ position = Vector2(215, 257)
 [node name="p2_7" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1540385415]
 position = Vector2(100, 259)
 
+[node name="p2_8" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1106255408]
+position = Vector2(447.75732, 322)
+
+[node name="p2_9" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1918256563]
+position = Vector2(704.61804, 325)
+
+[node name="p2_10" type="Marker2D" parent="PatrolPaths/Path2" unique_id=136453742]
+position = Vector2(478.7405, 290)
+
+[node name="p2_11" type="Marker2D" parent="PatrolPaths/Path2" unique_id=87527126]
+position = Vector2(509, 346)
+
 [node name="Path3" type="Node2D" parent="PatrolPaths" unique_id=1013101742]
 
 [node name="p3_1" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1936452682]
@@ -210,33 +222,21 @@ position = Vector2(416, 354)
 [node name="p4_5" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1597500460]
 position = Vector2(416, 436)
 
-[node name="Path2" type="Node2D" parent="PatrolPaths" unique_id=1780100022]
-
-[node name="p2_1" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1106255408]
-position = Vector2(447.75732, 322)
-
-[node name="p2_2" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1918256563]
-position = Vector2(704.61804, 325)
-
-[node name="p2_3" type="Marker2D" parent="PatrolPaths/Path2" unique_id=136453742]
-position = Vector2(478.7405, 290)
-
-[node name="p2_4" type="Marker2D" parent="PatrolPaths/Path2" unique_id=87527126]
-position = Vector2(509, 346)
-
-[node name="Path3" type="Node2D" parent="PatrolPaths" unique_id=1497011237]
-
-[node name="p3_1" type="Marker2D" parent="PatrolPaths/Path3" unique_id=475289346]
+[node name="p3_4" type="Marker2D" parent="PatrolPaths/Path3" unique_id=475289346]
 position = Vector2(577.6868, 354)
 
-[node name="p3_2" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1576187183]
+[node name="p3_5" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1576187183]
 position = Vector2(415.77463, 351)
 
-[node name="p3_3" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1656326002]
+[node name="p3_6" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1656326002]
 position = Vector2(416.77408, 193)
 
-[node name="p3_4" type="Marker2D" parent="PatrolPaths/Path3" unique_id=29843830]
+[node name="p3_7" type="Marker2D" parent="PatrolPaths/Path3" unique_id=29843830]
 position = Vector2(723.6078, 184)
+
+[node name="Path4" type="Node2D" parent="PatrolPaths" unique_id=1780100022]
+
+[node name="Path5" type="Node2D" parent="PatrolPaths" unique_id=1497011237]
 
 [node name="Walls" parent="." unique_id=897807902 instance=ExtResource("18_kgoe6")]
 position = Vector2(-16, 80)

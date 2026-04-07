@@ -3,7 +3,7 @@ extends Path2D
 @export var speed = 100 # Pixels per second
 var state := 0
 
-@onready var animated_sprite_2d: AnimatedSprite2D = $PathFollow2D/AnimatedSprite2D
+@export var animated_sprite_2d: AnimatedSprite2D
 
 
 # Called when the node enters the scene tree for the first time.

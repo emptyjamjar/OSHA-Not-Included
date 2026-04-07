@@ -211,9 +211,10 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="CutscenePath" type="Path2D" unique_id=1696193264]
+[node name="CutscenePath" type="Path2D" unique_id=1696193264 node_paths=PackedStringArray("animated_sprite_2d")]
 curve = SubResource("Curve2D_hb5m1")
 script = ExtResource("1_wy514")
+animated_sprite_2d = NodePath("PathFollow2D/AnimatedSprite2D")
 
 [node name="PathFollow2D" type="PathFollow2D" parent="." unique_id=331630892]
 position = Vector2(619, 351)

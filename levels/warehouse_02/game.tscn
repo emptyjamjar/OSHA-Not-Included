@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://ci8cvgkc7sn2f"]
+[gd_scene format=3 uid="uid://dt3hul4p8kgiu"]
 
 [ext_resource type="PackedScene" uid="uid://chidjbuid2cgd" path="res://levels/shared/World.tscn" id="1_oopdr"]
 [ext_resource type="Script" uid="uid://c8mj1grnlbspl" path="res://game/manager/ai/out_bounds_area.gd" id="2_cj0sn"]
@@ -107,7 +107,7 @@ fill_from = Vector2(0, 1)
 y_sort_enabled = true
 script = SubResource("GDScript_7sc4i")
 
-[node name="World" parent="." unique_id=2107734680 instance=ExtResource("1_halqj")]
+[node name="World" parent="." unique_id=2107734680 instance=ExtResource("1_oopdr")]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="World" unique_id=1435820696]
 environment = SubResource("Environment_halqj")
@@ -118,14 +118,14 @@ level = 4
 [node name="OutBoundsArea" type="Area2D" parent="." unique_id=1864494632]
 visible = false
 collision_layer = 2
-script = ExtResource("2_dd2np")
+script = ExtResource("2_cj0sn")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="OutBoundsArea" unique_id=995408817]
 position = Vector2(121.18235, 73.46653)
 scale = Vector2(0.6230469, 0.6540301)
 polygon = PackedVector2Array(-0.99945825, -1, 636.4481, 0.8156662, 637.65436, 365, 1.9989165, 365)
 
-[node name="Shipper" parent="." unique_id=441417436 instance=ExtResource("3_wkw6b")]
+[node name="Shipper" parent="." unique_id=441417436 instance=ExtResource("3_orsha")]
 position = Vector2(216, 176)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1359475966]
@@ -133,20 +133,20 @@ position = Vector2(216, 176)
 [node name="HUD" parent="CanvasLayer" unique_id=830642951 node_paths=PackedStringArray("productivity_manager") instance=ExtResource("4_ehrfo")]
 productivity_manager = NodePath("../../UI/Score")
 
-[node name="Player" parent="." unique_id=2112891127 instance=ExtResource("5_olr4i")]
-position = Vector2(198, 298)
+[node name="Player" parent="." unique_id=2112891127 instance=ExtResource("5_vcd3j")]
+position = Vector2(199, 298)
 
 [node name="HealthComponent" type="Node" parent="Player" unique_id=1337526708]
-script = ExtResource("6_y5cwl")
+script = ExtResource("6_ocm5a")
 
 [node name="EnergyComponent" type="Node" parent="Player" unique_id=1556776905]
-script = ExtResource("7_568yo")
+script = ExtResource("7_kmg8n")
 
 [node name="NeedsComponent" type="Node" parent="Player" unique_id=1834835802]
-script = ExtResource("8_f71xe")
+script = ExtResource("8_ro5fp")
 
 [node name="SanityComponent" type="Node" parent="Player" unique_id=264741504]
-script = ExtResource("9_itvml")
+script = ExtResource("9_ahdu7")
 
 [node name="PointLight2D" type="PointLight2D" parent="Player" unique_id=694927071]
 position = Vector2(2.0000038, -2.0000012)
@@ -156,10 +156,10 @@ energy = 0.87
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_dd2np")
 
-[node name="Packager" parent="." unique_id=2093227932 instance=ExtResource("10_pqdvj")]
+[node name="Packager" parent="." unique_id=2093227932 instance=ExtResource("10_kjm3g")]
 position = Vector2(640, 192)
 
-[node name="Conveyor" parent="." unique_id=1135306595 groups=["conveyor"] instance=ExtResource("11_2p8ph")]
+[node name="Conveyor" parent="." unique_id=1135306595 groups=["conveyor"] instance=ExtResource("11_srh4a")]
 position = Vector2(620, 363)
 story_resources = Dictionary[int, ExtResource("13_pqdvj")]({
 0: SubResource("Resource_ve8kv"),
@@ -168,29 +168,29 @@ story_resources = Dictionary[int, ExtResource("13_pqdvj")]({
 6: ExtResource("17_tthwu")
 })
 
-[node name="TicketTerminal" parent="." unique_id=982348100 instance=ExtResource("12_3mx75")]
+[node name="TicketTerminal" parent="." unique_id=982348100 instance=ExtResource("12_ipt1j")]
 position = Vector2(470, 403)
 
-[node name="VendingMachine" parent="." unique_id=1840311720 instance=ExtResource("13_halqj")]
+[node name="VendingMachine" parent="." unique_id=1840311720 instance=ExtResource("13_40oma")]
 position = Vector2(403.99994, 279.99997)
 scale = Vector2(0.33, 0.33)
 
-[node name="Washroom" parent="." unique_id=585966862 instance=ExtResource("14_dd2np")]
+[node name="Washroom" parent="." unique_id=585966862 instance=ExtResource("14_rmdop")]
 position = Vector2(117, 367.00003)
 scale = Vector2(0.245, 0.245)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1192117838 groups=["UI"]]
 layer = 15
 
-[node name="Pause" parent="UI" unique_id=1566201169 instance=ExtResource("15_ve8kv")]
+[node name="Pause" parent="UI" unique_id=1566201169 instance=ExtResource("15_gq5jn")]
 visible = false
 metadata/_edit_use_anchors_ = true
 
 [node name="Score" parent="UI" unique_id=1161969462 groups=["Productivity"] instance=ExtResource("16_qb10i")]
 visible = false
 
-[node name="Manager" parent="." unique_id=565657217 node_paths=PackedStringArray("patrol_paths_at_root", "out_bounds_area") instance=ExtResource("16_4qtht")]
-position = Vector2(339, 374)
+[node name="Manager" parent="." unique_id=565657217 node_paths=PackedStringArray("patrol_paths_at_root", "out_bounds_area") instance=ExtResource("17_bwxc5")]
+position = Vector2(392, 220)
 collision_mask = 2
 patrol_paths_at_root = NodePath("../PatrolPaths")
 out_bounds_area = NodePath("../OutBoundsArea")
@@ -266,19 +266,19 @@ position = Vector2(579, 440)
 
 [node name="Walls" type="Node2D" parent="." unique_id=830732475]
 
-[node name="Shelf" parent="Walls" unique_id=1206098896 instance=ExtResource("18_wkw6b")]
+[node name="Shelf" parent="Walls" unique_id=1206098896 instance=ExtResource("18_jn03o")]
 position = Vector2(729, 298)
 
-[node name="Shelf2" parent="Walls" unique_id=1094321740 instance=ExtResource("18_wkw6b")]
+[node name="Shelf2" parent="Walls" unique_id=1094321740 instance=ExtResource("18_jn03o")]
 position = Vector2(661, 298)
 
-[node name="Shelf" parent="." unique_id=1085808159 instance=ExtResource("18_wkw6b")]
+[node name="Shelf3" parent="Walls" unique_id=1085808159 instance=ExtResource("18_jn03o")]
 position = Vector2(593, 297)
 
-[node name="Shelf2" parent="." unique_id=1925849212 instance=ExtResource("18_wkw6b")]
+[node name="Shelf4" parent="Walls" unique_id=1925849212 instance=ExtResource("18_jn03o")]
 position = Vector2(524, 296)
 
-[node name="Shelf3" parent="." unique_id=1123887325 instance=ExtResource("18_wkw6b")]
+[node name="Shelf5" parent="Walls" unique_id=1123887325 instance=ExtResource("18_jn03o")]
 position = Vector2(455, 296)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2024396508]

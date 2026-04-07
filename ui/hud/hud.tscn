@@ -6,6 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://dfh2tueiapfnq" path="res://ui/hud/inventory/inventory.tscn" id="3_kwc50"]
 [ext_resource type="Texture2D" uid="uid://bigtlykgcw4yo" path="res://ui/hud/StatBarBack.png" id="4_kwc50"]
 [ext_resource type="Texture2D" uid="uid://by0viewb4ct5f" path="res://ui/hud/StatBarFill.png" id="5_o2lis"]
+[ext_resource type="Texture2D" uid="uid://0enu3a8st0nl" path="res://ui/hud/ClockSprite.png" id="7_o2lis"]
+[ext_resource type="Script" uid="uid://dok52jim2s26q" path="res://ui/hud/clock/clock.gd" id="8_aixkq"]
+[ext_resource type="Texture2D" uid="uid://c6gbmvw8xt2af" path="res://ui/hud/QuotaSprite.png" id="8_gfles"]
 
 [sub_resource type="Animation" id="Animation_aixkq"]
 length = 0.001
@@ -342,6 +345,13 @@ z_index = 10
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_4d6w6")
+anim_player = NodePath("AnimationPlayer")
+clock = NodePath("Clock")
+quota = NodePath("Quota/Body")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=2048140397]
+root_node = NodePath("../Quota")
+libraries/ = SubResource("AnimationLibrary_5uuaq")
 
 [node name="Background" type="TextureRect" parent="." unique_id=2145073693]
 z_index = -4

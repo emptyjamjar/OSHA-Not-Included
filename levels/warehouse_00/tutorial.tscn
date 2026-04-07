@@ -201,18 +201,7 @@ collision_mask = 2
 patrol_paths_at_root = NodePath("../PatrolPaths")
 out_bounds_area = NodePath("../OutBoundsArea")
 
-[node name="CutscenePath" type="Path2D" parent="." unique_id=2042277849]
-curve = SubResource("Curve2D_hb5m1")
-script = ExtResource("18_e36ub")
-
-[node name="PathFollow2D" type="PathFollow2D" parent="CutscenePath" unique_id=1602138425]
-position = Vector2(619, 351)
-rotation = 3.1415927
-rotates = false
-loop = false
-
-[node name="Sprite2D" type="Sprite2D" parent="CutscenePath/PathFollow2D" unique_id=1078777878]
-texture = ExtResource("18_boyg6")
+[node name="CutscenePath" parent="." unique_id=1696193264 instance=ExtResource("18_rvswv")]
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=837622460 groups=["UI"]]
 layer = 15
@@ -237,6 +226,7 @@ metadata/_edit_use_anchors_ = true
 visible = false
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=2074852728]
+visible = false
 position = Vector2(680.813, 122.281)
 scale = Vector2(18.681644, 9.741211)
 color = Color(0.33276916, 0.46037263, 0.80294394, 1)
@@ -249,7 +239,7 @@ scale = Vector2(18.681644, 9.741211)
 color = Color(0.77646405, 0.79886746, 0.85534906, 1)
 
 [node name="Trashcan" parent="." unique_id=1663879866 instance=ExtResource("20_e36ub")]
-position = Vector2(573, 205)
+position = Vector2(573, 197)
 
 [node name="PatrolPaths" type="Node2D" parent="." unique_id=351301721]
 
