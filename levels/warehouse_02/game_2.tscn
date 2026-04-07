@@ -285,7 +285,7 @@ position = Vector2(142, 257)
 color = Color(0.25123212, 0.2831364, 0.34381628, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=113270195]
-position = Vector2(864.00006, 872)
+position = Vector2(680.813, 122.281)
 scale = Vector2(18.681644, 9.741211)
 color = Color(0.33276916, 0.46037263, 0.80294394, 1)
 energy = 0.58
