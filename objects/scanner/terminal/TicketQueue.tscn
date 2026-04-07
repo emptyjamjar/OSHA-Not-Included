@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://0n1wwwmlkbx7" path="res://objects/scanner/terminal/slot_2.gd" id="5_u133q"]
 [ext_resource type="Script" uid="uid://dhgisybrihjmm" path="res://objects/scanner/terminal/slot_3.gd" id="6_0imhw"]
 [ext_resource type="Script" uid="uid://bbjyh7x7epkrg" path="res://objects/scanner/terminal/slot_4.gd" id="7_2t5fm"]
+[ext_resource type="Texture2D" uid="uid://byasy7v4a5mdo" path="res://ui/hud/inventory/ArrowKeyLeft.png" id="10_5hj6c"]
+[ext_resource type="Texture2D" uid="uid://br3a7tcuno5kr" path="res://ui/hud/inventory/ArrowKeyRight.png" id="11_mnu3c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wiggl"]
 atlas = ExtResource("1_vlja4")
@@ -522,6 +524,14 @@ theme_override_constants/h_separation = 4
 theme_override_constants/v_separation = 2
 columns = 3
 metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1346990690]
+position = Vector2(230, 55)
+texture = ExtResource("10_5hj6c")
+
+[node name="Sprite2D2" type="Sprite2D" parent="." unique_id=1746471434]
+position = Vector2(512, 55)
+texture = ExtResource("11_mnu3c")
 
 [connection signal="mouse_entered" from="HBoxContainer/Slot1" to="HBoxContainer/Slot1" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="HBoxContainer/Slot1" to="HBoxContainer/Slot1" method="_on_mouse_exited"]
