@@ -20,6 +20,8 @@
 [ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="17_dkvks"]
 [ext_resource type="PackedScene" uid="uid://dwdtpfj4n8pco" path="res://objects/trashcan/trashcan.tscn" id="18_x2hlw"]
 [ext_resource type="PackedScene" uid="uid://dbvedjuvqmdpu" path="res://objects/restroom/washroom_flipped.tscn" id="19_86toc"]
+[ext_resource type="PackedScene" uid="uid://benkbh7e5rv0k" path="res://core/systems/sanity/sanity_checker.tscn" id="21_gd6qc"]
+[ext_resource type="PackedScene" uid="uid://b7ooaa868w4lg" path="res://objects/sanity_eye_ball/sanity_eyeball.tscn" id="22_xx1od"]
 
 [sub_resource type="GDScript" id="GDScript_7sc4i"]
 script/source = "extends Node2D
@@ -231,6 +233,21 @@ position = Vector2(338, 217)
 [node name="Washroom" parent="." unique_id=585966862 instance=ExtResource("19_86toc")]
 position = Vector2(121, 327)
 scale = Vector2(0.245, 0.245)
+
+[node name="SanityChecker" parent="." unique_id=464636574 node_paths=PackedStringArray("sanity", "player", "eyeballs") instance=ExtResource("21_gd6qc")]
+sanity = NodePath("../Player/SanityComponent")
+player = NodePath("../Player")
+eyeballs = [NodePath("../SanityEyeball"), NodePath("../SanityEyeball2"), NodePath("../SanityEyeball3")]
+spawn_thresholds = Array[int]([75, 50, 25])
+
+[node name="SanityEyeball" parent="." unique_id=1605012371 instance=ExtResource("22_xx1od")]
+position = Vector2(451, 402)
+
+[node name="SanityEyeball2" parent="." unique_id=379602976 instance=ExtResource("22_xx1od")]
+position = Vector2(221, 258)
+
+[node name="SanityEyeball3" parent="." unique_id=1097859048 instance=ExtResource("22_xx1od")]
+position = Vector2(357, 320)
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
 [connection signal="get_money" from="Shipper" to="UI/Score" method="_on_shipper_get_money"]

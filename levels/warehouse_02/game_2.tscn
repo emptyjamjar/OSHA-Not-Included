@@ -21,6 +21,8 @@
 [ext_resource type="PackedScene" uid="uid://cmysh8kqsje1j" path="res://objects/shelves/shelf.tscn" id="18_ukc8s"]
 [ext_resource type="PackedScene" uid="uid://dwdtpfj4n8pco" path="res://objects/trashcan/trashcan.tscn" id="19_g44ti"]
 [ext_resource type="PackedScene" uid="uid://coa2sufhyfblt" path="res://objects/food/vending_machine.tscn" id="20_bp4gq"]
+[ext_resource type="PackedScene" uid="uid://benkbh7e5rv0k" path="res://core/systems/sanity/sanity_checker.tscn" id="22_6405i"]
+[ext_resource type="PackedScene" uid="uid://b7ooaa868w4lg" path="res://objects/sanity_eye_ball/sanity_eyeball.tscn" id="23_scbi8"]
 
 [sub_resource type="GDScript" id="GDScript_7sc4i"]
 script/source = "extends Node2D
@@ -166,7 +168,7 @@ metadata/_edit_use_anchors_ = true
 visible = false
 
 [node name="Manager" parent="." unique_id=565657217 node_paths=PackedStringArray("patrol_paths_at_root", "out_bounds_area") instance=ExtResource("17_mevm7")]
-position = Vector2(196, 420)
+position = Vector2(196, 385)
 collision_mask = 2
 patrol_paths_at_root = NodePath("../PatrolPaths")
 out_bounds_area = NodePath("../OutBoundsArea")
@@ -249,6 +251,24 @@ rotation = 1.5707964
 [node name="Packager5" parent="." unique_id=1270850920 instance=ExtResource("10_qcwrm")]
 position = Vector2(643, 319)
 rotation = 1.5707964
+
+[node name="SanityChecker" parent="." unique_id=464636574 node_paths=PackedStringArray("sanity", "player", "eyeballs") instance=ExtResource("22_6405i")]
+sanity = NodePath("../Player/SanityComponent")
+player = NodePath("../Player")
+eyeballs = [NodePath("../SanityEyeball"), NodePath("../SanityEyeball2"), NodePath("../SanityEyeball3"), NodePath("../SanityEyeball4")]
+spawn_thresholds = Array[int]([80, 60, 40, 20])
+
+[node name="SanityEyeball" parent="." unique_id=1605012371 instance=ExtResource("23_scbi8")]
+position = Vector2(469, 234)
+
+[node name="SanityEyeball2" parent="." unique_id=532121468 instance=ExtResource("23_scbi8")]
+position = Vector2(644, 415)
+
+[node name="SanityEyeball3" parent="." unique_id=710558785 instance=ExtResource("23_scbi8")]
+position = Vector2(413, 421)
+
+[node name="SanityEyeball4" parent="." unique_id=922115906 instance=ExtResource("23_scbi8")]
+position = Vector2(315, 245)
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
 [connection signal="get_money" from="Shipper" to="UI/Score" method="_on_shipper_get_money"]
