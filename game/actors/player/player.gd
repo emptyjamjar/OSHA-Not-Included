@@ -117,7 +117,6 @@ func _on_sanity_area_area_entered(_area: Area2D) -> void:
 func _on_sanity_area_body_exited(body: Node2D) -> void:
 	for overlapped_body in sanity_area.get_overlapping_bodies():
 		if overlapped_body.is_in_group("Manager"):
-			print("amang")
 			is_manager_near = true
 
 ##Starts sanity drain.

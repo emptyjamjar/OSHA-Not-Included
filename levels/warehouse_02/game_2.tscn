@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="17_mevm7"]
 [ext_resource type="PackedScene" uid="uid://cmysh8kqsje1j" path="res://objects/shelves/shelf.tscn" id="18_ukc8s"]
 [ext_resource type="PackedScene" uid="uid://dwdtpfj4n8pco" path="res://objects/trashcan/trashcan.tscn" id="19_g44ti"]
+[ext_resource type="PackedScene" uid="uid://c3oqia66gf01v" path="res://objects/shelves/sideshelf.tscn" id="20_b8amw"]
 [ext_resource type="PackedScene" uid="uid://coa2sufhyfblt" path="res://objects/food/vending_machine.tscn" id="20_bp4gq"]
 [ext_resource type="PackedScene" uid="uid://benkbh7e5rv0k" path="res://core/systems/sanity/sanity_checker.tscn" id="22_6405i"]
 [ext_resource type="PackedScene" uid="uid://b7ooaa868w4lg" path="res://objects/sanity_eye_ball/sanity_eyeball.tscn" id="23_scbi8"]
@@ -160,6 +161,30 @@ metadata/_edit_use_anchors_ = true
 [node name="Score" parent="UI" unique_id=1161969462 instance=ExtResource("16_va8ap")]
 visible = false
 
+[node name="Walls" type="Node2D" parent="." unique_id=830732475]
+y_sort_enabled = true
+
+[node name="Shelf6" parent="Walls" unique_id=1206098896 instance=ExtResource("20_b8amw")]
+position = Vector2(166, 257)
+
+[node name="Shelf7" parent="Walls" unique_id=688592932 instance=ExtResource("20_b8amw")]
+position = Vector2(246, 257)
+
+[node name="Shelf2" parent="Walls" unique_id=1094321740 instance=ExtResource("18_ukc8s")]
+position = Vector2(207, 299)
+
+[node name="Shelf" parent="Walls" unique_id=1275407441 instance=ExtResource("20_b8amw")]
+position = Vector2(166, 296)
+
+[node name="Shelf3" parent="Walls" unique_id=1051441979 instance=ExtResource("20_b8amw")]
+position = Vector2(248, 296)
+
+[node name="Shelf4" parent="Walls" unique_id=1453671272 instance=ExtResource("20_b8amw")]
+position = Vector2(248, 329)
+
+[node name="Shelf5" parent="Walls" unique_id=1078566439 instance=ExtResource("20_b8amw")]
+position = Vector2(166, 329)
+
 [node name="Manager" parent="." unique_id=565657217 node_paths=PackedStringArray("patrol_paths_at_root", "out_bounds_area") instance=ExtResource("17_mevm7")]
 position = Vector2(209, 369)
 collision_mask = 2
@@ -258,23 +283,6 @@ position = Vector2(320, 208)
 
 [node name="p4_10" type="Marker2D" parent="PatrolPaths/Path3" unique_id=2120145367]
 position = Vector2(86, 207)
-
-[node name="Walls" type="Node2D" parent="." unique_id=830732475]
-
-[node name="Shelf" parent="Walls" unique_id=1206098896 instance=ExtResource("18_ukc8s")]
-position = Vector2(268, 322)
-
-[node name="Shelf2" parent="Walls" unique_id=1094321740 instance=ExtResource("18_ukc8s")]
-position = Vector2(207, 299)
-
-[node name="Shelf3" parent="Walls" unique_id=1085808159 instance=ExtResource("18_ukc8s")]
-position = Vector2(142, 313)
-
-[node name="Shelf4" parent="Walls" unique_id=1925849212 instance=ExtResource("18_ukc8s")]
-position = Vector2(269, 259)
-
-[node name="Shelf5" parent="Walls" unique_id=1123887325 instance=ExtResource("18_ukc8s")]
-position = Vector2(142, 257)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2024396508]
 color = Color(0.25123212, 0.2831364, 0.34381628, 1)

@@ -5,6 +5,7 @@ signal ticket_selected(ticket)
 var ticket: Ticket
 var is_hovered : bool = false 
 var is_active : bool = false 
+@export var anim: AnimationPlayer
 
 func _ready() -> void:
 	mouse_filter = Control.MOUSE_FILTER_PASS
@@ -32,6 +33,7 @@ func _on_mouse_exited() -> void:
 	update_hovered_visual() 
 
 func set_ticket(t: Ticket): 
+	anim.play("enter")
 	ticket = t 
 	
 func set_active(state: bool) -> void: 
