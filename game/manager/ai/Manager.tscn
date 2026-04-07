@@ -379,3 +379,5 @@ metadata/_custom_type_script = "uid://bfr4futc0fa0"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TouchZone" unique_id=1788862835]
 shape = SubResource("CapsuleShape2D_xgoh0")
 debug_color = Color(0.85316795, 0.29115036, 0.588243, 0.41960785)
+
+[connection signal="body_entered" from="TouchZone" to="." method="check_bumped_into"]

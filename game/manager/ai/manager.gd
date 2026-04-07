@@ -185,7 +185,7 @@ func check_dropped_item():
 	productivity_manager.add_productivity(-3)
 
 
-func check_bumped_into():
+func check_bumped_into(body: Node2D):
 	pass
 
 
