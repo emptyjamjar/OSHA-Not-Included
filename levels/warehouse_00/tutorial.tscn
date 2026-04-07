@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="15_e8heu"]
 [ext_resource type="PackedScene" uid="uid://ia4xkacbg6ja" path="res://game/manager/cutscene/cutscene_path.tscn" id="18_rvswv"]
 [ext_resource type="PackedScene" uid="uid://dwdtpfj4n8pco" path="res://objects/trashcan/trashcan.tscn" id="20_e36ub"]
+[ext_resource type="Texture2D" uid="uid://cf1pjtf5i66d0" path="res://game/manager/ai/mang.webp" id="21_vaj68"]
 [ext_resource type="PackedScene" uid="uid://b7ooaa868w4lg" path="res://objects/sanity_eye_ball/sanity_eyeball.tscn" id="22_x5p1p"]
 
 [sub_resource type="GDScript" id="GDScript_7sc4i"]
