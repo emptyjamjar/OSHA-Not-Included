@@ -14,10 +14,15 @@
 [ext_resource type="PackedScene" uid="uid://cnumkt0ntauyy" path="res://objects/conveyor/conveyor.tscn" id="11_srh4a"]
 [ext_resource type="PackedScene" uid="uid://rgnaipuerpmn" path="res://objects/scanner/terminal/TicketTerminal.tscn" id="12_ipt1j"]
 [ext_resource type="PackedScene" uid="uid://b5kkxsvnf154u" path="res://objects/food/vending_machine_flipped.tscn" id="13_40oma"]
+[ext_resource type="Script" uid="uid://c7i8xoc0ofw0m" path="res://objects/items/item_data.gd" id="13_pqdvj"]
+[ext_resource type="Texture2D" uid="uid://0wuqh7msbsqn" path="res://objects/items/severed_hand/warehouse-severed-hand.png" id="14_2p8ph"]
 [ext_resource type="PackedScene" uid="uid://dbvedjuvqmdpu" path="res://objects/restroom/washroom_flipped.tscn" id="14_rmdop"]
+[ext_resource type="Texture2D" uid="uid://cbsf423x7mphr" path="res://objects/items/eyeball/warehouse-eyeball.png" id="15_3mx75"]
 [ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="15_gq5jn"]
+[ext_resource type="Resource" uid="uid://2eln5tjmc30e" path="res://objects/items/eyeball/eyeball.tres" id="16_gak0w"]
 [ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="16_qb10i"]
 [ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="17_bwxc5"]
+[ext_resource type="Resource" uid="uid://duxo6bothjxj0" path="res://objects/items/severed_hand/severed_hand.tres" id="17_tthwu"]
 [ext_resource type="PackedScene" uid="uid://cmysh8kqsje1j" path="res://objects/shelves/shelf.tscn" id="18_jn03o"]
 [ext_resource type="PackedScene" uid="uid://dwdtpfj4n8pco" path="res://objects/trashcan/trashcan.tscn" id="19_y0x7v"]
 [ext_resource type="PackedScene" uid="uid://benkbh7e5rv0k" path="res://core/systems/sanity/sanity_checker.tscn" id="21_olr4i"]
@@ -61,6 +66,24 @@ gradient = SubResource("Gradient_dd2np")
 fill = 1
 fill_from = Vector2(0.47008547, 0.4871795)
 fill_to = Vector2(0.8333333, 0.78205127)
+
+[sub_resource type="Resource" id="Resource_ve8kv"]
+script = ExtResource("13_pqdvj")
+type = 1
+name = "Severed Hand"
+description = "... I was just doing my job"
+texture = ExtResource("14_2p8ph")
+id = 9
+metadata/_custom_type_script = "uid://c7i8xoc0ofw0m"
+
+[sub_resource type="Resource" id="Resource_4qtht"]
+script = ExtResource("13_pqdvj")
+type = 1
+name = "Eyeball"
+description = "Don't look at me..."
+texture = ExtResource("15_3mx75")
+id = 7
+metadata/_custom_type_script = "uid://c7i8xoc0ofw0m"
 
 [sub_resource type="Gradient" id="Gradient_wkw6b"]
 offsets = PackedFloat32Array(0, 0.2736842, 0.6, 1)
@@ -137,6 +160,12 @@ position = Vector2(640, 192)
 
 [node name="Conveyor" parent="." unique_id=1135306595 groups=["conveyor"] instance=ExtResource("11_srh4a")]
 position = Vector2(620, 363)
+story_resources = Dictionary[int, ExtResource("13_pqdvj")]({
+0: SubResource("Resource_ve8kv"),
+2: SubResource("Resource_4qtht"),
+4: ExtResource("16_gak0w"),
+6: ExtResource("17_tthwu")
+})
 
 [node name="TicketTerminal" parent="." unique_id=982348100 instance=ExtResource("12_ipt1j")]
 position = Vector2(470, 403)

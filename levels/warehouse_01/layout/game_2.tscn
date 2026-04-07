@@ -13,11 +13,17 @@
 [ext_resource type="PackedScene" uid="uid://sxf3e0qydlfv" path="res://objects/packager/packager.tscn" id="10_w2cbs"]
 [ext_resource type="PackedScene" uid="uid://cnumkt0ntauyy" path="res://objects/conveyor/conveyor.tscn" id="11_tvh3a"]
 [ext_resource type="PackedScene" uid="uid://rgnaipuerpmn" path="res://objects/scanner/terminal/TicketTerminal.tscn" id="12_a6xfe"]
+[ext_resource type="Script" uid="uid://c7i8xoc0ofw0m" path="res://objects/items/item_data.gd" id="13_tvh3a"]
 [ext_resource type="PackedScene" uid="uid://coa2sufhyfblt" path="res://objects/food/vending_machine.tscn" id="13_yk7xk"]
+[ext_resource type="Texture2D" uid="uid://b7wyx42608m0y" path="res://objects/items/wires/warehouse-wires.png" id="14_a6xfe"]
 [ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="14_n7a52"]
 [ext_resource type="PackedScene" uid="uid://u3cnys6nkx03" path="res://levels/warehouse_01/layout/walls.tscn" id="15_rfkxv"]
+[ext_resource type="Texture2D" uid="uid://bhp0qex5vacta" path="res://objects/items/wires/warehouse-wire-small.png" id="15_yk7xk"]
+[ext_resource type="Texture2D" uid="uid://bgs1ykeoy6vy5" path="res://objects/items/gunpowder/warehouse-gunpowder.png" id="16_n7a52"]
 [ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="16_ot42e"]
 [ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="17_dkvks"]
+[ext_resource type="Texture2D" uid="uid://dgyj8u7g55p0e" path="res://objects/items/gunpowder/warehouse-gunpowder-small.png" id="17_rfkxv"]
+[ext_resource type="Resource" uid="uid://ctf1howehvin1" path="res://objects/items/bomb-clock/bomb-clock.tres" id="18_w2cbs"]
 [ext_resource type="PackedScene" uid="uid://dwdtpfj4n8pco" path="res://objects/trashcan/trashcan.tscn" id="18_x2hlw"]
 [ext_resource type="PackedScene" uid="uid://dbvedjuvqmdpu" path="res://objects/restroom/washroom_flipped.tscn" id="19_86toc"]
 [ext_resource type="PackedScene" uid="uid://benkbh7e5rv0k" path="res://core/systems/sanity/sanity_checker.tscn" id="21_gd6qc"]
@@ -58,6 +64,26 @@ gradient = SubResource("Gradient_halqj")
 fill = 1
 fill_from = Vector2(0.47008547, 0.4871795)
 fill_to = Vector2(0.8333333, 0.78205127)
+
+[sub_resource type="Resource" id="Resource_x2hlw"]
+script = ExtResource("13_tvh3a")
+type = 1
+name = "Wires"
+description = "Are these for a project of some kind?"
+texture = ExtResource("14_a6xfe")
+uiTexture = ExtResource("15_yk7xk")
+id = 10
+metadata/_custom_type_script = "uid://c7i8xoc0ofw0m"
+
+[sub_resource type="Resource" id="Resource_86toc"]
+script = ExtResource("13_tvh3a")
+type = 1
+name = "Gunpowder"
+description = "This smells like fireworks..."
+texture = ExtResource("16_n7a52")
+uiTexture = ExtResource("17_rfkxv")
+id = 8
+metadata/_custom_type_script = "uid://c7i8xoc0ofw0m"
 
 [sub_resource type="Gradient" id="Gradient_dd2np"]
 offsets = PackedFloat32Array(0.43157893, 1)
@@ -122,6 +148,11 @@ position = Vector2(640, 192)
 
 [node name="Conveyor" parent="." unique_id=1135306595 groups=["conveyor"] instance=ExtResource("11_tvh3a")]
 position = Vector2(-32, 0)
+story_resources = Dictionary[int, ExtResource("13_tvh3a")]({
+4: SubResource("Resource_x2hlw"),
+8: SubResource("Resource_86toc"),
+10: ExtResource("18_w2cbs")
+})
 
 [node name="Belt TileMap" parent="Conveyor" index="0" unique_id=1815729401]
 tile_map_data = PackedByteArray("AAANAAYAAQAAAAEAAAANAAcAAQAAAAIAAAAOAAcAAQABAAIAAAAPAAcAAQABAAIAAAAQAAcAAQABAAIAAAARAAcAAQABAAIAAAA=")

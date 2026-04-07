@@ -13,8 +13,10 @@
 [ext_resource type="PackedScene" uid="uid://sxf3e0qydlfv" path="res://objects/packager/packager.tscn" id="10_qcwrm"]
 [ext_resource type="PackedScene" uid="uid://cnumkt0ntauyy" path="res://objects/conveyor/conveyor.tscn" id="11_qqi37"]
 [ext_resource type="PackedScene" uid="uid://rgnaipuerpmn" path="res://objects/scanner/terminal/TicketTerminal.tscn" id="12_3ldla"]
-[ext_resource type="PackedScene" uid="uid://b5kkxsvnf154u" path="res://objects/food/vending_machine_flipped.tscn" id="13_ad8lc"]
+[ext_resource type="Script" uid="uid://c7i8xoc0ofw0m" path="res://objects/items/item_data.gd" id="13_b8amw"]
+[ext_resource type="Resource" uid="uid://2eln5tjmc30e" path="res://objects/items/eyeball/eyeball.tres" id="14_ipmml"]
 [ext_resource type="PackedScene" uid="uid://dbvedjuvqmdpu" path="res://objects/restroom/washroom_flipped.tscn" id="14_m5vto"]
+[ext_resource type="Resource" uid="uid://duxo6bothjxj0" path="res://objects/items/severed_hand/severed_hand.tres" id="15_d3ddq"]
 [ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="15_i2fq7"]
 [ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="16_va8ap"]
 [ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="17_mevm7"]
@@ -138,7 +140,15 @@ texture = SubResource("GradientTexture2D_dd2np")
 position = Vector2(416, 251)
 
 [node name="Conveyor" parent="." unique_id=1135306595 groups=["conveyor"] instance=ExtResource("11_qqi37")]
-position = Vector2(557, 239)
+position = Vector2(571, 250)
+story_resources = Dictionary[int, ExtResource("13_b8amw")]({
+0: ExtResource("14_ipmml"),
+2: ExtResource("15_d3ddq"),
+4: ExtResource("14_ipmml"),
+6: ExtResource("15_d3ddq"),
+8: ExtResource("14_ipmml"),
+10: ExtResource("15_d3ddq")
+})
 
 [node name="Belt TileMap" parent="Conveyor" index="0" unique_id=1815729401]
 tile_map_data = PackedByteArray("AAD+/wAAAQAAAAEAAAD+/wEAAQAAAAEAAAD+/wIAAQAAAAEAAAD+/wMAAQAAAAIAAAD//wMAAQABAAIAAAAAAAMAAQABAAIAAAD+////AQAAAAEAAAA=")
@@ -148,10 +158,6 @@ tile_map_data = PackedByteArray("AAAAAAMAAQADAAMAAAD+////AQABAAMAAAA=")
 
 [node name="TicketTerminal" parent="." unique_id=982348100 instance=ExtResource("12_3ldla")]
 position = Vector2(311, 399)
-
-[node name="VendingMachine" parent="." unique_id=1840311720 instance=ExtResource("13_ad8lc")]
-position = Vector2(734.00006, 206)
-scale = Vector2(0.33, 0.33)
 
 [node name="Washroom" parent="." unique_id=585966862 instance=ExtResource("14_m5vto")]
 position = Vector2(117, 367.00003)
@@ -168,7 +174,7 @@ metadata/_edit_use_anchors_ = true
 visible = false
 
 [node name="Manager" parent="." unique_id=565657217 node_paths=PackedStringArray("patrol_paths_at_root", "out_bounds_area") instance=ExtResource("17_mevm7")]
-position = Vector2(196, 385)
+position = Vector2(209, 369)
 collision_mask = 2
 patrol_paths_at_root = NodePath("../PatrolPaths")
 out_bounds_area = NodePath("../OutBoundsArea")
@@ -189,7 +195,7 @@ texture = SubResource("GradientTexture2D_55o4m")
 position = Vector2(266, 370)
 
 [node name="p1_2" type="Marker2D" parent="PatrolPaths/Path1" unique_id=2114138325]
-position = Vector2(602, 433)
+position = Vector2(535, 403)
 
 [node name="p1_3" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1365977136]
 position = Vector2(594, 221)
@@ -218,6 +224,7 @@ position = Vector2(142, 257)
 color = Color(0.25123212, 0.2831364, 0.34381628, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=113270195]
+visible = false
 position = Vector2(680.8126, 122.281265)
 scale = Vector2(18.681644, 9.741211)
 color = Color(0.33276916, 0.46037263, 0.80294394, 1)
