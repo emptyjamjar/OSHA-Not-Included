@@ -23,7 +23,7 @@ var ticket_manager: TicketManager
 ##How many random items will be spawned in between items that are required by the current tickets.
 ##Example: The current ticket needs a black bottle, the conveyor will queue up a black bottle with 
 ## 3 random_items in between each guaranteed black bottle.
-@export var random_items: int = 3
+@export var random_items: int = 1
 ## Affects how quickly items are moved/Animation speed
 ## (Default: 5)
 @export var conveyor_speed:int = 5

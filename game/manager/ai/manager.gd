@@ -41,6 +41,10 @@ func _ready() -> void:
 	
 	#Get productivity_manager
 	var UI = get_tree().get_first_node_in_group("UI")
+	
+	if UI == null:
+		printerr("Assign UI group to the UI node for this level")
+	
 	for child in UI.get_children():
 		if child.is_in_group("ProductivityManager"):
 			productivity_manager = child
@@ -173,12 +177,18 @@ func rotate_vision_cone():
 
 ##The Behaviour functions
 func check_not_moving():
-	pass
+	#This turns on the idle function already in the productivity manager.
+	productivity_manager.is_watched = true
 
 
 func check_dropped_item():
-	pass
+	productivity_manager.add_productivity(-3)
 
 
 func check_bumped_into():
+	pass
+
+
+##Shows a little frustrated thing to indicate to the player that their productivity has gone down.
+func manager_angry():
 	pass
