@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cqb1yyb72jf70"]
 
 [ext_resource type="PackedScene" uid="uid://cp3eur47tnd7i" path="res://objects/packager/demo.tscn" id="1_mq32o"]
-[ext_resource type="Script" uid="uid://cp5xmup3n5ly" path="res://game.gd" id="2_pbcc1"]
+[ext_resource type="Script" uid="uid://cp5xmup3n5ly" path="res://tutorial.gd" id="2_pbcc1"]
 [ext_resource type="PackedScene" uid="uid://cxbnggs2xw8ne" path="res://ui/hud/hud.tscn" id="3_ck3wt"]
 [ext_resource type="Script" uid="uid://cpt2knie07vvo" path="res://core/systems/needs/health_component.gd" id="4_cocth"]
 [ext_resource type="Script" uid="uid://ck4p7gga13e5e" path="res://core/systems/needs/energy_component.gd" id="5_qw6kx"]

@@ -25,7 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://dwdtpfj4n8pco" path="res://objects/trashcan/trashcan.tscn" id="19_kgoe6"]
 [ext_resource type="PackedScene" uid="uid://c3oqia66gf01v" path="res://objects/shelves/sideshelf.tscn" id="21_4oc41"]
 [ext_resource type="PackedScene" uid="uid://cmysh8kqsje1j" path="res://objects/shelves/shelf.tscn" id="22_rvv64"]
-[ext_resource type="PackedScene" uid="uid://benkbh7e5rv0k" path="res://core/systems/sanity/sanity_checker.tscn" id="25_t4b4w"]
+[ext_resource type="PackedScene" path="res://core/systems/sanity/sanity_checker.tscn" id="25_t4b4w"]
 [ext_resource type="PackedScene" uid="uid://b7ooaa868w4lg" path="res://objects/sanity_eye_ball/sanity_eyeball.tscn" id="26_ypk20"]
 
 [sub_resource type="GDScript" id="GDScript_7sc4i"]
@@ -35,6 +35,7 @@ class_name GameManager
 @onready var hud: Control = $CanvasLayer/HUD
 @onready var money := 0
 var Ticket_Manager: TicketManager
+var is_tut = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -222,6 +223,18 @@ position = Vector2(215, 257)
 [node name="p2_7" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1540385415]
 position = Vector2(100, 259)
 
+[node name="p2_8" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1106255408]
+position = Vector2(447.75732, 322)
+
+[node name="p2_9" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1918256563]
+position = Vector2(704.61804, 325)
+
+[node name="p2_10" type="Marker2D" parent="PatrolPaths/Path2" unique_id=136453742]
+position = Vector2(478.7405, 290)
+
+[node name="p2_11" type="Marker2D" parent="PatrolPaths/Path2" unique_id=87527126]
+position = Vector2(509, 346)
+
 [node name="Path3" type="Node2D" parent="PatrolPaths" unique_id=1013101742]
 
 [node name="p3_1" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1936452682]
@@ -238,6 +251,22 @@ position = Vector2(416, 354)
 
 [node name="p4_5" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1597500460]
 position = Vector2(416, 436)
+
+[node name="p3_4" type="Marker2D" parent="PatrolPaths/Path3" unique_id=475289346]
+position = Vector2(577.6868, 354)
+
+[node name="p3_5" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1576187183]
+position = Vector2(415.77463, 351)
+
+[node name="p3_6" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1656326002]
+position = Vector2(416.77408, 193)
+
+[node name="p3_7" type="Marker2D" parent="PatrolPaths/Path3" unique_id=29843830]
+position = Vector2(723.6078, 184)
+
+[node name="Path4" type="Node2D" parent="PatrolPaths" unique_id=1780100022]
+
+[node name="Path5" type="Node2D" parent="PatrolPaths" unique_id=1497011237]
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=2072761992 groups=["UI"]]
 layer = 15
@@ -259,7 +288,7 @@ shadow_enabled = true
 texture = SubResource("GradientTexture2D_8onr1")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=520613747]
-position = Vector2(563.00006, 375)
+position = Vector2(680.8126, 122.281265)
 scale = Vector2(18.681644, 9.741211)
 color = Color(0.64803123, 0.68176806, 0.7610899, 1)
 

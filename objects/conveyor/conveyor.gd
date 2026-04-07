@@ -2,6 +2,12 @@ class_name Conveyor extends Node2D
 ## The conveyor belt outputs items
 
 
+signal conveyor_dialogue
+
+var first_pickup := false
+
+@onready var game = get_tree().get_first_node_in_group("game")
+
 @export_category("Item Lists")
 ## Preloaded resources of all possible ItemData that this conveyor can generate.
 @export var item_resources : Array[ItemData]
@@ -196,6 +202,10 @@ func _spawn_into_first_slot(item: ItemData) -> void:
 func _on_item_picked_up(item: ItemBase, index: int):
 	_slots[index] = null
 	item.picked_up.disconnect(_on_item_picked_up)
+	if game.is_tut:
+		if first_pickup == false && game.game_state == 1:
+			emit_signal("conveyor_dialogue")
+			first_pickup = true
 
 
 # functions to help return all the item in the conveyor array 

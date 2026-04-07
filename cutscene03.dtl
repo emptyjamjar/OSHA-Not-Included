@@ -1,0 +1,17 @@
+Tal: Whew...no better today than it was yesterday.
+Tal: Although...now that I think about it...
+Tal: Nothing weird in our items today.
+Tal: Never new something normal would feel so...unnerving.
+Tal: It's just gotta be the strike. Its got me on edge.
+Tal: Ever since that rock a few blocks down...
+Tal: I should watch the news. Just to relax a bit.
+[signal arg="news"]
+Newscaster: -and today has been dark folks.
+Newscaster: A bomb was detonated at a protest on 47th street.
+Newscaster: The blast killed 3 people and injured 7 more.
+Tal: W-what?
+Tal: How did I not hear about this? How did I not hear it!?
+Tal: That's just down the street!
+Tal: W-wuh...I feel sick...
+Tal: I'm gonna go lie down...
+[signal arg="end"]
