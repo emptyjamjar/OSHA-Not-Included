@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://c7i8xoc0ofw0m" path="res://objects/items/item_data.gd" id="1_es0dh"]
 [ext_resource type="Texture2D" uid="uid://cf6mbbcwjpn63" path="res://objects/items/bomb-hallucination/warehouse-bomb-hallucination.png" id="2_kf6nb"]
+[ext_resource type="Texture2D" uid="uid://p42p7w2s06cn" path="res://objects/items/bomb-hallucination/warehouse-bomb-small.png" id="3_0h274"]
 
 [resource]
 script = ExtResource("1_es0dh")
@@ -9,5 +10,6 @@ type = 1
 name = "Bomb Hallucination"
 description = "It's ticking down... Oh god..."
 texture = ExtResource("2_kf6nb")
+uiTexture = ExtResource("3_0h274")
 id = 5
 metadata/_custom_type_script = "uid://c7i8xoc0ofw0m"

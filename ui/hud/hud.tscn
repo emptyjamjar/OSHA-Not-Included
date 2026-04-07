@@ -348,7 +348,6 @@ z_index = -4
 layout_mode = 0
 offset_right = 640.0
 offset_bottom = 360.0
-mouse_filter = 2
 texture = ExtResource("2_4d6w6")
 
 [node name="Money" type="Label" parent="Background" unique_id=1131186569]
@@ -374,7 +373,17 @@ layout_mode = 0
 offset_top = 64.0
 offset_right = 96.0
 offset_bottom = 238.0
-mouse_filter = 2
+texture = ExtResource("3_imuuq")
+
+[node name="BadgeShadow" type="TextureRect" parent="Badge" unique_id=1363656494]
+modulate = Color(0, 0, 0, 0.3137255)
+z_index = -1
+layout_mode = 0
+offset_left = -2.999999
+offset_top = -2.0
+offset_right = 93.0
+offset_bottom = 172.0
+scale = Vector2(1.02, 1.02)
 texture = ExtResource("3_imuuq")
 
 [node name="SanityBar" type="TextureProgressBar" parent="Badge" unique_id=1113052502]
@@ -439,17 +448,6 @@ mouse_filter = 1
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 6
 text = "Warehouse Associate"
-
-[node name="BadgeShadow" type="TextureRect" parent="Badge" unique_id=1363656494]
-modulate = Color(0, 0, 0, 0.3137255)
-z_index = -1
-layout_mode = 0
-offset_left = -2.999999
-offset_top = -2.0
-offset_right = 93.0
-offset_bottom = 172.0
-scale = Vector2(1.02, 1.02)
-texture = ExtResource("3_imuuq")
 
 [node name="Clock" type="TextureRect" parent="." unique_id=67808259 node_paths=PackedStringArray("clock", "clock_no_ticket", "anim_player")]
 layout_mode = 0
