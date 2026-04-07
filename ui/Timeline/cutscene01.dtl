@@ -1,0 +1,14 @@
+[signal arg="news"]
+Newscaster: News today as workers strikes have been popping up all around the city.
+Newscaster: Ever since the workers rights bill proposed by Premier Edwin Calhoun failed to go through,
+Newscaster: Worker unrest has grown and strikes are becoming more and more common by the day.
+The Sahara Warehouse on 51st street is just the latest of this epidemic.
+Tal: So...a strike, huh?
+Tal: Never thought this would happen in my life. Just my luck.
+Tal: I just can't deal with this right now. I'm barely making it paycheque to pacheque.
+Tal: My coworkers are going to hate me...
+Tal: God, why do you even care?! You didn't like them in the first place!
+Tal: Just...just get to work. Make enough money and you'll never see these people again anyways.
+Tal: Focus on Paradiso. You can make enough, you can do it.
+Tal: You can make money faster than the price goes up.
+[signal arg="end"]

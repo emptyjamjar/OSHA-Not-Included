@@ -27,7 +27,7 @@
 [ext_resource type="Resource" uid="uid://ctf1howehvin1" path="res://objects/items/bomb-clock/bomb-clock.tres" id="18_w2cbs"]
 [ext_resource type="PackedScene" uid="uid://dwdtpfj4n8pco" path="res://objects/trashcan/trashcan.tscn" id="18_x2hlw"]
 [ext_resource type="PackedScene" uid="uid://dbvedjuvqmdpu" path="res://objects/restroom/washroom_flipped.tscn" id="19_86toc"]
-[ext_resource type="PackedScene" uid="uid://benkbh7e5rv0k" path="res://core/systems/sanity/sanity_checker.tscn" id="21_gd6qc"]
+[ext_resource type="PackedScene" path="res://core/systems/sanity/sanity_checker.tscn" id="21_gd6qc"]
 [ext_resource type="PackedScene" uid="uid://b7ooaa868w4lg" path="res://objects/sanity_eye_ball/sanity_eyeball.tscn" id="22_xx1od"]
 
 [sub_resource type="GDScript" id="GDScript_7sc4i"]
@@ -37,6 +37,7 @@ class_name GameManager
 @onready var hud: Control = $CanvasLayer/HUD
 @onready var money := 0
 var Ticket_Manager: TicketManager
+var is_tut = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

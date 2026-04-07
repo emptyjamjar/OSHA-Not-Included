@@ -1,6 +1,5 @@
 # Score manager for level.
 # Depends on signals to washroom and shipper.
-
 class_name ProductivityManager
 
 extends Node2D
