@@ -116,3 +116,9 @@ func lower_music():
 func reset_music_volume():
 	music.volume_db = music_volume
 	
+func change_music_pitch(pitch_scale:float):
+	var mus_bus = AudioServer.get_bus_index("Music")
+	if mus_bus != -1:
+		var pitch = AudioServer.get_bus_effect(mus_bus, 0)
+		pitch.pitch_scale = pitch_scale
+	

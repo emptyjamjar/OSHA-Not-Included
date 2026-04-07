@@ -30,6 +30,7 @@ class_name GameManager
 func _ready() -> void:
 	Ticket_Manager.on_game_start()
 	VendingSystem.vending_bought.connect(_on_vending_bought)
+	Audio.change_music_pitch(0.5)
 
 
 func _on_shipper_get_money() -> void:
