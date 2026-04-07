@@ -3,12 +3,15 @@ class_name TicketTerminal
 
 signal ticketsEmpty
 signal activated
+signal ticket_dialogue
 @export var ticket: Ticket
 
 @onready var interaction_area: InteractionArea = $InteractionArea
 @onready var player_collision = $StaticBody2D/PlayerCollision
 @onready var ticket_queue_ui: CanvasLayer = $TicketQueueUI
+@onready var game = get_tree().get_first_node_in_group("game")
 @onready var player = get_tree().get_first_node_in_group("player")
+var first_interact := false
 
 var ticket_manager: TicketManager
 
@@ -28,7 +31,11 @@ func _ready() -> void:
 
 	
 func _on_interact(): 
-	if not active: 
+	if not active:
+		if game.is_tut:
+			if first_interact == false && game.game_state == 0:
+				emit_signal("ticket_dialogue")
+				first_interact = true
 		active = true
 		print("Terminal activated")
 		

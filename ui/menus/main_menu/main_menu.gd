@@ -8,7 +8,7 @@ func _on_play_pressed() -> void:
 		return
 	Audio.play_click()
 	PlayerInventory.reset()
-	get_tree().change_scene_to_file("res://game.tscn")
+	get_tree().change_scene_to_file("res://levels/warehouse_00/tutorial.tscn")
 
 
 func _on_settings_pressed() -> void:

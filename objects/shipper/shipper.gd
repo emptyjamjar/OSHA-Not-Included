@@ -1,10 +1,15 @@
 extends Area2D
 
 signal get_money
+signal shipper_dialogue
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var player_collision = $StaticBody2D/PlayerCollision
 
 var shipped:bool = false
+
+var first_ship := false
+
+@onready var game = get_tree().get_first_node_in_group("game")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -41,6 +46,10 @@ func _on_interact():
 		if item.type == ItemData.Type.PACKAGE:
 			if ticket_manager.active_ticket.required_items.has(item.id):
 				if ticket_manager.register_delivery(item.id):
+					if game.is_tut:
+						if first_ship == false && game.game_state == 3:
+							emit_signal("shipper_dialogue")
+							first_ship = true
 					PlayerInventory.remove_at(item_index)
 					get_money.emit()
 					animated_sprite.play("close")
