@@ -14,9 +14,13 @@ class_name Player extends CharacterBody2D
 @export var slow_speed := 125
 @export var push_speed := 20
 @export var sprint_speed := 1.5
+@export var sanity_timer_max:= 1
+@export var sanity_drain := 3
 var player_needs: bool = true
 var is_lifting: bool = false
+var is_manager_near: bool = false
 var last_direction = Vector2.DOWN
+var sanity_timer: float = 0
 
 # Used for the idle timer component attached to the player,
 # hopefully with minimal player gd changes
@@ -82,13 +86,18 @@ func _physics_process(_delta: float) -> void:
 	
 	
 	
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	#connects the bathroom to the player needs
 	if player_needs:
 		needs_component.rising = true
 	else:
 		needs_component.rising = false
-	
+	#If the manager is near then slowly drain sanity every (sanity_timer_max) seconds.
+	if is_manager_near:
+		sanity_timer += delta
+		if sanity_timer > sanity_timer_max:
+			sanity_timer = 0
+			sanity_component.decrease(sanity_drain)
 
 
 ## Returns the full dimensions of the player's animated sprite in a Vector2i
@@ -96,7 +105,13 @@ func get_animated_sprite_dimensions() -> Vector2i:
 	return animated_sprite.sprite_frames.get_frame_texture(animated_sprite.animation, animated_sprite.frame).get_size()
 
 
-func _on_sanity_area_area_entered(area: Area2D) -> void:
+##Starts sanity drain
+func _on_sanity_area_area_entered(_area: Area2D) -> void:
 	for overlapped_body in sanity_area.get_overlapping_bodies():
 		if overlapped_body.is_in_group("Manager"):
-			sanity_component.decrease(10)
+			is_manager_near = true
+
+
+func _on_sanity_area_body_exited(body: Node2D) -> void:
+	if body.is_in_group("Manager"):
+		is_manager_near = false

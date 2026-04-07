@@ -26,6 +26,11 @@ var current_index := 0
 var detected_colour : Color = Color(Color.BLUE, 0.3)
 var non_detected: Color = Color(Color.RED, 0.3)
 
+var productivity_manager: ProductivityManager
+
+
+
+
 func _ready() -> void:
 	add_to_group("agents")
 	vision_cone.entity_entered_vision.connect(_on_entity_seen)
@@ -33,6 +38,9 @@ func _ready() -> void:
 	self.hide()
 	await get_tree().create_timer(5).timeout
 	self.show()
+	
+	#Get productivity_manager
+	productivity_manager = get_tree().get_first_node_in_group("UI").get_tree().get_first_node_in_group("Ticket Manager")
 	
 	if patrol_paths_at_root == null:
 		print("No path to begin with -- Break from here") 
@@ -50,12 +58,14 @@ func _ready() -> void:
 	if out_bounds_area: 
 		print("Entered")
 		out_bounds_area.connect("agent_entered", Callable(self, "_on_out_of_bounds"))
-		
+
+
 func _on_entity_seen(entity): 
 	if entity.is_in_group("player"):
 		vision_cone.change_colour(detected_colour)
 		print("Manager RECEIVED entity_entered_vision:", entity) 
 		$StateMachine.on_child_transition($StateMachine.current_state, "follow")
+
 
 func _on_entity_lost(entity): 
 	if entity.is_in_group("player"): 
@@ -63,6 +73,7 @@ func _on_entity_lost(entity):
 		vision_cone.change_colour(non_detected)
 		print("Manager RECEIVED entity_existed_vision:", entity) 
 		#$StateMachine.on_child_transition($StateMachine.current_state, "idle")
+
 
 func _on_out_of_bounds(agent): 
 	print("Reaching this point")
@@ -84,8 +95,8 @@ func _on_out_of_bounds(agent):
 	# 5. Respawn 
 	visible = true 
 	set_physics_process(true)
-	
-	
+
+
 func choose_random_path(): 
 	if path_container.size() <= 0:
 		print("Has no path in the path_container") 
@@ -96,11 +107,13 @@ func choose_random_path():
 	waiting = false 
 	wait_timer = 0.0
 
+
 func wait_after_finished_a_path(): 
 	waiting = true 
 	wait_time = randf_range(0.5, 1.0) #random wait duration 
 	wait_timer = 0.0
-	
+
+
 func _physics_process(delta: float) -> void:
 	#if waiting: 
 		#wait_timer += delta
@@ -123,9 +136,11 @@ func _physics_process(delta: float) -> void:
 	#position.x = clamp(position.x, HUD_LEFT + sprite_width_half, screen_size.x - sprite_width_half)
 	#position.y = clamp(position.y, 0 + sprite_height_half, screen_size.y - sprite_height_half)
 
+
 ## Returns the full dimensions of the player's animated sprite in a Vector2i
 func get_animated_sprite_dimensions() -> Vector2i:
 	return sprite.sprite_frames.get_frame_texture(sprite.animation, sprite.frame).get_size()
+
 
 func rotate_vision_cone(): 
 	var dir := velocity
@@ -143,4 +158,16 @@ func rotate_vision_cone():
 			$VisionCone.rotation = PI / 2 # down 
 		else: 
 			$VisionCone.rotation = -PI / 2 # up 
-	
+
+
+##The 
+func player_not_moving():
+	pass
+
+
+func player_dropped_item():
+	pass
+
+
+func player_bumped_int():
+	pass
