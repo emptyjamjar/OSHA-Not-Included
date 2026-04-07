@@ -6,10 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://bimhohbyv6s5d" path="res://objects/shipper/shipper.tscn" id="3_bsom8"]
 [ext_resource type="PackedScene" uid="uid://cxbnggs2xw8ne" path="res://ui/hud/hud.tscn" id="4_6405i"]
 [ext_resource type="PackedScene" uid="uid://c7e7f64igaa5j" path="res://game/actors/player/player.tscn" id="5_scbi8"]
-[ext_resource type="Script" uid="uid://cpt2knie07vvo" path="res://core/systems/needs/health_component.gd" id="6_8eyeq"]
-[ext_resource type="Script" uid="uid://ck4p7gga13e5e" path="res://core/systems/needs/energy_component.gd" id="7_b8amw"]
-[ext_resource type="Script" uid="uid://b0ovv20hjaxi3" path="res://core/systems/needs/needs_component.gd" id="8_ipmml"]
-[ext_resource type="Script" uid="uid://dka4wuamclaju" path="res://core/systems/sanity/sanity_component.gd" id="9_d3ddq"]
+[ext_resource type="Script" uid="uid://ck4p7gga13e5e" path="res://core/systems/needs/energy_component.gd" id="7_8eyeq"]
+[ext_resource type="Script" uid="uid://cpt2knie07vvo" path="res://core/systems/needs/health_component.gd" id="8_b8amw"]
+[ext_resource type="Script" uid="uid://dka4wuamclaju" path="res://core/systems/sanity/sanity_component.gd" id="9_ipmml"]
+[ext_resource type="Script" uid="uid://b0ovv20hjaxi3" path="res://core/systems/needs/needs_component.gd" id="10_d3ddq"]
 [ext_resource type="PackedScene" uid="uid://sxf3e0qydlfv" path="res://objects/packager/packager.tscn" id="10_qcwrm"]
 [ext_resource type="PackedScene" uid="uid://cnumkt0ntauyy" path="res://objects/conveyor/conveyor.tscn" id="11_qqi37"]
 [ext_resource type="PackedScene" uid="uid://rgnaipuerpmn" path="res://objects/scanner/terminal/TicketTerminal.tscn" id="12_3ldla"]
@@ -55,16 +55,6 @@ func _on_vending_bought(item: ItemData):
 background_mode = 3
 adjustment_enabled = true
 adjustment_saturation = 0.75
-
-[sub_resource type="Gradient" id="Gradient_dd2np"]
-offsets = PackedFloat32Array(0, 0.6263158, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0.2842105, 0.2842105, 0.2842105, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_dd2np"]
-gradient = SubResource("Gradient_dd2np")
-fill = 1
-fill_from = Vector2(0.47008547, 0.4871795)
-fill_to = Vector2(0.8333333, 0.78205127)
 
 [sub_resource type="Gradient" id="Gradient_wkw6b"]
 offsets = PackedFloat32Array(0, 0.2736842, 0.6, 1)
@@ -114,27 +104,23 @@ position = Vector2(216, 176)
 productivity_manager = NodePath("../../UI/Score")
 
 [node name="Player" parent="." unique_id=2112891127 instance=ExtResource("5_scbi8")]
-position = Vector2(728, 400)
+position = Vector2(635, 400)
 
-[node name="HealthComponent" type="Node" parent="Player" unique_id=1337526708]
-script = ExtResource("6_8eyeq")
+[node name="EnergyComponent" type="Node" parent="Player" unique_id=593969821]
+script = ExtResource("7_8eyeq")
+metadata/_custom_type_script = "uid://ck4p7gga13e5e"
 
-[node name="EnergyComponent" type="Node" parent="Player" unique_id=1556776905]
-script = ExtResource("7_b8amw")
+[node name="HealthComponent" type="Node" parent="Player" unique_id=570069467]
+script = ExtResource("8_b8amw")
+metadata/_custom_type_script = "uid://cpt2knie07vvo"
 
-[node name="NeedsComponent" type="Node" parent="Player" unique_id=1834835802]
-script = ExtResource("8_ipmml")
+[node name="SanityComponent" type="Node" parent="Player" unique_id=152281217]
+script = ExtResource("9_ipmml")
+metadata/_custom_type_script = "uid://dka4wuamclaju"
 
-[node name="SanityComponent" type="Node" parent="Player" unique_id=264741504]
-script = ExtResource("9_d3ddq")
-
-[node name="PointLight2D" type="PointLight2D" parent="Player" unique_id=694927071]
-position = Vector2(2.0000038, -2.0000012)
-scale = Vector2(1.7500001, 1.6249998)
-color = Color(0.72156864, 0.5803922, 0.40392157, 1)
-energy = 0.87
-shadow_enabled = true
-texture = SubResource("GradientTexture2D_dd2np")
+[node name="NeedsComponent" type="Node" parent="Player" unique_id=1121542095]
+script = ExtResource("10_d3ddq")
+metadata/_custom_type_script = "uid://b0ovv20hjaxi3"
 
 [node name="Packager" parent="." unique_id=2093227932 instance=ExtResource("10_qcwrm")]
 position = Vector2(416, 251)
@@ -163,7 +149,7 @@ position = Vector2(311, 399)
 position = Vector2(117, 367.00003)
 scale = Vector2(0.245, 0.245)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1192117838]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1192117838 groups=["UI"]]
 layer = 15
 
 [node name="Pause" parent="UI" unique_id=1566201169 instance=ExtResource("15_i2fq7")]
@@ -293,6 +279,7 @@ position = Vector2(142, 257)
 color = Color(0.25123212, 0.2831364, 0.34381628, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=113270195]
+visible = false
 position = Vector2(680.813, 122.281)
 scale = Vector2(18.681644, 9.741211)
 color = Color(0.33276916, 0.46037263, 0.80294394, 1)
@@ -337,7 +324,7 @@ spawn_thresholds = Array[int]([80, 60, 40, 20])
 position = Vector2(469, 234)
 
 [node name="SanityEyeball2" parent="." unique_id=532121468 instance=ExtResource("23_scbi8")]
-position = Vector2(644, 415)
+position = Vector2(723, 417)
 
 [node name="SanityEyeball3" parent="." unique_id=710558785 instance=ExtResource("23_scbi8")]
 position = Vector2(413, 421)
@@ -347,10 +334,10 @@ position = Vector2(315, 245)
 
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
 [connection signal="get_money" from="Shipper" to="UI/Score" method="_on_shipper_get_money"]
-[connection signal="health_change" from="Player/HealthComponent" to="CanvasLayer/HUD" method="_on_health_component_health_change"]
 [connection signal="energy_change" from="Player/EnergyComponent" to="CanvasLayer/HUD" method="_on_energy_component_energy_change"]
-[connection signal="needs_change" from="Player/NeedsComponent" to="CanvasLayer/HUD" method="_on_needs_component_needs_change"]
+[connection signal="health_change" from="Player/HealthComponent" to="CanvasLayer/HUD" method="_on_health_component_health_change"]
 [connection signal="sanity_changed" from="Player/SanityComponent" to="CanvasLayer/HUD" method="_on_sanity_component_sanity_changed"]
+[connection signal="needs_change" from="Player/NeedsComponent" to="CanvasLayer/HUD" method="_on_needs_component_needs_change"]
 [connection signal="ticketsEmpty" from="TicketTerminal" to="UI/Score" method="_on_ticket_terminal_tickets_empty"]
 [connection signal="washroom_used" from="Washroom" to="UI/Score" method="_on_washroom_washroom_used"]
 

@@ -7,12 +7,16 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_oqai5"]
 radius = 30.307938
 
-[node name="ItemBase" type="Node2D" unique_id=1912400498 node_paths=PackedStringArray("iArea", "sprite") groups=["Boxes"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lt50k"]
+size = Vector2(24.242426, 24.242426)
+
+[node name="ItemBase" type="Node2D" unique_id=1912400498 node_paths=PackedStringArray("iArea", "sprite", "body") groups=["Boxes"]]
 scale = Vector2(0.66, 0.66)
 script = ExtResource("1_e5u0p")
 iArea = NodePath("InteractionArea")
 sprite = NodePath("Sprite2D")
 data = ExtResource("2_oqai5")
+body = NodePath("BodyColliderForVisionCone")
 
 [node name="InteractionArea" parent="." unique_id=2104453103 instance=ExtResource("2_lt50k")]
 position = Vector2(0, -4)
@@ -23,3 +27,11 @@ shape = SubResource("CircleShape2D_oqai5")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1270451069]
 position = Vector2(0, -9)
+
+[node name="BodyColliderForVisionCone" type="StaticBody2D" parent="." unique_id=240233497 groups=["Dropped Item"]]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BodyColliderForVisionCone" unique_id=1326687720]
+scale = Vector2(0.9999999, 0.9999999)
+shape = SubResource("RectangleShape2D_lt50k")

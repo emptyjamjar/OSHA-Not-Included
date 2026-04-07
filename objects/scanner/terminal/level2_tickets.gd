@@ -9,8 +9,8 @@ func get_templates() -> Array:
 			"goal": "S.O.S Response!",
 			"reward": 50,
 			"perf": 1, 
-			"time_min": 40, 
-			"time_max": 60, 
+			"time_min": 80, 
+			"time_max": 100, 
 			"min_items": 1, 
 			"max_items": 1
 		},
@@ -21,8 +21,8 @@ func get_templates() -> Array:
 			"goal": "Looks better now. Thanks!",
 			"reward": 30,
 			"perf": 1, 
-			"time_min": 30, 
-			"time_max": 40, 
+			"time_min": 80, 
+			"time_max": 80, 
 			"min_items": 1,
 			"max_items": 1
 		},
@@ -33,8 +33,8 @@ func get_templates() -> Array:
 			"goal": "Nice catch!",
 			"reward": 30,
 			"perf": 1, 
-			"time_min": 30, 
-			"time_max": 40, 
+			"time_min": 80, 
+			"time_max": 100, 
 			"min_items": 1,
 			"max_items": 1
 		},
@@ -45,8 +45,8 @@ func get_templates() -> Array:
 			"goal": "Seems weird!",
 			"reward": 30,
 			"perf": 1, 
-			"time_min": 30, 
-			"time_max": 40, 
+			"time_min": 100, 
+			"time_max": 120, 
 			"min_items": 1,
 			"max_items": 1
 		},
@@ -57,8 +57,8 @@ func get_templates() -> Array:
 			"goal": "Order finished!",
 			"reward": 30,
 			"perf": 1, 
-			"time_min": 30, 
-			"time_max": 40, 
+			"time_min": 100, 
+			"time_max": 100, 
 			"min_items": 1,
 			"max_items": 1
 		},
@@ -69,8 +69,8 @@ func get_templates() -> Array:
 			"goal": "Amazing!",
 			"reward": 30,
 			"perf": 1, 
-			"time_min": 30, 
-			"time_max": 40, 
+			"time_min": 80, 
+			"time_max": 100, 
 			"min_items": 1,
 			"max_items": 1
 		},
@@ -81,8 +81,8 @@ func get_templates() -> Array:
 			"goal": "Order finished!",
 			"reward": 30,
 			"perf": 1, 
-			"time_min": 30, 
-			"time_max": 40, 
+			"time_min": 80, 
+			"time_max": 100, 
 			"min_items": 1,
 			"max_items": 1
 		},
@@ -93,8 +93,8 @@ func get_templates() -> Array:
 			"goal": "Amazing day!",
 			"reward": 30,
 			"perf": 1, 
-			"time_min": 30, 
-			"time_max": 40, 
+			"time_min": 80, 
+			"time_max": 100, 
 			"min_items": 1,
 			"max_items": 1
 		}

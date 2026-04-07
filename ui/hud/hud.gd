@@ -62,7 +62,6 @@ func _update_quota():
 ##TODO: Add animation.
 func _missed_quota():
 	#Play animation.
-	print("FASDDDDDDDDDDDDDDDDDDDDdd")
 	anim_player.play("TicketMissed")
 
 

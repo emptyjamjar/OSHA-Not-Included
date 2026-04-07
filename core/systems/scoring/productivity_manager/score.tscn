@@ -16,7 +16,7 @@
 font_size = 22
 font_color = Color(0.9843137, 0.9607843, 0.9372549, 1)
 
-[node name="Score" type="Node2D" unique_id=1161969462]
+[node name="Score" type="Node2D" unique_id=1161969462 groups=["ProductivityManager"]]
 top_level = true
 script = ExtResource("1_s7su0")
 

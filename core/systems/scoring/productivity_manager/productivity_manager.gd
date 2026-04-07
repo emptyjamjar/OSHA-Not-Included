@@ -15,6 +15,9 @@ var quota : int = 0
 var breaks : int = 0
 var idles : int = 0
 
+##If the manager is watching. Turned on by the manager seeing the player in it's vision cone.
+var is_watched: bool = false
+
 
 func _ready() -> void:
 	pass
@@ -31,7 +34,7 @@ func add_productivity(value : int) -> int:
 
 func _on_shipper_get_money() -> void:
 	quota += 1
-	add_productivity(15)
+	add_productivity(20)
 	
 func _on_washroom_washroom_used() -> void:
 	breaks += 1
@@ -40,9 +43,10 @@ func _on_washroom_washroom_used() -> void:
 
 
 func _on_idle_timer_timeout() -> void:
-	idles += 1
-	add_productivity(-5)
-	#print("Productivity: " + str(productivity))
+	if is_watched:
+		idles += 1
+		add_productivity(-10)
+		#print("Productivity: " + str(productivity))
 
 
 func _on_ticket_terminal_tickets_empty() -> void:
