@@ -27,6 +27,7 @@ var sanity_timer: float = 0
 var idle: bool = true
 var started: bool = false
 
+var input_enabled:bool = true
 
 func _init() -> void:
 	add_to_group("player")
@@ -38,6 +39,8 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	if not input_enabled:
+		return
 	# wasd is the movement for move_(direction). 
 	var direction = Input.get_vector('move_left', 'move_right', 'move_up', 'move_down')
 	
@@ -123,3 +126,6 @@ func _on_sanity_area_body_exited(body: Node2D) -> void:
 func _on_sanity_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("Manager"):
 		is_manager_near = true
+		
+func set_input_enabled(enabled:bool) -> void:
+	input_enabled = enabled
