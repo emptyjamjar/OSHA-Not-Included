@@ -22,8 +22,9 @@
 [ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
 [ext_resource type="Resource" uid="uid://uve4tfgfh0ov" path="res://objects/items/wires/wires.tres" id="16_ypk20"]
 [ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="17_8onr1"]
-[ext_resource type="PackedScene" uid="uid://u3cnys6nkx03" path="res://levels/warehouse_01/layout/walls.tscn" id="18_kgoe6"]
 [ext_resource type="PackedScene" uid="uid://dwdtpfj4n8pco" path="res://objects/trashcan/trashcan.tscn" id="19_kgoe6"]
+[ext_resource type="PackedScene" uid="uid://c3oqia66gf01v" path="res://objects/shelves/sideshelf.tscn" id="21_4oc41"]
+[ext_resource type="PackedScene" uid="uid://cmysh8kqsje1j" path="res://objects/shelves/shelf.tscn" id="22_rvv64"]
 [ext_resource type="PackedScene" uid="uid://benkbh7e5rv0k" path="res://core/systems/sanity/sanity_checker.tscn" id="25_t4b4w"]
 [ext_resource type="PackedScene" uid="uid://b7ooaa868w4lg" path="res://objects/sanity_eye_ball/sanity_eyeball.tscn" id="26_ypk20"]
 
@@ -154,6 +155,34 @@ collision_mask = 2
 patrol_paths_at_root = NodePath("../PatrolPaths")
 out_bounds_area = NodePath("../OutBoundsArea")
 
+[node name="Shelves" type="Node2D" parent="." unique_id=2067524835]
+y_sort_enabled = true
+position = Vector2(-16, 80)
+
+[node name="Shelf5" parent="Shelves" unique_id=1206098896 instance=ExtResource("21_4oc41")]
+position = Vector2(324, 99)
+
+[node name="Shelf4" parent="Shelves" unique_id=1128931362 instance=ExtResource("21_4oc41")]
+position = Vector2(324, 152)
+
+[node name="Shelf3" parent="Shelves" unique_id=423742770 instance=ExtResource("21_4oc41")]
+position = Vector2(324, 204)
+
+[node name="Shelf6" parent="Shelves" unique_id=241480265 instance=ExtResource("21_4oc41")]
+position = Vector2(151, 99)
+
+[node name="Shelf7" parent="Shelves" unique_id=829420259 instance=ExtResource("21_4oc41")]
+position = Vector2(151, 152)
+
+[node name="Shelf8" parent="Shelves" unique_id=1887138358 instance=ExtResource("21_4oc41")]
+position = Vector2(151, 204)
+
+[node name="Shelf" parent="Shelves" unique_id=1931959191 instance=ExtResource("22_rvv64")]
+position = Vector2(240, 280)
+
+[node name="Shelf2" parent="Shelves" unique_id=1287017414 instance=ExtResource("22_rvv64")]
+position = Vector2(312, 280)
+
 [node name="PatrolPaths" type="Node2D" parent="." unique_id=351301721]
 
 [node name="Path1" type="Node2D" parent="PatrolPaths" unique_id=46041390]
@@ -209,9 +238,6 @@ position = Vector2(416, 354)
 
 [node name="p4_5" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1597500460]
 position = Vector2(416, 436)
-
-[node name="Walls" parent="." unique_id=897807902 instance=ExtResource("18_kgoe6")]
-position = Vector2(-16, 80)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=2072761992 groups=["UI"]]
 layer = 15

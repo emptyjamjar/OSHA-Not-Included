@@ -9,7 +9,7 @@
 [ext_resource type="Script" uid="uid://dv8osrfd81nlg" path="res://game/manager/states/manager_follow.gd" id="5_st5h1"]
 [ext_resource type="Script" uid="uid://bfr4futc0fa0" path="res://game/manager/states/manager_patrol.gd" id="6_7plvi"]
 [ext_resource type="Script" uid="uid://doxmxcaj2sv1a" path="res://game/manager/states/manager_recovery.gd" id="9_xgoh0"]
-[ext_resource type="PackedScene" uid="uid://ced5astmodlls" path="res://game/manager/ai/vision_cone.tscn" id="9_xncq1"]
+[ext_resource type="PackedScene" uid="uid://bxlp6nx0jpvvv" path="res://game/manager/ai/vision_cone.tscn" id="9_xncq1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_br8pi"]
 atlas = ExtResource("2_7gue4")

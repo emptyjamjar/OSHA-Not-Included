@@ -6,8 +6,10 @@
 [ext_resource type="PackedScene" uid="uid://bimhohbyv6s5d" path="res://objects/shipper/shipper.tscn" id="3_5dj75"]
 [ext_resource type="PackedScene" uid="uid://cxbnggs2xw8ne" path="res://ui/hud/hud.tscn" id="4_gd6qc"]
 [ext_resource type="PackedScene" uid="uid://c7e7f64igaa5j" path="res://game/actors/player/player.tscn" id="5_xx1od"]
+[ext_resource type="PackedScene" uid="uid://c3oqia66gf01v" path="res://objects/shelves/sideshelf.tscn" id="6_a6xfe"]
 [ext_resource type="Script" uid="uid://cpt2knie07vvo" path="res://core/systems/needs/health_component.gd" id="6_jvcy6"]
 [ext_resource type="Script" uid="uid://ck4p7gga13e5e" path="res://core/systems/needs/energy_component.gd" id="7_5osjm"]
+[ext_resource type="PackedScene" uid="uid://cmysh8kqsje1j" path="res://objects/shelves/shelf.tscn" id="7_yk7xk"]
 [ext_resource type="Script" uid="uid://b0ovv20hjaxi3" path="res://core/systems/needs/needs_component.gd" id="8_beo68"]
 [ext_resource type="Script" uid="uid://dka4wuamclaju" path="res://core/systems/sanity/sanity_component.gd" id="9_t4nin"]
 [ext_resource type="PackedScene" uid="uid://sxf3e0qydlfv" path="res://objects/packager/packager.tscn" id="10_w2cbs"]
@@ -17,7 +19,6 @@
 [ext_resource type="PackedScene" uid="uid://coa2sufhyfblt" path="res://objects/food/vending_machine.tscn" id="13_yk7xk"]
 [ext_resource type="Texture2D" uid="uid://b7wyx42608m0y" path="res://objects/items/wires/warehouse-wires.png" id="14_a6xfe"]
 [ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="14_n7a52"]
-[ext_resource type="PackedScene" uid="uid://u3cnys6nkx03" path="res://levels/warehouse_01/layout/walls.tscn" id="15_rfkxv"]
 [ext_resource type="Texture2D" uid="uid://bhp0qex5vacta" path="res://objects/items/wires/warehouse-wire-small.png" id="15_yk7xk"]
 [ext_resource type="Texture2D" uid="uid://bgs1ykeoy6vy5" path="res://objects/items/gunpowder/warehouse-gunpowder.png" id="16_n7a52"]
 [ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="16_ot42e"]
@@ -168,6 +169,34 @@ position = Vector2(250, 403)
 position = Vector2(346.00003, 392)
 scale = Vector2(0.3295734, 0.3295734)
 
+[node name="Shelves" type="Node2D" parent="." unique_id=284718978]
+y_sort_enabled = true
+position = Vector2(422, 112)
+
+[node name="Shelf5" parent="Shelves" unique_id=1206098896 instance=ExtResource("6_a6xfe")]
+position = Vector2(324, 99)
+
+[node name="Shelf4" parent="Shelves" unique_id=1286934569 instance=ExtResource("6_a6xfe")]
+position = Vector2(324, 152)
+
+[node name="Shelf3" parent="Shelves" unique_id=1426088597 instance=ExtResource("6_a6xfe")]
+position = Vector2(324, 204)
+
+[node name="Shelf6" parent="Shelves" unique_id=992565488 instance=ExtResource("6_a6xfe")]
+position = Vector2(151, 99)
+
+[node name="Shelf7" parent="Shelves" unique_id=1016145702 instance=ExtResource("6_a6xfe")]
+position = Vector2(151, 152)
+
+[node name="Shelf8" parent="Shelves" unique_id=1483129695 instance=ExtResource("6_a6xfe")]
+position = Vector2(151, 204)
+
+[node name="Shelf" parent="Shelves" unique_id=457673782 instance=ExtResource("7_yk7xk")]
+position = Vector2(240, 280)
+
+[node name="Shelf2" parent="Shelves" unique_id=2053817487 instance=ExtResource("7_yk7xk")]
+position = Vector2(312, 280)
+
 [node name="Manager" parent="." unique_id=565657217 node_paths=PackedStringArray("patrol_paths_at_root", "out_bounds_area") instance=ExtResource("14_n7a52")]
 position = Vector2(125, 216)
 collision_mask = 2
@@ -232,9 +261,6 @@ position = Vector2(494, 366)
 
 [node name="p3_7" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1214615763]
 position = Vector2(495, 444)
-
-[node name="Walls" parent="." unique_id=897807902 instance=ExtResource("15_rfkxv")]
-position = Vector2(423, 131)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=2072761992 groups=["UI"]]
 layer = 15
