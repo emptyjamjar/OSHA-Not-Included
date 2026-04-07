@@ -29,6 +29,7 @@ script/source = "extends Node2D
 class_name GameManager
 
 @onready var hud: Control = $CanvasLayer/HUD
+@onready var player:Player = $Player
 @onready var money := 0
 @onready var game_state = 0
 
@@ -44,6 +45,8 @@ func _ready() -> void:
 	# this starts the dialogue
 	Dialogic.start(\"timeline\")
 	VendingSystem.vending_bought.connect(_on_vending_bought)
+	
+	player.set_input_enabled(false)
 	
 
 func _on_shipper_get_money() -> void:
@@ -64,23 +67,29 @@ func tut_cutscene(argument:String) -> void:
 		$CutscenePath.state = 1
 		Dialogic.paused = true
 		Dialogic.Text.hide_textbox()
+		#player.set_input_enabled(true)
 	elif argument == \"2\":
 		$CutscenePath.state = 2
 		Dialogic.paused = true
 		Dialogic.Text.hide_textbox()
+		player.set_input_enabled(true)
 	elif argument == \"3\":
 		$CutscenePath.state = 3
 		Dialogic.paused = true
 		Dialogic.Text.hide_textbox()
+		player.set_input_enabled(true)
 	elif argument == \"4\":
 		$CutscenePath.state = 4
 		Dialogic.paused = true
 		Dialogic.Text.hide_textbox()
+		player.set_input_enabled(true)
 	elif argument == \"5\":
 		$CutscenePath.state = 5
+		player.set_input_enabled(true)
 
 
 func _on_ticket_terminal_ticket_dialogue() -> void:
+	player.set_input_enabled(false)
 	$CutscenePath.state = 2
 	Dialogic.paused = false
 	Dialogic.Text.show_textbox()
@@ -88,6 +97,7 @@ func _on_ticket_terminal_ticket_dialogue() -> void:
 
 
 func _on_conveyor_conveyor_dialogue() -> void:
+	player.set_input_enabled(false)
 	$CutscenePath.state = 3
 	Dialogic.paused = false
 	Dialogic.Text.show_textbox()
@@ -95,10 +105,16 @@ func _on_conveyor_conveyor_dialogue() -> void:
 
 
 func _on_packager_packager_dialogue() -> void:
+	player.set_input_enabled(false)
 	$CutscenePath.state = 4
 	Dialogic.paused = false
 	Dialogic.Text.show_textbox()
 	game_state += 1
+	
+	
+func _exit_tree() -> void:
+	if player:
+		player.set_input_enabled(true)
 "
 
 [sub_resource type="Gradient" id="Gradient_halqj"]
