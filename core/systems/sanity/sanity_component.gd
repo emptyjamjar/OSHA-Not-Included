@@ -30,9 +30,8 @@ func decrease(amount: int) -> void:
 	sanity_changed.emit(value)
 
 # Add milestone to the story dictionary.
-func set_milestone(threshold: int, effect_name: String) -> void:
+func set_milestone(threshold: int, effect_name: SanityChecker.Effects) -> void:
 	milestones[threshold] = effect_name
-	milestone_reached.emit(threshold)
 
 # Remove a milestone from the story dictionary.
 # Returns whether or not it succeeded.

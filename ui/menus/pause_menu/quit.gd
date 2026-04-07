@@ -1,7 +1,10 @@
 ## Quit button for pause menu.
 extends TextureButton
 
-
+func _ready() -> void:
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	
+	
 func _on_button_up() -> void:
 	Audio.play_exit_click()
 	Audio.reset_music_volume()

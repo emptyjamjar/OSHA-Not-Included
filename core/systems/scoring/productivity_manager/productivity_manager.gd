@@ -52,4 +52,14 @@ func _on_ticket_terminal_tickets_empty() -> void:
 	$VBoxContainer/Breaks.text = "Breaks taken: " + str(breaks)
 	$VBoxContainer/IdleDings.text = "Idle penalty: " + str(idles)
 	$VBoxContainer/Productivity.text = "Overall performance: " + str(productivity)
+	$VBoxContainer/Requirement.text = "Minimum score: " + str(Level_Manager.quota)
+	
+	if productivity >= Level_Manager.quota:
+		$EndOfDayPayReport/LetterOfTermination.visible = false
+		$Next.visible = true
+		$TryAgain.visible = false
+	else:
+		$EndOfDayPayReport/LetterOfTermination.visible = true
+		$Next.visible = false
+		$TryAgain.visible = true
 	get_tree().paused = true

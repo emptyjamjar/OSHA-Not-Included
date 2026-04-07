@@ -31,6 +31,7 @@ func _on_interact():
 	if not active: 
 		active = true
 		print("Terminal activated")
+		
 		print("Templates at interact:", ticket_manager.ticket_templates.size())
 		
 		#Set up ticket manager for the next level.
