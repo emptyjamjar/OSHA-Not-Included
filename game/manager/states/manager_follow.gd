@@ -14,17 +14,14 @@ func Enter():
 func Physics_Update(delta: float) -> void:
 	# get the direction between player and manager
 	var direction = player.global_position - manager.global_position
+	move_direction = direction
 	update_animation()
 	manager.velocity = direction.normalized() * move_speed
-	#if direction.length() > 25: 
-		## move manager towards the player
-		#manager.velocity = direction.normalized() * move_speed
-	#else: 
-		## stands still
-		#manager.velocity = Vector2()
-		 #
-	#if direction.length() > 50: 
-		#transitioned.emit(self, "idle")
+	# in case lost or touch player 
+	if not manager.vision_cone.is_entity_visible(player): 
+		transitioned.emit(self, "recovery")
+		return 
+	
 
 func update_animation(): 
 	if move_direction == Vector2.ZERO: 

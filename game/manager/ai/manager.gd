@@ -17,6 +17,7 @@ var lost_player_grace := 0.3
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var vision_cone = $VisionCone/CollisionPolygon2D
+@onready var touch_zone = $TouchZone #  for recovery state
 
 var path_container: Array = []
 var current_path: Array = []
@@ -109,11 +110,11 @@ func _physics_process(delta: float) -> void:
 		#return 
 	# normal movement 
 	rotate_vision_cone()
-	move_and_slide()
+	# move_and_slide()
 	if lost_player_timer > 0.0: 
 		lost_player_timer -= delta
-		if lost_player_timer <= 0.0: 
-			$StateMachine.on_child_transition($StateMachine.current_state, "idle")
+		#if lost_player_timer <= 0.0: 
+			#$StateMachine.on_child_transition($StateMachine.current_state, "idle")
 	## clamp to screen 
 	#var screen_size = get_viewport_rect().size
 	#var sprite_width_half = get_animated_sprite_dimensions().x / 2.0

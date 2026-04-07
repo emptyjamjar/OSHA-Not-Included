@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://tihl0oqfxvbq" path="res://game/manager/ai/Walk.png" id="4_xgoh0"]
 [ext_resource type="Script" uid="uid://dv8osrfd81nlg" path="res://game/manager/states/manager_follow.gd" id="5_st5h1"]
 [ext_resource type="Script" uid="uid://bfr4futc0fa0" path="res://game/manager/states/manager_patrol.gd" id="6_7plvi"]
+[ext_resource type="Script" uid="uid://doxmxcaj2sv1a" path="res://game/manager/states/manager_recovery.gd" id="9_xgoh0"]
 [ext_resource type="PackedScene" uid="uid://bxlp6nx0jpvvv" path="res://game/manager/ai/vision_cone.tscn" id="9_xncq1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_br8pi"]
@@ -332,6 +333,10 @@ animations = [{
 radius = 32.0
 height = 80.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xgoh0"]
+radius = 32.0
+height = 80.0
+
 [node name="Manager" type="CharacterBody2D" unique_id=565657217]
 script = ExtResource("1_6j6oq")
 
@@ -362,4 +367,15 @@ metadata/_custom_type_script = "uid://dv8osrfd81nlg"
 script = ExtResource("6_7plvi")
 metadata/_custom_type_script = "uid://bfr4futc0fa0"
 
+[node name="Recovery" type="Node" parent="StateMachine" unique_id=343038545 node_paths=PackedStringArray("manager")]
+script = ExtResource("9_xgoh0")
+manager = NodePath("../..")
+metadata/_custom_type_script = "uid://bfr4futc0fa0"
+
 [node name="VisionCone" parent="." unique_id=2046041614 instance=ExtResource("9_xncq1")]
+
+[node name="TouchZone" type="Area2D" parent="." unique_id=581405695]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TouchZone" unique_id=1788862835]
+shape = SubResource("CapsuleShape2D_xgoh0")
+debug_color = Color(0.85316795, 0.29115036, 0.588243, 0.41960785)
