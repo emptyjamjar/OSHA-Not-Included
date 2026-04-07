@@ -213,7 +213,7 @@ position = Vector2(254, 440)
 position = Vector2(254, 367)
 
 [node name="p1_3" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1365977136]
-position = Vector2(544, 367)
+position = Vector2(406, 411)
 
 [node name="p1_4" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1875373551]
 position = Vector2(544, 440)
@@ -236,10 +236,10 @@ position = Vector2(349, 288)
 position = Vector2(349, 238)
 
 [node name="p2_6" type="Marker2D" parent="PatrolPaths/Path2" unique_id=2036390393]
-position = Vector2(576, 238)
+position = Vector2(269, 255)
 
 [node name="p2_7" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1579245723]
-position = Vector2(761, 238)
+position = Vector2(292, 372)
 
 [node name="Path3" type="Node2D" parent="PatrolPaths" unique_id=326651166]
 
@@ -259,7 +259,7 @@ position = Vector2(349, 386)
 position = Vector2(464, 384)
 
 [node name="p3_6" type="Marker2D" parent="PatrolPaths/Path3" unique_id=573126639]
-position = Vector2(579, 386)
+position = Vector2(309, 408)
 
 [node name="p3_7" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1618136788]
 position = Vector2(579, 440)
@@ -285,6 +285,7 @@ position = Vector2(455, 296)
 color = Color(0.34233037, 0.3785334, 0.45536244, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=113270195]
+visible = false
 position = Vector2(680.813, 122.281)
 scale = Vector2(18.681644, 9.741211)
 color = Color(0.33276916, 0.46037263, 0.80294394, 1)

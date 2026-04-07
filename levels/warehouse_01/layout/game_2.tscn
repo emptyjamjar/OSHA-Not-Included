@@ -188,10 +188,10 @@ position = Vector2(459, 271)
 position = Vector2(459, 307)
 
 [node name="p1_4" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1875373551]
-position = Vector2(651, 307)
+position = Vector2(498, 342)
 
 [node name="p1_5" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1831874092]
-position = Vector2(651, 387)
+position = Vector2(500, 387)
 
 [node name="p1_6" type="Marker2D" parent="PatrolPaths/Path1" unique_id=848492553]
 position = Vector2(414, 387)
@@ -248,6 +248,7 @@ metadata/_edit_use_anchors_ = true
 visible = false
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=106612821]
+visible = false
 position = Vector2(680.813, 122.281)
 scale = Vector2(18.681644, 9.741211)
 color = Color(0.33276916, 0.46037263, 0.80294394, 1)
