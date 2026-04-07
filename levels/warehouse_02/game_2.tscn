@@ -34,6 +34,7 @@ var Ticket_Manager: TicketManager
 func _ready() -> void:
 	Ticket_Manager = get_tree().get_first_node_in_group(\"Ticket Manager\")
 	Ticket_Manager.on_game_start()
+	Audio.change_music_pitch(1.4, 5)
 
 func _on_shipper_get_money() -> void:
 	money += 10
@@ -124,7 +125,6 @@ script = ExtResource("8_ipmml")
 script = ExtResource("9_d3ddq")
 
 [node name="PointLight2D" type="PointLight2D" parent="Player" unique_id=694927071]
-visible = false
 position = Vector2(2.0000038, -2.0000012)
 scale = Vector2(1.7500001, 1.6249998)
 color = Color(0.72156864, 0.5803922, 0.40392157, 1)
@@ -172,7 +172,6 @@ patrol_paths_at_root = NodePath("../PatrolPaths")
 out_bounds_area = NodePath("../OutBoundsArea")
 
 [node name="PointLight2D" type="PointLight2D" parent="Manager" unique_id=238068845]
-visible = false
 position = Vector2(-3.000002, -6.000001)
 scale = Vector2(1.671875, 1.671875)
 color = Color(0.4862745, 0.4862745, 0.5764706, 1)

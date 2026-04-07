@@ -7,6 +7,7 @@ extends Node
 
 ## Current background music
 @onready var music:AudioStreamPlayer = $Music
+var active_pitch_tween: Tween
 
 ## Current volume of the background music
 var music_volume:float
@@ -115,10 +116,20 @@ func lower_music():
 ## calling [method lower_music].
 func reset_music_volume():
 	music.volume_db = music_volume
-	
-func change_music_pitch(pitch_scale:float):
+
+## Changes the pitch of the music to [param target_pitch] over a
+## a course of [param duration]
+func change_music_pitch(target_pitch: float, duration: float = 1.0):
 	var mus_bus = AudioServer.get_bus_index("Music")
-	if mus_bus != -1:
-		var pitch = AudioServer.get_bus_effect(mus_bus, 0)
-		pitch.pitch_scale = pitch_scale
+	if mus_bus == -1:
+		return
+
+	var pitch_effect = AudioServer.get_bus_effect(mus_bus, 0)
+	
+	if active_pitch_tween:
+		active_pitch_tween.kill()
+	
+	active_pitch_tween = create_tween()
+	active_pitch_tween.set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	active_pitch_tween.tween_property(pitch_effect, "pitch_scale", target_pitch, duration)
 	
