@@ -9,7 +9,9 @@ var levels : Array[NodePath] = [
 	"res://levels/warehouse_01/layout/game.tscn",
 	"res://levels/cutscenes/cutscene01.tscn",
 	"res://levels/warehouse_01/layout/game_2.tscn",
+	"res://levels/cutscenes/cutscene02.tscn",
 	"res://levels/warehouse_02/game.tscn",
+	"res://levels/cutscenes/cutscene03.tscn",
 	"res://levels/warehouse_02/game_2.tscn"]
 
 var quota = 0

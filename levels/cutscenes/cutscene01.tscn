@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bjr1yacnhieyv"]
 
-[ext_resource type="Script" uid="uid://b0wwycpk31uaj" path="res://levels/cutscenes/cutscene_00.gd" id="1_wnwv1"]
+[ext_resource type="Script" uid="uid://cdm7v1opxmsxu" path="res://levels/cutscenes/cutscene_01.gd" id="1_wnwv1"]
 [ext_resource type="Texture2D" uid="uid://cohf5020xlaxx" path="res://levels/cutscenes/BLACK.png" id="2_ehhqc"]
 
 [node name="Cutscene01" type="Node2D" unique_id=862083875]
