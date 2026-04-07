@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bv5j66jvpkjgu"]
+
+[ext_resource type="Script" uid="uid://dd2h2ayjq7ofo" path="res://core/autoload/ticket_manager/ticket_manager.gd" id="1_ndqfh"]
+
+[node name="TickeManager" type="Node" unique_id=195628826 groups=["Ticket Manager"]]
+script = ExtResource("1_ndqfh")

@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://chidjbuid2cgd" path="res://levels/shared/World.tscn" id="1_pva71"]
 [ext_resource type="Script" uid="uid://c8mj1grnlbspl" path="res://game/manager/ai/out_bounds_area.gd" id="2_4s104"]
+[ext_resource type="PackedScene" uid="uid://b5iphcv1rio5l" path="res://core/autoload/ticket_manager/ticket_manager.tscn" id="2_5dj75"]
 [ext_resource type="PackedScene" uid="uid://bimhohbyv6s5d" path="res://objects/shipper/shipper.tscn" id="3_5dj75"]
 [ext_resource type="PackedScene" uid="uid://cxbnggs2xw8ne" path="res://ui/hud/hud.tscn" id="4_gd6qc"]
 [ext_resource type="PackedScene" uid="uid://c7e7f64igaa5j" path="res://game/actors/player/player.tscn" id="5_xx1od"]
@@ -26,8 +27,11 @@ class_name GameManager
 
 @onready var hud: Control = $CanvasLayer/HUD
 @onready var money := 0
+var Ticket_Manager: TicketManager
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Ticket_Manager = get_tree().get_first_node_in_group(\"Ticket Manager\")
 	Ticket_Manager.on_game_start()
 	VendingSystem.vending_bought.connect(_on_vending_bought)
 	Audio.change_music_pitch(0.5)
@@ -67,6 +71,9 @@ y_sort_enabled = true
 script = SubResource("GDScript_7sc4i")
 
 [node name="World" parent="." unique_id=2107734680 instance=ExtResource("1_pva71")]
+
+[node name="TicketManager" parent="." unique_id=257549508 instance=ExtResource("2_5dj75")]
+level = 3
 
 [node name="OutBoundsArea" type="Area2D" parent="." unique_id=1864494632]
 visible = false

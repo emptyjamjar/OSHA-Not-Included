@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://dd2h2ayjq7ofo" path="res://core/autoload/ticket_manager/ticket_manager.gd" id="1_jv05l"]
 
-[node name="TicketManager" type="Node2D" unique_id=257549508]
+[node name="TicketManager" type="Node2D" unique_id=257549508 groups=["Ticket Manager"]]
 script = ExtResource("1_jv05l")

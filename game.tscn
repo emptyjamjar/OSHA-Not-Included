@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://chidjbuid2cgd" path="res://levels/shared/World.tscn" id="1_7sc4i"]
 [ext_resource type="Script" uid="uid://cpt2knie07vvo" path="res://core/systems/needs/health_component.gd" id="2_e2o6t"]
 [ext_resource type="Script" uid="uid://c8mj1grnlbspl" path="res://game/manager/ai/out_bounds_area.gd" id="2_e8heu"]
+[ext_resource type="PackedScene" uid="uid://b5iphcv1rio5l" path="res://core/autoload/ticket_manager/ticket_manager.tscn" id="2_qhcbd"]
 [ext_resource type="PackedScene" uid="uid://cxbnggs2xw8ne" path="res://ui/hud/hud.tscn" id="2_ryrav"]
 [ext_resource type="PackedScene" uid="uid://bimhohbyv6s5d" path="res://objects/shipper/shipper.tscn" id="3_e8heu"]
 [ext_resource type="Script" uid="uid://ck4p7gga13e5e" path="res://core/systems/needs/energy_component.gd" id="3_feb5d"]
@@ -15,7 +16,9 @@
 [ext_resource type="PackedScene" uid="uid://coa2sufhyfblt" path="res://objects/food/vending_machine.tscn" id="11_mfdv2"]
 [ext_resource type="PackedScene" uid="uid://sxf3e0qydlfv" path="res://objects/packager/packager.tscn" id="12_hb5m1"]
 [ext_resource type="PackedScene" uid="uid://cv4vrnpxs40bf" path="res://objects/restroom/washroom.tscn" id="12_iotsf"]
+[ext_resource type="Script" uid="uid://c7i8xoc0ofw0m" path="res://objects/items/item_data.gd" id="12_x5p1p"]
 [ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="13_lc2xo"]
+[ext_resource type="Resource" uid="uid://b33up4q2s6ntw" path="res://objects/items/document/document.tres" id="13_qhcbd"]
 [ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="15_e8heu"]
 [ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
 [ext_resource type="Texture2D" uid="uid://bmisxcq76lrat" path="res://icon.svg" id="18_boyg6"]
@@ -29,8 +32,12 @@ class_name GameManager
 
 @onready var hud: Control = $CanvasLayer/HUD
 @onready var money := 0
+
+var Ticket_Manager: TicketManager
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Ticket_Manager = get_tree().get_first_node_in_group(\"Ticket Manager\")
 	Dialogic.signal_event.connect(tut_cutscene)
 	var conveyor := $Conveyor
 	Ticket_Manager.on_game_start()
@@ -93,6 +100,8 @@ script = SubResource("GDScript_7sc4i")
 
 [node name="World" parent="." unique_id=2107734680 instance=ExtResource("1_7sc4i")]
 
+[node name="TicketManager" parent="." unique_id=257549508 instance=ExtResource("2_qhcbd")]
+
 [node name="OutBoundsArea" type="Area2D" parent="." unique_id=1864494632]
 visible = false
 collision_layer = 2
@@ -144,6 +153,9 @@ position = Vector2(640, 192)
 
 [node name="Conveyor" parent="." unique_id=1135306595 groups=["conveyor"] instance=ExtResource("8_j5wjh")]
 position = Vector2(101, 363)
+story_resources = Dictionary[int, ExtResource("12_x5p1p")]({
+5: ExtResource("13_qhcbd")
+})
 
 [node name="TicketTerminal" parent="." unique_id=982348100 instance=ExtResource("6_ryrav")]
 position = Vector2(368, 392)

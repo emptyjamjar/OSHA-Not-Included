@@ -2,11 +2,14 @@
 
 [ext_resource type="Script" uid="uid://c7i8xoc0ofw0m" path="res://objects/items/item_data.gd" id="1_tf82b"]
 [ext_resource type="Texture2D" uid="uid://c773vx0ry3ddj" path="res://objects/items/bomb-clock/warehouse-bomb-clock.png" id="2_d4jgw"]
+[ext_resource type="Texture2D" uid="uid://caa8pfqj21vtf" path="res://objects/items/bomb-clock/warehouse-clock-small.png" id="3_wbb2k"]
 
 [resource]
 script = ExtResource("1_tf82b")
+type = 1
 name = "Bomb Clock"
-description = "Tick.. Tick.."
+description = "Who would need this?"
 texture = ExtResource("2_d4jgw")
+uiTexture = ExtResource("3_wbb2k")
 id = 4
 metadata/_custom_type_script = "uid://c7i8xoc0ofw0m"
