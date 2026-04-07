@@ -177,6 +177,9 @@ func _spawn_into_first_slot(item: ItemData) -> void:
 			# Connect to function to remove from list on pickup
 			scene.picked_up.connect(_on_item_picked_up.bind(i))
 			
+			# When spawned from conveyor do not count it as dropped.
+			scene.undrop_body()
+			
 			scene.data = item.duplicate(true)
 			items_node.add_child(scene)
 			#Spawn onto the spawn tile

@@ -21,7 +21,6 @@
 [ext_resource type="Resource" uid="uid://b33up4q2s6ntw" path="res://objects/items/document/document.tres" id="13_qhcbd"]
 [ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="15_e8heu"]
 [ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
-[ext_resource type="Resource" uid="uid://uve4tfgfh0ov" path="res://objects/items/wires/wires.tres" id="16_i2p71"]
 [ext_resource type="Texture2D" uid="uid://bmisxcq76lrat" path="res://icon.svg" id="18_boyg6"]
 [ext_resource type="Script" uid="uid://j63ga8s4bhlu" path="res://cutscene_path.gd" id="18_e36ub"]
 [ext_resource type="PackedScene" uid="uid://dwdtpfj4n8pco" path="res://objects/trashcan/trashcan.tscn" id="20_e36ub"]
@@ -155,8 +154,6 @@ position = Vector2(640, 192)
 [node name="Conveyor" parent="." unique_id=1135306595 groups=["conveyor"] instance=ExtResource("8_j5wjh")]
 position = Vector2(101, 363)
 story_resources = Dictionary[int, ExtResource("12_x5p1p")]({
-2: ExtResource("13_qhcbd"),
-3: ExtResource("16_i2p71"),
 5: ExtResource("13_qhcbd")
 })
 
@@ -172,7 +169,7 @@ position = Vector2(744, 304)
 scale = Vector2(0.24458057, 0.24458057)
 
 [node name="Manager" parent="." unique_id=565657217 node_paths=PackedStringArray("patrol_paths_at_root", "out_bounds_area") groups=["Manager"] instance=ExtResource("16_80cx4")]
-position = Vector2(537, 350)
+position = Vector2(197, 240)
 collision_mask = 2
 patrol_paths_at_root = NodePath("../PatrolPaths")
 out_bounds_area = NodePath("../OutBoundsArea")

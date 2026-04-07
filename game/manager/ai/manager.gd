@@ -40,7 +40,10 @@ func _ready() -> void:
 	self.show()
 	
 	#Get productivity_manager
-	productivity_manager = get_tree().get_first_node_in_group("UI").get_tree().get_first_node_in_group("Ticket Manager")
+	var UI = get_tree().get_first_node_in_group("UI")
+	for child in UI.get_children():
+		if child.is_in_group("ProductivityManager"):
+			productivity_manager = child
 	
 	if patrol_paths_at_root == null:
 		print("No path to begin with -- Break from here") 
@@ -65,9 +68,17 @@ func _on_entity_seen(entity):
 		vision_cone.change_colour(detected_colour)
 		print("Manager RECEIVED entity_entered_vision:", entity) 
 		$StateMachine.on_child_transition($StateMachine.current_state, "follow")
+		
+		check_not_moving()
+	
+	elif entity.is_in_group("Dropped Item"):
+		check_dropped_item()
 
 
 func _on_entity_lost(entity): 
+	if entity == null:
+		return
+	
 	if entity.is_in_group("player"): 
 		lost_player_timer = lost_player_grace
 		vision_cone.change_colour(non_detected)
@@ -160,14 +171,14 @@ func rotate_vision_cone():
 			$VisionCone.rotation = -PI / 2 # up 
 
 
-##The 
-func player_not_moving():
+##The Behaviour functions
+func check_not_moving():
 	pass
 
 
-func player_dropped_item():
+func check_dropped_item():
 	pass
 
 
-func player_bumped_int():
+func check_bumped_into():
 	pass
