@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_es0dh")
+type = 1
 name = "Bomb Hallucination"
-description = "It exists just as I do"
+description = "It's ticking down... Oh god..."
 texture = ExtResource("2_kf6nb")
 id = 5
 metadata/_custom_type_script = "uid://c7i8xoc0ofw0m"

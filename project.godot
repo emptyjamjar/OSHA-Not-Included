@@ -33,7 +33,6 @@ buses/default_bus_layout="uid://c1uql1fcd7q2k"
 
 InteractionManager="*uid://rs788b0iptdm"
 VendingSystem="*uid://dw0hnoeunims1"
-Ticket_Manager="*uid://dd2h2ayjq7ofo"
 Audio="*uid://cpauy0iyhojqc"
 PlayerInventory="*uid://hx53g7dc4i10"
 ItemSpawner="*uid://biwgn8hxrtv3d"
@@ -72,6 +71,7 @@ Boxes=""
 conveyor=""
 Manager=""
 UI=""
+"Ticket Manager"=""
 
 [gui]
 

@@ -10,6 +10,8 @@ signal deduct_productivity(val: int) ## For changing productivity. Used in Hud.g
 @export var productivity_decay: int = 2 ##How many seconds you need to be in overtime until 1 point of productivity is deducted.
 @export var anim_player: AnimationPlayer
 
+var ticket_manager: TicketManager
+
 var clock_time:float = 0
 var performance: float = 0 ## How much the player will be deducted for not doing their job fast enough.
 var clock_start:bool = false ##If the timer should start.
@@ -18,7 +20,10 @@ var clock_start:bool = false ##If the timer should start.
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Ticket_Manager.tickets_generated.connect(start_clock)
+	ticket_manager = get_tree().get_first_node_in_group("Ticket Manager")
+	print(ticket_manager)
+	
+	ticket_manager.tickets_generated.connect(start_clock)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -73,11 +78,15 @@ func update_clock(delta: float):
 
 func get_clock_time()->float:
 	if level_time <= 0:
-		var tickets: Array[Ticket] = Ticket_Manager.all_tickets
+		var tickets: Array[Ticket] = ticket_manager.all_tickets
 		var sum_time: float = 0
 		
 		for ticket in tickets:
-			sum_time += ticket.max_time
+			#Story items have 10 minute timers so don't want the formula to get screwed here.
+			if ticket.max_time > 300:
+				sum_time += 30
+			else:
+				sum_time += ticket.max_time
 		
 		return sum_time * .75
 	#This is case we decide to have a customized time limit for the level instead of automatically generating it.

@@ -28,7 +28,6 @@ func next_level():
 func replay_level() -> void:
 	PlayerInventory.reset()
 	get_tree().change_scene_to_file(levels[level])
-
 	
 
 func reset():

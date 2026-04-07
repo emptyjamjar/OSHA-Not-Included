@@ -5,8 +5,9 @@
 
 [resource]
 script = ExtResource("1_d07q7")
+type = 1
 name = "Eyeball"
-description = "The window to the soul"
+description = "Don't look at me..."
 texture = ExtResource("2_kpfc8")
 id = 7
 metadata/_custom_type_script = "uid://c7i8xoc0ofw0m"

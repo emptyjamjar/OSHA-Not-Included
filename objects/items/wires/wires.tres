@@ -2,11 +2,14 @@
 
 [ext_resource type="Script" uid="uid://c7i8xoc0ofw0m" path="res://objects/items/item_data.gd" id="1_h6pqy"]
 [ext_resource type="Texture2D" uid="uid://b7wyx42608m0y" path="res://objects/items/wires/warehouse-wires.png" id="2_dq3nk"]
+[ext_resource type="Texture2D" uid="uid://bhp0qex5vacta" path="res://objects/items/wires/warehouse-wire-small.png" id="3_vkugd"]
 
 [resource]
 script = ExtResource("1_h6pqy")
+type = 1
 name = "Wires"
-description = "A spool of electrical wire"
+description = "Are these for a project of some kind?"
 texture = ExtResource("2_dq3nk")
+uiTexture = ExtResource("3_vkugd")
 id = 10
 metadata/_custom_type_script = "uid://c7i8xoc0ofw0m"
