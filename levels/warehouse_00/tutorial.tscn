@@ -153,6 +153,7 @@ eyeballs = [NodePath("../SanityEyeball")]
 
 [node name="Player" parent="." unique_id=2112891127 instance=ExtResource("5_rvswv")]
 position = Vector2(323, 263)
+sanity_drain = 0
 
 [node name="HealthComponent" type="Node" parent="Player" unique_id=1337526708]
 script = ExtResource("2_e2o6t")
@@ -194,8 +195,8 @@ scale = Vector2(0.3295734, 0.3295734)
 position = Vector2(744, 304)
 scale = Vector2(0.24458057, 0.24458057)
 
-[node name="Manager" parent="." unique_id=565657217 node_paths=PackedStringArray("patrol_paths_at_root", "out_bounds_area") groups=["Manager"] instance=ExtResource("16_80cx4")]
-position = Vector2(537, 350)
+[node name="Manager" parent="." unique_id=565657217 node_paths=PackedStringArray("patrol_paths_at_root", "out_bounds_area") instance=ExtResource("16_80cx4")]
+position = Vector2(512, 384)
 collision_mask = 2
 patrol_paths_at_root = NodePath("../PatrolPaths")
 out_bounds_area = NodePath("../OutBoundsArea")
@@ -213,7 +214,7 @@ loop = false
 [node name="Sprite2D" type="Sprite2D" parent="CutscenePath/PathFollow2D" unique_id=1078777878]
 texture = ExtResource("18_boyg6")
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=837622460]
+[node name="UI" type="CanvasLayer" parent="." unique_id=837622460 groups=["UI"]]
 layer = 15
 
 [node name="Pause" parent="UI" unique_id=1566201169 instance=ExtResource("13_lc2xo")]

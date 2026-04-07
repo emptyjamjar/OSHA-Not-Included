@@ -179,7 +179,7 @@ scale = Vector2(0.33, 0.33)
 position = Vector2(117, 367.00003)
 scale = Vector2(0.245, 0.245)
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=1192117838]
+[node name="UI" type="CanvasLayer" parent="." unique_id=1192117838 groups=["UI"]]
 layer = 15
 
 [node name="Pause" parent="UI" unique_id=1566201169 instance=ExtResource("15_ve8kv")]
@@ -207,44 +207,62 @@ texture = SubResource("GradientTexture2D_55o4m")
 [node name="Path1" type="Node2D" parent="PatrolPaths" unique_id=46041390]
 
 [node name="p1_1" type="Marker2D" parent="PatrolPaths/Path1" unique_id=2052612545]
-position = Vector2(575.688, 191)
+position = Vector2(254, 440)
 
 [node name="p1_2" type="Marker2D" parent="PatrolPaths/Path1" unique_id=2114138325]
-position = Vector2(489, 236)
+position = Vector2(254, 367)
 
 [node name="p1_3" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1365977136]
-position = Vector2(414, 244)
+position = Vector2(544, 367)
 
 [node name="p1_4" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1875373551]
-position = Vector2(389, 388)
+position = Vector2(544, 440)
 
-[node name="Path2" type="Node2D" parent="PatrolPaths" unique_id=1780100022]
+[node name="Path2" type="Node2D" parent="PatrolPaths" unique_id=484581952]
 
-[node name="p2_1" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1106255408]
-position = Vector2(452.75732, 342)
+[node name="p2_1" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1217291330]
+position = Vector2(254, 440)
 
-[node name="p2_2" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1918256563]
-position = Vector2(613.61804, 377)
+[node name="p2_2" type="Marker2D" parent="PatrolPaths/Path2" unique_id=23896577]
+position = Vector2(254, 367)
 
-[node name="p2_3" type="Marker2D" parent="PatrolPaths/Path2" unique_id=136453742]
-position = Vector2(478.7405, 347)
+[node name="p2_3" type="Marker2D" parent="PatrolPaths/Path2" unique_id=688778508]
+position = Vector2(254, 288)
 
-[node name="p2_4" type="Marker2D" parent="PatrolPaths/Path2" unique_id=87527126]
-position = Vector2(509, 346)
+[node name="p2_4" type="Marker2D" parent="PatrolPaths/Path2" unique_id=289448937]
+position = Vector2(349, 288)
 
-[node name="Path3" type="Node2D" parent="PatrolPaths" unique_id=1497011237]
+[node name="p2_5" type="Marker2D" parent="PatrolPaths/Path2" unique_id=43299095]
+position = Vector2(349, 238)
 
-[node name="p3_1" type="Marker2D" parent="PatrolPaths/Path3" unique_id=475289346]
-position = Vector2(577.6868, 354)
+[node name="p2_6" type="Marker2D" parent="PatrolPaths/Path2" unique_id=2036390393]
+position = Vector2(576, 238)
 
-[node name="p3_2" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1576187183]
-position = Vector2(415.77463, 351)
+[node name="p2_7" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1579245723]
+position = Vector2(761, 238)
 
-[node name="p3_3" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1656326002]
-position = Vector2(319.77408, 303)
+[node name="Path3" type="Node2D" parent="PatrolPaths" unique_id=326651166]
 
-[node name="p3_4" type="Marker2D" parent="PatrolPaths/Path3" unique_id=29843830]
-position = Vector2(381.6078, 184)
+[node name="p3_1" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1349026279]
+position = Vector2(97, 288)
+
+[node name="p3_2" type="Marker2D" parent="PatrolPaths/Path3" unique_id=212523382]
+position = Vector2(254, 288)
+
+[node name="p3_3" type="Marker2D" parent="PatrolPaths/Path3" unique_id=721213144]
+position = Vector2(349, 288)
+
+[node name="p3_4" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1040541265]
+position = Vector2(349, 386)
+
+[node name="p3_5" type="Marker2D" parent="PatrolPaths/Path3" unique_id=2057090302]
+position = Vector2(464, 384)
+
+[node name="p3_6" type="Marker2D" parent="PatrolPaths/Path3" unique_id=573126639]
+position = Vector2(579, 386)
+
+[node name="p3_7" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1618136788]
+position = Vector2(579, 440)
 
 [node name="Walls" type="Node2D" parent="." unique_id=830732475]
 
@@ -267,7 +285,7 @@ position = Vector2(455, 296)
 color = Color(0.34233037, 0.3785334, 0.45536244, 1)
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=113270195]
-position = Vector2(680.8126, 122.281265)
+position = Vector2(680.813, 122.281)
 scale = Vector2(18.681644, 9.741211)
 color = Color(0.33276916, 0.46037263, 0.80294394, 1)
 shadow_enabled = true
