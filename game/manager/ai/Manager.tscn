@@ -347,7 +347,7 @@ shape = SubResource("CapsuleShape2D_xncq1")
 
 [node name="StateMachine" type="Node" parent="." unique_id=2119156540 node_paths=PackedStringArray("initial_state")]
 script = ExtResource("2_p482c")
-initial_state = NodePath("Idle")
+initial_state = NodePath("Patrol")
 
 [node name="Idle" type="Node" parent="StateMachine" unique_id=1770861042 node_paths=PackedStringArray("manager")]
 script = ExtResource("3_6j6oq")

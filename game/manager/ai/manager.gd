@@ -101,12 +101,12 @@ func wait_after_finished_a_path():
 	wait_timer = 0.0
 	
 func _physics_process(delta: float) -> void:
-	if waiting: 
-		wait_timer += delta
-		velocity = Vector2()
-		if wait_timer >= wait_time: 
-			choose_random_path()
-		return 
+	#if waiting: 
+		#wait_timer += delta
+		#velocity = Vector2()
+		#if wait_timer >= wait_time: 
+			#choose_random_path()
+		#return 
 	# normal movement 
 	rotate_vision_cone()
 	move_and_slide()
@@ -114,13 +114,13 @@ func _physics_process(delta: float) -> void:
 		lost_player_timer -= delta
 		if lost_player_timer <= 0.0: 
 			$StateMachine.on_child_transition($StateMachine.current_state, "idle")
-	# clamp to screen 
-	var screen_size = get_viewport_rect().size
-	var sprite_width_half = get_animated_sprite_dimensions().x / 2.0
-	var sprite_height_half = get_animated_sprite_dimensions().y / 2.0
-	const HUD_LEFT = 96.0
-	position.x = clamp(position.x, HUD_LEFT + sprite_width_half, screen_size.x - sprite_width_half)
-	position.y = clamp(position.y, 0 + sprite_height_half, screen_size.y - sprite_height_half)
+	## clamp to screen 
+	#var screen_size = get_viewport_rect().size
+	#var sprite_width_half = get_animated_sprite_dimensions().x / 2.0
+	#var sprite_height_half = get_animated_sprite_dimensions().y / 2.0
+	#const HUD_LEFT = 96.0
+	#position.x = clamp(position.x, HUD_LEFT + sprite_width_half, screen_size.x - sprite_width_half)
+	#position.y = clamp(position.y, 0 + sprite_height_half, screen_size.y - sprite_height_half)
 
 ## Returns the full dimensions of the player's animated sprite in a Vector2i
 func get_animated_sprite_dimensions() -> Vector2i:

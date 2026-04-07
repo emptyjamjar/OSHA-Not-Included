@@ -4,7 +4,7 @@ class_name ManagerPatrol
 @export var manager: CharacterBody2D
 var player: CharacterBody2D
 var animated_sprite : AnimatedSprite2D 
-@export var move_speed := 40.0
+@export var move_speed := 15.0
 var move_direction : Vector2
 var index := 0
 var wait_timer := 0.0
@@ -22,9 +22,16 @@ func Enter():
 	wait_timer = 0.0
 	checking = false 
 	check_timer = 0.0
-	
+	if manager.current_path.is_empty(): 
+		manager.choose_random_path()
+	manager.current_index = clamp(manager.current_index, 0, max(manager.current_path.size() - 1, 0))
+
 func Physics_Update(delta: float) -> void:
+	# if never increment, distance_to(target) < 8 is never true
+	# if increments once --> path has only 1 point
+	#print("index:", manager.current_index, " / ", manager.current_path.size())
 	# If player is visible, stop patrolling
+	
 	if manager.vision_cone.is_entity_visible(player):
 		transitioned.emit(self, "follow")
 		return
@@ -37,13 +44,13 @@ func Physics_Update(delta: float) -> void:
 			checking = false
 			manager.vision_cone.enable()
 		return
-	# normal behaviour
-	if manager.waiting: 
-		return
+	## normal behaviour
+	#if manager.waiting: 
+		#return
 	var path = manager.current_path
 	if path.is_empty(): 
 		#print("WARNING: current_path is empty")
-		#manager.choose_random_path()
+		manager.choose_random_path()
 		return 
 	# ensure index is valid
 	if manager.current_index >= path.size(): 
@@ -57,7 +64,8 @@ func Physics_Update(delta: float) -> void:
 	var direction = (target - manager.global_position).normalized() 
 	manager.velocity = direction * move_speed
 	manager.move_and_slide()
-	
+	move_direction = direction
+	update_animation()
 	if manager.global_position.distance_to(target) < 8: 
 		wait_timer += delta
 		manager.velocity = Vector2()
