@@ -21,9 +21,9 @@
 [ext_resource type="Resource" uid="uid://b33up4q2s6ntw" path="res://objects/items/document/document.tres" id="13_qhcbd"]
 [ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="15_e8heu"]
 [ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
-[ext_resource type="Texture2D" uid="uid://bmisxcq76lrat" path="res://icon.svg" id="18_boyg6"]
 [ext_resource type="Script" uid="uid://j63ga8s4bhlu" path="res://cutscene_path.gd" id="18_e36ub"]
 [ext_resource type="PackedScene" uid="uid://dwdtpfj4n8pco" path="res://objects/trashcan/trashcan.tscn" id="20_e36ub"]
+[ext_resource type="Texture2D" uid="uid://cf1pjtf5i66d0" path="res://game/manager/ai/mang.webp" id="21_vaj68"]
 [ext_resource type="PackedScene" uid="uid://b7ooaa868w4lg" path="res://objects/sanity_eye_ball/sanity_eyeball.tscn" id="22_x5p1p"]
 
 [sub_resource type="GDScript" id="GDScript_7sc4i"]
@@ -186,7 +186,9 @@ rotates = false
 loop = false
 
 [node name="Sprite2D" type="Sprite2D" parent="CutscenePath/PathFollow2D" unique_id=1078777878]
-texture = ExtResource("18_boyg6")
+rotation = 3.1415927
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("21_vaj68")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=837622460 groups=["UI"]]
 layer = 15
@@ -211,6 +213,7 @@ metadata/_edit_use_anchors_ = true
 visible = false
 
 [node name="PointLight2D" type="PointLight2D" parent="." unique_id=2074852728]
+visible = false
 position = Vector2(680.813, 122.281)
 scale = Vector2(18.681644, 9.741211)
 color = Color(0.33276916, 0.46037263, 0.80294394, 1)
