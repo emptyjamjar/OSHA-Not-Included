@@ -177,6 +177,43 @@ _data = {
 &"RESET": SubResource("Animation_000l6")
 }
 
+[sub_resource type="Animation" id="Animation_5hj6c"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_mnu3c"]
+resource_name = "enter"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.43333334),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -64), Vector2(0, 4), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n4wfq"]
+_data = {
+&"RESET": SubResource("Animation_5hj6c"),
+&"enter": SubResource("Animation_mnu3c")
+}
+
 [node name="TicketQueueUI" type="CanvasLayer" unique_id=1534765680]
 
 [node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1292286621]
@@ -188,9 +225,10 @@ size_flags_horizontal = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 66
 
-[node name="Slot1" type="Control" parent="HBoxContainer" unique_id=2047756636]
+[node name="Slot1" type="Control" parent="HBoxContainer" unique_id=2047756636 node_paths=PackedStringArray("anim")]
 layout_mode = 2
 script = ExtResource("1_dsuxn")
+anim = NodePath("TicketAnim")
 
 [node name="Highlight" type="ColorRect" parent="HBoxContainer/Slot1" unique_id=1865432560]
 visible = false
@@ -275,9 +313,13 @@ columns = 3
 [node name="ItemTicketDisplay" parent="HBoxContainer/Slot1/AnimatedSprite2D/RequiredItemsContainer" unique_id=611193045 instance=ExtResource("5_0imhw")]
 layout_mode = 2
 
-[node name="Slot2" type="Control" parent="HBoxContainer" unique_id=680985875]
+[node name="TicketAnim" type="AnimationPlayer" parent="HBoxContainer/Slot1" unique_id=417546655]
+libraries/ = SubResource("AnimationLibrary_n4wfq")
+
+[node name="Slot2" type="Control" parent="HBoxContainer" unique_id=680985875 node_paths=PackedStringArray("anim")]
 layout_mode = 2
 script = ExtResource("5_u133q")
+anim = NodePath("TicketAnim")
 
 [node name="Highlight" type="ColorRect" parent="HBoxContainer/Slot2" unique_id=1056172396]
 visible = false
@@ -358,9 +400,13 @@ theme_override_constants/h_separation = 4
 theme_override_constants/v_separation = 2
 columns = 3
 
-[node name="Slot3" type="Control" parent="HBoxContainer" unique_id=432832531]
+[node name="TicketAnim" type="AnimationPlayer" parent="HBoxContainer/Slot2" unique_id=1398351629]
+libraries/ = SubResource("AnimationLibrary_n4wfq")
+
+[node name="Slot3" type="Control" parent="HBoxContainer" unique_id=432832531 node_paths=PackedStringArray("anim")]
 layout_mode = 2
 script = ExtResource("6_0imhw")
+anim = NodePath("TicketAnim")
 
 [node name="Highlight" type="ColorRect" parent="HBoxContainer/Slot3" unique_id=200160344]
 visible = false
@@ -441,9 +487,13 @@ theme_override_constants/h_separation = 4
 theme_override_constants/v_separation = 2
 columns = 3
 
-[node name="Slot4" type="Control" parent="HBoxContainer" unique_id=1700340132]
+[node name="TicketAnim" type="AnimationPlayer" parent="HBoxContainer/Slot3" unique_id=1820213585]
+libraries/ = SubResource("AnimationLibrary_n4wfq")
+
+[node name="Slot4" type="Control" parent="HBoxContainer" unique_id=1700340132 node_paths=PackedStringArray("anim")]
 layout_mode = 2
 script = ExtResource("7_2t5fm")
+anim = NodePath("TicketAnim")
 
 [node name="Highlight" type="ColorRect" parent="HBoxContainer/Slot4" unique_id=2052719026]
 visible = false
@@ -524,6 +574,9 @@ theme_override_constants/h_separation = 4
 theme_override_constants/v_separation = 2
 columns = 3
 metadata/_edit_use_anchors_ = true
+
+[node name="TicketAnim" type="AnimationPlayer" parent="HBoxContainer/Slot4" unique_id=1248012584]
+libraries/ = SubResource("AnimationLibrary_n4wfq")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1346990690]
 position = Vector2(230, 55)

@@ -190,10 +190,10 @@ texture = ExtResource("8_1bsph")
 
 [node name="QKey" type="TextureRect" parent="." unique_id=1347358289]
 layout_mode = 0
-offset_left = 16.0
-offset_top = 160.0
-offset_right = 29.0
-offset_bottom = 174.0
+offset_left = 18.0
+offset_top = 162.0
+offset_right = 31.0
+offset_bottom = 176.0
 texture = ExtResource("9_54k0y")
 
 [node name="Label" type="Label" parent="QKey" unique_id=1097051497]
