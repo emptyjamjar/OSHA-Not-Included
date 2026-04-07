@@ -64,7 +64,7 @@ func _input(event: InputEvent) -> void:
 
 
 ##This gets the ticket_template for this level.
-func load_templates_for_level(_level: int): 
+func load_templates_for_level(_level: int):
 	var path := "res://objects/scanner/terminal/level%d_tickets.gd" % _level
 	var script = load(path)
 	
@@ -457,11 +457,12 @@ func reset() -> void:
 
 ##Ticks up the level counter.
 func tick_up_level():
-	if level < 5: 
-		level = Level_Manager.level + 1
-	else: 
-		level = 1 # RESET point (infinite levels)
-	
+	pass
+	#if level < 5: 
+		#level = Level_Manager.level + 1
+	#else: 
+		#level = 1 # RESET point (infinite levels)
+
 func replay() -> void:
 	all_tickets.clear()
 	visible_queue.clear()
