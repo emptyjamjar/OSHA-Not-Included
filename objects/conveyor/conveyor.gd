@@ -202,9 +202,10 @@ func _spawn_into_first_slot(item: ItemData) -> void:
 func _on_item_picked_up(item: ItemBase, index: int):
 	_slots[index] = null
 	item.picked_up.disconnect(_on_item_picked_up)
-	if first_pickup == false && game.game_state == 1:
-		emit_signal("conveyor_dialogue")
-		first_pickup = true
+	if game.is_tut:
+		if first_pickup == false && game.game_state == 1:
+			emit_signal("conveyor_dialogue")
+			first_pickup = true
 
 
 # functions to help return all the item in the conveyor array 

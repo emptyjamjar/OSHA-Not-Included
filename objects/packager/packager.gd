@@ -20,9 +20,10 @@ func _ready() -> void:
 
 
 func _on_interact():
-	if first_package == false && game.game_state == 2:
-		emit_signal("packager_dialogue")
-		first_package = true
+	if game.is_tut:
+		if first_package == false && game.game_state == 2:
+			emit_signal("packager_dialogue")
+			first_package = true
 	var data : ItemData = PlayerInventory.get_item()
 	if  data == null or data.type == ItemData.Type.PACKAGE:
 		#Play a sound to say that nothing happens.

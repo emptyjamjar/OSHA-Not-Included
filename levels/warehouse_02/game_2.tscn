@@ -33,6 +33,7 @@ class_name GameManager
 @onready var hud: Control = $CanvasLayer/HUD
 @onready var money := 0
 var Ticket_Manager: TicketManager
+var is_tut = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

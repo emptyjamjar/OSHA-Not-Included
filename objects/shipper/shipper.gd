@@ -46,9 +46,10 @@ func _on_interact():
 		if item.type == ItemData.Type.PACKAGE:
 			if ticket_manager.active_ticket.required_items.has(item.id):
 				if ticket_manager.register_delivery(item.id):
-					if first_ship == false && game.game_state == 3:
-						emit_signal("shipper_dialogue")
-						first_ship = true
+					if game.is_tut:
+						if first_ship == false && game.game_state == 3:
+							emit_signal("shipper_dialogue")
+							first_ship = true
 					PlayerInventory.remove_at(item_index)
 					get_money.emit()
 					animated_sprite.play("close")

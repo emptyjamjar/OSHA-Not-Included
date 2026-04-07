@@ -49,6 +49,8 @@ directories/dch_directory={
 directories/dtl_directory={
 "cutscene00": "res://ui/Timeline/cutscene00.dtl",
 "cutscene01": "res://ui/Timeline/cutscene01.dtl",
+"cutscene02": "res://cutscene02.dtl",
+"cutscene03": "res://cutscene03.dtl",
 "timeline": "res://ui/Timeline/timeline.dtl"
 }
 layout/style_directory={

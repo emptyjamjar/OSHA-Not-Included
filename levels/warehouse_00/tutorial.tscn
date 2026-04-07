@@ -20,7 +20,6 @@
 [ext_resource type="PackedScene" uid="uid://85pjdlfq4c76" path="res://ui/menus/pause_menu/pause.tscn" id="13_lc2xo"]
 [ext_resource type="Resource" uid="uid://b33up4q2s6ntw" path="res://objects/items/document/document.tres" id="13_qhcbd"]
 [ext_resource type="PackedScene" uid="uid://c81h6ny71m2nb" path="res://core/systems/scoring/productivity_manager/score.tscn" id="15_e8heu"]
-[ext_resource type="PackedScene" uid="uid://b4fopdaegap2y" path="res://game/manager/ai/Manager.tscn" id="16_80cx4"]
 [ext_resource type="PackedScene" uid="uid://ia4xkacbg6ja" path="res://game/manager/cutscene/cutscene_path.tscn" id="18_rvswv"]
 [ext_resource type="PackedScene" uid="uid://dwdtpfj4n8pco" path="res://objects/trashcan/trashcan.tscn" id="20_e36ub"]
 [ext_resource type="PackedScene" uid="uid://b7ooaa868w4lg" path="res://objects/sanity_eye_ball/sanity_eyeball.tscn" id="22_x5p1p"]
@@ -34,6 +33,7 @@ class_name GameManager
 @onready var game_state = 0
 
 var Ticket_Manager: TicketManager
+var is_tut = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -41,7 +41,6 @@ func _ready() -> void:
 	Dialogic.signal_event.connect(tut_cutscene)
 	var conveyor := $Conveyor
 	Ticket_Manager.on_game_start()
-	$Manager.hide()
 	# this starts the dialogue
 	Dialogic.start(\"timeline\")
 	VendingSystem.vending_bought.connect(_on_vending_bought)
@@ -195,12 +194,6 @@ scale = Vector2(0.3295734, 0.3295734)
 position = Vector2(744, 304)
 scale = Vector2(0.24458057, 0.24458057)
 
-[node name="Manager" parent="." unique_id=565657217 node_paths=PackedStringArray("patrol_paths_at_root", "out_bounds_area") instance=ExtResource("16_80cx4")]
-position = Vector2(512, 384)
-collision_mask = 2
-patrol_paths_at_root = NodePath("../PatrolPaths")
-out_bounds_area = NodePath("../OutBoundsArea")
-
 [node name="CutscenePath" parent="." unique_id=1696193264 instance=ExtResource("18_rvswv")]
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=837622460 groups=["UI"]]
@@ -241,56 +234,6 @@ color = Color(0.77646405, 0.79886746, 0.85534906, 1)
 [node name="Trashcan" parent="." unique_id=1663879866 instance=ExtResource("20_e36ub")]
 position = Vector2(573, 197)
 
-[node name="PatrolPaths" type="Node2D" parent="." unique_id=351301721]
-
-[node name="Path1" type="Node2D" parent="PatrolPaths" unique_id=46041390]
-
-[node name="p1_1" type="Marker2D" parent="PatrolPaths/Path1" unique_id=2052612545]
-position = Vector2(623, 441)
-
-[node name="p1_2" type="Marker2D" parent="PatrolPaths/Path1" unique_id=2114138325]
-position = Vector2(623, 335)
-
-[node name="p1_3" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1365977136]
-position = Vector2(367, 335)
-
-[node name="p1_4" type="Marker2D" parent="PatrolPaths/Path1" unique_id=1875373551]
-position = Vector2(101, 335)
-
-[node name="Path2" type="Node2D" parent="PatrolPaths" unique_id=1780100022]
-
-[node name="p2_1" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1106255408]
-position = Vector2(762, 402)
-
-[node name="p2_2" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1918256563]
-position = Vector2(456, 400)
-
-[node name="p2_3" type="Marker2D" parent="PatrolPaths/Path2" unique_id=136453742]
-position = Vector2(456, 280)
-
-[node name="p2_4" type="Marker2D" parent="PatrolPaths/Path2" unique_id=87527126]
-position = Vector2(173, 280)
-
-[node name="p2_5" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1738241611]
-position = Vector2(173, 336)
-
-[node name="p2_6" type="Marker2D" parent="PatrolPaths/Path2" unique_id=1395905260]
-position = Vector2(101, 335)
-
-[node name="Path3" type="Node2D" parent="PatrolPaths" unique_id=1497011237]
-
-[node name="p3_1" type="Marker2D" parent="PatrolPaths/Path3" unique_id=475289346]
-position = Vector2(623, 441)
-
-[node name="p3_2" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1576187183]
-position = Vector2(623, 245)
-
-[node name="p3_3" type="Marker2D" parent="PatrolPaths/Path3" unique_id=1656326002]
-position = Vector2(456, 245)
-
-[node name="p3_4" type="Marker2D" parent="PatrolPaths/Path3" unique_id=29843830]
-position = Vector2(456, 440)
-
 [node name="SanityEyeball" parent="." unique_id=1605012371 instance=ExtResource("22_x5p1p")]
 position = Vector2(456, 256)
 
@@ -300,6 +243,9 @@ position = Vector2(456, 256)
 [connection signal="energy_change" from="Player/EnergyComponent" to="CanvasLayer/HUD" method="_on_energy_component_energy_change"]
 [connection signal="needs_change" from="Player/NeedsComponent" to="CanvasLayer/HUD" method="_on_needs_component_needs_change"]
 [connection signal="sanity_changed" from="Player/SanityComponent" to="CanvasLayer/HUD" method="_on_sanity_component_sanity_changed"]
+[connection signal="packager_dialogue" from="Packager" to="." method="_on_packager_packager_dialogue"]
+[connection signal="conveyor_dialogue" from="Conveyor" to="." method="_on_conveyor_conveyor_dialogue"]
+[connection signal="ticket_dialogue" from="TicketTerminal" to="." method="_on_ticket_terminal_ticket_dialogue"]
 [connection signal="ticketsEmpty" from="TicketTerminal" to="UI/Score" method="_on_ticket_terminal_tickets_empty"]
 [connection signal="washroom_used" from="Washroom" to="UI/Score" method="_on_washroom_washroom_used"]
 

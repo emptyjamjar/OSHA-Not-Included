@@ -32,9 +32,10 @@ func _ready() -> void:
 	
 func _on_interact(): 
 	if not active:
-		if first_interact == false && game.game_state == 0:
-			emit_signal("ticket_dialogue")
-			first_interact = true
+		if game.is_tut:
+			if first_interact == false && game.game_state == 0:
+				emit_signal("ticket_dialogue")
+				first_interact = true
 		active = true
 		print("Terminal activated")
 		
