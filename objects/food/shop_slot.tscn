@@ -10,6 +10,7 @@ custom_minimum_size = Vector2(64, 64)
 offset_top = 2.0
 offset_right = 65.0
 offset_bottom = 75.71429
+mouse_filter = 1
 mouse_default_cursor_shape = 2
 theme_override_styles/panel = SubResource("StyleBoxEmpty_hf6s4")
 script = ExtResource("1_hf6s4")

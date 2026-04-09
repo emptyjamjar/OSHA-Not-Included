@@ -209,3 +209,7 @@ func _on_line_edit_text_changed(new_text: String) -> void:
 	else:
 		Audio.play_invalid_interaction()
 	_slot_text = new_text
+
+
+func _on_exit_pressed() -> void:
+	mode = MODE.OFF
