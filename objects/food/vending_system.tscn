@@ -5,7 +5,6 @@
 [ext_resource type="Resource" uid="uid://d2cesp280t2nt" path="res://objects/food/item/soda.tres" id="3_q2db4"]
 [ext_resource type="Resource" uid="uid://tdrpbq6x6suy" path="res://objects/food/item/protein_bar.tres" id="4_kal06"]
 [ext_resource type="Resource" uid="uid://bloipc0k3kn0x" path="res://objects/food/item/onigiri.tres" id="4_yguo5"]
-[ext_resource type="Script" uid="uid://dja3fqnd27ru1" path="res://objects/food/exit.gd" id="5_a6g0k"]
 [ext_resource type="Texture2D" uid="uid://dbe5ugkrcig6d" path="res://objects/food/warehouse-v-machine.png" id="5_hndpr"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kal06"]
@@ -19,18 +18,19 @@ texture = ExtResource("5_hndpr")
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dvwgy"]
 
-[node name="VendingSystem" type="Control" unique_id=1682295057 node_paths=PackedStringArray("ui", "currency_label", "vending_container", "slot_input")]
+[node name="VendingSystem" type="Control" unique_id=1682295057 node_paths=PackedStringArray("ui", "vending_container", "slot_input")]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 0
+mouse_filter = 1
 script = ExtResource("1_xggib")
 ui = NodePath("UI")
-currency_label = NodePath("")
 vending_items = Array[ExtResource("2_s7a41")]([ExtResource("4_yguo5"), ExtResource("4_kal06"), ExtResource("3_q2db4"), ExtResource("4_yguo5"), ExtResource("4_yguo5"), ExtResource("3_q2db4"), ExtResource("4_kal06"), ExtResource("3_q2db4"), ExtResource("4_kal06")])
 vending_container = NodePath("UI/Panel/MarginContainer/VendingInventory")
 slot_input = NodePath("UI/Panel/LineEdit")
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=715410091]
+layer = 5
 
 [node name="Panel" type="Panel" parent="UI" unique_id=964781237]
 anchors_preset = 8
@@ -45,6 +45,7 @@ offset_bottom = 216.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxTexture_kal06")
 
 [node name="MarginContainer" type="MarginContainer" parent="UI/Panel" unique_id=1120294155]
@@ -234,13 +235,14 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_dvwgy")
 text = "Ent"
 
 [node name="Exit" type="Button" parent="UI/Panel" unique_id=1681868968]
+z_index = 5
 layout_mode = 0
 offset_left = 536.0
 offset_top = 8.0
 offset_right = 561.0
 offset_bottom = 35.0
+mouse_default_cursor_shape = 2
 text = "X"
-script = ExtResource("5_a6g0k")
 
 [connection signal="text_changed" from="UI/Panel/LineEdit" to="." method="_on_line_edit_text_changed"]
 [connection signal="pressed" from="UI/Panel/ButtonA" to="." method="_on_button_a_pressed"]
@@ -251,4 +253,4 @@ script = ExtResource("5_a6g0k")
 [connection signal="pressed" from="UI/Panel/Button3" to="." method="_on_button_3_pressed"]
 [connection signal="pressed" from="UI/Panel/ButtonDelete" to="." method="_on_button_delete_pressed"]
 [connection signal="pressed" from="UI/Panel/ButtonEnter" to="." method="_on_button_enter_pressed"]
-[connection signal="button_up" from="UI/Panel/Exit" to="UI/Panel/Exit" method="_on_button_up"]
+[connection signal="pressed" from="UI/Panel/Exit" to="." method="_on_exit_pressed"]

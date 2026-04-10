@@ -25,7 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://dwdtpfj4n8pco" path="res://objects/trashcan/trashcan.tscn" id="19_kgoe6"]
 [ext_resource type="PackedScene" uid="uid://c3oqia66gf01v" path="res://objects/shelves/sideshelf.tscn" id="21_4oc41"]
 [ext_resource type="PackedScene" uid="uid://cmysh8kqsje1j" path="res://objects/shelves/shelf.tscn" id="22_rvv64"]
-[ext_resource type="PackedScene" path="res://core/systems/sanity/sanity_checker.tscn" id="25_t4b4w"]
+[ext_resource type="PackedScene" uid="uid://benkbh7e5rv0k" path="res://core/systems/sanity/sanity_checker.tscn" id="25_t4b4w"]
 [ext_resource type="PackedScene" uid="uid://b7ooaa868w4lg" path="res://objects/sanity_eye_ball/sanity_eyeball.tscn" id="26_ypk20"]
 
 [sub_resource type="GDScript" id="GDScript_7sc4i"]
@@ -310,7 +310,9 @@ position = Vector2(387, 353)
 [connection signal="get_money" from="Shipper" to="." method="_on_shipper_get_money"]
 [connection signal="get_money" from="Shipper" to="UI/Score" method="_on_shipper_get_money"]
 [connection signal="health_change" from="Player/HealthComponent" to="CanvasLayer/HUD" method="_on_health_component_health_change"]
+[connection signal="energy_change" from="Player/EnergyComponent" to="CanvasLayer/HUD" method="_on_energy_component_energy_change"]
 [connection signal="needs_change" from="Player/NeedsComponent" to="CanvasLayer/HUD" method="_on_needs_component_needs_change"]
+[connection signal="sanity_changed" from="Player/SanityComponent" to="CanvasLayer/HUD" method="_on_sanity_component_sanity_changed"]
 [connection signal="ticketsEmpty" from="TicketTerminal" to="UI/Score" method="_on_ticket_terminal_tickets_empty"]
 [connection signal="washroom_used" from="Washroom" to="UI/Score" method="_on_washroom_washroom_used"]
 
